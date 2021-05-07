@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/aeapimanager/apis/591b6c8b9b96310083040001",
+      "type": "apis.azure"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AEDigital.Provider.API</name>
+    </assembly>
+    <members>
+        <member name="M:AEDigital.Provider.API.Controllers.CampusesController.Get(System.Int32)">
+            <Summary>
+             Gets Campus by CampusID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.CampusesController.GetCampuses(System.String)">
+            <Summary>
+             Gets Campus by CampusID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProgramsController.Get(System.String)">
+            <Summary>
+             Gets Programs by ProgramID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProgramsController.GetPrograms(System.String)">
+            <Summary>
+             Gets Programs by ProviderID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProvidersController.Get(System.String)">
+            <Summary>
+             Gets Provider by ProviderID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProvidersController.GetProvider(System.Int32)">
+            <Summary>
+             Gets Provider by Provider Number 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProvidersController.Get(AEDigital.Provider.API.Models.ProvidersParameters)">
+            <Summary>
+             Gets Providers 
+            </Summary>
+             FILTERED METHOD - https://code-maze.com/filtering-aspnet-core-webapi/
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProvidersController.GetProviderExtended(System.String)">
+            <Summary>
+             Gets ProviderExtended by ProviderID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.ProvidersController.GetProviderMetrics(System.String)">
+            <Summary>
+             Gets ProviderMetrics by ProviderID 
+            </Summary>
+        </member>
+        <member name="M:AEDigital.Provider.API.Controllers.SpecializationController.GetAlbertaSpecializationsByProgramID(System.String)">
+            <Summary>
+             Gets Specializations by ProgramID
+            </Summary>
+        </member>
+    </members>
+</doc>
