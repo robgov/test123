@@ -36,7 +36,7 @@
       "projectType": "application",
       "root": "apps/planmp",
       "sourceRoot": "apps/planmp/src",
-      "prefix": "aedigital-mono-repo",
+      "prefix": "aedigital",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -147,7 +147,7 @@
       "projectType": "application",
       "root": "apps/payeduc",
       "sourceRoot": "apps/payeduc/src",
-      "prefix": "aedigital-mono-repo",
+      "prefix": "aedigital",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

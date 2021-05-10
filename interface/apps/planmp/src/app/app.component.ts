@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module'; // CLI imports AppRouti
 
 
 @Component({
-  selector: 'aedigital-mono-repo-root',
+  selector: 'aedigital-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
