@@ -9,4 +9,4 @@ services:
       - "/aedigital/interface/node_modules"
       - ".:/aedigital"
     networks:
-      - strapi-app-network
+      - strapi
