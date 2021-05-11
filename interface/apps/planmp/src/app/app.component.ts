@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularComponentsModule } from '@abgov/angular-components';
+import { AppRoutingModule } from './app-routing.module'; // CLI imports AppRoutingModule
+
+
 
 @Component({
   selector: 'aedigital-mono-repo-root',
@@ -7,5 +10,9 @@ import { AngularComponentsModule } from '@abgov/angular-components';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'planmp';
-}
+
+    constructor() {
+    }
+  
+  }
+

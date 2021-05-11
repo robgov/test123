@@ -1,38 +1,18 @@
-  <div fxFlex fxLayout="column">
-    <div fxFlex fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="10px">
-      <goa-header serviceName="Advanced Education - Test Flow" serviceHome="ServiceHome" serviceLevel="Alpha" fxFlex>
-      </goa-header>
-      <button mat-button href="#">Option 1</button>
-      <button mat-button href="#">2nd Option</button>
-      <button mat-button href="#">Numero trois</button>
-      <button mat-button href="#">For four</button>
-      <button mat-button href="#">
-        <mat-icon>search</mat-icon>
-      </button>
-      <button mat-button href="#">
-        <mat-icon>account_circle_outlined</mat-icon>
-      </button>
-    </div>
-    <div fxFlex fxLayout="row" fxLayoutGap="10px">
-      <div fxFlex="50">
-        <p class="title">Welcome to our super cool, most triumphant dev spike!</p>
-        <p class="sub-title">This is just a test site to test out some testy stuffs. Reminder, just a test site. Thanks.
-        </p>
-        <br>
-        <p class="paragraph-header">Test form thing</p>
-        <p class="paragraph-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a ligula
-          lobortis lacinia non sed nibh.
-          Fusce congue iaculis nisl, eu dapibus nulla blandit at. Aenean laoreet lacinia nunc, eu consectetur ante
-          scelerisque vel. In viverra turpis varius, suscipit arcu vel, sollicitudin libero. Ut a augue dignissim,
-          dictum
-          enim id, congue arcu.</p>
-      </div>
-      <div fxFlex="50">
-        <img fxFlex="90" flex-shrink src="../assets/planMyPath.png">
-      </div>
-    </div>
-    <div fxFlex="100" fxLayoutGap="10px">
-      <button mat-button class="primary-button">Get Started</button>
-      <button mat-button class="secondary-button">Alternate option</button>
-    </div>
+<div fxFlex fxLayout="column">
+  <div fxFlex fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="10px">
+    <goa-header serviceName="Advanced Education - Test Flow" serviceHome="ServiceHome" serviceLevel="Alpha" fxFlex>
+    </goa-header>
+    <button mat-button [routerLink]="'/Page1'">Option 1</button>
+    <button mat-button [routerLink]="'/home'">2nd Option</button>
+    <button mat-button href="#">Numero trois</button>
+    <button mat-button href="#">For four</button>
+    <button mat-button href="#">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-button href="#">
+      <mat-icon>account_circle_outlined</mat-icon>
+    </button>
   </div>
+  <router-outlet></router-outlet>
+</div>
+ 
