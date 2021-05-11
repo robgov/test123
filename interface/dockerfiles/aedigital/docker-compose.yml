@@ -8,5 +8,3 @@ services:
     volumes:
       - "/aedigital/interface/node_modules"
       - ".:/aedigital"
-    networks:
-      - strapi
