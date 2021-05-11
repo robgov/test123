@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@abgov/nx-adsp": "^1.4.0-beta.2",
+    "@abgov/nx-dotnet": "^1.0.0",
+    "@abgov/nx-oc": "^1.4.0-beta.1"
+  }
+}

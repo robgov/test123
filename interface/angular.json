@@ -256,6 +256,29 @@
           }
         }
       }
+    },
+    "aedigital.provider.api": {
+      "root": "apps/aedigital.provider.api",
+      "projectType": "application",
+      "architect": {
+        "test": {
+          "builder": "@abgov/nx-dotnet:test"
+        },
+        "build": {
+          "builder": "@abgov/nx-dotnet:build",
+          "options": {
+            "configuration": "Debug"
+          },
+          "configurations": {
+            "production": {
+              "configuration": "Release"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@abgov/nx-dotnet:serve"
+        }
+      }
     }
   }
 }

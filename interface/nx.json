@@ -15,6 +15,7 @@
     "planmp": { "tags": [] },
     "planmp-e2e": { "tags": [], "implicitDependencies": ["planmp"] },
     "payeduc": { "tags": [] },
-    "payeduc-e2e": { "tags": [], "implicitDependencies": ["payeduc"] }
+    "payeduc-e2e": { "tags": [], "implicitDependencies": ["payeduc"] },
+    "aedigital.provider.api": {}
   }
 }
