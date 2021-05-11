@@ -1,5 +1,5 @@
 FROM node:12.17.0
-WORKDIR /aedigital/interface
+WORKDIR /aedigital
 COPY package.json .
 RUN npm install
 COPY . .
