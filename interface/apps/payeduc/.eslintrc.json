@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "aedigital-mono-repo",
+            "prefix": "aedigital",
             "style": "kebab-case"
           }
         ]

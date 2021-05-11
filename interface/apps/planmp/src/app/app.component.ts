@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AngularComponentsModule } from '@abgov/angular-components';
 
 @Component({
-  selector: 'aedigital-mono-repo-root',
+  selector: 'aedigital-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
