@@ -1,0 +1,27 @@
+<div fxLayout="column">
+<div fxFlex fxLayout="row" fxLayoutGap="10px">
+    <div fxFlex="50">
+      <p class="title">{{ this.providers[0].PageTitle }}</p>
+      <p class="sub-title">{{ this.providers[0].Subtitle}}
+      </p>
+      <br>
+      <p class="paragraph-header">{{ this.providers[0].Heading}}</p>
+      <p class="paragraph-content">{{ this.providers[0].Summary}}</p>
+    </div>
+
+      <!-- <div>
+    
+    
+    {{this.providers[0].Summary}}
+  </div>
+   -->
+    <div fxFlex="50">
+      <!-- <img fxFlex="90" flex-shrink src="../assets/planMyPath.png"> -->
+      <img  fxFlex="90" flex-shrink flex-grow  src="http://localhost:1337{{ this.providers[0].Splash_Image.url }}" />
+    </div>
+  </div>
+  <div fxFlex="100" fxLayoutGap="10px">
+    <button mat-button class="primary-button">Get Started</button>
+    <button mat-button class="secondary-button">Alternate option</button>
+  </div>
+</div>
