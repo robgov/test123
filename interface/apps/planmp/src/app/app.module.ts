@@ -10,12 +10,15 @@ import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [AppComponent, TombstoneComponent, HomeComponent],
+  imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, MatIconModule, MatButtonModule],
+
+  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent],
   imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, 
     MatIconModule, MatButtonModule, AppRoutingModule, HttpClientModule],
   providers: [],
