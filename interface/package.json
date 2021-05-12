@@ -6,7 +6,7 @@
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "nx": "nx",
-    "start": "ng serve --disable-host-check",
+    "start": "ng serve --host 0.0.0.0 --poll 500 --disable-host-check",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
