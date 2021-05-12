@@ -1,0 +1,36 @@
+@use './variables.scss';
+@import '~@angular/material/theming';
+@import './typography.scss';
+
+@include mat-core();
+
+// material themes
+$jsg-primary-theme: mat-palette(variables.$jsg-primary-palette);
+$jsg-accent-theme: mat-palette(variables.$jsg-accent-palette);
+$jsg-warn-theme: mat-palette(variables.$jsg-warn-palette);
+$jsg-danger-theme: mat-palette($mat-red);
+$jsg-alerts-theme: mat-palette($mat-amber);
+
+// override of the font styles
+$jsg-typography-config: mat-typography-config(
+	$font-family: 'acumin-pro-semi-condensed, sans-serif',
+	$body-1: mat-typography-level(variables.$font-size-md, 28px, 400),
+	$headline: mat-typography-level(48px, 56px, 400),
+	$title: mat-typography-level(variables.$font-size-xxl, 40px, 400),
+	$subheading-2: mat-typography-level(variables.$font-size-xl, 32px, 400),
+	$subheading-1: mat-typography-level(variables.$font-size-md, 28px, 700),
+	$caption: mat-typography-level(variables.$font-size-xs, 24px, 400),
+	$button: mat-typography-level(variables.$font-size-md, 28px, 600),
+);
+
+@include angular-material-typography($jsg-typography-config);
+
+html,
+body {
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	font-family: mat-font-family($jsg-typography-config);
+	line-height: mat-line-height($jsg-typography-config, subheading-1);
+	font-size: 18px;
+}

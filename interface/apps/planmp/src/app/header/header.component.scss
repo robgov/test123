@@ -1,0 +1,40 @@
+@use '../../variables.scss';
+
+header {
+	border-bottom: 1px solid variables.$goa-teal;
+	padding-top: 8px;
+	padding-bottom: 6px;
+
+	&.sticky {
+		background-color: variables.$jsg-white;
+		position: sticky;
+		top: 0;
+		width: 100%;
+		z-index: 500;
+
+		jsg-environment-sash {
+			margin-top: -8px; // negate the header's padding
+		}
+	}
+
+	.logo-header {
+		width: 150px;
+	}
+
+	.left-bar-title {
+		margin-left: 32px;
+
+		> h3 {
+			margin-bottom: 5px;
+			line-height: 1;
+		}
+		> h4 {
+			margin: 0;
+			line-height: 1;
+		}
+	}
+
+	button {
+		font-weight: bold;
+	}
+}
