@@ -15,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [AppComponent, TombstoneComponent, HomeComponent],
+
+  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent],
   imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, 
     MatIconModule, MatButtonModule, AppRoutingModule, HttpClientModule],
   providers: [],
