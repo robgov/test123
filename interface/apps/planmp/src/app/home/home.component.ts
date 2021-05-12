@@ -19,6 +19,8 @@ interface PageContent {
 export class HomeComponent implements OnInit {
 
   providers: any[] = [];
+
+  url: String = "http://localhost:1337/ds-home-pages";
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
@@ -30,11 +32,9 @@ export class HomeComponent implements OnInit {
   fetch() {
 
     var url = "http://localhost:8080/ds-homepages";
-    //var url = "http://localhost:1337/ds-home-pages";
-    this.http.get<any[]>(url).subscribe((t) => (this.providers = t));
-
-    // <img src="http://localhost:1337{{ student.image.url }}" alt="" height="100" />
-
-
+    this.http.get<any[]>(url).subscribe((t) => {
+      (this.providers = t)
+    }
+    );
   }
 }
