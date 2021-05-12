@@ -1,5 +1,5 @@
 <div>
-  <aedigital-header>
+  <aedigital-header caption = "Advanced Education - Test Flow" subCaption = "">
     <button mat-button href="#">Option 1</button>
     <button mat-button href="#">2nd Option</button>
     <button mat-button href="#">Numero trois</button>
@@ -11,9 +11,10 @@
       <mat-icon>account_circle</mat-icon>
     </button>
   </aedigital-header>
-  <div fxLayout="column">
-    <div fxFlex fxLayout="row" fxLayoutGap="10px">
-      <div fxFlex="50">
+  <div fxLayout="column" fxLayoutAlign="center" >
+    <div fxFlex="90%" fxLayout="row" fxLayoutGap="8px">
+       <div></div> <!--This is stupid, there has to be a better way -->
+      <div fxFlex="45">
         <p class="title">Welcome to our super cool, most triumphant dev spike!</p>
         <p class="sub-title">This is just a test site to test out some testy stuffs. Reminder, just a test site. Thanks.
         </p>
@@ -26,12 +27,13 @@
           dictum
           enim id, congue arcu.</p>
       </div>
-      <div fxFlex="50">
-        <img fxFlex="90" flex-shrink src="../assets/planMyPath.png">
+      <div fxFlex="45">
+        <img flex="0 0 50%" src="../assets/planMyPath.png">
       </div>
     </div>
-    <div fxFlex="100" fxLayoutGap="10px">
-      <button mat-button class="primary-button">Get Started</button>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <div></div> <!--This is stupid, there has to be a better way -->
+      <button mat-flat-button color="primary">Get Started</button>
       <button mat-button class="secondary-button">Alternate option</button>
     </div>
   </div>
