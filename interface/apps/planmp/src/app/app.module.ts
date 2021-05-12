@@ -16,7 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, MatIconModule, MatButtonModule],
 
   declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent],
   imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, 
