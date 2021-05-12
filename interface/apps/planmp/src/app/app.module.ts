@@ -7,9 +7,10 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, MatIconModule, MatButtonModule],
   providers: [],
   bootstrap: [AppComponent],
