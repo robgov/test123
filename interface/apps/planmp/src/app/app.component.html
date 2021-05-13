@@ -1,7 +1,5 @@
-<div fxFlex fxLayout="column">
-  <div fxFlex fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="10px">
-    <goa-header serviceName="Advanced Education - Test Flow" serviceHome="ServiceHome" serviceLevel="Alpha" fxFlex>
-    </goa-header>
+<div>
+  <aedigital-header caption = "Advanced Education - Test Flow" subCaption = "">
     <button mat-button [routerLink]="'/Page1'">Option 1</button>
     <button mat-button [routerLink]="'/home'">2nd Option</button>
     <button mat-button href="#">Numero trois</button>
@@ -10,9 +8,13 @@
       <mat-icon>search</mat-icon>
     </button>
     <button mat-button href="#">
-      <mat-icon>account_circle_outlined</mat-icon>
+      <mat-icon>account_circle</mat-icon>
     </button>
+  </aedigital-header>
+
+  <div class="container">
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
+
+  <aedigital-footer></aedigital-footer>
 </div>
- 
