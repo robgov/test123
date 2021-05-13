@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TombstoneComponent } from './tombstone/tombstone.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 // Material Imports
