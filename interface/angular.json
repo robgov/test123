@@ -48,7 +48,7 @@
             "tsConfig": "apps/planmp/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/planmp/src/favicon.ico", "apps/planmp/src/assets"],
-            "styles": ["apps/planmp/src/styles.scss"],
+            "styles": ["apps/planmp/src/styles/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -162,7 +162,7 @@
               "apps/payeduc/src/favicon.ico",
               "apps/payeduc/src/assets"
             ],
-            "styles": ["apps/payeduc/src/styles.scss"],
+            "styles": ["apps/payeduc/src/styles/styles.scss"],
             "scripts": []
           },
           "configurations": {
