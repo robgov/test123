@@ -114,6 +114,12 @@
             "jestConfig": "apps/planmp/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "apply-envs": {
+          "builder": "@abgov/nx-oc:apply",
+          "options": {
+            "ocProject": ["planmp-dev"]
+          }
         }
       }
     },
@@ -228,6 +234,12 @@
             "jestConfig": "apps/payeduc/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "apply-envs": {
+          "builder": "@abgov/nx-oc:apply",
+          "options": {
+            "ocProject": ["planmp-dev"]
+          }
         }
       }
     },
@@ -277,6 +289,12 @@
         },
         "serve": {
           "builder": "@abgov/nx-dotnet:serve"
+        },
+        "apply-envs": {
+          "builder": "@abgov/nx-oc:apply",
+          "options": {
+            "ocProject": ["planmp-dev"]
+          }
         }
       }
     }
