@@ -1,6 +1,6 @@
 <div fxLayout="column">
-<div fxFlex fxLayout="row" fxLayoutGap="10px">
-    <div fxFlex="50">
+  <div fxFlex="90%" fxLayout="row" fxLayoutGap="8px">
+    <div fxFlex="45">
       <p class="title">{{ this.providers[0].PageTitle }}</p>
       <p class="sub-title">{{ this.providers[0].Subtitle}}
       </p>
@@ -9,20 +9,20 @@
       <p class="paragraph-content">{{ this.providers[0].Summary}}</p>
     </div>
 
-      <!-- <div>
-    
-    
-    {{this.providers[0].Summary}}
-  </div>
-   -->
-    <div fxFlex="50">
-      <!-- <img fxFlex="90" flex-shrink src="../assets/planMyPath.png"> -->
-      <img  fxFlex="90" flex-shrink flex-grow  src="http://localhost:8080{{ this.providers[0].Splash[0].url }}" />
+    <!-- 
+    <div>
+      {{this.providers[0].Summary}}
     </div>
-      
+    -->
+
+    <div fxFlex="45">
+      <!-- <img fxFlex="90" flex-shrink src="../assets/planMyPath.png"> -->
+      <img fxFlex="0 0 50%" flex-shrink flex-grow src="http://localhost:8080{{ this.providers[0].Splash[0].url }}" />
+    </div>
   </div>
-  <div fxFlex="100" fxLayoutGap="10px">
-    <button mat-button class="primary-button">Get Started</button>
-    <button mat-button class="secondary-button">Alternate option</button>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <div></div>
+    <button mat-flat-button color="primary">Get Started</button>
+    <button mat-flat-button color="">Alternate option</button>
   </div>
 </div>
