@@ -13,11 +13,12 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
 
-  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent],
+  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent],
   imports: [BrowserModule, AngularComponentsModule, FlexLayoutModule, 
     MatIconModule, MatButtonModule, AppRoutingModule, HttpClientModule],
   providers: [],
