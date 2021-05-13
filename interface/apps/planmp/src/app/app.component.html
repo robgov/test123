@@ -13,15 +13,39 @@
       </button>
     </div>
     <div fxHide fxShow.lt-md>
-      <button mat-button>
+      <button mat-button (click)="right.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
   </aedigital-header>
 
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-
+  <mat-sidenav-container>
+    <mat-sidenav #right mode="over" autoFocus="false" position="end" class="right-sheet"
+      [fixedInViewport]="false" fxLayoutGap="8px">
+      <div fxLayout="column" fxLayoutGap="8px">
+        <button mat-button (click)="right.toggle()" >
+          <div fxFlex fxLayoutAlign="left center">
+            <mat-icon fxFlex="8px">close</mat-icon>
+            <p fxFlex>Close</p>
+          </div>
+        </button>
+        <button mat-button [routerLink]="'/Page1'">Option 1</button>
+        <button mat-button [routerLink]="'/home'">2nd Option</button>
+        <button mat-button href="#">Numero trois</button>
+        <button mat-button href="#">For four</button>
+        <button mat-button href="#">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-button href="#">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>  
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
   <aedigital-footer></aedigital-footer>
 </div>
