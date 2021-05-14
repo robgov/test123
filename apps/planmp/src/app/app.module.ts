@@ -46,10 +46,11 @@ import { FooterComponent } from './footer/footer.component';
 import { InputFormComponent } from './input-form/input-form.component';
 import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
 
-  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent, EnvironmentSashComponent],
+  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent, EnvironmentSashComponent, BreadcrumbComponent],
   imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule, FlexLayoutModule,
     MATERIAL_MODULES, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule
   ],

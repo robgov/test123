@@ -6,12 +6,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { InputFormComponent } from './input-form/input-form.component';
 
 
+
 const routes: Routes = [
-  {path: '*', redirectTo: '/home', pathMatch:'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'Page1', component:TombstoneComponent},
-  {path: 'Page2', component:InputFormComponent},
-  {path: '**', redirectTo: '/home'},
+  { path: '*', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: 'home', data: { breadcrumb: 'Advanced Education' }, children: [
+      { path: '', component: HomeComponent },
+      { path: 'Page1', component: TombstoneComponent, data: { breadcrumb: 'TS' } },
+      { path: 'Page2', component: InputFormComponent, data: { breadcrumb: 'FM' } },
+    ]
+  },
+  // {path: 'Page1', component:TombstoneComponent},
+  // {path: 'Page2', component:InputFormComponent},
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
