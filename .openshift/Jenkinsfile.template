@@ -79,7 +79,7 @@ pipeline {
         }
         script {
           openshift.withCluster() {
-            openshift.withProject('test') {
+            openshift.withProject('dev') {
               affectedApps.each { affected ->
                 def dc = openshift.selector("dc", "${affected}")
                 if ( dc.exists() ) {
