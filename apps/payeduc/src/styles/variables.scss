@@ -1,0 +1,205 @@
+$jsg-primary-palette: (
+	50: #e0eef8,
+	100: #b3d4ed,
+	200: #80b8e2,
+	300: #4d9bd6,
+	400: #2685cd,
+	500: #0070c4,
+	600: #0068be,
+	700: #005db6,
+	800: #0053af,
+	900: #0041a2,
+	A100: #ccddff,
+	A200: #99baff,
+	A400: #6698ff,
+	A700: #4d87ff,
+	contrast: (
+		50: #000000,
+		100: #000000,
+		200: #000000,
+		300: #000000,
+		400: #ffffff,
+		500: #ffffff,
+		600: #ffffff,
+		700: #ffffff,
+		800: #ffffff,
+		900: #ffffff,
+		A100: #000000,
+		A200: #000000,
+		A400: #000000,
+		A700: #000000,
+	),
+);
+
+$jsg-accent-palette: (
+	50: #e0efe7,
+	100: #b3d6c3,
+	200: #80bb9c,
+	300: #4da074,
+	400: #268b56,
+	500: #007738,
+	600: #006f32,
+	700: #00642b,
+	800: #005a24,
+	900: #004717,
+	A100: #7bff98,
+	A200: #48ff70,
+	A400: #15ff48,
+	A700: #00fb37,
+	contrast: (
+		50: #000000,
+		100: #000000,
+		200: #000000,
+		300: #000000,
+		400: #ffffff,
+		500: #ffffff,
+		600: #ffffff,
+		700: #ffffff,
+		800: #ffffff,
+		900: #ffffff,
+		A100: #000000,
+		A200: #000000,
+		A400: #000000,
+		A700: #000000,
+	),
+);
+
+$jsg-warn-palette: (
+	50: #fdf3ea,
+	100: #fbe2cb,
+	200: #f9cea8,
+	300: #f6ba85,
+	400: #f4ac6b,
+	500: #f29d51,
+	600: #f0954a,
+	700: #ee8b40,
+	800: #ec8137,
+	900: #e86f27,
+	A100: #ffffff,
+	A200: #fff6f1,
+	A400: #ffd5be,
+	A700: #ffc4a5,
+	contrast: (
+		50: #000000,
+		100: #000000,
+		200: #000000,
+		300: #000000,
+		400: #000000,
+		500: #000000,
+		600: #000000,
+		700: #000000,
+		800: #000000,
+		900: #000000,
+		A100: #000000,
+		A200: #000000,
+		A400: #000000,
+		A700: #000000,
+	),
+);
+
+// basic colors
+$jsg-white: #ffffff;
+$jsg-black: #000000;
+$jsg-silver: #a4a4a4;
+$jsg-readonly-gray: #f2f2f2;
+
+//buttons
+$jsg-primary: #0053af;
+//links
+$jsg-href: #0068be;
+
+$jsg-footer-border-light: #4d9bd6;
+$jsg-footer-border-dark: #6698ff;
+
+//errors
+$jsg-danger: #ec040b;
+$jsg-warning: #f29d51;
+
+$jsg-height-sash: 24px;
+$jsg-height-header: 80px;
+$jsg-height-footer: 93px;
+
+$jsg-max-width: 1166px;
+
+//goa
+$goa-red: #ec040b;
+$goa-yellow: #feba35;
+$goa-blue: #005daa;
+$goa-green: #007738;
+$goa-teal: #2685cd;
+
+$goa-corporate-dark: #005072;
+$goa-corporate-primary: #0081a2;
+$goa-corporate-midtones: #c8eefa;
+
+$goa-layout-primary-dark: #333333;
+$goa-layout-primary-contrast: #ffffff;
+$goa-layout-primary-primary: #666666;
+$goa-layout-primary-primary-contrast: #ffffff;
+$goa-layout-primary-midtones: #dcdcdc;
+$goa-layout-primary-midtones-contrast: #000000;
+$goa-layout-primary-light: #f1f1f1;
+$goa-layout-primary-light-contrast: #000000;
+
+$goa-layout-accent-dark: $goa-corporate-dark;
+$goa-layout-accent-dark-contrast: #ffffff;
+$goa-layout-accent-primary: $goa-corporate-primary;
+$goa-layout-accent-primary-contrast: #ffffff;
+$goa-layout-accent-midtones: $goa-corporate-midtones;
+$goa-layout-accent-midtones-contrast: #000000;
+
+$goa-interactive: #0070c4;
+$goa-interactive-contrast: #ffffff;
+$goa-interactive-hover: #004f84;
+$goa-interactive-hover-contrast: #ffffff;
+
+$goa-status-error: #ec040b;
+$goa-status-error-contrast: #ffffff;
+$goa-status-warn: #feba35;
+$goa-status-warn-contrast: #000000;
+$goa-status-information: #005daa;
+$goa-status-information-contrast: #ffffff;
+$goa-status-ok: #007738;
+$goa-status-ok-contrast: #ffffff;
+
+$padding-xxs: 0.5px;
+$padding-xs: 1px;
+$padding-sm: 2px;
+$padding-md: 3px;
+$padding-lg: 4px;
+$padding-xl: 5px;
+$padding-xxl: 10px;
+
+$margin-xxs: 0.5px;
+$margin-xs: 1px;
+$margin-sm: 2px;
+$margin-md: 3px;
+$margin-lg: 4px;
+$margin-xl: 5px;
+$margin-xxl: 10px;
+
+$box-shadow-xxs: 0.5px;
+$box-shadow-xs: 1px;
+$box-shadow-sm: 2px;
+$box-shadow-md: 3px;
+$box-shadow-lg: 4px;
+$box-shadow-xl: 5px;
+$box-shadow-xxl: 10px;
+
+$box-shadow-color: rgba(5, 5, 5, 0.25);
+
+$border-xxs: 0.5px;
+$border-xs: 1px;
+$border-sm: 2px;
+$border-md: 3px;
+$border-lg: 4px;
+$border-xl: 5px;
+$border-xxl: 10px;
+
+$font-size-xxs: 12px;
+$font-size-xs: 14px;
+$font-size-sm: 16px;
+$font-size-md: 18px;
+$font-size-lg: 21px;
+$font-size-xl: 24px;
+$font-size-xxl: 32px;
