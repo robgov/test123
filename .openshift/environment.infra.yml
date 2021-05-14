@@ -79,7 +79,7 @@ items:
       runPolicy: Serial
       source:
         git:
-          uri: 'git@gitlab.gov.ab.ca:ae-digital-redesign/aedigital.git'
+          uri: 'https://gitlab.gov.ab.ca/ae-digital-redesign/aedigital.git'
         type: Git
       strategy:
         jenkinsPipelineStrategy:
