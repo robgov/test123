@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace AedigitalProviderApi.Controllers {
+namespace ProviderApi.Controllers {
   public class ResourceControllerTests
   {
     [Fact]

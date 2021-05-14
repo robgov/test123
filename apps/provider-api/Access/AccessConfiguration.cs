@@ -1,7 +1,7 @@
 
 using System;
 
-namespace AedigitalProviderApi.Access
+namespace ProviderApi.Access
 {
   public class AccessConfiguration {
     public string Realm { get; set; }

@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AedigitalProviderApi.Access
+namespace ProviderApi.Access
 {
   public static class AccessExtensions {
     internal static IServiceCollection AddAccessJwtAuthentication(
@@ -17,7 +17,7 @@ namespace AedigitalProviderApi.Access
               configuration.Url, 
               $"/auth/realms/{configuration.Realm}"
             ).AbsoluteUri;
-          jwt.Audience = "aedigital.provider.api";
+          jwt.Audience = "provider-api";
         });
 
       return services;
