@@ -1,0 +1,12 @@
+@use '../../styles/variables.scss';
+
+footer {
+	background-color: #eee;
+	border-bottom: (variables.$border-xl * 3) solid variables.$goa-corporate-primary;
+	border-top: 2px solid variables.$goa-layout-primary-midtones;
+	color: variables.$goa-layout-primary-primary;
+	font-size: 16px;
+	padding: 24px;
+	position: relative;
+	z-index: 5;
+}

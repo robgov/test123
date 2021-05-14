@@ -1,0 +1,6 @@
+@use '../styles/variables.scss';
+
+.container {
+	// header+footer => needed to push footer to the bottom
+	min-height: calc(100vh - (#{variables.$jsg-height-header} + #{variables.$jsg-height-footer}));
+}
