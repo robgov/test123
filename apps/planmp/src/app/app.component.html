@@ -1,8 +1,8 @@
 <div>
   <aedigital-header caption="Advanced Education - Test Flow" subCaption="">
-    <div fxHide.lt-md>
-      <button mat-button [routerLink]="'/home'">Home</button>
-      <button mat-button [routerLink]="'/Page1'">Providers</button>
+    <div fxShow fxHide.lt-md>
+      <button mat-button [routerLink]="'/Page1'">Option 1</button>
+      <button mat-button [routerLink]="'/home'">2nd Option</button>
       <button mat-button href="#">Numero trois</button>
       <button mat-button href="#">For four</button>
       <button mat-button href="#">
@@ -20,62 +20,30 @@
   </aedigital-header>
 
   <mat-sidenav-container>
-    <mat-sidenav #right mode="over" autoFocus="false" position="end" class="right-sheet" [fixedInViewport]="false">
-      <div fxLayout="column">
-        <button mat-button (click)="right.toggle()">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>close</mat-icon>
-            <p>Close</p>
-            <div fxFlex></div>
+    <mat-sidenav #right mode="over" autoFocus="false" position="end" class="right-sheet"
+      [fixedInViewport]="false" fxLayoutGap="8px">
+      <div fxLayout="column" fxLayoutGap="8px">
+        <button mat-button (click)="right.toggle()" >
+          <div fxFlex fxLayoutAlign="left center">
+            <mat-icon fxFlex="8px">close</mat-icon>
+            <p fxFlex>Close</p>
           </div>
         </button>
-        <button mat-button [routerLink]="'/home'">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>home</mat-icon>
-            <p>Home</p>
-            <div fxFlex></div>
-          </div>
-        </button>
-        <button mat-button [routerLink]="'/Page1'">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>class</mat-icon>
-            <p>Providers</p>
-            <div fxFlex></div>
-          </div>
+        <button mat-button [routerLink]="'/Page1'">Option 1</button>
+        <button mat-button [routerLink]="'/home'">2nd Option</button>
+        <button mat-button href="#">Numero trois</button>
+        <button mat-button href="#">For four</button>
+        <button mat-button href="#">
+          <mat-icon>search</mat-icon>
         </button>
         <button mat-button href="#">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>filter_3</mat-icon>
-            <p>Numero trois</p>
-            <div fxFlex></div>
-          </div>
-        </button>
-        <button mat-button href="#">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>filter_4</mat-icon>
-            <p>For four</p>
-            <div fxFlex></div>
-          </div>
-        </button>
-        <button mat-button href="#">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>search</mat-icon>
-            <p>Search</p>
-            <div fxFlex></div>
-          </div>
-        </button>
-        <button mat-button href="#">
-          <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-            <mat-icon>account_circle</mat-icon>
-            <p>Account</p>
-            <div fxFlex></div>
-          </div>
+          <mat-icon>account_circle</mat-icon>
         </button>
       </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="container">
-        <router-outlet></router-outlet>
+        <router-outlet></router-outlet>  
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
