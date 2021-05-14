@@ -1,0 +1,39 @@
+
+<div fxFlex fxLayout="column" >
+    <div>Breadcrumb goes here</div>
+    <aedigital-banner style="background-color: #0081A2;" fxLayout="left center">
+        <div caption style="color:white">Test Form Thing</div>
+	    <div subcaption style="color:white">Warning, testing going on here. Test, test and more tests!</div>
+    </aedigital-banner>    
+    <form> 
+        <h1>Grouping one</h1>
+        <p>Aenean laoreet lacinia nunc, eu consectetur ante scelerisque vel. In viverra turpis varius, suscipit arcu vel, sollicitudin libero.</p>
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput placeholder="Enter a first name" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label >Middle Name</mat-label>
+            <input type="text" matInput placeholder="Enter a middle name" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label >Last Name</mat-label>
+            <input type="text" matInput placeholder="Enter a last name" />
+        </mat-form-field>
+        <!-- <div fxLayoutGap="8px">
+            <mat-form-field fxFlex="50">
+                <mat-label >Phone</mat-label>
+                <input type="text" matInput placeholder="000-000-0000" />
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Judicial Centre</mat-label>
+                <mat-select formControlName="judicialCentreCode">
+                    <mat-option *ngFor="let option of judicialCentres$ | async" [value]="option.code">
+                        {{ option.title }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="get('judicialCentreCode').errors?.required"> Judicial Centre is <strong>required</strong> </mat-error>
+            </mat-form-field>
+        </div> -->
+    </form>
+</div>
