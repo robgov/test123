@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +26,7 @@ const MATERIAL_MODULES = [ MatButtonModule,
                            MatCardModule, 
                            MatCheckboxModule, 
                            MatChipsModule, 
+                           MatDialogModule,
                            MatFormFieldModule,
                            MatListModule, 
                            MatIconModule, 
@@ -40,10 +42,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { InputFormComponent } from './input-form/input-form.component';
 import { BannerComponent } from './banner/banner.component';
+import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 
 @NgModule({
 
-  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent],
+  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent, EnvironmentSashComponent],
   imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule , FlexLayoutModule,
     MATERIAL_MODULES, AppRoutingModule, HttpClientModule, 
   ],
