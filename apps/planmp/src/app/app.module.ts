@@ -7,6 +7,7 @@ import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 // Material Imports
 import { MatButtonModule } from '@angular/material/button';
@@ -50,7 +51,7 @@ import { EnvironmentSashComponent } from './environment-sash/environment-sash.co
 
   declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent, EnvironmentSashComponent],
   imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule, FlexLayoutModule,
-    MATERIAL_MODULES, AppRoutingModule, HttpClientModule,
+    MATERIAL_MODULES, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
