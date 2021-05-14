@@ -18,21 +18,23 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 
 
-const MATERIAL_MODULES = [ MatButtonModule, 
-                           MatCardModule, 
-                           MatCheckboxModule, 
-                           MatChipsModule, 
-                           MatDialogModule,
-                           MatFormFieldModule,
-                           MatListModule, 
-                           MatIconModule, 
-                           MatInputModule, 
-                           MatSelectModule,
-                           MatSidenavModule];
+const MATERIAL_MODULES = [MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatListModule,
+  MatIconModule,
+  MatInputModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule];
 
 // Components
 import { AppComponent } from './app.component';
@@ -47,8 +49,8 @@ import { EnvironmentSashComponent } from './environment-sash/environment-sash.co
 @NgModule({
 
   declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent, EnvironmentSashComponent],
-  imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule , FlexLayoutModule,
-    MATERIAL_MODULES, AppRoutingModule, HttpClientModule, 
+  imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule, FlexLayoutModule,
+    MATERIAL_MODULES, AppRoutingModule, HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
