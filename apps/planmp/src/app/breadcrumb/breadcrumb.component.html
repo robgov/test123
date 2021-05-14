@@ -1,3 +1,4 @@
-<div class="maticon" fxLayoutAlign="center center">
-        <ng-content></ng-content>
+<div class="maticon" fxLayoutAlign="left center" fxLayout="row">
+        <!-- <ng-content></ng-content> -->
+        <a style="color:white" routerLink="{{parentRoute}}" *ngIf="this.parentPage">{{parentPage}}</a><mat-icon *ngIf="this.parentPage">arrow_forward</mat-icon><div>{{currentPage}}</div>
 </div>
