@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AedigitalProviderApi.Controllers
+namespace ProviderApi.Controllers
 {
   public class ResourceResponse {
     public string Message { get; internal set; }
   }
 
   [ApiController]
-  [Route("/aedigital.provider.api/v1")]
+  [Route("/provider-api/v1")]
   public class ResourceController: ControllerBase {
     [HttpGet]
     [Route("public")]

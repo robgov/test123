@@ -269,8 +269,8 @@
         }
       }
     },
-    "aedigital.provider.api": {
-      "root": "apps/aedigital.provider.api",
+    "provider-api": {
+      "root": "apps/provider-api",
       "projectType": "application",
       "architect": {
         "test": {
@@ -293,7 +293,7 @@
         "apply-envs": {
           "builder": "@abgov/nx-oc:apply",
           "options": {
-            "ocProject": ["planmp-dev"]
+            "ocProject": ["dev"]
           }
         }
       }
