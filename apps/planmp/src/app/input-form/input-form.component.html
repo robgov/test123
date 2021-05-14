@@ -1,14 +1,14 @@
 <div fxFlex fxLayout="column"> <!--Child controls are drawn vertically, one after another-->
     <div>Breadcrumb goes here</div>
-    <aedigital-banner style="background-color: #0081A2;" fxLayout="left center">
+    <aedigital-banner style="background-color: #0081A2;" fxLayout="left center" fxFlex="180px">
         <div caption style="color:white">Test Form Thing</div>
         <div subcaption style="color:white">Warning, testing going on here. Test, test and more tests!</div>
     </aedigital-banner>
     <div fxLayout="row" fxLayoutAlign="" fxLayoutGap="8px"> <!--Child controls are drawn horizontally, one after another--> 
         <div></div>
         <form fxLayout="column" fxFlex="66" [formGroup]="form" >
-            <h1>Grouping one</h1>
-            <p>Aenean laoreet lacinia nunc, eu consectetur ante scelerisque vel. In viverra turpis varius, suscipit arcu
+            <h1 class="group-one-header">Grouping one</h1>
+            <p class="group-one-description">Aenean laoreet lacinia nunc, eu consectetur ante scelerisque vel. In viverra turpis varius, suscipit arcu
                 vel, sollicitudin libero.</p>
             <mat-form-field appearance="outline">
                 <mat-label>First Name</mat-label>
@@ -66,6 +66,7 @@
                 <button mat-flat-button color="primary" (click)="Submitted()">Submit</button>
                 <button mat-flat-button>Cancel</button>
             </div>
+            <div fxFlex="8px"></div>
         </form>
     </div>
 </div>
