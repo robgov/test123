@@ -47,7 +47,13 @@
             "polyfills": "apps/planmp/src/polyfills.ts",
             "tsConfig": "apps/planmp/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/planmp/src/favicon.ico", "apps/planmp/src/assets"],
+            "assets": ["apps/planmp/src/favicon.ico", "apps/planmp/src/assets",
+              {
+                "glob": "nginx.conf",
+                "input": "apps/planmp",
+                "output": "./"
+              }
+            ],
             "styles": ["apps/planmp/src/styles/styles.scss"],
             "scripts": []
           },
@@ -164,9 +170,12 @@
             "polyfills": "apps/payeduc/src/polyfills.ts",
             "tsConfig": "apps/payeduc/tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "apps/payeduc/src/favicon.ico",
-              "apps/payeduc/src/assets"
+            "assets": ["apps/payeduc/src/favicon.ico","apps/payeduc/src/assets",
+              {
+                "glob": "nginx.conf",
+                "input": "apps/payeduc",
+                "output": "./"
+              }
             ],
             "styles": ["apps/payeduc/src/styles/styles.scss"],
             "scripts": []

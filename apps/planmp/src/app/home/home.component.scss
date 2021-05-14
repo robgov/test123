@@ -1,4 +1,5 @@
 button {
+<<<<<<< HEAD
   text-align: right;
   font: normal normal bold 18px/24px Acumin Pro SemiCondensed;
   letter-spacing: 0px;
@@ -46,3 +47,69 @@ button {
   background-color: #ffffff;
   color: #0070c4;
 }
+
+.group-one-header {
+  text-align: left;
+  font: normal normal normal 36px/44px Acumin Pro SemiCondensed;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+}
+
+.group-one-description {
+  text-align: left;
+  font: normal normal normal 18px/28px Acumin Pro SemiCondensed;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+}
+=======
+    text-align: right;
+    font: normal normal bold 18px/24px Acumin Pro SemiCondensed;
+    letter-spacing: 0px;
+    background-color: #ffffff;
+  }
+  
+  .title {
+    text-align: left;
+    font: normal normal bold 48px/56px Acumin Pro SemiCondensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+  }
+  
+  .sub-title {
+    text-align: left;
+    font: normal normal normal 36px/44px Acumin Pro SemiCondensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+  }
+  
+  .paragraph-header {
+    text-align: left;
+    font: normal normal normal 24px/32px Acumin Pro SemiCondensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+  }
+  
+  .paragraph-content {
+    text-align: left;
+    font: normal normal normal 18px/28px Acumin Pro SemiCondensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+  }
+  
+  .primary-button {
+    background-color: #0070c4;
+    color: #ffffff;
+  }
+  
+  .secondary-button {
+    background-color: #ffffff;
+    color: #0070c4;
+  }
+  
+>>>>>>> 82aa93d1ed1cdbdc1819061f0400538d3de0d550
