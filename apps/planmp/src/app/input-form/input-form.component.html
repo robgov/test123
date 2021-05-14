@@ -1,39 +1,77 @@
+<div fxFlex fxLayout="column"> <!--Child controls are drawn vertically, one after another-->
+    <aedigital-breadcrumb style="background-color: #0081A2;" fxLayout="left center" fxFlex="60px">
+        <span caption style="color:white"><ul>Advanced Education</ul> - Test flow</span><mat-icon>
+            arrow_forward</mat-icon>
+        <span subcaption style="color:white">Test form thing</span>
+    </aedigital-breadcrumb>
 
-<div fxFlex fxLayout="column" >
-    <div>Breadcrumb goes here</div>
-    <aedigital-banner style="background-color: #0081A2;" fxLayout="left center">
+    <aedigital-banner style="background-color: #0081A2;" fxLayout="left center" fxFlex="180px">
         <div caption style="color:white">Test Form Thing</div>
-	    <div subcaption style="color:white">Warning, testing going on here. Test, test and more tests!</div>
-    </aedigital-banner>    
-    <form> 
-        <h1>Grouping one</h1>
-        <p>Aenean laoreet lacinia nunc, eu consectetur ante scelerisque vel. In viverra turpis varius, suscipit arcu vel, sollicitudin libero.</p>
-        <mat-form-field>
-            <mat-label>First Name</mat-label>
-            <input type="text" matInput placeholder="Enter a first name" />
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label >Middle Name</mat-label>
-            <input type="text" matInput placeholder="Enter a middle name" />
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label >Last Name</mat-label>
-            <input type="text" matInput placeholder="Enter a last name" />
-        </mat-form-field>
-        <!-- <div fxLayoutGap="8px">
-            <mat-form-field fxFlex="50">
-                <mat-label >Phone</mat-label>
-                <input type="text" matInput placeholder="000-000-0000" />
+        <div subcaption style="color:white">Warning, testing going on here. Test, test and more tests!</div>
+    </aedigital-banner>
+    <div fxLayout="row" fxLayoutAlign="" fxLayoutGap="8px"> <!--Child controls are drawn horizontally, one after another--> 
+        <div></div>
+        <form fxLayout="column" fxFlex="66" [formGroup]="form" >
+            <h1 class="group-one-header">Grouping one</h1>
+            <p class="group-one-description">Aenean laoreet lacinia nunc, eu consectetur ante scelerisque vel. In viverra turpis varius, suscipit arcu
+                vel, sollicitudin libero.</p>
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput formControlName="firstName"  placeholder="Enter a first name" />
+                <mat-error *ngIf="get('firstName').errors?.required">
+                    First Name is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
-            <mat-form-field fxFlex>
-                <mat-label>Judicial Centre</mat-label>
-                <mat-select formControlName="judicialCentreCode">
-                    <mat-option *ngFor="let option of judicialCentres$ | async" [value]="option.code">
-                        {{ option.title }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="get('judicialCentreCode').errors?.required"> Judicial Centre is <strong>required</strong> </mat-error>
+            <mat-form-field appearance="outline">
+                <mat-label>Middle Name</mat-label>
+                <input type="text" matInput formControlName="middleName" placeholder="Enter a middle name" />
             </mat-form-field>
-        </div> -->
-    </form>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input type="text" matInput formControlName="lastName" placeholder="Enter a last name" />
+                <mat-error *ngIf="get('lastName').errors?.required">
+                    Last Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <div fxFlex fxLayout="row" fxLayoutGap="8px">
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input type="text" formControlName="phoneNumber" matInput placeholder="000-000-0000" />
+                    <mat-error *ngIf="get('phoneNumber').errors?.required">
+                        Phone is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type" >
+                        <!-- <mat-option>--Select One--</mat-option> -->
+                        <mat-option value="1">Type One</mat-option>
+                        <mat-option value="2">Type Two</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="get('type').errors?.required">
+                        Type is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-flat-button>Add another number</button>
+            </div>
+            <mat-label>Is this a test?</mat-label>
+            <div>
+                <mat-radio-group formControlName="isTest" fxLayoutGap="8px" fxLayout="column">
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                    <mat-radio-button value="3">Not sure</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="get('isTest').errors?.required">
+                    Test is <strong>required</strong>
+                </mat-error>
+            </div>
+            <div fxLayoutGap="8px">
+                <button mat-flat-button color="primary" (click)="Submitted()">Submit</button>
+                <button mat-flat-button>Cancel</button>
+            </div>
+            <div fxFlex="8px"></div>
+        </form>
+    </div>
 </div>
