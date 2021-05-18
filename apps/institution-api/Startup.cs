@@ -36,7 +36,7 @@ namespace ProviderApi
       });
 
       services.AddCors(options => {
-        options.AddPolicy("AllowSpecificOrigin", builder => builder.WithOrigins("http://localhost:44337"));
+        options.AddPolicy("AllowSpecificOrigin", builder => builder.WithOrigins("http://localhost:5001"));
         options.AddPolicy("AllowAnyOrigin", builder => builder.AllowAnyOrigin());
 
       });
