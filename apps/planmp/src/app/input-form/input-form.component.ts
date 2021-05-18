@@ -10,32 +10,8 @@ export class InputFormComponent {
 
   userInformationForm: FormGroup;
 
-  form
-
-  constructor(private formBuilder: FormBuilder) {
-    this.createForm();
-  }
-
   get invalid(): boolean {
-		return this.form.invalid;
+		return this.userInformationForm.invalid;
 	}
-  
-  get(name: string): AbstractControl {
-		return this.form.get(name);
-	}
-
-  createForm(){
-    this.form = this.formBuilder.group({
-      firstName: ['',Validators.required],
-      middleName: [''],
-      lastName: ['',Validators.required],
-      phoneNumber: ['',Validators.required],
-      type: ['',Validators.required],
-      isTest: ['',Validators.required]
-    });
-  }
-  Submitted() {
-    console.log('Your form data : ', this.form.value );
-  }
-
+ 
 }
