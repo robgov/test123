@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-interface Provider {
-  providerName: string;
+interface Institution {
+  institutionName: string;
 }
 
 
@@ -16,7 +16,7 @@ export class TombstoneComponent implements OnInit {
 
 
 
-  providers: Provider[] = [];
+  institutions: Institution[] = [];
   pagenumber =1;
   pagesize =5;
 
@@ -26,8 +26,9 @@ export class TombstoneComponent implements OnInit {
 
 
   fetch() {
-    const url = "https://aedigitalproviderapi20210311145202.azurewebsites.net/API/Providers?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;
-    this.http.get<Provider[]>(url).subscribe((t) => (this.providers = t));
+    const localurl = "https://localhost:5001";
+    const url = localurl + "/API/Institutions?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;
+    this.http.get<Institution[]>(url).subscribe((t) => (this.institutions = t));
   }
 }
 
