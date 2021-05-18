@@ -1,0 +1,12 @@
+<div class="environment-sash">
+	<span class="beta-btn">alpha</span>
+	<span>
+		This is a new <a [href]="ExternalUrl.AlbertaCa" target="_blank">Alberta Government</a> service. &nbsp;
+		<a [routerLink]="">Details</a>
+	</span>
+
+	<div class="version" *ngIf="version?.environment">
+		<strong>{{ version.environment }}</strong>
+		<span class="build-number">({{ version.version }})</span>
+	</div>
+</div>

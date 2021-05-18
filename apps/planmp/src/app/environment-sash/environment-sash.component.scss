@@ -1,0 +1,29 @@
+@use '../../styles/variables.scss';
+
+.environment-sash {
+	background: variables.$goa-layout-primary-light;
+	font-size: 12px;
+	height: 24px;
+	line-height: 2;
+
+	.beta-btn {
+		background-color: variables.$goa-corporate-primary;
+		color: variables.$jsg-white;
+		font-weight: bold;
+		margin: 0 5px 0 28px;
+		padding: 0 4px;
+	}
+
+	.version {
+		color: variables.$goa-red;
+		display: block;
+		margin: -24px auto;
+		max-width: variables.$jsg-max-width;
+		text-align: center;
+
+		.build-number {
+			margin-left: 5px;
+			color: variables.$jsg-black;
+		}
+	}
+}

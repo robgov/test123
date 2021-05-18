@@ -1,0 +1,230 @@
+kind: Template
+apiVersion: template.openshift.io/v1
+metadata:
+  name: vault-server
+  annotations:
+    tags: vault, server, dio
+    template.openshift.io/provider-display-name: 'Governemtn of Alberta - DIO department'
+    openshift.io/display-name: 'vault-server'
+    description:
+message: 'Hashicorp Vault'
+
+parameters:
+  #Project Params
+  - name: NAME_SPACE
+    displayName: 'Name Space'
+    description: 'Project Name Space. Required for deployment trigger to work.'
+    value: 'planmp-tools'
+
+  - name: PROJECT
+    displayName: 'Project'
+    description: 'unique project identifier, will be part of project name'
+    required: true
+    value: 'test2'
+
+  - name: NAME
+    displayName: 'Name'
+    description: 'The name assigned to all of the frontend objects defined in this template.'
+    required: true
+    value: 'planmp'
+
+  # Git Params
+  # Create the token in the repo first and base64 encode it. See ReadMe
+  - name: GIT_URL
+    displayName: Git Url
+    description: Git repo location.
+    value: https://gitlab.gov.ab.ca/ae-digital-redesign/aedigital.git
+    
+  - name: BRANCH
+    displayName: GitLab Branch
+    description: The Branch or git reference.
+    value: RSB_content_sourced_by_strapi
+
+  - name: TOKEN_PASS
+    displayName: Gitlab Token Password
+    description: A base64 encoded GitLab token password.
+    value: S3ZwSDVHZWVmVnVaVmN1ZWRUUmM=
+
+  - name: TOKEN_USER_ID
+    displayName: Gitlab Token User ID
+    description: A base64 encoded GitLab token user name.
+    value: Z2l0bGFiK2RlcGxveS10b2tlbi03MQ==
+
+objects:
+  # Secrets
+  # [ Gitlab Token ]
+  # Create the token in the repo first and base64 encode it. See ReadMe
+  - apiVersion: v1
+    kind: Secret
+    data:
+      password: '${TOKEN_PASS}'
+      username: '${TOKEN_USER_ID}'
+    metadata:
+      name: '${PROJECT}-${NAME}-git-token'
+      namespace: '${NAME_SPACE}'
+    type: kubernetes.io/basic-auth
+
+    # Image Stream
+  - kind: ImageStream
+    apiVersion: image.openshift.io/v1
+    metadata:
+      name: '${PROJECT}-${NAME}'
+      namespace: '${NAME_SPACE}'
+      labels:
+        app: '${PROJECT}-${NAME}'
+        app.kubernetes.io/component: '${PROJECT}-${NAME}-is'
+        app.kubernetes.io/instance: '${PROJECT}-${NAME}'
+        app.kubernetes.io/part-of: '${PROJECT}-${NAME}-app'
+      annotations:
+        app.openshift.io/vcs-ref: '${BRANCH}'
+        app.openshift.io/vcs-uri: '${GIT_URL}'
+      generation: 1
+    spec:
+      lookupPolicy:
+        local: false
+
+    # Build Config
+  - kind: BuildConfig
+    apiVersion: build.openshift.io/v1
+    metadata:
+      name: '${PROJECT}-${NAME}'
+      namespace: '${NAME_SPACE}'
+      labels:
+        app: '${PROJECT}-${NAME}'
+        app.kubernetes.io/component: '${PROJECT}-${NAME}'
+        app.kubernetes.io/instance: '${PROJECT}-${NAME}'
+        app.kubernetes.io/part-of: '${PROJECT}-${NAME}-app'
+      annotations:
+        app.openshift.io/vcs-ref: '${BRANCH}'
+        app.openshift.io/vcs-uri: '${GIT_URL}'
+    spec:
+      nodeSelector: null
+      output:
+        to:
+          kind: ImageStreamTag
+          name: '${PROJECT}-${NAME}:latest'
+      resources: {}
+      successfulBuildsHistoryLimit: 5
+      failedBuildsHistoryLimit: 5
+      strategy:
+        type: Docker
+        dockerStrategy:
+          dockerfilePath: dockerfiles/aedigital/Dockerfile
+      postCommit: {}
+      source:
+        type: Git
+        git:
+          uri: '${GIT_URL}'
+          ref: '${BRANCH}'
+        contextDir: /
+        sourceSecret:
+          name: '${PROJECT}-${NAME}-git-token'
+      runPolicy: Serial
+
+    # Deployment
+  - kind: DeploymentConfig
+    apiVersion: v1
+    metadata:
+      name: '${PROJECT}-${NAME}-deploy'
+      namespace: '${NAME_SPACE}'
+      labels:
+        app: '${PROJECT}-${NAME}'
+        app.kubernetes.io/component: '${PROJECT}-${NAME}-deploy'
+        app.kubernetes.io/instance: '${PROJECT}-${NAME}'
+        app.kubernetes.io/part-of: '${PROJECT}-${NAME}-app'
+      annotations:
+        alpha.image.policy.openshift.io/resolve-names: '*'
+        app.openshift.io/vcs-ref: '${BRANCH}'
+        app.openshift.io/vcs-uri: '${GIT_URL}'
+    spec:
+      replicas: 1
+      selector:
+        app: '${PROJECT}-${NAME}'
+        deployment: '${PROJECT}-${NAME}-deployment'
+      strategy:
+        type: Recreate
+      revisionHistoryLimit: 3
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: '${PROJECT}-${NAME}'
+            deployment: '${PROJECT}-${NAME}-deployment'
+        spec:
+          containers:
+            - name: '${PROJECT}-${NAME}'
+              image: 'docker-registry.default.svc:5000/${NAME_SPACE}/${PROJECT}-${NAME}:latest'
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+              imagePullPolicy: Always
+          restartPolicy: Always
+          terminationGracePeriodSeconds: 30
+          dnsPolicy: ClusterFirst
+          securityContext: {}
+          schedulerName: default-scheduler
+      test: false        
+      triggers:
+        - type: ConfigChange
+        - type: ImageChange
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - "${PROJECT}-${NAME}"
+            from: 
+              kind: ImageStreamTag
+              name: "${PROJECT}-${NAME}:latest"
+              namespace: "${NAME_SPACE}"
+
+    # [ HTTPS port for web interface ]
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: '${PROJECT}-${NAME}-service'
+      namespace: '${NAME_SPACE}'
+      labels:
+        app: '${PROJECT}-${NAME}'
+        app.kubernetes.io/component: '${PROJECT}-${NAME}-sr'
+        app.kubernetes.io/instance: '${PROJECT}-${NAME}'
+        app.kubernetes.io/part-of: '${PROJECT}-${NAME}-app'
+      annotations:
+        app.openshift.io/vcs-ref: '${BRANCH}'
+        app.openshift.io/vcs-uri: '${GIT_URL}'
+    spec:
+      ports:
+        - name: 4200-tcp
+          protocol: TCP
+          port: 4200
+          targetPort: 4200 
+      selector:
+        app: '${PROJECT}-${NAME}'
+      sessionAffinity: None
+
+    # Routes
+  - kind: Route
+    apiVersion: route.openshift.io/v1
+    metadata:
+      name: '${PROJECT}-${NAME}-http-route'
+      namespace: '${NAME_SPACE}'
+      labels:
+        app: '${PROJECT}-${NAME}'
+        app.kubernetes.io/component: '${PROJECT}-${NAME}-sr'
+        app.kubernetes.io/instance: '${PROJECT}-${NAME}'
+        app.kubernetes.io/part-of: '${PROJECT}-${NAME}-app'
+      annotations:
+        app.openshift.io/vcs-ref: '${BRANCH}'
+        app.openshift.io/vcs-uri: '${GIT_URL}'
+    spec:
+      host: '${PROJECT}-${NAME}.os99.int.alberta.ca'
+      to:
+        kind: Service
+        name: '${PROJECT}-${NAME}-service'
+        weight: 100
+      port:
+        targetPort: 4200-tcp
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+      wildcardPolicy: None
+
+

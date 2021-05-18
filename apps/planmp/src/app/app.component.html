@@ -1,0 +1,77 @@
+<div>
+  <aedigital-header caption="Advanced Education - Test Flow" subCaption="">
+    <div fxShow fxHide.lt-md>
+      <button mat-button [routerLink]="'/home'">Home</button>
+      <button mat-button [routerLink]="'/home/Page1'">Providers</button>
+      <button mat-button [routerLink]="'/home/Page2'">Test Form</button>
+      <button mat-button href="#">For four</button>
+      <button mat-button href="#">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-button href="#">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <div fxHide fxShow.lt-md>
+      <button mat-button (click)="right.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </aedigital-header>
+
+  <mat-sidenav-container>
+    <mat-sidenav #right mode="over" autoFocus="false" position="end" class="right-sheet"
+      [fixedInViewport]="false" fxLayoutGap="8px">
+      <div fxLayout="column" fxLayoutGap="8px">
+        <button mat-button (click)="right.toggle()" >
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>close</mat-icon>
+            <p>Close</p>
+          </div>
+        </button>
+        <button mat-button [routerLink]="'/home'">
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>home</mat-icon>
+            <p>Home</p>
+          </div>
+        </button>
+        <button mat-button [routerLink]="'/home/Page1'">
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>account_balance</mat-icon>
+            <p>Providers</p>
+          </div>
+        </button>
+        <button mat-button [routerLink]="'/home/Page2'">
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>description</mat-icon>
+            <p>Test Form</p>
+          </div>
+        </button>
+        <button mat-button href="#">
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>filter_4</mat-icon>
+            <p>For four</p>
+          </div>
+        </button>
+        <button mat-button href="#">
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>search</mat-icon>
+            <p>Search</p>
+          </div>
+        </button>
+        <button mat-button href="#">
+          <div fxLayoutAlign="left center" fxLayoutGap="8px">
+            <mat-icon>account_circle</mat-icon>
+            <p>Account</p>
+          </div>
+        </button>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>  
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <aedigital-footer></aedigital-footer>
+</div>

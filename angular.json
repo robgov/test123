@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "planmp",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "planmp": {
+      "projectType": "application",
+      "root": "apps/planmp",
+      "sourceRoot": "apps/planmp/src",
+      "prefix": "aedigital",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/planmp",
+            "index": "apps/planmp/src/index.html",
+            "main": "apps/planmp/src/main.ts",
+            "polyfills": "apps/planmp/src/polyfills.ts",
+            "tsConfig": "apps/planmp/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/planmp/src/favicon.ico", "apps/planmp/src/assets",
+              {
+                "glob": "nginx.conf",
+                "input": "apps/planmp",
+                "output": "./"
+              }
+            ],
+            "styles": ["apps/planmp/src/styles/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/planmp/src/environments/environment.ts",
+                  "with": "apps/planmp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "planmp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "planmp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "planmp:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/planmp/src/**/*.ts",
+              "apps/planmp/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/planmp"],
+          "options": {
+            "jestConfig": "apps/planmp/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "apply-envs": {
+          "builder": "@abgov/nx-oc:apply",
+          "options": {
+            "ocProject": ["planmp-dev"]
+          }
+        }
+      }
+    },
+    "planmp-e2e": {
+      "root": "apps/planmp-e2e",
+      "sourceRoot": "apps/planmp-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/planmp-e2e/cypress.json",
+            "tsConfig": "apps/planmp-e2e/tsconfig.e2e.json",
+            "devServerTarget": "planmp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "planmp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/planmp-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "payeduc": {
+      "projectType": "application",
+      "root": "apps/payeduc",
+      "sourceRoot": "apps/payeduc/src",
+      "prefix": "aedigital",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/payeduc",
+            "index": "apps/payeduc/src/index.html",
+            "main": "apps/payeduc/src/main.ts",
+            "polyfills": "apps/payeduc/src/polyfills.ts",
+            "tsConfig": "apps/payeduc/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/payeduc/src/favicon.ico","apps/payeduc/src/assets",
+              {
+                "glob": "nginx.conf",
+                "input": "apps/payeduc",
+                "output": "./"
+              }
+            ],
+            "styles": ["apps/payeduc/src/styles/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/payeduc/src/environments/environment.ts",
+                  "with": "apps/payeduc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "payeduc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "payeduc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "payeduc:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/payeduc/src/**/*.ts",
+              "apps/payeduc/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/payeduc"],
+          "options": {
+            "jestConfig": "apps/payeduc/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "apply-envs": {
+          "builder": "@abgov/nx-oc:apply",
+          "options": {
+            "ocProject": ["planmp-dev"]
+          }
+        }
+      }
+    },
+    "payeduc-e2e": {
+      "root": "apps/payeduc-e2e",
+      "sourceRoot": "apps/payeduc-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/payeduc-e2e/cypress.json",
+            "tsConfig": "apps/payeduc-e2e/tsconfig.e2e.json",
+            "devServerTarget": "payeduc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "payeduc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/payeduc-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "provider-api": {
+      "root": "apps/provider-api",
+      "projectType": "application",
+      "architect": {
+        "test": {
+          "builder": "@abgov/nx-dotnet:test"
+        },
+        "build": {
+          "builder": "@abgov/nx-dotnet:build",
+          "options": {
+            "configuration": "Debug"
+          },
+          "configurations": {
+            "production": {
+              "configuration": "Release"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@abgov/nx-dotnet:serve"
+        },
+        "apply-envs": {
+          "builder": "@abgov/nx-oc:apply",
+          "options": {
+            "ocProject": ["dev"]
+          }
+        }
+      }
+    }
+  }
+}

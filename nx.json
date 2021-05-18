@@ -1,0 +1,21 @@
+{
+  "implicitDependencies": {
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    ".eslintrc.json": "*"
+  },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "aedigital",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+    }
+  },
+  "projects": {
+    "planmp": { "tags": [] },
+    "planmp-e2e": { "tags": [], "implicitDependencies": ["planmp"] },
+    "payeduc": { "tags": [] },
+    "payeduc-e2e": { "tags": [], "implicitDependencies": ["payeduc"] },
+    "provider-api": {}
+  }
+}
