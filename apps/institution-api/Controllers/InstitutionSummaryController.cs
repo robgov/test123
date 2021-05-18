@@ -15,20 +15,20 @@ namespace ProviderApi.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class InstitutionsController : ControllerBase
+  public class InstitutionSummaryController : ControllerBase
   {
-    private readonly ILogger<InstitutionsController> _logger;
+    private readonly ILogger<InstitutionSummaryController> _logger;
 
     private AEDMContext _context;
 
-    public InstitutionsController(ILogger<InstitutionsController> logger, AEDMContext context)
+    public InstitutionSummaryController(ILogger<InstitutionSummaryController> logger, AEDMContext context)
     {
       _logger = logger;
       _context = context;
     }
 
     ///<Summary>
-    /// Gets Institution by InstitutionID 
+    /// Gets Institution Summary by InstitutionID 
     ///</Summary>
     [HttpGet("{id}")]
     [SwaggerOperation("GetInstitution")]
@@ -40,7 +40,7 @@ namespace ProviderApi.Controllers
     }
 
     ///<Summary>
-    /// Gets Institution by Provincial Institution Number 
+    /// Gets Institution Summary by Provincial Institution Number 
     ///</Summary>
     [HttpGet("GetInstitutionByProvincialInstitutionNumber/{pin}")]
     [SwaggerOperation("GetInstitution")]
@@ -52,28 +52,28 @@ namespace ProviderApi.Controllers
     }
 
     ///<Summary>
-    /// Gets Institution by InstitutionID 
+    /// Gets Institution Summary by InstitutionID 
     ///</Summary>
     [HttpGet()]
     [SwaggerOperation("GetInstitutions")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> Get([FromQuery] InstitutionsParameters institutionsParameters)
+    public IEnumerable<VwInstitutionSummary> Get([FromQuery] InstitutionsParameters institutionSummaryParameters)
     {
-      List<VwInstitutionSummary> institutions = _context.VwInstitutionSummaries.ToList();
+      List<VwInstitutionSummary> institutionSummaries = _context.VwInstitutionSummaries.ToList();
 
       // Filtering
       var predicate = PredicateBuilder.New<VwInstitutionSummary>();
       var originalPredicate = predicate;
-      predicate = InstitutionsEnricher.InstitutionFilter(institutionsParameters, predicate);
+      predicate = InstitutionSummaryEnricher.InstitutionFilter(institutionSummaryParameters, predicate);
       if (predicate != originalPredicate)
       {
-        institutions = institutions.Where(predicate).ToList();
+        institutionSummaries = institutionSummaries.Where(predicate).ToList();
       }
 
       // Pagination
-      var pagedInstitutions = institutions.Skip((institutionsParameters.PageNumber - 1) * institutionsParameters.PageSize)
-          .Take(institutionsParameters.PageSize)
+      var pagedInstitutions = institutionSummaries.Skip((institutionSummaryParameters.PageNumber - 1) * institutionSummaryParameters.PageSize)
+          .Take(institutionSummaryParameters.PageSize)
           .ToList();
 
       return pagedInstitutions;
