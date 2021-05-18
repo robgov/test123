@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": ["!**/*"],
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
@@ -20,8 +20,11 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "extends": ["plugin:@nrwl/nx/typescript","plugin:cypress/recommended",
+        "../../.eslintrc"],
+      "rules": {"@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/camelcase": "off",
+        "no-undef": "off"}
     },
     {
       "files": ["*.js", "*.jsx"],
