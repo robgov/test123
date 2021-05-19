@@ -30,7 +30,12 @@
     "payeduc-e2e:cypressRun": "npx nx e2e payeduc-e2e",
     "payeduc-e2e:ci:smokeTest": "npx nx e2e payeduc-e2e -- --spec=**/src/integration/smoke-test/* --headless",
     "payeduc-e2e:ci:endToEnd": "npx nx e2e payeduc-e2e -- --spec=**/src/integration/e2e/* --headless",
-    "payeduc-e2e:html-report": "node .\\apps\\payeduc-e2e\\src\\support\\multiple-cucumber-html-reporter.js"
+    "payeduc-e2e:html-report": "node .\\apps\\payeduc-e2e\\src\\support\\multiple-cucumber-html-reporter.js",
+    "planmp-e2e:cypressOpen": "npx nx e2e planmp-e2e --watch",
+    "planmp-e2e:cypressRun": "npx nx e2e planmp-e2e",
+    "planmp-e2e:ci:smokeTest": "npx nx e2e planmp-e2e -- --spec=**/src/integration/smoke-test/* --headless",
+    "planmp-e2e:ci:endToEnd": "npx nx e2e planmp-e2e -- --spec=**/src/integration/e2e/* --headless",
+    "planmp-e2e:html-report": "node .\\apps\\planmp-e2e\\src\\support\\multiple-cucumber-html-reporter.js"
   },
   "private": true,
   "dependencies": {
