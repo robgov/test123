@@ -1,4 +1,4 @@
-Feature: Login functionality
+Feature: Sachin functionality
 
   Scenario: Login
     Given the user navigates to the AE home page
