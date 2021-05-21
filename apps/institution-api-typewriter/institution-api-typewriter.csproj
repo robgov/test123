@@ -1,0 +1,103 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>institution_api_typewriter</RootNamespace>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release;typewriter</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="AEDMContext.ts">
+      <CustomToolNamespace>..\institution-api\Models\AEDMContext.cs</CustomToolNamespace>
+    </None>
+    <None Update="Institution.ts">
+      <CustomToolNamespace>..\institution-api\Models\Institution.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionAddress.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionAddress.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionEmail.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionEmail.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionLocation.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionLocation.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionLocationAddress.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionLocationAddress.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionLocationEmail.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionLocationEmail.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionLocationPhone.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionLocationPhone.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionLocationPublication.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionLocationPublication.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionLocationWebsite.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionLocationWebsite.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionPhone.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionPhone.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionPublication.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionPublication.cs</CustomToolNamespace>
+    </None>
+    <None Update="InstitutionWebsite.ts">
+      <CustomToolNamespace>..\institution-api\Models\InstitutionWebsite.cs</CustomToolNamespace>
+    </None>
+    <None Update="MigrationLog.ts">
+      <CustomToolNamespace>..\institution-api\Models\MigrationLog.cs</CustomToolNamespace>
+    </None>
+    <None Update="MigrationLogCurrent.ts">
+      <CustomToolNamespace>..\institution-api\Models\MigrationLogCurrent.cs</CustomToolNamespace>
+    </None>
+    <None Update="SchemaSnapshot.ts">
+      <CustomToolNamespace>..\institution-api\Models\SchemaSnapshot.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitution.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitution.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionAddress.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionAddress.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionEmail.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionEmail.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionLocation.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionLocation.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionLocationAddress.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionLocationAddress.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionLocationEmail.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionLocationEmail.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionLocationPhone.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionLocationPhone.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionLocationPublication.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionLocationPublication.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionLocationWebsite.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionLocationWebsite.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionPhone.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionPhone.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionPublication.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionPublication.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwCurrentInstitutionWebsite.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwCurrentInstitutionWebsite.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwInstitutionLocationSummary.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwInstitutionLocationSummary.cs</CustomToolNamespace>
+    </None>
+    <None Update="VwInstitutionSummary.ts">
+      <CustomToolNamespace>..\institution-api\Models\VwInstitutionSummary.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+
+</Project>

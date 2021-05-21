@@ -17,15 +17,9 @@ items:
 
     # TODO See Tings email on may 14th
     subjects:
-<<<<<<< HEAD:.openshift/environments.yml
-      - kind: ServiceAccount
-        name: deployer
-        namespace: dev
-=======
       - apiGroup: rbac.authorization.k8s.io
         kind: Group
         name: 'system:serviceaccounts:planmp-dev'
->>>>>>> 82aa93d1ed1cdbdc1819061f0400538d3de0d550:interface/.openshift/environments.yml
   - apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
