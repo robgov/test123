@@ -4,7 +4,7 @@
 </div>
 <div class="flex" style="background: black; color:white;">
   <ul>
-    <li *ngFor="let t of institutions | filter: searchText; let i = index" class="provider">{{ t.institutionName }}</li>
+    <li *ngFor="let t of institutions | aedfilter: searchText; let i = index" class="provider">{{ t.institutionName }}</li>
   </ul>
   <div fxflex="100" fxLayoutGap="8px">
     <div></div>

@@ -47,11 +47,20 @@ import { InputFormComponent } from './input-form/input-form.component';
 import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { FilterPipe } from './Tombstone/filter.pipe';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
 
-  declarations: [AppComponent, TombstoneComponent, HomeComponent, HeaderComponent, FooterComponent, InputFormComponent, BannerComponent, EnvironmentSashComponent, BreadcrumbComponent, FilterPipe],
+  declarations: [AppComponent
+              , TombstoneComponent
+              , HomeComponent
+              , HeaderComponent
+              , FooterComponent
+              , InputFormComponent
+              , BannerComponent
+              , EnvironmentSashComponent
+              , BreadcrumbComponent
+              , FilterPipe],
   imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule, FlexLayoutModule,
     MATERIAL_MODULES, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule
   ],
