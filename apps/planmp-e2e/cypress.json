@@ -8,5 +8,7 @@
   "video": true,
   "videosFolder": "../../dist/cypress/apps/planmp-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/planmp-e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "testFiles": "**/*.feature",
+  "ignoreTestFiles": "*.js"
 }
