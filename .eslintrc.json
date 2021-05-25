@@ -20,8 +20,7 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript","plugin:cypress/recommended",
-        "../../.eslintrc"],
+      "extends": ["plugin:@nrwl/nx/typescript","plugin:cypress/recommended"],
       "rules": {"@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/camelcase": "off",
         "no-undef": "off"}
@@ -31,5 +30,18 @@
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {}
     }
+    // {
+    //   "files": ["*.ts", "*.tsx"],
+    //   "extends": ["plugin:@nrwl/nx/typescript","plugin:cypress/recommended",
+    //     "../../.eslintrc"],
+    //   "rules": {"@typescript-eslint/no-var-requires": "off",
+    //     "@typescript-eslint/camelcase": "off",
+    //     "no-undef": "off"}
+    // },
+    // {
+    //   "files": ["*.js", "*.jsx"],
+    //   "extends": ["plugin:@nrwl/nx/javascript"],
+    //   "rules": {}
+    // }
   ]
 }

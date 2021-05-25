@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { InputFormComponent } from './input-form/input-form.component';
 
 
-
 const routes: Routes = [
   { path: '*', redirectTo: '/home', pathMatch: 'full' },
   {
