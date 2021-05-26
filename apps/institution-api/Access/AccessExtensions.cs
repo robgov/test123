@@ -17,7 +17,7 @@ namespace ProviderApi.Access
               configuration.Url, 
               $"/auth/realms/{configuration.Realm}"
             ).AbsoluteUri;
-          jwt.Audience = "provider-api";
+          jwt.Audience = "institution-api";
         });
 
       return services;
