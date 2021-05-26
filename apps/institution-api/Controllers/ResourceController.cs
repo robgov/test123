@@ -8,7 +8,7 @@ namespace ProviderApi.Controllers
   }
 
   [ApiController]
-  [Route("/provider-api/v1")]
+  [Route("/institution-api/v1")]
   public class ResourceController: ControllerBase {
     [HttpGet]
     [Route("public")]

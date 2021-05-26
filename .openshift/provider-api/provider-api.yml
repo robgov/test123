@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: provider-api
+  name: institution-api
 labels:
-  app: provider-api
+  app: institution-api
 parameters:
   - name: INFRA_PROJECT
     description: Project used for build infrastructure.
@@ -17,7 +17,7 @@ parameters:
   - name: APP_NAME
     description: Name of the application.
     displayName: Application Name
-    value: provider-api
+    value: institution-api
     required: true
   - name: DEPLOY_TAG
     description: Tag of the ImageStream to deploy.
@@ -48,10 +48,10 @@ objects:
         dockerStrategy:
           buildArgs:
             - name: PROJECT
-              value: provider-api
+              value: institution-api
             - name: ASSEMBLY
-              value: provider-api.dll
-          dockerfilePath: .openshift/provider-api/Dockerfile
+              value: institution-api.dll
+          dockerfilePath: .openshift/institution-api/Dockerfile
         type: Docker
       triggers: []
   - apiVersion: v1
