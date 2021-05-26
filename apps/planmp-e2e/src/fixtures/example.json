@@ -1,4 +1,8 @@
 {
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io"
+  "firstname": "sachin",
+  "lastname": "sethi",
+  "postalcode": "T6T7Y7",
+  "customer": "sachin sethi",
+  "currency": "Dollar"
+
 }
