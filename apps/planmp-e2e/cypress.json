@@ -10,5 +10,6 @@
   "screenshotsFolder": "../../dist/cypress/apps/planmp-e2e/screenshots",
   "chromeWebSecurity": false,
   "testFiles": "**/*.feature",
-  "ignoreTestFiles": "*.js"
+  "ignoreTestFiles": "*.js",
+  "baseUrl": "http://www.way2automation.com/angularjs-protractor/banking/#/login"
 }
