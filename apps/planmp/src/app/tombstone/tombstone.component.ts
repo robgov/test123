@@ -14,8 +14,7 @@ interface Institution {
 })
 export class TombstoneComponent implements OnInit {
 
-
-
+  searchText: string;
   institutions: Institution[] = [];
   pagenumber =1;
   pagesize =5;
@@ -26,8 +25,9 @@ export class TombstoneComponent implements OnInit {
 
 
   fetch() {
+
     const localurl = "https://localhost:5001";
-    const url = localurl + "/API/Institutions?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;
+    const url = localurl + "/API/InstitutionSummary?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;
     this.http.get<Institution[]>(url).subscribe((t) => (this.institutions = t));
   }
 }
