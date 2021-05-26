@@ -6,20 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-address.ts" Link="vw-current-institution-address.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-email.ts" Link="vw-current-institution-email.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-location-address.ts" Link="vw-current-institution-location-address.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-location-email.ts" Link="vw-current-institution-location-email.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-location-phone.ts" Link="vw-current-institution-location-phone.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-location-publication.ts" Link="vw-current-institution-location-publication.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-location-website.ts" Link="vw-current-institution-location-website.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-location.ts" Link="vw-current-institution-location.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-phone.ts" Link="vw-current-institution-phone.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-publication.ts" Link="vw-current-institution-publication.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution-website.ts" Link="vw-current-institution-website.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-current-institution.ts" Link="vw-current-institution.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-institution-location-summary.ts" Link="vw-institution-location-summary.ts" />
-    <None Include="..\..\planmp\src\libs\common\models\vw-institution-summary.ts" Link="vw-institution-summary.ts" />
+    <None Include="..\..\planmp\src\libs\common\services\institution-summary.service.ts" Link="institution-summary.service.ts" />
+    <None Include="..\..\planmp\src\libs\common\services\resource-response.service.ts" Link="resource-response.service.ts" />
   </ItemGroup>
 
 </Project>
