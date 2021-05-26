@@ -5,9 +5,4 @@
     <Configurations>Debug;Release;typewriter</Configurations>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\planmp\src\libs\common\services\institution-summary.service.ts" Link="institution-summary.service.ts" />
-    <None Include="..\..\planmp\src\libs\common\services\resource-response.service.ts" Link="resource-response.service.ts" />
-  </ItemGroup>
-
 </Project>

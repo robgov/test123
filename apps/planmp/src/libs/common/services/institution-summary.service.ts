@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -17,13 +16,13 @@ export class InstitutionSummaryService extends EndPointService {
         this.key = 'institutionSummary';
     }
     
-    public getInstitution(id: number): Observable<VwInstitutionSummary[]> { 
+    public getInstitutionSummary(id: number): Observable<VwInstitutionSummary[]> { 
         return this.get(this.url + '{id}', id);
     }
-    public getInstitutionByPIN(pin: number): Observable<VwInstitutionSummary[]> { 
+    public getInstitutionSummaryByProvincialInstitutionNumber(pin: number): Observable<VwInstitutionSummary[]> { 
         return this.get(this.url + 'GetInstitutionByProvincialInstitutionNumber/{pin}', pin);
     }
-    public queryInstitnutions(institutionSummaryParameters: InstitutionsParameters): Observable<VwInstitutionSummary[]> { 
+    public getInstitutionSummarys(institutionSummaryParameters: InstitutionsParameters): Observable<VwInstitutionSummary[]> { 
         return this.get(this.url + '', institutionSummaryParameters);
     }
 
