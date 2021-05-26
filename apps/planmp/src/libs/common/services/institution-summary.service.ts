@@ -2,32 +2,32 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import {VwInstitutionSummary} from './../models';
 
 @Injectable({
     providedIn: 'root'
 })
-export class InstitutionSummaryService {
+export class InstitutionSummaryService extends EndPointService {
 	key: string;
 
     constructor(http: HttpClient){
+        super(http);
         this.key = 'institutionSummary';
     }
     
-    public get(id: number): Observable<VwInstitutionSummary[]> { 
+    public getInstitution(id: number): Observable<VwInstitutionSummary[]> { 
         return this.get(this.url + '{id}', id);
     }
-    public getInstitution(pin: number): Observable<VwInstitutionSummary[]> { 
+    public getInstitutionByPIN(pin: number): Observable<VwInstitutionSummary[]> { 
         return this.get(this.url + 'GetInstitutionByProvincialInstitutionNumber/{pin}', pin);
     }
-    // public get(institutionSummaryParameters: InstitutionsParameters): Observable<VwInstitutionSummary[]> { 
-    //     return this.get(this.url + '', institutionSummaryParameters);
-    // }
+    public queryInstitnutions(institutionSummaryParameters: InstitutionsParameters): Observable<VwInstitutionSummary[]> { 
+        return this.get(this.url + '', institutionSummaryParameters);
+    }
 
     private get url() {
-        return "localhost:5001";
-        // return this.store.selectSnapshot(ConfigSelectors.getUrls)[this.key];
+        return "";
     }
 }

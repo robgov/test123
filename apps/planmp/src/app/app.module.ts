@@ -24,7 +24,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 
 import { VwCurrentInstitution } from './../libs/common/models';
-import { InstitutionSummaryService } from './../libs/common/services';
+import { EndPointService, InstitutionSummaryService } from './../libs/common/services';
 
 const MATERIAL_MODULES = [
   MatButtonModule,

@@ -147,9 +147,7 @@ ${
 $Classes(c => c.Namespace.Equals("ProviderApi.Controllers") && (c.Name.EndsWith("Controller") && !ignoreControllers.Any(q => c.Name.StartsWith(q))))[
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConfigSelectors } from '@jsg/libs/common/state/selectors/config.selectors';
-import { EndPointService } from '@jsg/libs/shared/services/end-point.service';
-import { Store } from '@ngxs/store';
+import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
 $Imports
@@ -159,7 +157,7 @@ $Imports
 export class $ServiceName extends EndPointService {
 	key: string;
 
-    constructor(http: HttpClient, private store: Store){
+    constructor(http: HttpClient){
         super(http);
         this.key = '$ServiceName[$CamelCase]';
     }
@@ -169,6 +167,6 @@ export class $ServiceName extends EndPointService {
     }]
 
     private get url() {
-        return this.store.selectSnapshot(ConfigSelectors.getUrls)[this.key];
+        return "";
     }
 }]

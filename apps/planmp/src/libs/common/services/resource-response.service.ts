@@ -2,9 +2,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConfigSelectors } from '@jsg/libs/common/state/selectors/config.selectors';
-import { EndPointService } from '@jsg/libs/shared/services/end-point.service';
-import { Store } from '@ngxs/store';
+import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
 
@@ -14,7 +12,7 @@ import { Observable } from 'rxjs';
 export class ResourceService extends EndPointService {
 	key: string;
 
-    constructor(http: HttpClient, private store: Store){
+    constructor(http: HttpClient){
         super(http);
         this.key = 'resource';
     }
@@ -27,6 +25,6 @@ export class ResourceService extends EndPointService {
     }
 
     private get url() {
-        return this.store.selectSnapshot(ConfigSelectors.getUrls)[this.key];
+        return "";
     }
 }
