@@ -94,7 +94,7 @@ pipeline {
         }
       }
     }
-stage("Smoke Test"){
+stage('Smoke Test'){
       steps {
  sh ps -ef | grep Xvfb | grep -v grep | awk '{print $2}' | xargs kill -9
  sh "npm run planmp-e2e:ci:smokeTest --silent"
