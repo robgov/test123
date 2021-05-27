@@ -17,6 +17,7 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
+        checkout scm
         sh 'npm ci'
         script {
           if (params.affectedBase) {
