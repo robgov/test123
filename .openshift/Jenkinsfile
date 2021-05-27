@@ -4,7 +4,8 @@ def affectedApps = []
 pipeline {
   agent {
     node {
-      label 'node12-dotnet5'
+      label 'node12-dotnet5',
+      label "node12-cypress"
     }
   }
   parameters {
