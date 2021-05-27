@@ -2,10 +2,7 @@ def baseCommand = '--all'
 def affectedApps = []
 
 pipeline {
-  agent {
-    node {      
-      label 'node12-dotnet5'
-    }
+  agent none
   }
   parameters {
     string(
@@ -16,6 +13,11 @@ pipeline {
   }
   stages {
     stage('Prepare') {
+                agent {
+           node {      
+            label 'node12-dotnet5'
+            }
+          }
       steps {
         checkout scm
         sh 'npm ci'
@@ -35,16 +37,31 @@ pipeline {
       }
     }
     stage('Lint') {
+      agent {
+           node {      
+            label 'node12-dotnet5'
+            }
+          }
       steps {
         sh "npx nx affected --target=lint ${baseCommand} --parallel"
       }
     }
     stage('Test') {
+      agent {
+           node {      
+            label 'node12-dotnet5'
+            }
+          }
       steps {
         sh "npx nx affected --target=test ${baseCommand} --parallel"
       }
     }
     stage('Build') {
+      agent {
+           node {      
+            label 'node12-dotnet5'
+            }
+          }
       steps {
         sh "npx nx affected --target=build ${baseCommand} --parallel --configuration=production"
         script {
@@ -65,6 +82,11 @@ pipeline {
       input {
         message "Promote to Dev?"
       }
+      agent {
+           node {      
+            label 'node12-dotnet5'
+            }
+          }
       steps {
         script {
           openshift.withCluster() {
@@ -95,6 +117,11 @@ pipeline {
       }
     }
 stage('Smoke Test'){
+            agent {
+           node {      
+            label 'node12-cypress'
+            }
+          }
       steps {
  
  sh "npx nx e2e planmp-e2e -- --spec=**/src/integration/smoke-test/* --browser chrome --headless=true " 
