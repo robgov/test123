@@ -1,10 +1,8 @@
 def baseCommand = '--all'
 def affectedApps = []
 
-pipeline {
-  {
-  agent none
-  }
+pipeline {  
+  agent none  
   parameters {
     string(
       name: 'affectedBase',
