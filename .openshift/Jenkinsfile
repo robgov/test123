@@ -93,6 +93,10 @@ pipeline {
         }
       }
     }
-
+stage('Smoke Test'){
+      steps {
+ sh "npx nx e2e planmp-e2e -- --spec=**/src/integration/smoke-test/* --browser chrome --headless=true " 
+ }
+}
   }
 }
