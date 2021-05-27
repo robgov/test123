@@ -5,7 +5,7 @@ ${
     using System.Text.RegularExpressions;
     using System.Text;
 
-    static string appPath = "../../planmp/src/";
+    static string appPath = "../../../";
     static string libsCommonPath = appPath + "libs/common/";
 
      // Uncomment the constructor to change template settings.

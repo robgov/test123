@@ -23,8 +23,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 
-import { VwCurrentInstitution } from './../libs/common/models';
-import { EndPointService, InstitutionSummaryService } from './../libs/common/services';
+import { VwCurrentInstitution } from './../../../../libs/common/models';
+import { EndPointService, InstitutionSummaryService } from './../../../../libs/common/services';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
