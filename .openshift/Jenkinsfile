@@ -4,7 +4,7 @@ def affectedApps = []
 pipeline {
   agent {
     node {      
-      label 'node12-cypress'
+      label 'node14-cypress'
     }
   }
   parameters {
@@ -18,7 +18,7 @@ pipeline {
     stage('Prepare') {
       steps {
         checkout scm
-        sh 'npm ci'
+        sh 'npm install'
         script {
           if (params.affectedBase) {
             baseCommand = affectedBase
@@ -94,10 +94,6 @@ pipeline {
         }
       }
     }
-stage('Smoke Test'){
-      steps {
- sh "npx nx e2e planmp-e2e -- --spec=**/src/integration/smoke-test/* --browser chrome --headless=true"
- }
-}
+
   }
 }
