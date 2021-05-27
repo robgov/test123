@@ -2,6 +2,7 @@ def baseCommand = '--all'
 def affectedApps = []
 
 pipeline {
+  {
   agent none
   }
   parameters {
