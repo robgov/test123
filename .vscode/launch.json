@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/services/shared/AEDigital.Provider.API/AEDigital.Provider.API/bin/Debug/net5.0/AEDigital.Provider.API.dll",
+            "program": "${workspaceFolder}/apps/institution-api/bin/Debug/net5.0/institution-api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/services/shared/AEDigital.Provider.API/AEDigital.Provider.API",
+            "cwd": "${workspaceFolder}/apps/institution-api",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
