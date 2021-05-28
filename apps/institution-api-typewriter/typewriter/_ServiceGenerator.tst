@@ -23,11 +23,10 @@ ${
 
             // default to common, since it has the majority of services (this may have to change in the future)
             return $"{libsCommonPath}services/{tsName}";
-            // return  string.Format("../services/{0}.service.ts", ToTsFileName(modelClass.name));
         };
     }
 
-    static string[] ignoreControllers = new [] { "Default", "Document", "Seed" };
+    static string[] ignoreControllers = new [] { "Default", "Document", "Seed", "ResourceController" };
     static string[] ignoreMethods = new string[] {}; 
 
     string ToTsFileName(string name)
@@ -93,28 +92,13 @@ ${
         var importTemplate = "import {{ {0} }} from '{1}';\r\n";
         
         // managing these lists leads to lots of repetitive code
-        // TODO: refactor these four lists into a dictionary
         var commonImports = new List<string>();
-        var lawyerImports = new List<string>();
-        var clerkImports = new List<string>();
-        var sharedImports = new List<string>();
 
         foreach (var method in c.Methods) 
         {
             var className = method.Type.ClassName().Trim();
             var import = string.Empty;
 
-            if (className.StartsWith("CommandResult"))
-            { 
-                sharedImports.Add("CommandResult");
-                className = className.Replace("CommandResult<", string.Empty)
-                                    .Replace("IList<", string.Empty)
-                                    .Replace("IEnumerable<", string.Empty)
-                                    .Replace("[", string.Empty)
-                                    .Replace("]", string.Empty)
-                                    .Replace(">", string.Empty).Trim();
-
-            }
             if (prim.Contains(className))
             {
                 //Do nothing for base types.
@@ -136,9 +120,9 @@ ${
         }
         commonImports = commonImports.Distinct().OrderBy(x => x).ToList();
 
-        if (sharedImports.Count > 0)
+        if (commonImports.Count > 0)
         {
-            buffer.Add(string.Format(importTemplate, string.Join(", ", sharedImports), "@jsg/libs/shared/models"));
+            buffer.Add(string.Format(importTemplate, string.Join(", ", commonImports), "@libs/common/models"));
         }
 
         return string.Join(string.Empty, buffer.Distinct());

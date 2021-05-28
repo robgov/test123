@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import {VwInstitutionSummary, InstitutionsParameters } from './../models'
+import { InstitutionsParameters, VwInstitutionSummary } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'

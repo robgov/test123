@@ -1,29 +1,31 @@
-﻿// import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { EndPointService } from './end-point.service';
-// import { Observable } from 'rxjs';
+﻿
 
-// import { ResourceResponse } from '../models';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { EndPointService } from './end-point.service';
+import { Observable } from 'rxjs';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class ResourceService extends EndPointService {
-//   key: string;
+import { ResourceResponse } from '@libs/common/models';
 
-//   constructor(http: HttpClient) {
-//     super(http);
-//     this.key = 'resource';
-//   }
+@Injectable({
+    providedIn: 'root'
+})
+export class ResourceService extends EndPointService {
+	key: string;
 
-//   public retrievePublicResource(): Observable<ResourceResponse> {
-//     return this.get(this.url + 'v1/public');
-//   }
-//   public retrievePrivateResource(): Observable<ResourceResponse> {
-//     return this.get(this.url + 'v1/private');
-//   }
+    constructor(http: HttpClient){
+        super(http);
+        this.key = 'resource';
+    }
+    
+    public retrievePublicResource(): Observable<ResourceResponse> { 
+        return this.get(this.url + 'v1/public');
+    }
+    public retrievePrivateResource(): Observable<ResourceResponse> { 
+        return this.get(this.url + 'v1/private');
+    }
 
-//   private get url() {
-//     return '';
-//   }
-// }
+    private get url() {
+        return "";
+    }
+}
