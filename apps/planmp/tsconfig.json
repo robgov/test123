@@ -2,6 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
+  "compilerOptions": {
+    "paths": {
+      "@planmp/*" : ["apps/planmp/src/app/*"],
+      "@libs/*" : ["libs/*"]
+    }
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"
