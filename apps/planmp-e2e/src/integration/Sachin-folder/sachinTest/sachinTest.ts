@@ -49,6 +49,11 @@ When(/^the user clicks on Add Customer button and enter information in all field
   homepage.selectCustomer()
   homepage.selectCurrenty()
   homepage.clickProcess()
+  homepage.verifynewcustomer()
+ // homepage.clickCustomer()
+ // homepage.verifynewcustomer()
+
+
   
 
 });

@@ -117,6 +117,55 @@ export default class sachinhomepageelement {
 
         cy.get('form.ng-dirty > button').click()
     }
-   
+
+    clickCustomer() {
+        cy.get('[ng-class="btnClass3"]').click()
+    }
+    verifynewcustomer() {
+        
+
+    var i;  
+    i=0; 
+           cy.get('#userSelect option').each((el)=>{
+            
+     
+if (el.text() === 'Harry Potter')
+    {
     
+  // cy.wrap(el).then( obj => {
+  //  const bt = obj.text();
+   // cy.log (bt);
+     
+   cy.wrap(el).as('bt')
+   cy.wrap(el.text())
+   //cy.wrap(el).click()
+   cy.log(i);
+  // cy.get('#userSelect').select('6')
+    }
+i++;
+
+})
+
+  
 }
+
+/*
+else
+{
+   
+    cy.wrap($el).then( obj => {
+        const bt = obj.text();
+        cy.log (bt);
+       }) 
+}
+*/
+      
+            
+            
+        
+       
+
+
+    
+    }
+    
