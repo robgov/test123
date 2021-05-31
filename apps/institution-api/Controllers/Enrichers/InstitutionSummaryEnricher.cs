@@ -6,12 +6,12 @@ namespace ProviderApi.Controllers.Enrichers
 {
   public static class InstitutionSummaryEnricher
   {
-    public static ExpressionStarter<VwInstitutionSummary> InstitutionFilter(InstitutionsParameters institutionSummaryParameters, ExpressionStarter<VwInstitutionSummary> predicate)
-    {
-      if (!string.IsNullOrEmpty(institutionSummaryParameters.InstitutionName))
-        predicate = predicate.And(provider => provider.InstitutionName.Contains(institutionSummaryParameters.InstitutionName));
+    //public static ExpressionStarter<VwInstitutionSummary> InstitutionFilter(InstitutionsParameters institutionSummaryParameters, ExpressionStarter<VwInstitutionSummary> predicate)
+    //{
+    //  if (!string.IsNullOrEmpty(institutionSummaryParameters.InstitutionName))
+    //    predicate = predicate.And(provider => provider.InstitutionName.Contains(institutionSummaryParameters.InstitutionName));
 
-      return predicate;
-    }
+    //  return predicate;
+    //}
   }
 }

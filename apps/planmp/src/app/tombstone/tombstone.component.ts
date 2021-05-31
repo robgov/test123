@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {InstitutionSummaryService} from '@libs/common/services';
-import { InstitutionsParameters } from '@libs/common/models';
+import {InstitutionSummaryService, ProviderService} from '@libs/common/services';
+import { InstitutionsParameters, PagedDataParameters, VwProvider } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-tombstone',
@@ -13,25 +13,30 @@ export class TombstoneComponent implements OnInit {
 
   searchText: string;
   institutions: any[] = [];
+  providers: VwProvider[];
   pagenumber =1;
   pagesize =5;
 
   test: any;
 
-  constructor(private http: HttpClient, private institutionSummaryService: InstitutionSummaryService) { }
+  constructor(private http: HttpClient, private providerService: ProviderService) { }
   ngOnInit(): void { this.fetch(); }
 
 
 
   fetch() {
 
-    let params: InstitutionsParameters  = new InstitutionsParameters();
+    let params: PagedDataParameters  = new PagedDataParameters();
     params.pageNumber=this.pagenumber;
     params.pageSize = this.pagesize;
     
-    this.institutionSummaryService.getInstitutionSummarys(params).subscribe((t)=> {
-      this.institutions = t
-    });
+    this.providerService.getProviders(params).subscribe((t)=>{
+      this.providers = t;
+    })
+
+    // this.institutionSummaryService.getInstitutionSummarys(params).subscribe((t)=> {
+    //   this.institutions = t
+    // });
 
     // const localurl = "https://localhost:5001";
     // const url = localurl + "/API/InstitutionSummary?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;

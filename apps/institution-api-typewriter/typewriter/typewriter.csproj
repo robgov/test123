@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\libs\common\services\institution-summary.service.ts" Link="institution-summary.service.ts" />
+    <None Include="..\..\..\libs\common\models\ae-digital_systcontext.ts" Link="ae-digital_systcontext.ts" />
+    <None Include="..\..\..\libs\common\services\provider-website.service.ts" Link="provider-website.service.ts" />
+    <None Include="..\..\..\libs\common\services\provider.service.ts" Link="provider.service.ts" />
   </ItemGroup>
 
 </Project>
