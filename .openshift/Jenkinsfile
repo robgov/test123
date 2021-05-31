@@ -1,12 +1,12 @@
 def baseCommand = '--all'
 def affectedApps = []
 
-pipeline {  
+pipeline {
   agent {
-    node {      
+    node {
       label 'node12-dotnet5'
     }
-  } 
+  }
   parameters {
     string(
       name: 'affectedBase',
@@ -17,7 +17,6 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        checkout scm
         sh 'npm ci'
         script {
           if (params.affectedBase) {
@@ -51,9 +50,9 @@ pipeline {
           openshift.withCluster() {
             openshift.withProject('planmp-tools') {
               affectedApps.each { affected ->
-                def bc = openshift.selector("bc", affected)
+                def bc = openshift.selector('bc', affected)
                 if ( bc.exists() ) {
-                  bc.startBuild("--from-dir=.", "--wait", "--follow")
+                  bc.startBuild('--from-dir=.', '--wait', '--follow')
                 }
               }
             }
@@ -63,14 +62,14 @@ pipeline {
     }
     stage('Deploy Dev') {
       input {
-        message "Promote to Dev?"
+        message 'Promote to Dev?'
       }
       steps {
         script {
           openshift.withCluster() {
             openshift.withProject('planmp-tools') {
               affectedApps.each { affected ->
-                def is = openshift.selector("is", "${affected}")
+                def is = openshift.selector('is', "${affected}")
                 if ( is.exists() ) {
                   openshift.tag("${affected}:latest", "${affected}:dev")
                 }
@@ -82,7 +81,7 @@ pipeline {
           openshift.withCluster() {
             openshift.withProject('planmp-dev') {
               affectedApps.each { affected ->
-                def dc = openshift.selector("dc", "${affected}")
+                def dc = openshift.selector('dc', "${affected}")
                 if ( dc.exists() ) {
                   def rm = dc.rollout()
                   rm.latest()
@@ -94,15 +93,5 @@ pipeline {
         }
       }
     }
-stage('Smoke Test'){
-            agent {
-           node {      
-            label 'node14-cypress'
-            }
-          }
-      steps { 
- sh "npx nx e2e planmp-e2e -- --spec=**/src/integration/smoke-test/* --browser chrome --headless=true" 
- }
-  }
   }
 }
