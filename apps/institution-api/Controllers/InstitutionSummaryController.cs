@@ -34,7 +34,7 @@ namespace ProviderApi.Controllers
     [SwaggerOperation("GetInstitution")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> Get(int id)
+    public IEnumerable<VwInstitutionSummary> GetInstitutionSummary(int id)
     {
       return _context.VwInstitutionSummaries.Where(inst => inst.InstitutionId.Equals(id));
     }
@@ -46,7 +46,7 @@ namespace ProviderApi.Controllers
     [SwaggerOperation("GetInstitution")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> GetInstitution(int pin)
+    public IEnumerable<VwInstitutionSummary> GetInstitutionSummaryByProvincialInstitutionNumber(int pin)
     {
       return _context.VwInstitutionSummaries.Where(inst => inst.ProvincialInstitutionNumber.Equals(pin));
     }
@@ -54,11 +54,11 @@ namespace ProviderApi.Controllers
     ///<Summary>
     /// Gets Institution Summary by InstitutionID 
     ///</Summary>
-    [HttpGet()]
+    [HttpGet("GetInstitutions")]
     [SwaggerOperation("GetInstitutions")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> Get([FromQuery] InstitutionsParameters institutionSummaryParameters)
+    public IEnumerable<VwInstitutionSummary> GetInstitutionSummarys([FromQuery] InstitutionsParameters institutionSummaryParameters)
     {
       List<VwInstitutionSummary> institutionSummaries = _context.VwInstitutionSummaries.ToList();
 

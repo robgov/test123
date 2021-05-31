@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;typewriter</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\libs\common\services\institution-summary.service.ts" Link="institution-summary.service.ts" />
+  </ItemGroup>
+
+</Project>

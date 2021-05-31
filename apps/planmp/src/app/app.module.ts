@@ -7,7 +7,9 @@ import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { InstitutionSummaryService } from '@libs/common/services';
 
 // Material Imports
 import { MatButtonModule } from '@angular/material/button';
@@ -23,8 +25,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 
-
-const MATERIAL_MODULES = [MatButtonModule,
+const MATERIAL_MODULES = [
+  MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
@@ -35,7 +37,8 @@ const MATERIAL_MODULES = [MatButtonModule,
   MatInputModule,
   MatRadioModule,
   MatSelectModule,
-  MatSidenavModule];
+  MatSidenavModule,
+];
 
 // Components
 import { AppComponent } from './app.component';
@@ -50,21 +53,30 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
 
 @NgModule({
-
-  declarations: [AppComponent
-              , TombstoneComponent
-              , HomeComponent
-              , HeaderComponent
-              , FooterComponent
-              , InputFormComponent
-              , BannerComponent
-              , EnvironmentSashComponent
-              , BreadcrumbComponent
-              , FilterPipe],
-  imports: [BrowserModule, AngularComponentsModule, BrowserAnimationsModule, FlexLayoutModule,
-    MATERIAL_MODULES, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule
+  declarations: [
+    AppComponent,
+    TombstoneComponent,
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent,
+    InputFormComponent,
+    BannerComponent,
+    EnvironmentSashComponent,
+    BreadcrumbComponent,
+    FilterPipe,
   ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AngularComponentsModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MATERIAL_MODULES,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
+  providers: [InstitutionSummaryService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
