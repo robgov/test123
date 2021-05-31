@@ -5,4 +5,8 @@
     <Configurations>Debug;Release;typewriter</Configurations>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\..\libs\common\services\institution-summary.service.ts" Link="institution-summary.service.ts" />
+  </ItemGroup>
+
 </Project>

@@ -54,7 +54,7 @@ namespace ProviderApi.Controllers
     ///<Summary>
     /// Gets Institution Summary by InstitutionID 
     ///</Summary>
-    [HttpGet()]
+    [HttpGet("GetInstitutions")]
     [SwaggerOperation("GetInstitutions")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]

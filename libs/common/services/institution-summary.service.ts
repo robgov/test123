@@ -25,10 +25,10 @@ export class InstitutionSummaryService extends EndPointService {
         return this.get(this.url + 'GetInstitutionByProvincialInstitutionNumber/{pin}', pin);
     }
     public getInstitutionSummarys(institutionSummaryParameters: InstitutionsParameters): Observable<VwInstitutionSummary[]> { 
-        return this.get(this.url + '', institutionSummaryParameters);
+        return this.get(this.url + 'GetInstitutions', institutionSummaryParameters);
     }
 
     private get url() {
-        return "";
+        return "http://localhost:5001/api/" + this.key + "/";
     }
 }

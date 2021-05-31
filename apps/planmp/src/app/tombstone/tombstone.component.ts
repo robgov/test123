@@ -4,12 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {InstitutionSummaryService} from '@libs/common/services';
 import { InstitutionsParameters } from '@libs/common/models';
 
-interface Institution {
-  institutionName: string;
-}
-
-
-
 @Component({
   selector: 'aedigital-tombstone',
   templateUrl: './tombstone.component.html',
@@ -18,9 +12,11 @@ interface Institution {
 export class TombstoneComponent implements OnInit {
 
   searchText: string;
-  institutions: Institution[] = [];
+  institutions: any[] = [];
   pagenumber =1;
   pagesize =5;
+
+  test: any;
 
   constructor(private http: HttpClient, private institutionSummaryService: InstitutionSummaryService) { }
   ngOnInit(): void { this.fetch(); }
@@ -33,7 +29,9 @@ export class TombstoneComponent implements OnInit {
     params.pageNumber=this.pagenumber;
     params.pageSize = this.pagesize;
     
-    this.institutionSummaryService.getInstitutionSummarys(params).subscribe((t)=> (this.institutions = t));
+    this.institutionSummaryService.getInstitutionSummarys(params).subscribe((t)=> {
+      this.institutions = t
+    });
 
     // const localurl = "https://localhost:5001";
     // const url = localurl + "/API/InstitutionSummary?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "institution-api", "institut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "typewriter", "institution-api-typewriter\typewriter\typewriter.csproj", "{5E9C2533-FA77-4061-8453-17DE75EDE4DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "provider-api", "provider-api\provider-api.csproj", "{35628192-0C80-42CE-96E4-8C32D697FB30}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{5E9C2533-FA77-4061-8453-17DE75EDE4DF}.Debug|Any CPU.Build.0 = typewriter|Any CPU
 		{5E9C2533-FA77-4061-8453-17DE75EDE4DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E9C2533-FA77-4061-8453-17DE75EDE4DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35628192-0C80-42CE-96E4-8C32D697FB30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35628192-0C80-42CE-96E4-8C32D697FB30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35628192-0C80-42CE-96E4-8C32D697FB30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35628192-0C80-42CE-96E4-8C32D697FB30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
