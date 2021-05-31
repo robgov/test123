@@ -28,6 +28,7 @@ ${
     static string[] ignoreModels = new string[] 
     { 
         "AEDMContext",
+        "AEDigital_SYSTContext",
         "migration-log",
         "migration-log-current",
         "schema-snapshot"

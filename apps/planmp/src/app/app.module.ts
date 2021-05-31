@@ -9,7 +9,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { InstitutionSummaryService } from '@libs/common/services';
+import { LocationAddressService, 
+         LocationEmailService, 
+         LocationPhoneService, 
+         LocationPublicationService, 
+         LocationService,
+         ProgramPublicationService,
+         ProgramService,
+         ProviderAddressService,
+         ProviderEmailService,
+         ProviderPhoneService,
+         ProviderPublicationService,
+         ProviderService,
+         ProviderTypeService,
+         ProviderWebsiteService
+        } from '@libs/common/services';
+
 
 // Material Imports
 import { MatButtonModule } from '@angular/material/button';
@@ -76,7 +91,20 @@ import { FilterPipe } from './filter.pipe';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [InstitutionSummaryService],
+  providers: [LocationAddressService, 
+    LocationEmailService, 
+    LocationPhoneService, 
+    LocationPublicationService, 
+    LocationService,
+    ProgramPublicationService,
+    ProgramService,
+    ProviderAddressService,
+    ProviderEmailService,
+    ProviderPhoneService,
+    ProviderPublicationService,
+    ProviderService,
+    ProviderTypeService,
+    ProviderWebsiteService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -19,65 +19,65 @@ namespace ProviderApi.Controllers
   {
     private readonly ILogger<InstitutionSummaryController> _logger;
 
-    private AEDMContext _context;
+    //private AEDMContext _context;
 
-    public InstitutionSummaryController(ILogger<InstitutionSummaryController> logger, AEDMContext context)
-    {
-      _logger = logger;
-      _context = context;
-    }
+    //public InstitutionSummaryController(ILogger<InstitutionSummaryController> logger, AEDMContext context)
+    //{
+    //  _logger = logger;
+    //  _context = context;
+    //}
 
-    ///<Summary>
-    /// Gets Institution Summary by InstitutionID 
-    ///</Summary>
-    [HttpGet("{id}")]
-    [SwaggerOperation("GetInstitution")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> GetInstitutionSummary(int id)
-    {
-      return _context.VwInstitutionSummaries.Where(inst => inst.InstitutionId.Equals(id));
-    }
+    /////<Summary>
+    ///// Gets Institution Summary by InstitutionID 
+    /////</Summary>
+    //[HttpGet("{id}")]
+    //[SwaggerOperation("GetInstitution")]
+    //[SwaggerResponse((int)HttpStatusCode.OK)]
+    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
+    //public IEnumerable<VwInstitutionSummary> GetInstitutionSummary(int id)
+    //{
+    //  return _context.VwInstitutionSummaries.Where(inst => inst.InstitutionId.Equals(id));
+    //}
 
-    ///<Summary>
-    /// Gets Institution Summary by Provincial Institution Number 
-    ///</Summary>
-    [HttpGet("GetInstitutionByProvincialInstitutionNumber/{pin}")]
-    [SwaggerOperation("GetInstitution")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> GetInstitutionSummaryByProvincialInstitutionNumber(int pin)
-    {
-      return _context.VwInstitutionSummaries.Where(inst => inst.ProvincialInstitutionNumber.Equals(pin));
-    }
+    /////<Summary>
+    ///// Gets Institution Summary by Provincial Institution Number 
+    /////</Summary>
+    //[HttpGet("GetInstitutionByProvincialInstitutionNumber/{pin}")]
+    //[SwaggerOperation("GetInstitution")]
+    //[SwaggerResponse((int)HttpStatusCode.OK)]
+    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
+    //public IEnumerable<VwInstitutionSummary> GetInstitutionSummaryByProvincialInstitutionNumber(int pin)
+    //{
+    //  return _context.VwInstitutionSummaries.Where(inst => inst.ProvincialInstitutionNumber.Equals(pin));
+    //}
 
-    ///<Summary>
-    /// Gets Institution Summary by InstitutionID 
-    ///</Summary>
-    [HttpGet("GetInstitutions")]
-    [SwaggerOperation("GetInstitutions")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwInstitutionSummary> GetInstitutionSummarys([FromQuery] InstitutionsParameters institutionSummaryParameters)
-    {
-      List<VwInstitutionSummary> institutionSummaries = _context.VwInstitutionSummaries.ToList();
+    /////<Summary>
+    ///// Gets Institution Summary by InstitutionID 
+    /////</Summary>
+    //[HttpGet("GetInstitutions")]
+    //[SwaggerOperation("GetInstitutions")]
+    //[SwaggerResponse((int)HttpStatusCode.OK)]
+    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
+    //public IEnumerable<VwInstitutionSummary> GetInstitutionSummarys([FromQuery] InstitutionsParameters institutionSummaryParameters)
+    //{
+    //  List<VwInstitutionSummary> institutionSummaries = _context.VwInstitutionSummaries.ToList();
 
-      // Filtering
-      var predicate = PredicateBuilder.New<VwInstitutionSummary>();
-      var originalPredicate = predicate;
-      predicate = InstitutionSummaryEnricher.InstitutionFilter(institutionSummaryParameters, predicate);
-      if (predicate != originalPredicate)
-      {
-        institutionSummaries = institutionSummaries.Where(predicate).ToList();
-      }
+    //  // Filtering
+    //  var predicate = PredicateBuilder.New<VwInstitutionSummary>();
+    //  var originalPredicate = predicate;
+    //  predicate = InstitutionSummaryEnricher.InstitutionFilter(institutionSummaryParameters, predicate);
+    //  if (predicate != originalPredicate)
+    //  {
+    //    institutionSummaries = institutionSummaries.Where(predicate).ToList();
+    //  }
 
-      // Pagination
-      var pagedInstitutions = institutionSummaries.Skip((institutionSummaryParameters.PageNumber - 1) * institutionSummaryParameters.PageSize)
-          .Take(institutionSummaryParameters.PageSize)
-          .ToList();
+    //  // Pagination
+    //  var pagedInstitutions = institutionSummaries.Skip((institutionSummaryParameters.PageNumber - 1) * institutionSummaryParameters.PageSize)
+    //      .Take(institutionSummaryParameters.PageSize)
+    //      .ToList();
 
-      return pagedInstitutions;
-    }
+    //  return pagedInstitutions;
+    //}
 
     #region "Not implemented yet"
     /*

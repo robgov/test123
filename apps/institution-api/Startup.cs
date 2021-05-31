@@ -43,8 +43,8 @@ namespace ProviderApi
 
       });
 
-      services.AddDbContext<AEDMContext>(opt =>
-              opt.UseSqlServer(Configuration.GetConnectionString("TheJunConnection"))
+      services.AddDbContext<AEDigital_SYSTContext>(opt =>
+              opt.UseSqlServer(Configuration.GetConnectionString("AEDIGITAL_SYST"))
            );
     }
 
