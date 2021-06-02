@@ -1,8 +1,11 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutGap="8px">
-      <div fxFlex="100">
-        <div *ngFor="let p of providers">
-          <aedigital-school-summary [provider]="p"></aedigital-school-summary>
+        <div fxFlex="100" fxLayout="column">
+            <div fxFlex="400px;">
+                <div *ngFor="let p of providers">
+                    <aedigital-school-summary [provider]="p"></aedigital-school-summary>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProgramService, AlbertaPSIProviderService } from '@libs/common/services';
+import { FlexConstants } from '@libs/FlexConstants';
 
 interface PageContent {
   Title: string;
@@ -15,6 +16,8 @@ interface PageContent {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  FlexConstants = FlexConstants;
+
   programCategories: string[];
 
   url = 'http://localhost:1337/ds-home-pages';
