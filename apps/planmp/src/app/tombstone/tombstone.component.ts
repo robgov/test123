@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {InstitutionSummaryService, ProviderService} from '@libs/common/services';
+import {ProviderService} from '@libs/common/services';
 import { InstitutionsParameters, PagedDataParameters, VwProvider } from '@libs/common/models';
 
 @Component({

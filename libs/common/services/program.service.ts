@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { VwProgram } from '@libs/common/models';
+import { ProviderProgramRequest, VwProgram } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +20,9 @@ export class ProgramService extends EndPointService {
     
     public getProgram(id: number): Observable<VwProgram[]> { 
         return this.get(this.url + '{id}', id);
+    }
+    public getProgramsByProviderId(request: ProviderProgramRequest): Observable<VwProgram[]> { 
+        return this.get(this.url + 'GetProgramsByProviderId', request);
     }
 
     private get url() {

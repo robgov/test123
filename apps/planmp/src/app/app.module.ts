@@ -66,6 +66,8 @@ import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
+import { SchoolSummaryComponent } from './school-summary/school-summary.component';
+import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { FilterPipe } from './filter.pipe';
     EnvironmentSashComponent,
     BreadcrumbComponent,
     FilterPipe,
+    SchoolSummaryComponent,
+    SchoolSummaryListComponent,
   ],
   imports: [
     BrowserModule,

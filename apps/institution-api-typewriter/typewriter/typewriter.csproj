@@ -6,9 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\libs\common\models\ae-digital_systcontext.ts" Link="ae-digital_systcontext.ts" />
-    <None Include="..\..\..\libs\common\services\provider-website.service.ts" Link="provider-website.service.ts" />
-    <None Include="..\..\..\libs\common\services\provider.service.ts" Link="provider.service.ts" />
+    <None Include="..\..\..\libs\common\models\program-category-parameters.ts" Link="program-category-parameters.ts" />
+    <None Include="..\..\..\libs\common\models\program-category-request.ts" Link="program-category-request.ts" />
+    <None Include="..\..\..\libs\common\models\provider-program-request.ts" Link="provider-program-request.ts" />
+    <None Include="..\..\..\libs\common\services\alberta-psiprovider.service.ts" Link="alberta-psiprovider.service.ts" />
+    <None Include="..\..\..\libs\common\services\program.service.ts" Link="program.service.ts" />
   </ItemGroup>
 
 </Project>

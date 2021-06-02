@@ -1,6 +1,6 @@
+export * from './alberta-psiprovider.service';
 export * from './end-point.service';
 export * from './http-object-mapper';
-export * from './institution-summary.service';
 export * from './location-address.service';
 export * from './location-email.service';
 export * from './location-phone.service';

@@ -1,46 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-
+import { HttpClient } from '@angular/common/http';
+import { ProgramService, AlbertaPSIProviderService } from '@libs/common/services';
 
 interface PageContent {
-
   Title: string;
   Subtitle: string;
   Summary: string;
   SplashImage: ImageBitmap;
 }
 
-
 @Component({
   selector: 'aedigital-mono-repo-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  programCategories: string[];
 
-  providers: any[] = [
-    {
-      PageTitle: "Title",
-      Subtitle: "Subtitle",
-      Header: "Header",
-      Summary: "Strapi call failed",
-    }];
-
-  url = "http://localhost:1337/ds-home-pages";
-  constructor(private http: HttpClient) { }
+  url = 'http://localhost:1337/ds-home-pages';
+  constructor(
+    private http: HttpClient,
+    private apsiProviderService: AlbertaPSIProviderService
+  ) {}
 
   ngOnInit(): void {
-    this.fetch();
+    this.getProgramCategories();
   }
 
+  fetch() {}
 
-
-  fetch() {
-
-    const url = "http://localhost:8080/ds-homepages";
-    this.http.get<any[]>(url).subscribe((t) => {
-      (this.providers = t)
-    }
-    );
+  getProgramCategories() {
+    this.apsiProviderService.getAlbertaPsiProviderCategories().subscribe((result) => {
+      this.programCategories = result;
+    });
   }
 }

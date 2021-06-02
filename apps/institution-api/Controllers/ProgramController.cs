@@ -36,5 +36,33 @@ namespace ProviderApi.Controllers
       return _context.VwPrograms.Where(x => x.ProgramId.Equals(id));
     }
 
+    [HttpGet("GetProgramsByProviderId")]
+    [SwaggerOperation("GetProgramsByProviderId")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<VwProgram> GetProgramsByProviderId([FromQuery] ProviderProgramRequest request)
+    {
+      return _context.VwPrograms.Where(x => x.ProviderId.Equals(request.ProviderId));
+    }
+
+    //[HttpGet("")]
+    //[SwaggerOperation("GetProgramCategories")]
+    //[SwaggerResponse((int)HttpStatusCode.OK)]
+    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
+    //public IEnumerable<string> GetProgramCategories()
+    //{
+    //  var programCategories = _context.VwPrograms.Select(x => x.ProgramName).Distinct().ToList();
+    //  return programCategories.OrderBy(x => x);
+    //}
+
+    //[HttpGet("{category}")]
+    //[SwaggerOperation("GetProgramCountByCategory")]
+    //[SwaggerResponse((int)HttpStatusCode.OK)]
+    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
+    //public int GetProgramCountByCategory(string category)
+    //{
+    //  var programCategoryCount = _context.VwPrograms.Count(x => x.ProgramName == category);
+    //  return programCategoryCount;
+    //}
   }
 }
