@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { FlexConstants } from '@libs/FlexConstants';
 
 
 interface PageContent {
@@ -17,6 +18,8 @@ interface PageContent {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  FlexConstants = FlexConstants;
 
   providers: any[] = [
     {

@@ -16,7 +16,7 @@
     </div>
     -->
 
-    <div fxFlex="50" *ngIf="this.providers[0].Splash" fxHide.lt-md>
+    <div fxFlex="{{FlexConstants.column.Large_3}}" *ngIf="this.providers[0].Splash" fxHide.lt-md>
       <!-- <img fxFlex="90" flex-shrink src="../assets/planMyPath.png"> -->
       <img flex-shrink flex-grow src="http://localhost:8080{{ this.providers[0].Splash[0].url }}" />
     </div>

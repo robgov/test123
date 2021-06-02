@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FlexConstants} from '@libs/FlexConstants';
 
 @Component({
   selector: 'aedigital-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  FlexConstants = FlexConstants;
 }
 
