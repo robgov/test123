@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { VwAlbertaPsiprovider, VwProgram, ProviderProgramRequest } from '@libs/common/models';
 import { ProgramService, AlbertaPSIProviderService } from '@libs/common/services';
+import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -9,6 +10,7 @@ import { ProgramService, AlbertaPSIProviderService } from '@libs/common/services
   styleUrls: ['./programs-search-results.component.scss']
 })
 export class ProgramsSearchResultsComponent implements OnInit {
+  FlexConstants = FlexConstants;
 
   private providerId: number = null;
   providers: VwAlbertaPsiprovider[];

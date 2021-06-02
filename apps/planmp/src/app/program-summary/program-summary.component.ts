@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { VwProgram, VwProvider } from '@libs/common/models';
+import { FlexConstants } from '@libs/FlexConstants';
 import { ProgramsSearchResultsComponent } from '@planmp/programs-search-results/programs-search-results.component';
 
 @Component({
@@ -8,6 +9,7 @@ import { ProgramsSearchResultsComponent } from '@planmp/programs-search-results/
   styleUrls: ['./program-summary.component.scss']
 })
 export class ProgramSummaryComponent implements OnInit {
+  FlexConstants = FlexConstants;
   @Input() program: VwProgram;
   @Input() providers: VwProvider[];
   constructor() { }

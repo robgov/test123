@@ -1,5 +1,6 @@
+<aedigital-breadcrumb></aedigital-breadcrumb>
 <div fxLayout="column">
-    <div fxLayout="row" fxLayoutGap="8px">
+    <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
         <div fxFlex="100" fxLayout="column">
             <div *ngFor="let p of searchResults">
                 <aedigital-program-summary [program]="p" [providers]="providers"></aedigital-program-summary>

@@ -1,24 +1,24 @@
 <div fxLayout="column">
-    <div fxFlex=100 fxLayout="row" fxLayoutGap="16px">
-        <div>img</div>
-        <div fxLayout="column" fxFlex>
+    <div fxFlex=100 fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
+        <div fxFlex="{{FlexConstants.Column.Large}}" fxLayoutAlign="center center">img</div>
+        <div fxLayout="column" fxFlex="{{FlexConstants.Column.Large_6}}">
             <div>{{program.programName}}</div>
             <div>TODO:Program Type</div>
             <!-- <div>{{program.}}</div> -->
             <div>{{programProvider().providerName}}</div>
             <div></div>
-            <div fxLayout="row" fxLayotuGap="16px;">
-                <div fxFlex>{{program.programLength}}</div>
-                <div fxFlex>{{program.credentialType}}</div>
-                <div fxFlex>$ XXXX/year</div>
+            <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
+                <div fxFlex="{{FlexConstants.Column.Large_2}}">{{program.programLength}}</div>
+                <div fxFlex="{{FlexConstants.Column.Large_2}}">{{program.credentialType}}</div>
+                <div fxFlex="{{FlexConstants.Column.Large_2}}">$ XXXX/year</div>
             </div>
         </div>
-        <div fxFlex>
+        <div fxFlex="{{FlexConstants.Column.Large_2}}">
             <div fxLayout="column">
                 <div>Median Income</div>
                 <div>Employment Rate</div>
             </div>
         </div>
     </div>
-    <hr>
 </div>
+<hr>
