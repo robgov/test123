@@ -2,7 +2,7 @@
     <div fxLayout="row" fxLayoutGap="8px">
         <div fxFlex="100" fxLayout="column">
             <div *ngFor="let p of searchResults">
-                <aedigital-program-summary [program]="p"></aedigital-program-summary>
+                <aedigital-program-summary [program]="p" [providers]="providers"></aedigital-program-summary>
             </div>
         </div>
     </div>
