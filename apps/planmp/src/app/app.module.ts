@@ -39,6 +39,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -53,6 +54,7 @@ const MATERIAL_MODULES = [
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
+  MatTabsModule
 ];
 
 // Components
@@ -68,6 +70,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
 import { SchoolSummaryComponent } from './school-summary/school-summary.component';
 import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
+import { FindProgramsComponent } from './find-programs/find-programs.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +86,7 @@ import { SchoolSummaryListComponent } from './school-summary-list/school-summary
     FilterPipe,
     SchoolSummaryComponent,
     SchoolSummaryListComponent,
+    FindProgramsComponent,
   ],
   imports: [
     BrowserModule,
