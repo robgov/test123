@@ -71,6 +71,8 @@ import { FilterPipe } from './filter.pipe';
 import { SchoolSummaryComponent } from './school-summary/school-summary.component';
 import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
 import { FindProgramsComponent } from './find-programs/find-programs.component';
+import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
+import { ProgramSummaryComponent } from './program-summary/program-summary.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import { FindProgramsComponent } from './find-programs/find-programs.component';
     SchoolSummaryComponent,
     SchoolSummaryListComponent,
     FindProgramsComponent,
+    ProgramsSearchResultsComponent,
+    ProgramSummaryComponent,
   ],
   imports: [
     BrowserModule,
