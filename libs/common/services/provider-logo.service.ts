@@ -19,7 +19,10 @@ export class ProviderLogoService extends EndPointService {
     }
     
     public getProviderLogoByProviderId(request: ProviderLogoRequest): Observable<VwProviderLogo> { 
-        return this.get(this.url + '', request);
+        return this.get(this.url + 'GetProviderLogoByProviderId', request);
+    }
+    public getProviderLogos(): Observable<VwProviderLogo[]> { 
+        return this.get(this.url + '');
     }
 
     private get url() {

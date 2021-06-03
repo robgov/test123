@@ -37,6 +37,15 @@ namespace ProviderApi.Controllers
     }
 
     [HttpGet("")]
+    [SwaggerOperation("GetSpecializations")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<VwSpecialization> GetSpecializations()
+    {
+      return _context.VwSpecializations;
+    }
+
+    [HttpGet("GetSpecializationByProgramId")]
     [SwaggerOperation("GetSpecializationByProgramId")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]

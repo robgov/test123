@@ -9,22 +9,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LocationAddressService, 
-         LocationEmailService, 
-         LocationPhoneService, 
-         LocationPublicationService, 
-         LocationService,
-         ProgramPublicationService,
-         ProgramService,
-         ProviderAddressService,
-         ProviderEmailService,
-         ProviderPhoneService,
-         ProviderPublicationService,
-         ProviderService,
-         ProviderTypeService,
-         ProviderWebsiteService
-        } from '@libs/common/services';
-
+import {
+  LocationAddressService,
+  LocationEmailService,
+  LocationPhoneService,
+  LocationPublicationService,
+  LocationService,
+  ProgramPublicationService,
+  ProgramService,
+  ProviderAddressService,
+  ProviderEmailService,
+  ProviderPhoneService,
+  ProviderPublicationService,
+  ProviderService,
+  ProviderTypeService,
+  ProviderWebsiteService,
+} from '@libs/common/services';
 
 // Material Imports
 import { MatButtonModule } from '@angular/material/button';
@@ -36,9 +36,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 
 const MATERIAL_MODULES = [
@@ -51,10 +53,12 @@ const MATERIAL_MODULES = [
   MatListModule,
   MatIconModule,
   MatInputModule,
+  MatPaginatorModule,
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTableModule
 ];
 
 // Components
@@ -105,10 +109,11 @@ import { PaginationComponent } from './pagination/pagination.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [LocationAddressService, 
-    LocationEmailService, 
-    LocationPhoneService, 
-    LocationPublicationService, 
+  providers: [
+    LocationAddressService,
+    LocationEmailService,
+    LocationPhoneService,
+    LocationPublicationService,
     LocationService,
     ProgramPublicationService,
     ProgramService,
@@ -118,7 +123,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     ProviderPublicationService,
     ProviderService,
     ProviderTypeService,
-    ProviderWebsiteService],
+    ProviderWebsiteService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProgramService, AlbertaPSIProviderService } from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';
+import { Router } from '@angular/router';
 
 interface PageContent {
   Title: string;

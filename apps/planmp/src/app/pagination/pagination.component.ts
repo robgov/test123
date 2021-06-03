@@ -7,14 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  @Input() totalItems = 18;
-  @Input() itemsPerPage = 6;
-  @Input() currentPage = 1;
+  totalItems = 18;
+  itemsPerPage = 6;
+  currentPage = 1;
   constructor() { }
 
-  totalPages () {
+  totalPages(): number {
     var pages = Math.floor(this.totalItems / this.itemsPerPage);
-    if (pages > 1) {
+    if (pages < 1) {
       pages=1;
     }
     return pages;

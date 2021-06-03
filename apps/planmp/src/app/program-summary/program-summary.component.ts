@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VwProgram, VwProvider, VwSpecialization } from '@libs/common/models';
+import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
-import { ProgramsSearchResultsComponent } from '@planmp/programs-search-results/programs-search-results.component';
-import { SpecializationService, ProviderLogoService } from '@libs/common/services';
-import { SpecializationRequest, VwProviderLogo, ProviderLogoRequest } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-program-summary',
@@ -14,28 +11,37 @@ export class ProgramSummaryComponent implements OnInit {
   FlexConstants = FlexConstants;
   @Input() program: VwProgram;
   @Input() providers: VwProvider[];
-  specialization: VwSpecialization;
-  providerLogo: VwProviderLogo;
-  constructor(private specializationService: SpecializationService, private providerLogoService: ProviderLogoService) {}
+  @Input() specializations: VwSpecialization[];
+  @Input() providerLogos: VwProviderLogo[];
+  constructor() {}
 
   ngOnInit(): void {
-    this.specializationService
-      .getSpecializationByProgramId(
-        new SpecializationRequest({ programId: this.program.programId })
-      )
-      .subscribe((result) => {
-        this.specialization = result;
-      });
-
-    this.providerLogoService.getProviderLogoByProviderId(new ProviderLogoRequest({providerId: this.program.providerId }) ).subscribe((result)=>{
-      this.providerLogo = result;
-    })
+    
   }
 
-  // This seems like a dumb way to do this, improve.
+  // TODO: This is quick and dirty, refactor.
   programProvider(): VwProvider {
+    if (!this.providers) return new VwProvider();
     return this.providers.filter(
       (provider) => provider.providerId == this.program.providerId
     )[0];
+  }
+
+  providerLogo(): VwProviderLogo {
+    if (!this.providerLogos) return new VwProviderLogo();
+    return this.providerLogos.filter(
+      (logo) => logo.providerId == this.program.providerId
+    )[0];
+  }
+
+  providerSpecialization(): VwSpecialization {
+    if (!this.specializations) return new VwSpecialization();
+    var result = this.specializations.filter(
+      (specialization) => specialization.programId == this.program.programId
+    )[0];
+    if (result) {
+      return result;
+    }
+    return new VwSpecialization();
   }
 }

@@ -21,8 +21,11 @@ export class SpecializationService extends EndPointService {
     public getSpecialization(id: number): Observable<VwSpecialization[]> { 
         return this.get(this.url + '{id}', id);
     }
+    public getSpecializations(): Observable<VwSpecialization[]> { 
+        return this.get(this.url + '');
+    }
     public getSpecializationByProgramId(request: SpecializationRequest): Observable<VwSpecialization> { 
-        return this.get(this.url + '', request);
+        return this.get(this.url + 'GetSpecializationByProgramId', request);
     }
 
     private get url() {
