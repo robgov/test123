@@ -23,7 +23,9 @@ namespace ProviderApi.Models
         public virtual DbSet<VwLocationEmail> VwLocationEmails { get; set; }
         public virtual DbSet<VwLocationPhone> VwLocationPhones { get; set; }
         public virtual DbSet<VwLocationPublication> VwLocationPublications { get; set; }
+        public virtual DbSet<VwLocationWebsite> VwLocationWebsites { get; set; }
         public virtual DbSet<VwProgram> VwPrograms { get; set; }
+        public virtual DbSet<VwProgramCost> VwProgramCosts { get; set; }
         public virtual DbSet<VwProgramPublication> VwProgramPublications { get; set; }
         public virtual DbSet<VwProvider> VwProviders { get; set; }
         public virtual DbSet<VwProviderAddress> VwProviderAddresses { get; set; }
@@ -32,13 +34,14 @@ namespace ProviderApi.Models
         public virtual DbSet<VwProviderPublication> VwProviderPublications { get; set; }
         public virtual DbSet<VwProviderType> VwProviderTypes { get; set; }
         public virtual DbSet<VwProviderWebsite> VwProviderWebsites { get; set; }
+        public virtual DbSet<VwSpecialization> VwSpecializations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=D-642325;Database=AEDigital_SYST;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=c-goa-sql-10348;Database=AEDigital_SYST;Trusted_Connection=True;");
             }
         }
 
@@ -232,6 +235,29 @@ namespace ProviderApi.Models
                 entity.Property(e => e.SubRegion).HasMaxLength(200);
             });
 
+            modelBuilder.Entity<VwLocationWebsite>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_LocationWebsite");
+
+                entity.Property(e => e.BusinessEndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.BusinessStartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LocationId).HasColumnName("LocationID");
+
+                entity.Property(e => e.LocationWebsiteId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("LocationWebsiteID");
+
+                entity.Property(e => e.WebsiteUrl)
+                    .HasMaxLength(200)
+                    .HasColumnName("WebsiteURL");
+
+                entity.Property(e => e.WebsiteUsage).HasMaxLength(200);
+            });
+
             modelBuilder.Entity<VwProgram>(entity =>
             {
                 entity.HasNoKey();
@@ -261,6 +287,21 @@ namespace ProviderApi.Models
                 entity.Property(e => e.ProgramType).HasMaxLength(200);
 
                 entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
+            });
+
+            modelBuilder.Entity<VwProgramCost>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_ProgramCost");
+
+                entity.Property(e => e.Books).HasColumnType("numeric(38, 2)");
+
+                entity.Property(e => e.Other).HasColumnType("numeric(38, 2)");
+
+                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
+
+                entity.Property(e => e.Tuition).HasColumnType("numeric(38, 2)");
             });
 
             modelBuilder.Entity<VwProgramPublication>(entity =>
@@ -466,17 +507,56 @@ namespace ProviderApi.Models
 
                 entity.Property(e => e.BusinessStartDate).HasColumnType("datetime");
 
-                entity.Property(e => e.LocationId).HasColumnName("LocationID");
+                entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
 
-                entity.Property(e => e.LocationWebsiteId)
+                entity.Property(e => e.ProviderWebsiteId)
                     .ValueGeneratedOnAdd()
-                    .HasColumnName("LocationWebsiteID");
+                    .HasColumnName("ProviderWebsiteID");
 
                 entity.Property(e => e.WebsiteUrl)
                     .HasMaxLength(200)
                     .HasColumnName("WebsiteURL");
 
                 entity.Property(e => e.WebsiteUsage).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VwSpecialization>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_Specialization");
+
+                entity.Property(e => e.AdministrativeUnit).HasMaxLength(100);
+
+                entity.Property(e => e.AdministrativeUnitCode).HasMaxLength(2);
+
+                entity.Property(e => e.BusinessEndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.BusinessStartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.CipCodeId).HasColumnName("CipCodeID");
+
+                entity.Property(e => e.CipSubSeries).HasMaxLength(250);
+
+                entity.Property(e => e.CipSubSeriesCode).HasMaxLength(15);
+
+                entity.Property(e => e.EntranceRequirement).HasMaxLength(200);
+
+                entity.Property(e => e.EntranceRequirementCode).HasMaxLength(4);
+
+                entity.Property(e => e.PrimaryFundingCode).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
+
+                entity.Property(e => e.SpecializationCode).HasMaxLength(30);
+
+                entity.Property(e => e.SpecializationId).HasColumnName("SpecializationID");
+
+                entity.Property(e => e.SpecializationName).HasMaxLength(160);
+
+                entity.Property(e => e.SpecializationStatus).HasMaxLength(200);
+
+                entity.Property(e => e.UnitOfLoad).HasMaxLength(200);
             });
 
             OnModelCreatingPartial(modelBuilder);

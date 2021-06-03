@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\libs\common\models\program-category-parameters.ts" Link="program-category-parameters.ts" />
-    <None Include="..\..\..\libs\common\models\program-category-request.ts" Link="program-category-request.ts" />
-    <None Include="..\..\..\libs\common\models\provider-program-request.ts" Link="provider-program-request.ts" />
-    <None Include="..\..\..\libs\common\services\alberta-psiprovider.service.ts" Link="alberta-psiprovider.service.ts" />
-    <None Include="..\..\..\libs\common\services\program.service.ts" Link="program.service.ts" />
+    <None Include="..\..\..\libs\common\models\specialization-request.ts" Link="specialization-request.ts" />
+    <None Include="..\..\..\libs\common\models\vw-program.ts" Link="vw-program.ts" />
+    <None Include="..\..\..\libs\common\services\specialization.service.ts" Link="specialization.service.ts" />
   </ItemGroup>
 
 </Project>

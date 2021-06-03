@@ -25,6 +25,8 @@ export class ProgramsSearchResultsComponent implements OnInit {
         this.providerId = params['provider'];
         this.loadProviderPrograms(this.providerId);
       }
+      // if parameters search
+      // get all programs a
     });
 
     this.loadProviders();
