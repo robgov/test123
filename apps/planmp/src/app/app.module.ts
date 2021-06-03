@@ -73,6 +73,7 @@ import { SchoolSummaryListComponent } from './school-summary-list/school-summary
 import { FindProgramsComponent } from './find-programs/find-programs.component';
 import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
 import { ProgramSummaryComponent } from './program-summary/program-summary.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ProgramSummaryComponent } from './program-summary/program-summary.compo
     FindProgramsComponent,
     ProgramsSearchResultsComponent,
     ProgramSummaryComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
