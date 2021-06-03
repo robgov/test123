@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -30,6 +30,7 @@ namespace ProviderApi.Models
         public virtual DbSet<VwProvider> VwProviders { get; set; }
         public virtual DbSet<VwProviderAddress> VwProviderAddresses { get; set; }
         public virtual DbSet<VwProviderEmail> VwProviderEmails { get; set; }
+        public virtual DbSet<VwProviderLogo> VwProviderLogos { get; set; }
         public virtual DbSet<VwProviderPhone> VwProviderPhones { get; set; }
         public virtual DbSet<VwProviderPublication> VwProviderPublications { get; set; }
         public virtual DbSet<VwProviderType> VwProviderTypes { get; set; }
@@ -428,6 +429,19 @@ namespace ProviderApi.Models
                 entity.Property(e => e.ProviderEmailId)
                     .ValueGeneratedOnAdd()
                     .HasColumnName("ProviderEmailID");
+
+                entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
+            });
+
+            modelBuilder.Entity<VwProviderLogo>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_ProviderLogo");
+
+                entity.Property(e => e.LogoUrl)
+                    .HasMaxLength(800)
+                    .HasColumnName("LogoURL");
 
                 entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
             });

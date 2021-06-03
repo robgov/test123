@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\libs\common\models\specialization-request.ts" Link="specialization-request.ts" />
-    <None Include="..\..\..\libs\common\models\vw-program.ts" Link="vw-program.ts" />
-    <None Include="..\..\..\libs\common\services\specialization.service.ts" Link="specialization.service.ts" />
+    <None Include="..\..\..\libs\common\models\provider-logo-request.ts" Link="provider-logo-request.ts" />
+    <None Include="..\..\..\libs\common\services\provider-logo.service.ts" Link="provider-logo.service.ts" />
   </ItemGroup>
 
 </Project>

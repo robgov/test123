@@ -10,6 +10,7 @@ export * from './program-publication.service';
 export * from './program.service';
 export * from './provider-address.service';
 export * from './provider-email.service';
+export * from './provider-logo.service';
 export * from './provider-phone.service';
 export * from './provider-publication.service';
 export * from './provider-type.service';

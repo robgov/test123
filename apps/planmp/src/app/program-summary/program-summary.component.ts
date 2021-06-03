@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { VwProgram, VwProvider, VwSpecialization } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { ProgramsSearchResultsComponent } from '@planmp/programs-search-results/programs-search-results.component';
-import { SpecializationService } from '@libs/common/services';
-import { SpecializationRequest } from '@libs/common/models';
+import { SpecializationService, ProviderLogoService } from '@libs/common/services';
+import { SpecializationRequest, VwProviderLogo, ProviderLogoRequest } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-program-summary',
@@ -15,7 +15,8 @@ export class ProgramSummaryComponent implements OnInit {
   @Input() program: VwProgram;
   @Input() providers: VwProvider[];
   specialization: VwSpecialization;
-  constructor(private specializationService: SpecializationService) {}
+  providerLogo: VwProviderLogo;
+  constructor(private specializationService: SpecializationService, private providerLogoService: ProviderLogoService) {}
 
   ngOnInit(): void {
     this.specializationService
@@ -25,6 +26,10 @@ export class ProgramSummaryComponent implements OnInit {
       .subscribe((result) => {
         this.specialization = result;
       });
+
+    this.providerLogoService.getProviderLogoByProviderId(new ProviderLogoRequest({providerId: this.program.providerId }) ).subscribe((result)=>{
+      this.providerLogo = result;
+    })
   }
 
   // This seems like a dumb way to do this, improve.
