@@ -25,6 +25,7 @@
     <None Include="..\..\..\libs\common\models\paprscode.ts" Link="paprscode.ts" />
     <None Include="..\..\..\libs\common\models\program-cost.ts" Link="program-cost.ts" />
     <None Include="..\..\..\libs\common\models\program-cost1.ts" Link="program-cost1.ts" />
+    <None Include="..\..\..\libs\common\models\program-costs-request.ts" Link="program-costs-request.ts" />
     <None Include="..\..\..\libs\common\models\program-credential.ts" Link="program-credential.ts" />
     <None Include="..\..\..\libs\common\models\program-publication.ts" Link="program-publication.ts" />
     <None Include="..\..\..\libs\common\models\program-publication1.ts" Link="program-publication1.ts" />
@@ -58,6 +59,7 @@
     <None Include="..\..\..\libs\common\models\vw-program.ts" Link="vw-program.ts" />
     <None Include="..\..\..\libs\common\models\vw-specialization-programs.ts" Link="vw-specialization-programs.ts" />
     <None Include="..\..\..\libs\common\services\alberta-psiprovider.service.ts" Link="alberta-psiprovider.service.ts" />
+    <None Include="..\..\..\libs\common\services\program-cost.service.ts" Link="program-cost.service.ts" />
     <None Include="..\..\..\libs\common\services\program.service.ts" Link="program.service.ts" />
     <None Include="..\..\..\libs\common\services\provider-logo.service.ts" Link="provider-logo.service.ts" />
     <None Include="..\..\..\libs\common\services\specialization.service.ts" Link="specialization.service.ts" />

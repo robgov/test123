@@ -4,6 +4,7 @@ export * from './institutions-parameters';
 export * from './paged-data-parameters';
 export * from './program-category-parameters';
 export * from './program-category-request';
+export * from './program-costs-request';
 export * from './programs-request';
 export * from './provider-logo-request';
 export * from './provider-program-request';

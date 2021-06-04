@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@ang
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { VwAlbertaPsiprovider, VwProgram, ProgramsRequest, VwSpecialization, VwProviderLogo } from '@libs/common/models';
-import { ProgramService, AlbertaPSIProviderService, SpecializationService, ProviderLogoService } from '@libs/common/services';
+import { VwAlbertaPsiprovider, VwProgram, ProgramsRequest, VwSpecialization, VwProviderLogo, VwProgramCost, ProgramCostsRequest } from '@libs/common/models';
+import { ProgramService, AlbertaPSIProviderService, SpecializationService, ProviderLogoService, ProgramCostService } from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
 
@@ -25,13 +25,17 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
   searchResults: VwProgram[];
+  programCosts: VwProgramCost[];
+
+  sortOption: string;
 
   constructor(private route: ActivatedRoute,
               private programService: ProgramService,
               private apsiProviderService: AlbertaPSIProviderService,
               private changeDetectorRef: ChangeDetectorRef,
               private specializationService: SpecializationService, 
-              private providerLogoService: ProviderLogoService) { }
+              private providerLogoService: ProviderLogoService,
+              private programCostService: ProgramCostService) { }
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
 
@@ -47,6 +51,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     });
 
     this.loadProviders();
+    this.loadProgramCosts();
     this.loadSpecializations();
     this.loadProviderLogos();
 
@@ -70,6 +75,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     })
   }
 
+  loadProgramCosts() {
+    this.programCostService.getProgramCosts(new ProgramCostsRequest()).subscribe((result)=>{
+      this.programCosts = result;
+    });
+  }
+
   loadSpecializations() {
     this.specializationService.getSpecializations().subscribe((result) => {
       this.specializations = result;
@@ -79,18 +90,9 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   loadPrograms(providerId: number, cipSubSeriesCode) {
     this.programService.getPrograms(new ProgramsRequest({"providerId":providerId ?? 0, "cipSubSeriesCode":cipSubSeriesCode ?? ''}) ).subscribe((result) => {
       // Stubbed in a basic sort
-      this.searchResults = result.sort((obj1, obj2)=> {
-        if (obj1.programName > obj2.programName){
-          return 1;
-        }
-        if (obj1.programName < obj2.programName){ 
-          return -1;
-        }
-        return 0;
-      });
+      this.searchResults = result
       this.dataSource = new MatTableDataSource<VwProgram>(this.searchResults);
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
     });
-  }
-}
+  }}

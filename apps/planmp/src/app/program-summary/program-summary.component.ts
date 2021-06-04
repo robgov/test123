@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo } from '@libs/common/models';
+import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({
@@ -13,6 +13,7 @@ export class ProgramSummaryComponent implements OnInit {
   @Input() providers: VwProvider[];
   @Input() specializations: VwSpecialization[];
   @Input() providerLogos: VwProviderLogo[];
+  @Input() programCosts: VwProgramCost[];
   constructor() {}
 
   ngOnInit(): void {
@@ -32,6 +33,15 @@ export class ProgramSummaryComponent implements OnInit {
     return this.providerLogos.filter(
       (logo) => logo.providerId == this.program.providerId
     )[0];
+  }
+
+  programCost(): string {
+    if (!this.programCosts) return "";
+    var costs = this.programCosts.filter( (pc)=>pc.programId==this.program.programId)[0];
+    if (costs) {
+      return (costs.tuition + costs.books + costs.other).toString();
+    }
+    return "XXXXX";
   }
 
   providerSpecialization() {
