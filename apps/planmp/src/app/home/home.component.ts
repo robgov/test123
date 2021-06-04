@@ -28,14 +28,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProgramCategories();
   }
 
   fetch() {}
-
-  getProgramCategories() {
-    this.apsiProviderService.getAlbertaPsiProviderCategories().subscribe((result) => {
-      this.programCategories = result;
-    });
-  }
 }

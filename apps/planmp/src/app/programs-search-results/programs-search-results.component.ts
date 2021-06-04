@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@ang
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { VwAlbertaPsiprovider, VwProgram, ProviderProgramRequest, VwSpecialization, VwProviderLogo } from '@libs/common/models';
+import { VwAlbertaPsiprovider, VwProgram, ProgramsRequest, VwSpecialization, VwProviderLogo } from '@libs/common/models';
 import { ProgramService, AlbertaPSIProviderService, SpecializationService, ProviderLogoService } from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
@@ -15,13 +15,12 @@ import { Observable } from 'rxjs';
 export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   FlexConstants = FlexConstants;
 
-  // From Example
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>
   dataSource: MatTableDataSource<VwProgram>;
-  // End Example declaration
 
   private providerId: number = null;
+  private cipSubSeriesCode: string= null;
   providers: VwAlbertaPsiprovider[];
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
@@ -39,8 +38,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe(params => {
       if (params['provider']) {
         this.providerId = params['provider'];
-        this.loadProviderPrograms(this.providerId);
       }
+      if (params['cipSubSeriesCode']) {
+        this.cipSubSeriesCode = params['cipSubSeriesCode'];
+      }
+
+      this.loadPrograms(this.providerId, this.cipSubSeriesCode);
     });
 
     this.loadProviders();
@@ -73,8 +76,8 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadProviderPrograms(providerId: number) {
-    this.programService.getProgramsByProviderId(new ProviderProgramRequest({"providerId":providerId}) ).subscribe((result) => {
+  loadPrograms(providerId: number, cipSubSeriesCode) {
+    this.programService.getPrograms(new ProgramsRequest({"providerId":providerId ?? 0, "cipSubSeriesCode":cipSubSeriesCode ?? ''}) ).subscribe((result) => {
       // Stubbed in a basic sort
       this.searchResults = result.sort((obj1, obj2)=> {
         if (obj1.programName > obj2.programName){
@@ -90,5 +93,4 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       this.obs = this.dataSource.connect();
     });
   }
-
 }

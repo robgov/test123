@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VwAlbertaPsiprovider, VwProgram, ProviderProgramRequest } from '@libs/common/models';
+import { VwAlbertaPsiprovider, VwProgram, ProgramsRequest } from '@libs/common/models';
 import { ProgramService } from '@libs/common/services';
 
 @Component({
@@ -11,15 +11,22 @@ export class SchoolSummaryComponent implements OnInit {
   constructor(private programService: ProgramService) {}
 
   @Input() provider: VwAlbertaPsiprovider;
-  programCount = 0;
   providerPrograms: VwProgram[];
+  @Input() programs: VwProgram[];
 
   ngOnInit(): void {
-    this.loadProviderPrograms(this.provider.providerId);
+    // this.loadProviderPrograms(this.provider.providerId);
   }
  
+  programCount()  {
+    if (this.programs) {
+      return this.programs.filter((program) => program.providerId == this.provider.providerId).length;
+    }
+    return '';
+  }
+
   loadProviderPrograms(providerId: number) {
-    this.programService.getProgramsByProviderId(new ProviderProgramRequest({"providerId":providerId}) ).subscribe((result) => {
+    this.programService.getPrograms(new ProgramsRequest({"providerId":providerId}) ).subscribe((result) => {
       this.providerPrograms = result;
     });
   }

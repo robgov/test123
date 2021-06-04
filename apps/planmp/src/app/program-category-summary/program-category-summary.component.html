@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutGap="16px">
+    <div></div>
+    <div fxFlex fxLayout="column">
+        <div fxFlex>{{programCountByCategory.cipSubSeries}}</div>
+        <div>{{[(programCountByCategory.programCount)]}} Programs</div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center">
+        <a mat-stroked-button [routerLink]="['program-search-results']"
+            [queryParams]="{cipSubSeriesCode: this.programCountByCategory.cipSubSeriesCode}"
+            queryParamsHandling="merge">View</a>
+    </div>
+</div>
+<hr>

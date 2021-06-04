@@ -34,14 +34,14 @@ export class ProgramSummaryComponent implements OnInit {
     )[0];
   }
 
-  providerSpecialization(): VwSpecialization {
-    if (!this.specializations) return new VwSpecialization();
+  providerSpecialization() {
+    if (!this.specializations) return '';
     var result = this.specializations.filter(
       (specialization) => specialization.programId == this.program.programId
     )[0];
     if (result) {
-      return result;
+      return result.cipSubSeries;
     }
-    return new VwSpecialization();
+    return '';
   }
 }
