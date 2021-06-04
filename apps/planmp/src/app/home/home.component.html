@@ -1,29 +1,5 @@
 <div fxLayout="column">
-  <div fxLayout="row" fxLayoutGap="8px">
-    <div fxFlex="45" fxFlex.lt-md="100">
-      <h1>Welcome to planmp!</h1>
-      <p class="title">{{ this.providers[0].PageTitle }}</p>
-      <p class="sub-title">{{ this.providers[0].Subtitle}}
-      </p>
-      <br>
-      <p class="paragraph-header">{{ this.providers[0].Header}}</p>
-      <p class="paragraph-content">{{ this.providers[0].Summary}}</p>
-    </div>
-
-    <!-- 
-    <div>
-      {{this.providers[0].Summary}}
-    </div>
-    -->
-
-    <div fxFlex="50" *ngIf="this.providers[0].Splash" fxHide.lt-md>
-      <!-- <img fxFlex="90" flex-shrink src="../assets/planMyPath.png"> -->
-      <img flex-shrink flex-grow src="http://localhost:8080{{ this.providers[0].Splash[0].url }}" />
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutGap="8px">
-    <div></div>
-    <button mat-flat-button color="primary" routerLink="/home/Page2">Get Started</button>
-    <button mat-flat-button color="">Alternate option</button>
+  <div fxLayout="row" [fxFlex]="FlexConstants.Column.Large_6">
+    <aedigital-find-programs ></aedigital-find-programs>
   </div>
 </div>

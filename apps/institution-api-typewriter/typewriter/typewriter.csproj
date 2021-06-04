@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\libs\common\models\ae-digital_systcontext.ts" Link="ae-digital_systcontext.ts" />
-    <None Include="..\..\..\libs\common\services\provider-website.service.ts" Link="provider-website.service.ts" />
-    <None Include="..\..\..\libs\common\services\provider.service.ts" Link="provider.service.ts" />
+    <None Include="..\..\..\libs\common\models\provider-logo-request.ts" Link="provider-logo-request.ts" />
+    <None Include="..\..\..\libs\common\services\provider-logo.service.ts" Link="provider-logo.service.ts" />
+    <None Include="..\..\..\libs\common\services\specialization.service.ts" Link="specialization.service.ts" />
   </ItemGroup>
 
 </Project>

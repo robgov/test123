@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutGap="16px">
+    <div></div>
+    <div fxFlex fxLayout="column" >
+        <div fxFlex>{{provider.providerName}}</div>
+        <div>{{[(providerPrograms?.length)]}} Programs</div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center">
+        <a mat-stroked-button [routerLink]="['program-search-results']"  [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" >View</a>
+    </div>
+</div>
+<hr>

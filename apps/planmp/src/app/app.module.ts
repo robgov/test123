@@ -9,22 +9,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LocationAddressService, 
-         LocationEmailService, 
-         LocationPhoneService, 
-         LocationPublicationService, 
-         LocationService,
-         ProgramPublicationService,
-         ProgramService,
-         ProviderAddressService,
-         ProviderEmailService,
-         ProviderPhoneService,
-         ProviderPublicationService,
-         ProviderService,
-         ProviderTypeService,
-         ProviderWebsiteService
-        } from '@libs/common/services';
-
+import {
+  LocationAddressService,
+  LocationEmailService,
+  LocationPhoneService,
+  LocationPublicationService,
+  LocationService,
+  ProgramPublicationService,
+  ProgramService,
+  ProviderAddressService,
+  ProviderEmailService,
+  ProviderPhoneService,
+  ProviderPublicationService,
+  ProviderService,
+  ProviderTypeService,
+  ProviderWebsiteService,
+} from '@libs/common/services';
 
 // Material Imports
 import { MatButtonModule } from '@angular/material/button';
@@ -36,9 +36,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule} from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -50,9 +53,12 @@ const MATERIAL_MODULES = [
   MatListModule,
   MatIconModule,
   MatInputModule,
+  MatPaginatorModule,
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
+  MatTabsModule,
+  MatTableModule
 ];
 
 // Components
@@ -66,6 +72,12 @@ import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
+import { SchoolSummaryComponent } from './school-summary/school-summary.component';
+import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
+import { FindProgramsComponent } from './find-programs/find-programs.component';
+import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
+import { ProgramSummaryComponent } from './program-summary/program-summary.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +91,12 @@ import { FilterPipe } from './filter.pipe';
     EnvironmentSashComponent,
     BreadcrumbComponent,
     FilterPipe,
+    SchoolSummaryComponent,
+    SchoolSummaryListComponent,
+    FindProgramsComponent,
+    ProgramsSearchResultsComponent,
+    ProgramSummaryComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,10 +109,11 @@ import { FilterPipe } from './filter.pipe';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [LocationAddressService, 
-    LocationEmailService, 
-    LocationPhoneService, 
-    LocationPublicationService, 
+  providers: [
+    LocationAddressService,
+    LocationEmailService,
+    LocationPhoneService,
+    LocationPublicationService,
     LocationService,
     ProgramPublicationService,
     ProgramService,
@@ -104,7 +123,8 @@ import { FilterPipe } from './filter.pipe';
     ProviderPublicationService,
     ProviderService,
     ProviderTypeService,
-    ProviderWebsiteService],
+    ProviderWebsiteService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
