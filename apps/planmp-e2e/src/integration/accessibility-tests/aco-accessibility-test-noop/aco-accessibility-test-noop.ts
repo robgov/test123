@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const data = require("../../../fixtures/example.json");
+import { injectAxe } from '../../../support/app.po';
 import { createHtmlReport } from 'axe-html-reporter';
 import {
   Before,
@@ -13,8 +14,12 @@ Given(/^we want a simple pass$/, function() {
   expect(1).to.eq(1);
   cy.visit('https://acods-test.os99.gov.ab.ca/home');
   cy.wait(5000)
-  cy.injectAxe();
+  
+  //cy.injectAxe();
  
+ injectAxe()
+
+
 
 /*
   cy.configureAxe({

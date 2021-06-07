@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const data = require("../../../fixtures/example.json");
+import { injectAxe } from '../../../support/app.po';
 import {
   Before,
   After,
@@ -22,8 +23,8 @@ Given(/^we want a simple pass$/, function() {
     .contains("Create New")
     .click();
   cy.wait(2000);
-  cy.injectAxe();
-
+ // cy.injectAxe();
+injectAxe()
   //1. Check all Accessibility Failures on the Page
  // cy.checkA11y();
 
