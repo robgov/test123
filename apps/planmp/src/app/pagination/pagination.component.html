@@ -1,0 +1,8 @@
+<div fxLayout="row" fxFlex="100" fxLayoutGap="8px" >
+    <div><button mat-button (click)="previousPage()">Prev</button></div>
+    <div *ngFor="let item of [].constructor(totalPages()); let i = index">
+        <div><button mat-button (click)="navigateTo(i)">{{i+1}}</button></div>    
+    </div>
+    <div><button mat-button (click)="nextPage()">Next</button></div>
+    <div fxFlex></div>
+</div>

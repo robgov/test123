@@ -1,0 +1,11 @@
+<aedigital-breadcrumb></aedigital-breadcrumb>
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
+        <div fxFlex="100" fxLayout="column">
+            <div *ngFor="let p of obs | async">
+                <aedigital-program-summary [program]="p" [providers]="providers" [specializations]="specializations" [providerLogos]="providerLogos"></aedigital-program-summary>
+            </div>
+        </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

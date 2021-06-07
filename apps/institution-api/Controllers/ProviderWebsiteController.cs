@@ -33,7 +33,7 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwProviderWebsite> GetProviderWebsite(int id)
     {
-      return _context.VwProviderWebsites.Where(x => x.LocationWebsiteId.Equals(id));
+      return _context.VwProviderWebsites.Where(x => x.ProviderWebsiteId.Equals(id));
     }
 
   }

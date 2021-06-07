@@ -1,16 +1,16 @@
 ﻿
 
 
-export class VwProviderWebsite {
-    public providerWebsiteId: number = 0;
+export class VwLocationWebsite {
+    public locationWebsiteId: number = 0;
     public websiteUsage: string = '';
     public listSequence: number;
     public websiteUrl: string = '';
-    public providerId: number;
+    public locationId: number;
     public businessStartDate: Date;
     public businessEndDate: Date;
 
-    constructor(init? : Partial<VwProviderWebsite>) {
+    constructor(init? : Partial<VwLocationWebsite>) {
         
         Object.assign(this, init);
     }
