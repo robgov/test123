@@ -33,9 +33,11 @@
     "payeduc-e2e:html-report": "node .\\apps\\payeduc-e2e\\src\\support\\multiple-cucumber-html-reporter.js",
     "planmp-e2e:cypressOpen": "npx nx e2e planmp-e2e --watch",
     "planmp-e2e:cypressRun": "npx nx e2e planmp-e2e",
+    "planmp-e2e:ci:accessibility": "npx nx e2e planmp-e2e -- --spec=**/src/integration/accessibility-tests/aco-accessibility-test-noop.feature --browser chrome",
     "planmp-e2e:ci:smokeTest": "npx nx e2e planmp-e2e -- --spec=**/src/integration/smoke-test/* --headless",
     "planmp-e2e:ci:endToEnd": "npx nx e2e planmp-e2e -- --spec=**/src/integration/e2e/* --headless",
-    "planmp-e2e:html-report": "node .\\apps\\planmp-e2e\\src\\support\\multiple-cucumber-html-reporter.js"
+    "planmp-e2e:html-report": "node .\\apps\\planmp-e2e\\src\\support\\multiple-cucumber-html-reporter.js",
+    "planmp-e2e:accessibilityTest": "npx nx e2e planmp-e2e -- --spec=**/src/integration/accessibility-tests/* --headed"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +53,8 @@
     "@angular/platform-browser-dynamic": "^11.2.0",
     "@angular/router": "^11.2.0",
     "@nrwl/angular": "12.0.8",
+    "axe-cli": "^3.2.1",
+    "axe-html-reporter": "^2.2.2",
     "bootstrap": "^5.0.1",
     "material-design-icons": "^3.0.1",
     "rxjs": "~6.6.3",
@@ -82,8 +86,10 @@
     "@types/node": "^14.17.1",
     "@typescript-eslint/eslint-plugin": "4.19.0",
     "@typescript-eslint/parser": "4.19.0",
+    "axe-core": "^4.2.2",
     "chalk": "^4.1.1",
-    "cypress": "^7.3.0",
+    "cypress": "^7.4.0",
+    "cypress-axe": "^0.12.2",
     "cypress-cucumber-preprocessor": "^4.1.0",
     "dotenv": "8.2.0",
     "eslint": "^7.22.0",
