@@ -3,6 +3,8 @@
   "lastname": "sethi",
   "postalcode": "T6T7Y7",
   "customer": "sachin sethi",
-  "currency": "Dollar"
+  "currency": "Dollar",
+  "withdrawalamount": " 10",
+  "depositamount": " 1000"
 
 }

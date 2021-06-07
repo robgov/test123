@@ -50,6 +50,21 @@ When(/^the user clicks on Add Customer button and enter information in all field
   homepage.selectCurrenty()
   homepage.clickProcess()
   homepage.verifynewcustomer()
+  homepage.clickhome()
+  homepage.loginAsCustomer()
+  homepage.selectlogincustomer()
+  homepage.tabWithdrawal()
+  homepage.enterAmountwithdraw()
+  homepage.verifywithdrawalerror()
+  cy.wait(1000)
+  homepage.tabdeposit()
+
+  homepage.enterAmountdeposit()
+
+  homepage.verifydepositmessage()
+
+  homepage.tabtransaction()
+
  // homepage.clickCustomer()
  // homepage.verifynewcustomer()
 
