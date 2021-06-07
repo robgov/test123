@@ -1,14 +1,14 @@
 <div fxLayout="row" fxLayoutGap="16px">
     <div></div>
     <div fxFlex fxLayout="column">
-        <div fxFlex [attr.data-cy]="'cipSubSeries'">{{programCountByCategory.cipSubSeries}}</div>
-        <div [attr.data-cy]="'programCount'">{{[(programCountByCategory.programCount)]}} Programs</div>
+        <div fxFlex [attr.data-cy]="'program-category-summary.cipSubSeries'">{{programCountByCategory.cipSubSeries}}</div>
+        <div [attr.data-cy]="'program-category-summary.programCount'">{{[(programCountByCategory.programCount)]}} Programs</div>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
         <a [routerLink]="['program-search-results']"
             [queryParams]="{cipSubSeriesCode: this.programCountByCategory.cipSubSeriesCode}"
             queryParamsHandling="merge"
-            [attr.data-cy]="'program-search-results:' + programCountByCategory.cipSubSeriesCode">View</a>
+            [attr.data-cy]="'program-category-summary.view-program-search-results'">View</a>
     </div>
 </div>
 <hr>
