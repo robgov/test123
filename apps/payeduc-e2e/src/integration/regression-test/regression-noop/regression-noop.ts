@@ -5,7 +5,7 @@ import {
   Given,
   When,
   Then,
-} from "cypress-cucumber-preprocessor/steps";
+} from 'cypress-cucumber-preprocessor/steps';
 
 Given(/^we want a simple pass$/, function () {
   expect(1).to.eq(1);

@@ -6,7 +6,7 @@
     "allowJs": true,
     "strict": true,
     "noImplicitAny": false,
-    "types": ["cypress","node"],
+    "types": ["cypress","node","cypress-axe"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
