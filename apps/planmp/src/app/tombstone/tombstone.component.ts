@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import {InstitutionSummaryService, ProviderService} from '@libs/common/services';
-import { InstitutionsParameters, PagedDataParameters, VwProvider } from '@libs/common/models';
+import {InstitutionsParameters, PagedDataParameters, VwProvider } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-tombstone',
@@ -33,14 +33,6 @@ export class TombstoneComponent implements OnInit {
     this.providerService.getProviders(params).subscribe((t)=>{
       this.providers = t;
     })
-
-    // this.institutionSummaryService.getInstitutionSummarys(params).subscribe((t)=> {
-    //   this.institutions = t
-    // });
-
-    // const localurl = "https://localhost:5001";
-    // const url = localurl + "/API/InstitutionSummary?PageNumber=" + this.pagenumber + "&PageSize=" + this.pagesize;
-    // this.http.get<Institution[]>(url).subscribe((t) => (this.institutions = t));
   }
 }
 

@@ -1,0 +1,20 @@
+<div fxFlex fxLayout="column" style="background-color: #0081A2;">
+    <div fxFlex="300px;" fxLayout="row" fxLayoutGap="16px">
+      <div fxFlex="60%" 
+      fxFlex="{{ FlexConstants.Column.Large_6 }}">  
+
+      <div alt="loanapplyimage"  *ngIf="this.loandata[0].loanapplyimage" fxHide.lt-md>
+        <img flex-shrink flex-grow src="http://localhost:1337{{ this.loandata[0].loanapplyimage.url }}" />
+      </div>
+  
+
+
+         </div>
+      <div fxFlex style="color: white;">
+        <h1>{{ this.loandata[0].loanapplytitle }}</h1>
+        <p>{{ this.loandata[0].loanapplymessage }}</p>
+        <button>{{ this.loandata[0].buttonstart }}</button>
+      </div>
+
+    </div>
+  </div>

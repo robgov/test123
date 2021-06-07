@@ -21,7 +21,6 @@ describe('HomeComponent', () => {
 
 
   it('Fake HomeComponent Test', () => {
-    
     expect(1==1);
   });
 

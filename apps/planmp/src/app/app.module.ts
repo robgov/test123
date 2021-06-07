@@ -66,6 +66,9 @@ import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
+import { LoanstartComponent } from './loanstart/loanstart.component';
+import { ProgramstartComponent } from './programstart/programstart.component';
+import { SearchblockComponent } from './searchblock/searchblock.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import { FilterPipe } from './filter.pipe';
     EnvironmentSashComponent,
     BreadcrumbComponent,
     FilterPipe,
+    LoanstartComponent,
+    ProgramstartComponent,
+    SearchblockComponent,
   ],
   imports: [
     BrowserModule,

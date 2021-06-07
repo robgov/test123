@@ -1,29 +1,101 @@
-<div fxLayout="column">
-  <div fxLayout="row" fxLayoutGap="8px">
-    <div fxFlex="45" fxFlex.lt-md="100">
-      <h1>Welcome to planmp!</h1>
-      <p class="title">{{ this.providers[0].PageTitle }}</p>
-      <p class="sub-title">{{ this.providers[0].Subtitle}}
-      </p>
-      <br>
-      <p class="paragraph-header">{{ this.providers[0].Header}}</p>
-      <p class="paragraph-content">{{ this.providers[0].Summary}}</p>
-    </div>
+<div fxLayout="row">
+  <div fxFlex="{{ FlexConstants.Column.Large_3 }}" fxLayout="row">
+    <div>Education and Training</div>
+    <!-- <select>
+      <option></option>
+      <option value="schools">schools</option>
+      <option value="programs">programs</option>
+    </select> -->
+  </div>
+  <div fxFlex="{{ FlexConstants.Column.Large_3 }}" fxLayout="row">
+    <div>Careers and Jobs</div>
+    <!-- <select>
+      <option></option>
+      <option value="schools">schools</option>
+      <option value="programs">programs</option>
+    </select> -->
+  </div>
+  <div fxFlex="{{ FlexConstants.Column.Large_3 }}" fxLayout="row">
+    <div>Funding and Costs</div>
+    <select>
+      <option></option>
+      <option value="schools">schools</option>
+      <option value="programs">programs</option>
+    </select>
+  </div>
+  <div fxFlex></div>
+</div>
 
-    <!-- 
-    <div>
-      {{this.providers[0].Summary}}
+<div       
+fxLayout="column"
+>
+<div fxFlex="300px" fxFlexLayout="row">
+  <aedigital-banner
+    style="
+      background-color: #0081a2;
+      display: table;
+      vertical-align: middle;
+      text-align: center;
+    "
+    fxLayout="left center"
+    fxFlex="100%"
+    fxLayoutGap="16px;"
+    [backgroundImage]="getbackgroundurl()"
+  >
+    <div
+      caption
+      style="color: white"
+      fxLayout="row"
+      fxflex="100%"
+    >
+      <div fxFlex>{{ this.providers[0].HeroTitle }}</div>
     </div>
-    -->
+    <div
+      subcaption
+      style="color: white"
+      fxflex="100%"
+    >
+      {{ this.providers[0].HeroMessage }}
+    </div>
+  </aedigital-banner>
+</div>
 
-    <div fxFlex="{{FlexConstants.column.Large_3}}" *ngIf="this.providers[0].Splash" fxHide.lt-md>
-      <!-- <img fxFlex="90" flex-shrink src="../assets/planMyPath.png"> -->
-      <img flex-shrink flex-grow src="http://localhost:8080{{ this.providers[0].Splash[0].url }}" />
+  <div fxflex fxLayout="column" style="background-color: #0081a2">
+    <div fxFlex="{{ FlexConstants.Button.Large }}">
+      <button mat-flat-button color="primary">
+        Explore your options
+        <mat-icon style="font-size: medium"> arrow_forward</mat-icon>
+      </button>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutGap="8px">
-    <div></div>
-    <button mat-flat-button color="primary" routerLink="/home/Page2">Get Started</button>
-    <button mat-flat-button color="">Alternate option</button>
+  <div fxLayout="row wrap" fxFlex="100" id="bastard">
+    <div
+      fxLayout="column"
+      fxLayoutAlign=""
+      fxFlex="100%"
+      class="red-border"
+    >
+      <ae-searchblock></ae-searchblock>
+    </div>
+    <div
+      fxLayout="column"
+      fxLayoutAlign=""
+      fxFlex="{{ FlexConstants.Column.Large_8 }}"
+    >
+      <h1>{{ this.providers[0].schoolbrowsertitle }}</h1>
+    </div>
+
+    <div
+      fxLayout="column"
+      fxLayoutAlign=""
+      fxFlex="{{ FlexConstants.Column.Large_3 }}"
+      fxHide.lt-md
+    >
+      <ae-programstart></ae-programstart>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="" fxFlex>
+      <aedigital-loanstart></aedigital-loanstart>
+    </div>
   </div>
 </div>
