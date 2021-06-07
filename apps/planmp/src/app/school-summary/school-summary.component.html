@@ -1,8 +1,8 @@
 <div fxLayout="row" fxLayoutGap="16px">
     <div></div>
     <div fxFlex fxLayout="column" >
-        <div fxFlex>{{provider.providerName}}</div>
-        <div>{{[(programCount())]}} Programs</div>
+        <div fxFlex [attr.data-cy]="'providerName'" >{{provider.providerName}}</div>
+        <div [attr.data-cy]="'programCount'">{{[(programCount())]}} Programs</div>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
         <a mat-stroked-button [routerLink]="['program-search-results']"  [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" >View</a>

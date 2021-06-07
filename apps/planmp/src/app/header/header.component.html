@@ -1,11 +1,10 @@
 <header [ngClass]="{ sticky: isDesktop }" fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex >
-	
 	<aedigital-environment-sash [version]="{environment:'alpha', version:'0.0.0.1'}" fxFlex="100"></aedigital-environment-sash>
 	<div fxFlex fxLayout="row" fxLayoutAlign="start center">
-		<a href="http://www.alberta.ca"><img src="../../assets/img/alberta.png" class="logo-header" alt="Alberta" /></a>
+		<a href="http://www.alberta.ca"><img src="../../assets/img/alberta.png" class="logo-header" alt="Alberta" data-cy='logo' /></a>
 		<div class="left-bar-title" fxHide.lt-md>
-			<h3>{{ caption }}</h3>
-			<h4>{{ subCaption }}</h4>
+			<h3 data-cy='caption'>{{ caption }}</h3>
+			<h4 data-cy='subCaption'>{{ subCaption }}</h4>
 		</div>
 	</div>
 	<ng-content fxFlex></ng-content>
