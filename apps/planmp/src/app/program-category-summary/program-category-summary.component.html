@@ -5,7 +5,7 @@
         <div>{{[(programCountByCategory.programCount)]}} Programs</div>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
-        <a mat-stroked-button [routerLink]="['program-search-results']"
+        <a [routerLink]="['program-search-results']"
             [queryParams]="{cipSubSeriesCode: this.programCountByCategory.cipSubSeriesCode}"
             queryParamsHandling="merge">View</a>
     </div>

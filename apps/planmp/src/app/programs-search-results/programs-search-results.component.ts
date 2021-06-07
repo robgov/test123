@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { VwAlbertaPsiprovider, VwProgram, ProgramsRequest, VwSpecialization, VwProviderLogo, VwProgramCost, ProgramCostsRequest } from '@libs/common/models';
 import { ProgramService, AlbertaPSIProviderService, SpecializationService, ProviderLogoService, ProgramCostService } from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VwSpecialization, VwSpecializationPrograms, VwPmpPsiprogramCountByCategory } from '@libs/common/models';
-import { ProgramService, SpecializationService } from '@libs/common/services';
+import { VwPmpPsiprogramCountByCategory } from '@libs/common/models';
+import { ProgramService } from '@libs/common/services';
 
 @Component({
   selector: 'aedigital-program-category-summary-list',
