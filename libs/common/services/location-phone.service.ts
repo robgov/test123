@@ -23,6 +23,6 @@ export class LocationPhoneService extends EndPointService {
     }
 
     private get url() {
-        return "http://localhost:5001/api/" + this.key + "/";
+        return this.urlBase + this.key + "/";
     }
 }

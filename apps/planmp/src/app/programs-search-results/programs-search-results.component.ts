@@ -44,6 +44,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   private providerId: number = null;
   private cipSubSeriesCode: string = null;
+  private keyword: string=null;
   providers: VwAlbertaPsiprovider[];
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
@@ -61,7 +62,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     private specializationService: SpecializationService,
     private providerLogoService: ProviderLogoService,
     private programCostService: ProgramCostService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.loadCipProgramIds();
     this.loadProviders();
@@ -77,8 +78,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       if (params['cipSubSeriesCode']) {
         this.cipSubSeriesCode = params['cipSubSeriesCode'];
       }
+      if (params['keywords']) {
+        this.keyword = params['keywords'];
+      }
+      
 
-      this.loadPrograms(this.providerId, this.cipSubSeriesCode);
+      this.loadPrograms(this.providerId, this.cipSubSeriesCode, this.keyword);
     });
   }
 
@@ -136,9 +141,14 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   }
 
   getProgramCost(program: VwProgram): VwProgramCost {
-    return this.programCosts.filter(
-      (costs) => costs.programId == program.programId
-    )[0];
+    if (!this.programCosts) {
+      return new VwProgramCost;
+    }
+    else {
+      return this.programCosts.filter(
+        (costs) => costs.programId == program.programId
+      )[0];
+    }
   }
 
   getProviderLogo(program: VwProgram): VwProviderLogo {
@@ -152,10 +162,10 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  loadPrograms(providerId: number, cipSubSeriesCode) {
+  loadPrograms(providerId: number, cipSubSeriesCode, keyword: string) {
     // return this.programService.getProgramIdsByCategory().subscribe((result) => {
     //   this.programByCategoryList = result;
-      this.programService
+    this.programService
       .getPrograms(new ProgramsRequest())
       .subscribe((result) => {
         this.searchResults = result;
@@ -163,23 +173,36 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
         this.dataSource.paginator = this.paginator;
         this.obs = this.dataSource.connect();
         this.dataSource.filterPredicate = programFilterPredicate;
-        this.filterPrograms(providerId, cipSubSeriesCode);
+        this.filterPrograms(providerId, cipSubSeriesCode,keyword);
       });
     //});
   }
 
-  filterPrograms(providerId: number, cipSubSeriesCode: string) {
-    var selectedFilters = { providerId:[], programId:[] };
+  filterPrograms(providerId: number, cipSubSeriesCode: string, keyword: string) {
+    var selectedFilters = { providerId: [], programId: [], programName:""};
 
+    
     if (providerId > 0) {
       selectedFilters.providerId.push(+providerId);
     }
     if (cipSubSeriesCode) {
-      const programIds = this.programByCategoryList.filter(pc=> pc.cipSubSeriesCode==cipSubSeriesCode).map(pc=>pc.programId)
-      selectedFilters.programId=programIds;
+      if (!this.programByCategoryList) {
+        return this.programService.getProgramIdsByCategory().subscribe((result) => {
+          this.programByCategoryList = result;
+          const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+          selectedFilters.programId = programIds;
+        });
+      }
+      else {
+        const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+        selectedFilters.programId = programIds;
+      }
+    }
+    if (keyword) {
+      selectedFilters.programName=keyword;
     }
     //TODO: Keyword search
-    
+
     this.dataSource.filter = JSON.stringify(selectedFilters);
   }
 }

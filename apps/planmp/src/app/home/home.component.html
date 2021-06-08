@@ -1,5 +1,101 @@
-<div fxLayout="column">
-  <div fxLayout="row" [fxFlex]="FlexConstants.Column.Large_6">
-    <aedigital-find-programs [attr.data-cy]="'home.find-programs'" ></aedigital-find-programs>
+<div fxLayout="row">
+  <div [fxFlex]="FlexConstants.Column.Large_3" fxLayout="row">
+    <div>Education and Training</div>
+    <!-- <select>
+      <option></option>
+      <option value="schools">schools</option>
+      <option value="programs">programs</option>
+    </select> -->
+  </div>
+  <div [fxFlex]="FlexConstants.Column.Large_3" fxLayout="row">
+    <div>Careers and Jobs</div>
+    <!-- <select>
+      <option></option>
+      <option value="schools">schools</option>
+      <option value="programs">programs</option>
+    </select> -->
+  </div>
+  <div [fxFlex]="FlexConstants.Column.Large_3" fxLayout="row">
+    <div>Funding and Costs</div>
+    <select>
+      <option></option>
+      <option value="schools">schools</option>
+      <option value="programs">programs</option>
+    </select>
+  </div>
+  <div fxFlex></div>
+</div>
+
+<div       
+fxLayout="column"
+>
+<div fxFlex="300px" fxFlexLayout="row">
+  <aedigital-banner
+    fxFlex="100%"
+    [backgroundImage]="getbackgroundurl()"
+  >
+    <div
+      caption
+      style="color: white"
+      fxLayout="row"
+      fxflex="100%"
+    >
+      <div fxFlex>{{ this.providers[0].HeroTitle }}</div>
+    </div>
+    <div
+      subcaption
+      style="color: white"
+      fxflex="100%"
+    >
+      {{ this.providers[0].HeroMessage }}
+    </div>
+  </aedigital-banner>
+</div>
+
+  <div fxflex fxLayout="column" style="background-color: #0081a2">
+    <div [fxFlex]="FlexConstants.Button.Large ">
+      <button mat-flat-button color="primary"
+      
+      [attr.data-cy]="'landingpage.explore_options'"
+      >
+        Explore your options
+        <mat-icon style="font-size: medium"> arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div fxLayout="row wrap" fxFlex="100" id="bastard">
+    <div
+      fxLayout="column"
+      fxLayoutAlign=""
+      fxFlex="100%"
+    >
+      <ae-searchblock></ae-searchblock>
+    </div>
+    <div
+      fxLayout="column"
+      fxLayoutAlign=""
+      [fxFlex]="FlexConstants.Column.Large_8 "
+    >
+      <h1>{{ this.providers[0].schoolbrowsertitle }}</h1>
+      <aedigital-find-programs [attr.data-cy]="'home.find-programs'" ></aedigital-find-programs>
+    </div>
+    <div
+      [fxFlex]=" FlexConstants.Column.Large "
+    >
+    </div>
+    <div
+      fxLayout="column"
+      fxLayoutAlign=""
+      fxLayoutGap="16px"
+      [fxFlex]="FlexConstants.Column.Large_3 "
+      fxHide.lt-md
+    >
+      <ae-programstart></ae-programstart>
+      <div></div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="" fxFlex>
+      <aedigital-loanstart></aedigital-loanstart>
+    </div>
   </div>
 </div>

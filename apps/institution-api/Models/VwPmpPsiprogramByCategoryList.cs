@@ -14,5 +14,6 @@ namespace ProviderApi.Models
         public string ProgramName { get; set; }
 
         public int ProgramId { get; set; }
-  }
+    }
+  
 }

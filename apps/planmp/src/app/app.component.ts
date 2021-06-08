@@ -7,7 +7,6 @@ import { FlexConstants} from '@libs/FlexConstants';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
   FlexConstants = FlexConstants;
 }
 

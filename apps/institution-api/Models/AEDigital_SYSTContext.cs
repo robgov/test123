@@ -54,6 +54,9 @@ namespace ProviderApi.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            
+           
+
             modelBuilder.Entity<VwAlbertaPsiprovider>(entity =>
             {
                 entity.HasNoKey();

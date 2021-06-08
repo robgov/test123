@@ -72,6 +72,9 @@ import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
+import { LoanstartComponent } from './loanstart/loanstart.component';
+import { ProgramstartComponent } from './programstart/programstart.component';
+import { SearchblockComponent } from './searchblock/searchblock.component';
 import { SchoolSummaryComponent } from './school-summary/school-summary.component';
 import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
 import { FindProgramsComponent } from './find-programs/find-programs.component';
@@ -92,6 +95,9 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     EnvironmentSashComponent,
     BreadcrumbComponent,
     FilterPipe,
+    LoanstartComponent,
+    ProgramstartComponent,
+    SearchblockComponent,
     SchoolSummaryComponent,
     SchoolSummaryListComponent,
     FindProgramsComponent,

@@ -5,6 +5,9 @@ import { Dictionary } from '../models/dictionary';
 import { HttpObjectMapper } from './http-object-mapper';
 
 export abstract class EndPointService {
+
+	protected urlBase = "https://localhost:5001/api/";
+
 	protected constructor(public http: HttpClient) {}
 
 	private localCache$: Map<string, Observable<any>> = new Map<string, Observable<any>>();

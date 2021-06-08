@@ -1,9 +1,11 @@
-<div class="banner" fxLayoutAlign="center center">
-	<div class="banner-box">
-		<div class="caption">
+<div fxFlex="100" class="banner container_img" fxLayoutAlign="center center"  
+[style.background-image]="'url(' + AddBackgroundImage() + ')'"
+>
+	<div class="banner-box" >
+		<div class="caption" >
 			<h1><ng-content select="[caption]"></ng-content></h1>
 		</div>
-		<div class="subcaption">
+		<div class="subcaption" >
 			<ng-content select="[subcaption]"></ng-content>
 		</div>
 	</div>

@@ -8,6 +8,7 @@ export * from './location-publication.service';
 export * from './location.service';
 export * from './program-cost.service';
 export * from './program-publication.service';
+export * from './program-type.service';
 export * from './program.service';
 export * from './provider-address.service';
 export * from './provider-email.service';

@@ -1,0 +1,32 @@
+<div fxLayout="row" fxFlex="100">
+  <div fxFlex>
+    <input
+      fxFlex
+      matInput
+      type="text"
+      maxlength="256"
+      (keyup)="onSearchChange($event.target.value)"
+      [(ngModel)]="keywords"
+    />
+
+    <div fxFlex="40px">
+      <button
+        
+        style="background-color: #0070c4"
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="search"
+        [attr.data-cy]="'searchblock.view-program-search-results'"
+        [disabled]="searchdisabled"
+        [routerLink]="['program-search-results']"
+        [queryParams]="{ keywords: this.keywords }"
+        queryParamsHandling="merge"
+      >
+        <mat-icon color="primary" style="font-size: 24px; color: white"
+          >search</mat-icon
+        >
+      </button>
+    </div>
+  </div>
+</div>

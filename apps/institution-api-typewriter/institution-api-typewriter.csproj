@@ -8,14 +8,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\libs\common\models\vw-pmp-psiprogram-by-category-list.ts" Link="typewriter\vw-pmp-psiprogram-by-category-list.ts" />
+    <None Include="..\..\libs\common\models\vw-pmp-psiprogram-count-by-category.ts" Link="typewriter\vw-pmp-psiprogram-count-by-category.ts" />
+    <None Include="..\..\libs\common\models\vw-program-credential.ts" Link="typewriter\vw-program-credential.ts" />
+    <None Include="..\..\libs\common\models\vw-program-type.ts" Link="typewriter\vw-program-type.ts" />
+    <None Include="..\..\libs\common\models\vw-program.ts" Link="typewriter\vw-program.ts" />
+    <None Include="..\..\libs\common\services\alberta-psiprovider.service.ts" Link="typewriter\alberta-psiprovider.service.ts" />
+    <None Include="..\..\libs\common\services\location-address.service.ts" Link="typewriter\location-address.service.ts" />
+    <None Include="..\..\libs\common\services\location-email.service.ts" Link="typewriter\location-email.service.ts" />
+    <None Include="..\..\libs\common\services\location-phone.service.ts" Link="typewriter\location-phone.service.ts" />
+    <None Include="..\..\libs\common\services\location-publication.service.ts" Link="typewriter\location-publication.service.ts" />
+    <None Include="..\..\libs\common\services\location.service.ts" Link="typewriter\location.service.ts" />
+    <None Include="..\..\libs\common\services\program-publication.service.ts" Link="typewriter\program-publication.service.ts" />
+    <None Include="..\..\libs\common\services\program.service.ts" Link="typewriter\program.service.ts" />
+    <None Include="..\..\libs\common\services\provider-address.service.ts" Link="typewriter\provider-address.service.ts" />
+    <None Include="..\..\libs\common\services\provider-email.service.ts" Link="typewriter\provider-email.service.ts" />
+    <None Include="..\..\libs\common\services\provider-logo.service.ts" Link="typewriter\provider-logo.service.ts" />
+    <None Include="..\..\libs\common\services\provider-phone.service.ts" Link="typewriter\provider-phone.service.ts" />
+    <None Include="..\..\libs\common\services\provider-publication.service.ts" Link="typewriter\provider-publication.service.ts" />
+    <None Include="..\..\libs\common\services\provider-type.service.ts" Link="typewriter\provider-type.service.ts" />
+    <None Include="..\..\libs\common\services\provider-website.service.ts" Link="typewriter\provider-website.service.ts" />
+    <None Include="..\..\libs\common\services\provider.service.ts" Link="typewriter\provider.service.ts" />
+    <None Include="..\..\libs\common\services\specialization.service.ts" Link="typewriter\specialization.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="AEDMContext.ts">
       <CustomToolNamespace>..\institution-api\Models\AEDMContext.cs</CustomToolNamespace>
     </None>
     <None Update="Institution.ts">
       <CustomToolNamespace>..\institution-api\Models\Institution.cs</CustomToolNamespace>
-    </None>
-    <None Update="InstitutionAddress.ts">
-      <CustomToolNamespace>..\institution-api\Models\InstitutionAddress.cs</CustomToolNamespace>
     </None>
     <None Update="InstitutionEmail.ts">
       <CustomToolNamespace>..\institution-api\Models\InstitutionEmail.cs</CustomToolNamespace>
