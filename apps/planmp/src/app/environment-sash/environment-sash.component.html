@@ -6,7 +6,7 @@
 	</span>
 
 	<div class="version" *ngIf="version?.environment">
-		<strong>{{ version.environment }}</strong>
-		<span class="build-number">({{ version.version }})</span>
+		<strong [attr.data-cy]="'environment-sash.environment'">{{ version.environment }}</strong>
+		<span [attr.data-cy]="'environment-sash.build-number'" class="build-number">({{ version.version }})</span>
 	</div>
 </div>

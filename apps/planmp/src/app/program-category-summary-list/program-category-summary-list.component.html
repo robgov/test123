@@ -1,0 +1,11 @@
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="8px">
+        <div fxFlex="100" fxLayout="column">
+            <div fxFlex="400px;">
+                <div *ngFor="let pc of programCountByCategory ">
+                    <aedigital-program-category-summary [attr.data-cy]="'program-category-summary-list.program-category-summary'" [programCountByCategory]="pc"></aedigital-program-category-summary>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

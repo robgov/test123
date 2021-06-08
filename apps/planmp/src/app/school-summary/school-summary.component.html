@@ -1,11 +1,11 @@
 <div fxLayout="row" fxLayoutGap="16px">
     <div></div>
     <div fxFlex fxLayout="column" >
-        <div fxFlex>{{provider.providerName}}</div>
-        <div>{{[(providerPrograms?.length)]}} Programs</div>
+        <div fxFlex [attr.data-cy]="'school-summary.providerName'" >{{provider.providerName}}</div>
+        <div [attr.data-cy]="'school-summary.programCount'">{{[(programCount())]}} Programs</div>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
-        <a mat-stroked-button [routerLink]="['program-search-results']"  [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" >View</a>
+        <a mat-stroked-button [routerLink]="['program-search-results']" [attr.data-cy]="'school-summary.view-program'" [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" >View</a>
     </div>
 </div>
 <hr>

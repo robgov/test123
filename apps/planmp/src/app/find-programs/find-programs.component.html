@@ -1,6 +1,12 @@
 <div>Find a school or program</div>
 <mat-tab-group>
-    <mat-tab label="Program Category"><div>Not Implemented</div></mat-tab>
-    <mat-tab label="School"><aedigital-school-summary-list></aedigital-school-summary-list></mat-tab>
-    <mat-tab label="Credential"><div>Not Implemented</div></mat-tab>
+    <mat-tab label="Program Category" [attr.data-cy]="'find-programs.program-category-tab'">
+        <aedigital-program-category-summary-list></aedigital-program-category-summary-list>
+    </mat-tab>
+    <mat-tab label="School" [attr.data-cy]="'find-programs.school-tab'">
+        <aedigital-school-summary-list></aedigital-school-summary-list>
+    </mat-tab>
+    <mat-tab label="Credential" disabled [attr.data-cy]="'find-programs.credential-tab'">
+        <div>Not Implemented</div>
+    </mat-tab>
 </mat-tab-group>

@@ -77,7 +77,8 @@ import { SchoolSummaryListComponent } from './school-summary-list/school-summary
 import { FindProgramsComponent } from './find-programs/find-programs.component';
 import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
 import { ProgramSummaryComponent } from './program-summary/program-summary.component';
-import { PaginationComponent } from './pagination/pagination.component';
+import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
+import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     FindProgramsComponent,
     ProgramsSearchResultsComponent,
     ProgramSummaryComponent,
-    PaginationComponent,
+    ProgramCategorySummaryComponent,
+    ProgramCategorySummaryListComponent,
   ],
   imports: [
     BrowserModule,

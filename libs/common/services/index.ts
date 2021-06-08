@@ -6,6 +6,7 @@ export * from './location-email.service';
 export * from './location-phone.service';
 export * from './location-publication.service';
 export * from './location.service';
+export * from './program-cost.service';
 export * from './program-publication.service';
 export * from './program.service';
 export * from './provider-address.service';

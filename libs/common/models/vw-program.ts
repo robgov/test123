@@ -8,8 +8,8 @@ export class VwProgram {
     public programName: string = '';
     public programCode: string = '';
     public programLength: string = '';
-    public credentialType: string = '';
-    public programType: string = '';
+    public programCredentialId: number;
+    public programTypeId: number;
     public programStatus: string = '';
     public providerId: number;
     public businessStartDate: Date;
