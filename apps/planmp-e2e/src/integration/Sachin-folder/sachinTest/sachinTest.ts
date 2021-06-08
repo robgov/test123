@@ -17,7 +17,6 @@ const homepage = new sachinhomepageelement()
 Given(/^the user navigates to the banking app home page$/, function () {
   //expect(1).to.eq(1);
   homepage.navigateToURL()
-  cy.wait(1000)
 
 });
 
