@@ -61,7 +61,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     private specializationService: SpecializationService,
     private providerLogoService: ProviderLogoService,
     private programCostService: ProgramCostService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.loadCipProgramIds();
     this.loadProviders();
@@ -136,9 +136,14 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   }
 
   getProgramCost(program: VwProgram): VwProgramCost {
-    return this.programCosts.filter(
-      (costs) => costs.programId == program.programId
-    )[0];
+    if (!this.programCosts) {
+      return new VwProgramCost;
+    }
+    else {
+      return this.programCosts.filter(
+        (costs) => costs.programId == program.programId
+      )[0];
+    }
   }
 
   getProviderLogo(program: VwProgram): VwProviderLogo {
@@ -155,7 +160,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   loadPrograms(providerId: number, cipSubSeriesCode) {
     // return this.programService.getProgramIdsByCategory().subscribe((result) => {
     //   this.programByCategoryList = result;
-      this.programService
+    this.programService
       .getPrograms(new ProgramsRequest())
       .subscribe((result) => {
         this.searchResults = result;
@@ -169,17 +174,18 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   }
 
   filterPrograms(providerId: number, cipSubSeriesCode: string) {
-    var selectedFilters = { providerId:[], programId:[] };
+    var selectedFilters = { providerId: [], programId: [] };
 
+    
     if (providerId > 0) {
       selectedFilters.providerId.push(+providerId);
     }
     if (cipSubSeriesCode) {
-      const programIds = this.programByCategoryList.filter(pc=> pc.cipSubSeriesCode==cipSubSeriesCode).map(pc=>pc.programId)
-      selectedFilters.programId=programIds;
+      const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+      selectedFilters.programId = programIds;
     }
     //TODO: Keyword search
-    
+
     this.dataSource.filter = JSON.stringify(selectedFilters);
   }
 }

@@ -22,7 +22,7 @@ export class ProgramCostService extends EndPointService {
         return this.get(this.url + '{id}', id);
     }
     public getProgramCosts(request: ProgramCostsRequest): Observable<VwProgramCost[]> { 
-        return this.get(this.url + 'GetPrograms', request);
+        return this.get(this.url + 'GetProgramCosts', request);
     }
 
     private get url() {

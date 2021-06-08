@@ -86,7 +86,7 @@ fxLayout="column"
       [fxFlex]="FlexConstants.Column.Large_8 "
     >
       <h1>{{ this.providers[0].schoolbrowsertitle }}</h1>
-      <aedigital-find-programs></aedigital-find-programs>
+      <aedigital-find-programs [attr.data-cy]="'home.find-programs'" ></aedigital-find-programs>
     </div>
     <div
       [fxFlex]=" FlexConstants.Column.Large "

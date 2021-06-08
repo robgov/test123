@@ -36,8 +36,8 @@ namespace ProviderApi.Controllers
       return _context.VwPrograms.Where(x => x.ProgramId.Equals(id));
     }
 
-    [HttpGet("GetPrograms")]
-    [SwaggerOperation("GetPrograms")]
+    [HttpGet("GetProgramCosts")]
+    [SwaggerOperation("GetProgramCosts")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwProgramCost> GetProgramCosts([FromQuery] ProgramCostsRequest request)
