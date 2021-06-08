@@ -3,7 +3,7 @@
         <div fxFlex="100" fxLayout="column">
             <div fxFlex="400px;">
                 <div *ngFor="let p of providers">
-                    <aedigital-school-summary [provider]="p"></aedigital-school-summary>
+                    <aedigital-school-summary [attr.data-cy]="'school-summary-list.school-summary'" [provider]="p" [programs]="programs"></aedigital-school-summary>
                 </div>
             </div>
         </div>

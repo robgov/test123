@@ -50,24 +50,5 @@ namespace ProviderApi.Controllers
     {
       return _context.VwAlbertaPsiproviders.OrderBy(x=>x.ProviderName);
     }
-
-    //[HttpGet("ProviderCategory")]
-    //[SwaggerOperation("GetAlbertaPsiProviderCategories")]
-    //[SwaggerResponse((int)HttpStatusCode.OK)]
-    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
-    //public IEnumerable<string> GetAlbertaPsiProviderCategories()
-    //{
-    //  return _context.VwPrograms.Select(x => x.ProgramType).Distinct().ToList().OrderBy(x => x);
-    //}
-
-    //[HttpGet("ProviderCategoryCount")]
-    //[SwaggerOperation("GetProgramCountByCategory")]
-    //[SwaggerResponse((int)HttpStatusCode.OK)]
-    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
-    //public int GetProgramCountByCategory([FromQuery] ProgramCategoryRequest requestParams)
-    //{
-    //  var programCategoryCount = _context.VwPrograms.Count(x => x.ProgramType == requestParams.ProgramCategory);
-    //  return programCategoryCount;
-    //}
   }
 }

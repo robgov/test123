@@ -3,9 +3,9 @@
     <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
         <div fxFlex="100" fxLayout="column">
             <div *ngFor="let p of obs | async">
-                <aedigital-program-summary [program]="p" [providers]="providers" [specializations]="specializations" [providerLogos]="providerLogos"></aedigital-program-summary>
+                <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p" [programProvider]="getProvider(p)" [programSpecialization]="getSpecialization(p)" [programCost]="getProgramCost(p)" [providerLogo]="getProviderLogo(p)"></aedigital-program-summary>
             </div>
         </div>
     </div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [attr.data-cy]="'programs-search-results.paginator'" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

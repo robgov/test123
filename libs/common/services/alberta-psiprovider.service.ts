@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { ProgramCategoryRequest, VwAlbertaPsiprovider } from '@libs/common/models';
+import { VwAlbertaPsiprovider } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -23,12 +23,6 @@ export class AlbertaPSIProviderService extends EndPointService {
     }
     public getAlbertaPsiProviders(): Observable<VwAlbertaPsiprovider[]> { 
         return this.get(this.url + '');
-    }
-    public getAlbertaPsiProviderCategories(): Observable<string[]> { 
-        return this.get(this.url + 'ProviderCategory');
-    }
-    public getProgramCountByCategory(requestParams: ProgramCategoryRequest): Observable<number> { 
-        return this.get(this.url + 'ProviderCategoryCount', requestParams);
     }
 
     private get url() {

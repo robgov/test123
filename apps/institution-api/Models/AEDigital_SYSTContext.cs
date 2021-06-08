@@ -280,11 +280,11 @@ namespace ProviderApi.Models
                     .HasMaxLength(800)
                     .HasColumnName("LogoURL");
 
-                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
-
                 entity.Property(e => e.ProgramName).HasMaxLength(100);
 
                 entity.Property(e => e.ProviderName).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
             });
 
             modelBuilder.Entity<VwPmpPsiprogramCountByCategory>(entity =>
