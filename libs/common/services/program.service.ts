@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { ProgramsRequest, VwPmpPsiprogramCountByCategory, VwProgram } from '@libs/common/models';
+import { ProgramsRequest, VwPmpPsiprogramByCategoryList, VwPmpPsiprogramCountByCategory, VwProgram } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +26,9 @@ export class ProgramService extends EndPointService {
     }
     public getProgramCountByCategory(): Observable<VwPmpPsiprogramCountByCategory[]> { 
         return this.get(this.url + 'GetProgramCountByCategory');
+    }
+    public getProgramIdsByCategory(): Observable<VwPmpPsiprogramByCategoryList[]> { 
+        return this.get(this.url + 'GetProgramIdsByCategory');
     }
 
     private get url() {

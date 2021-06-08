@@ -3,7 +3,7 @@
     <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
         <div fxFlex="100" fxLayout="column">
             <div *ngFor="let p of obs | async">
-                <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p" [providers]="providers" [specializations]="specializations" [programCosts]="programCosts" [providerLogos]="providerLogos"></aedigital-program-summary>
+                <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p" [programProvider]="getProvider(p)" [programSpecialization]="getSpecialization(p)" [programCost]="getProgramCost(p)" [providerLogo]="getProviderLogo(p)"></aedigital-program-summary>
             </div>
         </div>
     </div>

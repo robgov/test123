@@ -1,18 +1,20 @@
 <div fxLayout="column">
     <div fxFlex=100 fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
-        <div fxFlex="{{FlexConstants.Column.Large}}" fxLayoutAlign="center center"><img [attr.data-cy]="'program-summary.providerLogo'"
-                fxFlex="72px;" fxShrink [(src)]="providerLogo().logoUrl"></div>
+        <div fxFlex="{{FlexConstants.Column.Large}}" fxLayoutAlign="center center">
+            <img [id]="program.providerId" [attr.data-cy]="'program-summary.providerLogo'" fxFlex="72px;" fxShrink [src]="getLogoUrl()"></div>
         <div fxLayout="column" fxFlex="{{FlexConstants.Column.Large_6}}">
             <div [attr.data-cy]="'program-summary.programName'">{{program.programName}}</div>
-            <div [attr.data-cy]="'program-summary.providerSpecialization'">{{providerSpecialization()}}</div>
-            <div [attr.data-cy]="'program-summary.providerName'">{{programProvider().providerName}}</div>
+            <div [attr.data-cy]="'program-summary.providerSpecialization'">{{programSpecialization ?
+                programSpecialization.specializationName : '' }}</div>
+            <div [attr.data-cy]="'program-summary.providerName'">{{getProgramProviderName()}}</div>
             <div></div>
             <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
                 <div [attr.data-cy]="'program-summary.programLength'" fxFlex="{{FlexConstants.Column.Large_2}}">
                     {{program.programLength}}</div>
                 <div [attr.data-cy]="'program-summary.programCredentialId'" fxFlex="{{FlexConstants.Column.Large_2}}">
                     {{program.programCredentialId}}</div>
-                <div [attr.data-cy]="'program-summary.programCost'" fxFlex="{{FlexConstants.Column.Large_2}}">$ {{programCost()}}/year
+                <div [attr.data-cy]="'program-summary.programCost'" fxFlex="{{FlexConstants.Column.Large_2}}">$
+                    {{getProgramCost()}}/year
                 </div>
             </div>
         </div>

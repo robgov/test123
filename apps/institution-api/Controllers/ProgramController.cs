@@ -69,5 +69,14 @@ namespace ProviderApi.Controllers
     {
       return _context.VwPmpPsiprogramCountByCategories.OrderBy(x=>x.CipSubSeries);
     }
+
+    [HttpGet("GetProgramIdsByCategory")]
+    [SwaggerOperation("GetProgramIdsByCategory")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<VwPmpPsiprogramByCategoryList> GetProgramIdsByCategory()
+    {
+      return _context.VwPmpPsiprogramByCategoryLists.ToList();
+    }
   }
 }
