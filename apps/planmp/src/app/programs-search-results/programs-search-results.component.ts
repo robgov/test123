@@ -181,8 +181,17 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       selectedFilters.providerId.push(+providerId);
     }
     if (cipSubSeriesCode) {
-      const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
-      selectedFilters.programId = programIds;
+      if (!this.programByCategoryList) {
+        return this.programService.getProgramIdsByCategory().subscribe((result) => {
+          this.programByCategoryList = result;
+          const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+          selectedFilters.programId = programIds;
+        });
+      }
+      else {
+        const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+        selectedFilters.programId = programIds;
+      }
     }
     //TODO: Keyword search
 
