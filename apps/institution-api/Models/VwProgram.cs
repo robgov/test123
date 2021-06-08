@@ -13,8 +13,8 @@ namespace ProviderApi.Models
         public string ProgramName { get; set; }
         public string ProgramCode { get; set; }
         public string ProgramLength { get; set; }
-        public string CredentialType { get; set; }
-        public string ProgramType { get; set; }
+        public int? ProgramCredentialId { get; set; }
+        public int? ProgramTypeId { get; set; }
         public string ProgramStatus { get; set; }
         public int? ProviderId { get; set; }
         public DateTime? BusinessStartDate { get; set; }

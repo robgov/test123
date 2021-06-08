@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -24,9 +24,13 @@ namespace ProviderApi.Models
         public virtual DbSet<VwLocationPhone> VwLocationPhones { get; set; }
         public virtual DbSet<VwLocationPublication> VwLocationPublications { get; set; }
         public virtual DbSet<VwLocationWebsite> VwLocationWebsites { get; set; }
+        public virtual DbSet<VwPmpPsiprogramByCategoryList> VwPmpPsiprogramByCategoryLists { get; set; }
+        public virtual DbSet<VwPmpPsiprogramCountByCategory> VwPmpPsiprogramCountByCategories { get; set; }
         public virtual DbSet<VwProgram> VwPrograms { get; set; }
         public virtual DbSet<VwProgramCost> VwProgramCosts { get; set; }
+        public virtual DbSet<VwProgramCredential> VwProgramCredentials { get; set; }
         public virtual DbSet<VwProgramPublication> VwProgramPublications { get; set; }
+        public virtual DbSet<VwProgramType> VwProgramTypes { get; set; }
         public virtual DbSet<VwProvider> VwProviders { get; set; }
         public virtual DbSet<VwProviderAddress> VwProviderAddresses { get; set; }
         public virtual DbSet<VwProviderEmail> VwProviderEmails { get; set; }
@@ -49,6 +53,9 @@ namespace ProviderApi.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            
+           
 
             modelBuilder.Entity<VwAlbertaPsiprovider>(entity =>
             {
@@ -259,6 +266,38 @@ namespace ProviderApi.Models
                 entity.Property(e => e.WebsiteUsage).HasMaxLength(200);
             });
 
+            modelBuilder.Entity<VwPmpPsiprogramByCategoryList>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_pmp_PSIProgramByCategoryList");
+
+                entity.Property(e => e.CipSubSeries).HasMaxLength(250);
+
+                entity.Property(e => e.CipSubSeriesCode).HasMaxLength(15);
+
+                entity.Property(e => e.LogoUrl)
+                    .HasMaxLength(800)
+                    .HasColumnName("LogoURL");
+
+                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
+
+                entity.Property(e => e.ProgramName).HasMaxLength(100);
+
+                entity.Property(e => e.ProviderName).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VwPmpPsiprogramCountByCategory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_pmp_PSIProgramCountByCategory");
+
+                entity.Property(e => e.CipSubSeries).HasMaxLength(250);
+
+                entity.Property(e => e.CipSubSeriesCode).HasMaxLength(15);
+            });
+
             modelBuilder.Entity<VwProgram>(entity =>
             {
                 entity.HasNoKey();
@@ -269,9 +308,9 @@ namespace ProviderApi.Models
 
                 entity.Property(e => e.BusinessStartDate).HasColumnType("datetime");
 
-                entity.Property(e => e.CredentialType).HasMaxLength(200);
-
                 entity.Property(e => e.ProgramCode).HasMaxLength(50);
+
+                entity.Property(e => e.ProgramCredentialId).HasColumnName("ProgramCredentialID");
 
                 entity.Property(e => e.ProgramGovernor).HasMaxLength(50);
 
@@ -285,7 +324,7 @@ namespace ProviderApi.Models
 
                 entity.Property(e => e.ProgramStatus).HasMaxLength(200);
 
-                entity.Property(e => e.ProgramType).HasMaxLength(200);
+                entity.Property(e => e.ProgramTypeId).HasColumnName("ProgramTypeID");
 
                 entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
             });
@@ -305,6 +344,19 @@ namespace ProviderApi.Models
                 entity.Property(e => e.Tuition).HasColumnType("numeric(38, 2)");
             });
 
+            modelBuilder.Entity<VwProgramCredential>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_ProgramCredential");
+
+                entity.Property(e => e.ProgramCredential).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramCredentialId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ProgramCredentialID");
+            });
+
             modelBuilder.Entity<VwProgramPublication>(entity =>
             {
                 entity.HasNoKey();
@@ -320,6 +372,19 @@ namespace ProviderApi.Models
                     .HasColumnName("ProgramPublicationID");
 
                 entity.Property(e => e.ProgramPublicationStatus).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VwProgramType>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_ProgramType");
+
+                entity.Property(e => e.ProgramType).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramTypeId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ProgramTypeID");
             });
 
             modelBuilder.Entity<VwProvider>(entity =>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
+import { environment } from '../environment/environment';
 
 @Component({
   selector: 'aedigital-loanstart',
@@ -9,6 +10,7 @@ import { FlexConstants } from '@libs/FlexConstants';
 })
 export class LoanstartComponent implements OnInit {
 
+  env = environment;
   FlexConstants = FlexConstants;
   constructor(private http: HttpClient) { }
 
@@ -23,6 +25,11 @@ export class LoanstartComponent implements OnInit {
       loanimage: "Header",
       Summary: "Strapi call failed",
     }];
+
+
+    AddBackgroundImage() {
+      return "'url('" + this.env.StrapiBaseUrl + this.loandata[0].loanapplyimage.url + "')'";
+    }
 
   fetch() {
 

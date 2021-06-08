@@ -5,22 +5,23 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { VwProgramPublication } from '@libs/common/models';
+import { ProviderProgramRequest, VwProgramType } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProgramPublicationService extends EndPointService {
+export class ProgramTypeService extends EndPointService {
 	key: string;
 
     constructor(http: HttpClient){
         super(http);
-        this.key = 'programPublication';
+        this.key = 'programType';
     }
     
-    public getProgramPublication(id: number): Observable<VwProgramPublication[]> { 
-        return this.get(this.url + '{id}', id);
+    public gGetCredentials(): Observable<VwProgramType[]> { 
+        return this.get(this.url);
     }
+
 
     private get url() {
         return "https://localhost:5001/api/" + this.key + "/";

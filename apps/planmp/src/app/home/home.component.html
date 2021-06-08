@@ -1,5 +1,5 @@
 <div fxLayout="row">
-  <div fxFlex="{{ FlexConstants.Column.Large_3 }}" fxLayout="row">
+  <div [fxFlex]="FlexConstants.Column.Large_3" fxLayout="row">
     <div>Education and Training</div>
     <!-- <select>
       <option></option>
@@ -7,7 +7,7 @@
       <option value="programs">programs</option>
     </select> -->
   </div>
-  <div fxFlex="{{ FlexConstants.Column.Large_3 }}" fxLayout="row">
+  <div [fxFlex]="FlexConstants.Column.Large_3" fxLayout="row">
     <div>Careers and Jobs</div>
     <!-- <select>
       <option></option>
@@ -15,7 +15,7 @@
       <option value="programs">programs</option>
     </select> -->
   </div>
-  <div fxFlex="{{ FlexConstants.Column.Large_3 }}" fxLayout="row">
+  <div [fxFlex]="FlexConstants.Column.Large_3" fxLayout="row">
     <div>Funding and Costs</div>
     <select>
       <option></option>
@@ -61,8 +61,11 @@ fxLayout="column"
 </div>
 
   <div fxflex fxLayout="column" style="background-color: #0081a2">
-    <div fxFlex="{{ FlexConstants.Button.Large }}">
-      <button mat-flat-button color="primary">
+    <div [fxFlex]="FlexConstants.Button.Large ">
+      <button mat-flat-button color="primary"
+      
+      [attr.data-cy]="'landingpage.explore_options'"
+      >
         Explore your options
         <mat-icon style="font-size: medium"> arrow_forward</mat-icon>
       </button>
@@ -80,18 +83,24 @@ fxLayout="column"
     <div
       fxLayout="column"
       fxLayoutAlign=""
-      fxFlex="{{ FlexConstants.Column.Large_8 }}"
+      [fxFlex]="FlexConstants.Column.Large_8 "
     >
       <h1>{{ this.providers[0].schoolbrowsertitle }}</h1>
+      <aedigital-find-programs></aedigital-find-programs>
     </div>
-
+    <div
+      [fxFlex]=" FlexConstants.Column.Large "
+    >
+    </div>
     <div
       fxLayout="column"
       fxLayoutAlign=""
-      fxFlex="{{ FlexConstants.Column.Large_3 }}"
+      fxLayoutGap="16px"
+      [fxFlex]="FlexConstants.Column.Large_3 "
       fxHide.lt-md
     >
       <ae-programstart></ae-programstart>
+      <div></div>
     </div>
 
     <div fxLayout="column" fxLayoutAlign="" fxFlex>

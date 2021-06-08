@@ -6,5 +6,14 @@
 
         <h1>{{ this.programdata[0].applytitle }}</h1>
         <h2>{{ this.programdata[0].applymessage }}</h2>
-        <button mat-flat-button>{{ this.programdata[0].buttonstart }}</button>
+
+        <ul>
+          <li *ngFor="let c of credentials | slice :0:5">{{ c.programType}}</li>
+        </ul>
+
+
+        <button mat-raised-button color="primary"
+        [attr.data-cy]="'programstart.start_application_process'"
+        >{{ this.programdata[0].buttonstart }}</button>
+
 </div>

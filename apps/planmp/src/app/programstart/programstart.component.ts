@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
-import {InstitutionSummaryService, ProviderService} from '@libs/common/services';
-import {InstitutionsParameters, PagedDataParameters, VwProvider } from '@libs/common/models';
+import {ProgramTypeService} from '@libs/common/services';
+import { PagedDataParameters, VwProgramType } from '@libs/common/models';
 
 @Component({
   selector: 'ae-programstart',
@@ -14,12 +14,13 @@ export class ProgramstartComponent implements OnInit {
 FlexConstants = FlexConstants;
 searchText: string;
 institutions: any[] = [];
-providers: VwProvider[];
-pagenumber =1;
-pagesize =5;
+credentials: VwProgramType[];
 
-constructor(private http: HttpClient, private providerService: ProviderService) { }
-ngOnInit(): void { this.fetch(); }
+constructor(private http: HttpClient, private ptservice: ProgramTypeService) { }
+ngOnInit(): void { 
+  this.fetch();
+  this.fetchCredentials();
+}
 
 
 
@@ -40,20 +41,9 @@ ngOnInit(): void { this.fetch(); }
     );
   }
 
-
-
-
-  fetchProviders() {
-
-    let params: PagedDataParameters  = new PagedDataParameters();
-    params.pageNumber=this.pagenumber;
-    params.pageSize = this.pagesize;
-    
-    this.providerService.getProviders(params).subscribe((t)=>{
-      this.providers = t;
+  fetchCredentials() {
+    this.ptservice.gGetCredentials().subscribe((t)=>{
+      this.credentials = t;
     })
   }
-
-
-
 }

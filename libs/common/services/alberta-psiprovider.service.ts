@@ -32,6 +32,6 @@ export class AlbertaPSIProviderService extends EndPointService {
     }
 
     private get url() {
-        return "http://localhost:5001/api/" + this.key + "/";
+        return "https://localhost:5001/api/" + this.key + "/";
     }
 }
