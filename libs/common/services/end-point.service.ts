@@ -6,7 +6,7 @@ import { HttpObjectMapper } from './http-object-mapper';
 
 export abstract class EndPointService {
 
-	protected urlBase = "https://localhost:5001/api/";
+	protected urlBase = "http://localhost:5000/api/";
 
 	protected constructor(public http: HttpClient) {}
 
