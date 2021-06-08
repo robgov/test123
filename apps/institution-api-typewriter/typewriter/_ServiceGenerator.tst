@@ -151,6 +151,6 @@ export class $ServiceName extends EndPointService {
     }]
 
     private get url() {
-        return "https://localhost:5001/api/" + this.key + "/";
+        return this.urlBase + this.key + "/";
     }
 }]

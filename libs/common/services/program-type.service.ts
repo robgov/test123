@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { ProviderProgramRequest, VwProgramType } from '@libs/common/models';
+import { VwProgramType } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -18,12 +18,11 @@ export class ProgramTypeService extends EndPointService {
         this.key = 'programType';
     }
     
-    public gGetCredentials(): Observable<VwProgramType[]> { 
-        return this.get(this.url);
+    public getCredentials(): Observable<VwProgramType[]> { 
+        return this.get(this.url + '');
     }
 
-
     private get url() {
-        return "https://localhost:5001/api/" + this.key + "/";
+        return this.urlBase + this.key + "/";
     }
 }
