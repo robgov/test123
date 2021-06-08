@@ -42,7 +42,7 @@ ngOnInit(): void {
   }
 
   fetchCredentials() {
-    this.ptservice.gGetCredentials().subscribe((t)=>{
+    this.ptservice.getCredentials().subscribe((t)=>{
       this.credentials = t;
     })
   }

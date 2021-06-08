@@ -5,7 +5,7 @@
 
       <div alt="loanapplyimage"  *ngIf="this.loandata[0].loanapplyimage" fxHide.lt-md>
         <!-- <img flex-shrink flex-grow [src]="AddBackgroundImage()" /> -->
-        <img flex-shrink flex-grow src="http://localhost:1337{{ this.loandata[0].loanapplyimage.url }}" />
+        <img fxFlex="75%"  src="http://localhost:1337{{ this.loandata[0].loanapplyimage.url }}" />
       </div>
   
 

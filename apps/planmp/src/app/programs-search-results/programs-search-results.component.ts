@@ -44,6 +44,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   private providerId: number = null;
   private cipSubSeriesCode: string = null;
+  private keyword: string=null;
   providers: VwAlbertaPsiprovider[];
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
@@ -77,8 +78,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       if (params['cipSubSeriesCode']) {
         this.cipSubSeriesCode = params['cipSubSeriesCode'];
       }
+      if (params['keywords']) {
+        this.keyword = params['keywords'];
+      }
+      
 
-      this.loadPrograms(this.providerId, this.cipSubSeriesCode);
+      this.loadPrograms(this.providerId, this.cipSubSeriesCode, this.keyword);
     });
   }
 
@@ -157,7 +162,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  loadPrograms(providerId: number, cipSubSeriesCode) {
+  loadPrograms(providerId: number, cipSubSeriesCode, keyword: string) {
     // return this.programService.getProgramIdsByCategory().subscribe((result) => {
     //   this.programByCategoryList = result;
     this.programService
@@ -168,13 +173,13 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
         this.dataSource.paginator = this.paginator;
         this.obs = this.dataSource.connect();
         this.dataSource.filterPredicate = programFilterPredicate;
-        this.filterPrograms(providerId, cipSubSeriesCode);
+        this.filterPrograms(providerId, cipSubSeriesCode,keyword);
       });
     //});
   }
 
-  filterPrograms(providerId: number, cipSubSeriesCode: string) {
-    var selectedFilters = { providerId: [], programId: [] };
+  filterPrograms(providerId: number, cipSubSeriesCode: string, keyword: string) {
+    var selectedFilters = { providerId: [], programId: [], programName:""};
 
     
     if (providerId > 0) {
@@ -192,6 +197,9 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
         const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
         selectedFilters.programId = programIds;
       }
+    }
+    if (keyword) {
+      selectedFilters.programName=keyword;
     }
     //TODO: Keyword search
 

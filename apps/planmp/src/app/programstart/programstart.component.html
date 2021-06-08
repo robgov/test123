@@ -1,7 +1,6 @@
 <div fxLayout="column" fxFlex="100" >
         <div alt="programapplyimage" *ngIf="this.programdata[0].applyimage" fxHide.lt-md>
-          <img fxShrink="0"
-          flex-shrink flex-grow src="http://localhost:1337{{ this.programdata[0].applyimage.url }}" />
+          <img fxFlex="100%" src="http://localhost:1337{{ this.programdata[0].applyimage.url }}" />
         </div>
 
         <h1>{{ this.programdata[0].applytitle }}</h1>
