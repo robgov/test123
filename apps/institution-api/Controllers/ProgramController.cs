@@ -43,20 +43,21 @@ namespace ProviderApi.Controllers
     public IEnumerable<VwProgram> GetPrograms([FromQuery] ProgramsRequest request)
     {
       IQueryable<VwProgram> programs;
-      if (request.ProviderId > 0)
-      {
-         programs = _context.VwPrograms.Where(x => x.ProviderId.Equals(request.ProviderId));
-      }
-      else
-      {
-        programs = _context.VwPrograms;
-      }
+      ///TODO: Should be able to remove this, server shouldn't be doing the filtering
+      //if (request.ProviderId > 0)
+      //{
+      //   programs = _context.VwPrograms.Where(x => x.ProviderId.Equals(request.ProviderId));
+      //}
+      //else
+      //{
+      programs = _context.VwPrograms;
+      //}
 
-      if (!string.IsNullOrEmpty(request.CipSubSeriesCode))
-      {
-        var categoryProgramIds = _context.VwPmpPsiprogramByCategoryLists.Where(c => c.CipSubSeriesCode == request.CipSubSeriesCode).Select(cp=>cp.ProgramId);
-        programs = programs.Where(p => categoryProgramIds.Contains(p.ProgramId));
-      }
+      //if (!string.IsNullOrEmpty(request.CipSubSeriesCode))
+      //{
+      //  var categoryProgramIds = _context.VwPmpPsiprogramByCategoryLists.Where(c => c.CipSubSeriesCode == request.CipSubSeriesCode).Select(cp=>cp.ProgramId);
+      //  programs = programs.Where(p => categoryProgramIds.Contains(p.ProgramId));
+      //}
 
       return programs.ToList().OrderBy(x=>x.ProgramName);
     }
@@ -65,18 +66,19 @@ namespace ProviderApi.Controllers
     [SwaggerOperation("GetProgramCountByCategory")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwPmpPsiprogramCountByCategory> GetProgramCountByCategory()
+    public IEnumerable<VwPmpPsispecializationCountByCategory> GetProgramCountByCategory()
     {
-      return _context.VwPmpPsiprogramCountByCategories.OrderBy(x=>x.CipSubSeries);
+      return _context.VwPmpPsispecializationCountByCategories.OrderBy(x=>x.CipSubSeries);
     }
 
-    [HttpGet("GetProgramIdsByCategory")]
-    [SwaggerOperation("GetProgramIdsByCategory")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwPmpPsiprogramByCategoryList> GetProgramIdsByCategory()
-    {
-      return _context.VwPmpPsiprogramByCategoryLists.ToList();
-    }
+
+    //[HttpGet("GetProgramIdsByCategory")]
+    //[SwaggerOperation("GetProgramIdsByCategory")]
+    //[SwaggerResponse((int)HttpStatusCode.OK)]
+    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
+    //public IEnumerable<VwPmpPsiprogramCountByCategory> GetProgramIdsByCategory()
+    //{
+    //  return _context.VwPmpPsispecializationCountByCategories.ToList();
+    //}
   }
 }

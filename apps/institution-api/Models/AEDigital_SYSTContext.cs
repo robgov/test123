@@ -24,8 +24,9 @@ namespace ProviderApi.Models
         public virtual DbSet<VwLocationPhone> VwLocationPhones { get; set; }
         public virtual DbSet<VwLocationPublication> VwLocationPublications { get; set; }
         public virtual DbSet<VwLocationWebsite> VwLocationWebsites { get; set; }
-        public virtual DbSet<VwPmpPsiprogramByCategoryList> VwPmpPsiprogramByCategoryLists { get; set; }
-        public virtual DbSet<VwPmpPsiprogramCountByCategory> VwPmpPsiprogramCountByCategories { get; set; }
+        public virtual DbSet<VwPmpPsipspecializationYearlyCost> VwPmpPsipspecializationYearlyCosts { get; set; }
+        public virtual DbSet<VwPmpPsispecializationByCategoryList> VwPmpPsispecializationByCategoryLists { get; set; }
+        public virtual DbSet<VwPmpPsispecializationCountByCategory> VwPmpPsispecializationCountByCategories { get; set; }
         public virtual DbSet<VwProgram> VwPrograms { get; set; }
         public virtual DbSet<VwProgramCost> VwProgramCosts { get; set; }
         public virtual DbSet<VwProgramCredential> VwProgramCredentials { get; set; }
@@ -40,6 +41,7 @@ namespace ProviderApi.Models
         public virtual DbSet<VwProviderType> VwProviderTypes { get; set; }
         public virtual DbSet<VwProviderWebsite> VwProviderWebsites { get; set; }
         public virtual DbSet<VwSpecialization> VwSpecializations { get; set; }
+        public virtual DbSet<VwSpecializationCost> VwSpecializationCosts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,9 +55,6 @@ namespace ProviderApi.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
-            
-           
 
             modelBuilder.Entity<VwAlbertaPsiprovider>(entity =>
             {
@@ -266,11 +265,22 @@ namespace ProviderApi.Models
                 entity.Property(e => e.WebsiteUsage).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<VwPmpPsiprogramByCategoryList>(entity =>
+            modelBuilder.Entity<VwPmpPsipspecializationYearlyCost>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToView("vw_pmp_PSIProgramByCategoryList");
+                entity.ToView("vw_pmp_PSIPSpecializationYearlyCost");
+
+                entity.Property(e => e.Cost).HasColumnType("money");
+
+                entity.Property(e => e.SpecializationId).HasColumnName("SpecializationID");
+            });
+
+            modelBuilder.Entity<VwPmpPsispecializationByCategoryList>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_pmp_PSISpecializationByCategoryList");
 
                 entity.Property(e => e.CipSubSeries).HasMaxLength(250);
 
@@ -284,14 +294,16 @@ namespace ProviderApi.Models
 
                 entity.Property(e => e.ProviderName).HasMaxLength(200);
 
-                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
+                entity.Property(e => e.SpecializationId).HasColumnName("SpecializationID");
+
+                entity.Property(e => e.SpecializationName).HasMaxLength(160);
             });
 
-            modelBuilder.Entity<VwPmpPsiprogramCountByCategory>(entity =>
+            modelBuilder.Entity<VwPmpPsispecializationCountByCategory>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToView("vw_pmp_PSIProgramCountByCategory");
+                entity.ToView("vw_pmp_PSISpecializationCountByCategory");
 
                 entity.Property(e => e.CipSubSeries).HasMaxLength(250);
 
@@ -636,6 +648,35 @@ namespace ProviderApi.Models
                 entity.Property(e => e.SpecializationStatus).HasMaxLength(200);
 
                 entity.Property(e => e.UnitOfLoad).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VwSpecializationCost>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_SpecializationCost");
+
+                entity.Property(e => e.Amount).HasColumnType("money");
+
+                entity.Property(e => e.CostType).HasMaxLength(200);
+
+                entity.Property(e => e.DisplayOnSfsflag).HasColumnName("DisplayOnSFSFlag");
+
+                entity.Property(e => e.FundingYearCode).HasMaxLength(4);
+
+                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
+
+                entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
+
+                entity.Property(e => e.SessionEndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SessionOfStudyId).HasColumnName("SessionOfStudyID");
+
+                entity.Property(e => e.SessionStartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SpecializationId).HasColumnName("SpecializationID");
+
+                entity.Property(e => e.StudyYear).HasColumnType("numeric(2, 0)");
             });
 
             OnModelCreatingPartial(modelBuilder);
