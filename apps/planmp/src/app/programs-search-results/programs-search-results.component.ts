@@ -64,7 +64,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     private programCostService: ProgramCostService
   ) { }
   ngOnInit(): void {
-    this.loadCipProgramIds();
+    //this.loadCipProgramIds();
     this.loadProviders();
     this.loadProgramCosts();
     this.loadSpecializations();
@@ -119,11 +119,11 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadCipProgramIds() {
-    return this.programService.getProgramIdsByCategory().subscribe((result) => {
-      this.programByCategoryList = result;
-    });
-  }
+  // loadCipProgramIds() {
+  //   return this.programService.getProgramIdsByCategory().subscribe((result) => {
+  //     this.programByCategoryList = result;
+  //   });
+  // }
 
   getProvider(program: VwProgram): VwProvider {
     return this.providers.filter(
@@ -186,15 +186,15 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       selectedFilters.providerId.push(+providerId);
     }
     if (cipSubSeriesCode) {
-      if (!this.programByCategoryList) {
-        return this.programService.getProgramIdsByCategory().subscribe((result) => {
-          this.programByCategoryList = result;
-          const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+      if (!this.specializations) {
+        return this.specializationService.getSpecializations().subscribe((result) => {
+          this.specializations = result;
+          const programIds = this.specializations.filter(s => s.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
           selectedFilters.programId = programIds;
         });
       }
       else {
-        const programIds = this.programByCategoryList.filter(pc => pc.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
+        const programIds = this.specializations.filter(s => s.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
         selectedFilters.programId = programIds;
       }
     }
