@@ -45,7 +45,7 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwProvider> GetProviders([FromQuery] PagedDataParameters providerParameters)
     {
-      List<VwProvider> providers = _context.VwProviders.ToList();
+      List<VwProvider> providers = _context.VwProviders.ToList().OrderBy(p=>p.ProviderName).ToList();
 
       // Filtering
       var predicate = PredicateBuilder.New<VwProvider>();

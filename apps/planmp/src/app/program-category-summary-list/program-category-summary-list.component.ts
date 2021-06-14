@@ -1,24 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Select } from '@ngxs/store';
 import { VwPmpPsiprogramCountByCategory } from '@libs/common/models';
-import { ProgramService } from '@libs/common/services';
+import {  ProgramSelectors } from '@libs/common/store/program';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'aedigital-program-category-summary-list',
   templateUrl: './program-category-summary-list.component.html',
-  styleUrls: ['./program-category-summary-list.component.scss']
+  styleUrls: ['./program-category-summary-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgramCategorySummaryListComponent implements OnInit {
-  programCountByCategory: VwPmpPsiprogramCountByCategory[];
-
-  constructor(private programService: ProgramService) { }
-
-  ngOnInit(): void {
-    this.loadProgramCountByCategory();
-  }
-
-  loadProgramCountByCategory() {
-    this.programService.getProgramCountByCategory().subscribe((result)=>{
-      this.programCountByCategory = result;
-    });
-  }
+export class ProgramCategorySummaryListComponent {
+  @Select(ProgramSelectors.programCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
 }

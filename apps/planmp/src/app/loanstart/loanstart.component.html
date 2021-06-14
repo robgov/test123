@@ -3,21 +3,20 @@
       <div fxFlex="60%" 
       fxFlex="{{ FlexConstants.Column.Large_6 }}">  
 
-      <div alt="loanapplyimage"  *ngIf="this.loandata[0].loanapplyimage" fxHide.lt-md>
+      <div alt="loanapplyimage"  fxHide.lt-md>
         <!-- <img flex-shrink flex-grow [src]="AddBackgroundImage()" /> -->
-        <img fxFlex="75%"  src="http://localhost:1337{{ this.loandata[0].loanapplyimage.url }}" />
+        <img fxFlex="75%"  [src]="getLoanApplyUrl()" />
       </div>
-  
 
 
          </div>
       <div fxFlex style="color: white;">
-        <h1>{{ this.loandata[0].loanapplytitle }}</h1>
-        <p>{{ this.loandata[0].loanapplymessage }}</p>
+        <h1>{{ this.loandata[0].Loanapplytitle }}</h1>
+        <p>{{ this.loandata[0].Loanapplymessage }}</p>
         <button
         [attr.data-cy]="'loanstart.start_application_process'"
         
-        >{{ this.loandata[0].buttonstart }}</button>
+        >{{ this.loandata[0].Buttonstart }}</button>
       </div>
 
     </div>

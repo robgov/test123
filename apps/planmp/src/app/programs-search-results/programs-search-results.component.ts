@@ -15,20 +15,19 @@ import {
   VwSpecialization,
   VwProviderLogo,
   VwProgramCost,
-  ProgramCostsRequest,
   VwPmpPsiprogramByCategoryList,
-  VwProvider,
+  VwProvider
 } from '@libs/common/models';
 import {
   ProgramService,
-  AlbertaPSIProviderService,
-  SpecializationService,
-  ProviderLogoService,
-  ProgramCostService,
+  SpecializationService
 } from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';
-import { forkJoin, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Store, Select } from '@ngxs/store';
+import { ProgramSelectors } from '@libs/common/store/program';
+import { map } from 'rxjs/operators';
+import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -38,8 +37,12 @@ import { filter } from 'rxjs/operators';
 export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   FlexConstants = FlexConstants;
 
+  @Select(ProgramSelectors.programSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
+  @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
+  @Select(ProgramSelectors.getProgramSearchFilters) programSearchFilters$: Observable<any>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  obs: Observable<any>;
+  programs$: Observable<any>;
   dataSource: MatTableDataSource<VwProgram>;
 
   private providerId: number = null;
@@ -55,20 +58,13 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   sortOption: string;
 
   constructor(
+    private store: Store,
     private route: ActivatedRoute,
     private programService: ProgramService,
-    private apsiProviderService: AlbertaPSIProviderService,
     private changeDetectorRef: ChangeDetectorRef,
-    private specializationService: SpecializationService,
-    private providerLogoService: ProviderLogoService,
-    private programCostService: ProgramCostService
-  ) { }
+  ) {
+   }
   ngOnInit(): void {
-    //this.loadCipProgramIds();
-    this.loadProviders();
-    this.loadProgramCosts();
-    this.loadSpecializations();
-    this.loadProviderLogos();
     this.changeDetectorRef.detectChanges();
 
     this.route.queryParams.subscribe((params) => {
@@ -81,7 +77,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       if (params['keywords']) {
         this.keyword = params['keywords'];
       }
-      
+      this.applyFilter();
 
       this.loadPrograms(this.providerId, this.cipSubSeriesCode, this.keyword);
     });
@@ -93,115 +89,53 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadProviders() {
-    return this.apsiProviderService.getAlbertaPsiProviders().subscribe((result) => {
-      this.providers = result;
-    });
+  applyFilter(){
+    this.store    
   }
 
-  loadProviderLogos() {
-    this.providerLogoService.getProviderLogos().subscribe((result) => {
-      this.providerLogos = result;
-    });
+  getProvider(program: VwProgram): Observable<VwProvider> {
+    return this.store.select(ProgramSelectors.getProvider(program.providerId));
   }
 
-  loadProgramCosts() {
-    this.programCostService
-      .getProgramCosts(new ProgramCostsRequest())
-      .subscribe((result) => {
-        this.programCosts = result;
-      });
+  getProviderLogo(program: VwProgram): Observable<VwProviderLogo> {
+    return this.store.select(ProgramSelectors.getProviderLogo(program.providerId));
   }
 
-  loadSpecializations() {
-    this.specializationService.getSpecializations().subscribe((result) => {
-      this.specializations = result;
-    });
+  getSpecialization(program: VwProgram): Observable<VwSpecialization> {
+    return this.store.select(ProgramSelectors.getProgramSpecialization(program.programId));
   }
 
-  // loadCipProgramIds() {
-  //   return this.programService.getProgramIdsByCategory().subscribe((result) => {
-  //     this.programByCategoryList = result;
-  //   });
-  // }
-
-  getProvider(program: VwProgram): VwProvider {
-    return this.providers.filter(
-      (provider) => provider.providerId == program.providerId
-    )[0];
-  }
-
-  getSpecialization(program: VwProgram): VwSpecialization {
-    if (this.specializations) {
-      return this.specializations.filter(
-        (specialization) => specialization.programId == program.programId
-      )[0];
-    }
-    return new VwSpecialization();
-  }
-
-  getProgramCost(program: VwProgram): VwProgramCost {
-    if (!this.programCosts) {
-      return new VwProgramCost;
-    }
-    else {
-      return this.programCosts.filter(
-        (costs) => costs.programId == program.programId
-      )[0];
-    }
-  }
-
-  getProviderLogo(program: VwProgram): VwProviderLogo {
-    if (
-      this.providerLogos.filter((logo) => logo.providerId == program.providerId)
-    ) {
-      return this.providerLogos.filter(
-        (logo) => logo.providerId == program.providerId
-      )[0];
-    }
-    return null;
+  getProgramCost(program: VwProgram): Observable<VwProgramCost> {
+    return this.store.select(ProgramSelectors.getProgramCost(program.programId));
   }
 
   loadPrograms(providerId: number, cipSubSeriesCode, keyword: string) {
-    // return this.programService.getProgramIdsByCategory().subscribe((result) => {
-    //   this.programByCategoryList = result;
     this.programService
       .getPrograms(new ProgramsRequest())
       .subscribe((result) => {
         this.searchResults = result;
         this.dataSource = new MatTableDataSource<VwProgram>(this.searchResults);
         this.dataSource.paginator = this.paginator;
-        this.obs = this.dataSource.connect();
+        this.programs$ = this.dataSource.connect();
         this.dataSource.filterPredicate = programFilterPredicate;
         this.filterPrograms(providerId, cipSubSeriesCode,keyword);
       });
-    //});
   }
 
   filterPrograms(providerId: number, cipSubSeriesCode: string, keyword: string) {
     var selectedFilters = { providerId: [], programId: [], programName:""};
 
-    
     if (providerId > 0) {
       selectedFilters.providerId.push(+providerId);
     }
     if (cipSubSeriesCode) {
-      if (!this.specializations) {
-        return this.specializationService.getSpecializations().subscribe((result) => {
-          this.specializations = result;
-          const programIds = this.specializations.filter(s => s.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
-          selectedFilters.programId = programIds;
-        });
-      }
-      else {
-        const programIds = this.specializations.filter(s => s.cipSubSeriesCode == cipSubSeriesCode).map(pc => pc.programId)
-        selectedFilters.programId = programIds;
-      }
+        const categoryProgramIds = this.store.selectSnapshot(ProgramSelectors.getCategoryPrograms(this.cipSubSeriesCode));
+    
+        selectedFilters.programId = categoryProgramIds.map(specs=>specs.programId);
     }
     if (keyword) {
       selectedFilters.programName=keyword;
     }
-    //TODO: Keyword search
 
     this.dataSource.filter = JSON.stringify(selectedFilters);
   }

@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgxsModule, Store } from '@ngxs/store';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,6 +9,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AppAction } from '@libs/common/store/common/app.actions';
+import {pmpState} from '@libs/common/store/store-index';
 
 import {
   LocationAddressService,
@@ -116,6 +120,7 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxsModule.forRoot(pmpState),
   ],
   providers: [
     LocationAddressService,
@@ -132,6 +137,12 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     ProviderService,
     ProviderTypeService,
     ProviderWebsiteService,
+    {
+			provide: APP_INITIALIZER,
+			useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),
+			deps: [Store],
+			multi: true,
+		},
   ],
   bootstrap: [AppComponent],
 })

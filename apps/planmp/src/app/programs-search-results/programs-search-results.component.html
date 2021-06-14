@@ -2,10 +2,16 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
         <div fxFlex="100" fxLayout="column">
-            <div *ngFor="let p of obs | async">
-                <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p" [programProvider]="getProvider(p)" [programSpecialization]="getSpecialization(p)" [programCost]="getProgramCost(p)" [providerLogo]="getProviderLogo(p)"></aedigital-program-summary>
+            <div *ngFor="let p of programs$ | async">
+                <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p"
+                    [programProvider]="getProvider(p) | async" 
+                    [programSpecialization]="getSpecialization(p) | async"
+                    [programCost]="getProgramCost(p) | async" 
+                    [providerLogo]="getProviderLogo(p) | async">
+                </aedigital-program-summary>
             </div>
         </div>
     </div>
-    <mat-paginator [attr.data-cy]="'programs-search-results.paginator'" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [attr.data-cy]="'programs-search-results.paginator'" [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons></mat-paginator>
 </div>

@@ -1,32 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ProgramsRequest, VwAlbertaPsiprovider, VwProgram } from '@libs/common/models';
-import { AlbertaPSIProviderService, ProgramService } from '@libs/common/services';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ProgramActions, ProgramSelectors } from '@libs/common/store/program';
+import { VwProgram, VwProvider } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-school-summary-list',
   templateUrl: './school-summary-list.component.html',
-  styleUrls: ['./school-summary-list.component.scss']
+  styleUrls: ['./school-summary-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SchoolSummaryListComponent implements OnInit {
-  constructor(private apsiProviderService: AlbertaPSIProviderService, private programService: ProgramService) {}
+export class SchoolSummaryListComponent {
+  @Select(ProgramSelectors.programProviders) programProviders$: Observable<VwProvider[]>;
 
-  providers: VwAlbertaPsiprovider[];
-  programs: VwProgram[];
-
-  ngOnInit(): void {
-    this.loadProviders();
-    this.loadPrograms();
+  constructor(private store: Store) {
   }
 
-  loadPrograms() {
-    this.programService.getPrograms(new ProgramsRequest()).subscribe( (result)=> {
-      this.programs = result
-    });
-  }
-
-  loadProviders() {
-    this.apsiProviderService.getAlbertaPsiProviders().subscribe((result) => {
-      this.providers = result;
-    });
+  getProviderPrograms(provider: VwProvider): Observable<VwProgram[]> {
+    return this.store.select(
+      ProgramSelectors.getProviderPrograms(provider.providerId)
+    );
   }
 }
