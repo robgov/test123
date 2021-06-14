@@ -53,5 +53,14 @@ namespace ProviderApi.Controllers
     {
       return _context.VwSpecializations.FirstOrDefault(x => x.ProgramId.Equals(request.ProgramId));
     }
+
+    [HttpGet("GetSpecializationYearlyCosts")]
+    [SwaggerOperation("GetSpecializationYearlyCosts")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<VwPmpPsipspecializationYearlyCost> GetSpecializationYearlyCosts()
+    {
+      return _context.VwPmpPsipspecializationYearlyCosts.ToList();
+    }
   }
 }
