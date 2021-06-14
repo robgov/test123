@@ -21,8 +21,6 @@ export class ProgramSummaryComponent {
   currentCost = "XXXXX";
   currentSpecialization: string;
 
-  // TODO: These are quick and dirty, refactor.
-
   getProgramCost(): string {
     if (!this.programCost) return "";
     return (this.programCost.tuition + this.programCost.books + this.programCost.other).toString();

@@ -1,10 +1,10 @@
 <div fxLayout="column" fxFlex="100" >
-        <div alt="programapplyimage" *ngIf="this.programdata[0].applyimage" fxHide.lt-md>
-          <img fxFlex="100%" src="http://localhost:1337{{ this.programdata[0].applyimage.url }}" />
+        <div alt="programapplyimage" fxHide.lt-md>
+          <img fxFlex="100%" [src]="getImageUrl()" />
         </div>
 
-        <h1>{{ this.programdata[0].applytitle }}</h1>
-        <h2>{{ this.programdata[0].applymessage }}</h2>
+        <h1>{{ this.programdata[0].Applytitle }}</h1>
+        <h2>{{ this.programdata[0].Applymessage }}</h2>
 
         <ul>
           <li *ngFor="let c of credentials | slice :0:5">{{ c.programType}}</li>
@@ -13,6 +13,6 @@
 
         <button mat-raised-button color="primary"
         [attr.data-cy]="'programstart.start_application_process'"
-        >{{ this.programdata[0].buttonstart }}</button>
+        >{{ this.programdata[0].Buttonstart }}</button>
 
 </div>

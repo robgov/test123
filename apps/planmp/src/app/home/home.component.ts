@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
-import { MatMenuModule } from '@angular/material/menu';
 import { environment } from '../environment/environment';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { VwProgram } from '@libs/common/models';
+import { ProgramActions, ProgramSelectors } from '@libs/common/store/program';
 
 interface PageContent {
 
@@ -23,7 +26,8 @@ interface SearchOption {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  @Select(ProgramSelectors.programs) programs$: Observable<VwProgram[]>;
+  programs: VwProgram[];
   env = environment;
 
   selectedValue: string;
@@ -45,7 +49,8 @@ export class HomeComponent implements OnInit {
       Summary: "Strapi call failed",
     }];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store) {
+   }
 
   ngOnInit(): void {
     this.fetch();
@@ -55,7 +60,7 @@ export class HomeComponent implements OnInit {
   {
     if(this.providers[0].HeroImage)
     {
-      return this.providers[0].HeroImage[0].url;
+      return this.providers[0].HeroImage.url;
     }
     else  
     {

@@ -42,7 +42,7 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwSpecialization> GetSpecializations()
     {
-      return _context.VwSpecializations;
+      return _context.VwSpecializations.ToList();
     }
 
     [HttpGet("GetSpecializationByProgramId")]

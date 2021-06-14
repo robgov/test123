@@ -31,9 +31,17 @@ export class LoanstartComponent implements OnInit {
       return "'url('" + this.env.StrapiBaseUrl + this.loandata[0].loanapplyimage.url + "')'";
     }
 
+    getLoanApplyUrl(){
+
+      if (this.loandata) {
+        return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.loandata[0].Loanapplyimage.url;
+      }
+      return '';
+    }
+
   fetch() {
 
-    const url = "http://localhost:1337/ae-loanapplies";
+    const url = "http://aestrapi-dev.eastus.cloudapp.azure.com:1337/ae-loanapplies";
     this.http.get<any[]>(url).subscribe((t) => {
       (this.loandata = t)
     }

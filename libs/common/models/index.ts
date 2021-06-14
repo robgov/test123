@@ -9,6 +9,7 @@ export * from './programs-request';
 export * from './provider-logo-request';
 export * from './provider-program-request';
 export * from './specialization-request';
+export * from './version.model';
 export * from './vw-alberta-psiprovider';
 export * from './vw-location-address';
 export * from './vw-location-email';
