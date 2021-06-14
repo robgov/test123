@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { SpecializationRequest, VwSpecialization } from '@libs/common/models';
+import { SpecializationRequest, VwPmpPsipspecializationYearlyCost, VwSpecialization } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +26,9 @@ export class SpecializationService extends EndPointService {
     }
     public getSpecializationByProgramId(request: SpecializationRequest): Observable<VwSpecialization> { 
         return this.get(this.url + 'GetSpecializationByProgramId', request);
+    }
+    public getSpecializationYearlyCosts(): Observable<VwPmpPsipspecializationYearlyCost[]> { 
+        return this.get(this.url + 'GetSpecializationYearlyCosts');
     }
 
     private get url() {
