@@ -1,0 +1,52 @@
+<!-- <div *ngIf="!this.providers">
+  <div> spinner icon ... loading </div>
+</div> -->
+<div fxLayout="row" fxFlex="100" *ngIf="this.providers">
+  <div fxFlex="100">
+    <input
+      fxFlex
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+      matInput
+      type="text"
+      maxlength="256"
+      (keyup)="onSearchChange($event.target.value)"
+      [(ngModel)]="keywords"
+    />
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        <div>
+          <div fxFlex>
+            {{ option.value }}
+          </div>
+          <div fxFlex="100px">
+            <mat-chip>{{ option.type }}</mat-chip>
+          </div>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+
+    <div fxFlex="40px">
+      <button
+        style="background-color: #0070c4"
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="search"
+        [attr.data-cy]="'searchblock.view-program-search-results'"
+        [disabled]="searchdisabled"
+        [routerLink]="['program-search-results']"
+        [queryParams]="{ keywords: this.keywords }"
+        queryParamsHandling="merge"
+      >
+        <mat-icon color="primary" style="font-size: 24px; color: white"
+          >search</mat-icon
+        >
+      </button>
+    </div>
+  </div>
+</div>

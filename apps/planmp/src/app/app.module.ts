@@ -46,8 +46,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const MATERIAL_MODULES = [
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -86,6 +88,8 @@ import { ProgramsSearchResultsComponent } from './programs-search-results/progra
 import { ProgramSummaryComponent } from './program-summary/program-summary.component';
 import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
 import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
+import { TypetextComponent } from './typetext/typetext.component';
+import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +113,8 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     ProgramSummaryComponent,
     ProgramCategorySummaryComponent,
     ProgramCategorySummaryListComponent,
+    TypetextComponent,
+    TypetextdetailComponent,
   ],
   imports: [
     BrowserModule,
