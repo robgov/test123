@@ -11,5 +11,5 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgramCategorySummaryListComponent {
-  @Select(ProgramSelectors.programCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
+  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
 }

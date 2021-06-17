@@ -12,7 +12,7 @@
                 <div [attr.data-cy]="'program-summary.programLength'" fxFlex="{{FlexConstants.Column.Large_2}}">
                     {{program.programLength}}</div>
                 <div [attr.data-cy]="'program-summary.programCredentialId'" fxFlex="{{FlexConstants.Column.Large_2}}">
-                    {{program.programCredentialId}}</div>
+                    {{getProgramType()}}</div>
                 <div [attr.data-cy]="'program-summary.programCost'" fxFlex="{{FlexConstants.Column.Large_2}}">$
                     {{getProgramCost()}}/year
                 </div>

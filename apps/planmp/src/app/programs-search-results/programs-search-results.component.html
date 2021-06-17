@@ -4,7 +4,7 @@
         <div fxFlex="100" fxLayout="column">
             <aedigital-program-search-results-filter 
                 [programCountsByCategory]="programCountsByCategory$ | async"
-                [providers]="programProviders$ | async" 
+                [providers]="providers$ | async" 
                 [credentials]="programCredentials$ | async"
                 [programTypes]="programTypes$ | async"
             >
@@ -12,7 +12,8 @@
             <div *ngFor="let p of filteredPrograms$ | async">
                 <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p"
                     [programProvider]="getProvider(p) | async" [programSpecialization]="getSpecialization(p) | async"
-                    [programCost]="getProgramCost(p) | async" [providerLogo]="getProviderLogo(p) | async">
+                    [programCost]="getProgramCost(p) | async" [providerLogo]="getProviderLogo(p) | async"
+                    [programType]="getProgramType(p) | async">
                 </aedigital-program-summary>
             </div>
         </div>

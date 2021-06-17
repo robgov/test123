@@ -1,7 +1,8 @@
-import { Action, NgxsOnInit, State, StateContext, Store } from '@ngxs/store';
-import { map, tap } from 'rxjs/operators';
+import { Action, State, StateContext, Store } from '@ngxs/store';
+import { tap } from 'rxjs/operators';
 
 import { ProgramStateModel } from './program-state.model';
+
 import { ProgramActions } from './program.actions';
 import {
   ProgramService,
@@ -15,8 +16,6 @@ import {
 import {
   VwProgram,
   ProgramsRequest,
-  VwAlbertaPsiprovider,
-  VwProviderLogo,
   VwSpecialization,
   VwProgramCost,
   ProgramCostsRequest,
@@ -26,7 +25,6 @@ import {
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
-import { ProgramSelectors } from './program.selectors';
 
 const initialState = new ProgramStateModel();
 
@@ -37,10 +35,7 @@ const initialState = new ProgramStateModel();
 @Injectable()
 export class ProgramState {
   constructor(
-    private store: Store,
     private programService: ProgramService,
-    private albertaPSIProviderService: AlbertaPSIProviderService,
-    private providerLogoService: ProviderLogoService,
     private specializationService: SpecializationService,
     private programCostService: ProgramCostService,
     private programCredentialService: ProgramCredentialService,
@@ -54,8 +49,6 @@ export class ProgramState {
       new ProgramActions.GetProgramCategoryCounts(),
       new ProgramActions.GetProgramCosts(),
       new ProgramActions.GetProgramCredentials(),
-      new ProgramActions.GetProgramProviders(),
-      new ProgramActions.GetProgramProviderLogos(),
       new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramTypes()
@@ -71,34 +64,6 @@ export class ProgramState {
       tap((data: VwProgram[]) => {
         ctx.patchState({
           programs: data,
-        });
-      })
-    );
-  }
-
-  @Action(ProgramActions.GetProgramProviders)
-  onGetProgramProviders(
-    ctx: StateContext<ProgramStateModel>,
-    action: ProgramActions.GetProgramProviders
-  ) {
-    return this.albertaPSIProviderService.getAlbertaPsiProviders().pipe(
-      tap((data: VwAlbertaPsiprovider[]) => {
-        ctx.patchState({
-          programProviders: data,
-        });
-      })
-    );
-  }
-
-  @Action(ProgramActions.GetProgramProviderLogos)
-  onGetProgramProviderLogos(
-    ctx: StateContext<ProgramStateModel>,
-    action: ProgramActions.GetProgramProviderLogos
-  ) {
-    return this.providerLogoService.getProviderLogos().pipe(
-      tap((data: VwProviderLogo[]) => {
-        ctx.patchState({
-          providerLogos: data,
         });
       })
     );

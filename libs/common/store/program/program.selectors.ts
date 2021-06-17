@@ -7,8 +7,6 @@ import {
   VwProgramCost,
   VwProgramCredential,
   VwProgramType,
-  VwProvider,
-  VwProviderLogo,
   VwSpecialization,
 } from '@libs/common/models';
 
@@ -30,6 +28,12 @@ export class ProgramSelectors {
     );
   }
 
+  static getProgramType(id: number) {
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programTypes.find((q) => q.programTypeId === id)
+    );
+  }
+
   static getProgramCategoryCount(cipSubSeriesCode: string) {
     return createSelector([ProgramState], (state: ProgramStateModel) =>
       state.programCategoryCounts.find(
@@ -47,38 +51,25 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static programSpecializations(state: ProgramStateModel): VwSpecialization[] {
+  static getProgramSpecializations(state: ProgramStateModel): VwSpecialization[] {
     return state.programSpecializations;
   }
 
   @Selector([ProgramState])
-  static programCosts(state: ProgramStateModel): VwProgramCost[] {
+  static getProgramCosts(state: ProgramStateModel): VwProgramCost[] {
     return state.programCosts;
   }
 
   @Selector([ProgramState])
-  static programTypes(state: ProgramStateModel): VwProgramType[] {
+  static getProgramTypes(state: ProgramStateModel): VwProgramType[] {
     return state.programTypes;
   }
 
   @Selector([ProgramState])
-  static programCategoryCounts(
+  static getProgramCategoryCounts(
     state: ProgramStateModel
   ): VwPmpPsiprogramCountByCategory[] {
     return state.programCategoryCounts;
-  }
-
-  // Provider Selectors
-  static getProvider(id: number) {
-    return createSelector([ProgramState], (state: ProgramStateModel) =>
-      state.programProviders.find((q) => q.providerId === id)
-    );
-  }
-
-  static getProviderLogo(id: number) {
-    return createSelector([ProgramState], (state: ProgramStateModel) =>
-      state.providerLogos.find((q) => q.providerId === id)
-    );
   }
 
   static getProviderPrograms(id: number) {
@@ -88,23 +79,13 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static programProviders(state: ProgramStateModel): VwProvider[] {
-    return state.programProviders;
-  }
-
-  @Selector([ProgramState])
-  static programCredentials(state: ProgramStateModel): VwProgramCredential[] {
+  static getProgramCredentials(state: ProgramStateModel): VwProgramCredential[] {
     return state.programCredentials;
-  }
-
-  @Selector([ProgramState])
-  static programProviderLogos(state: ProgramStateModel): VwProviderLogo[] {
-    return state.providerLogos;
   }
 
   // Program Filtering
   @Selector([ProgramState])
-  static filteredPrograms(state: ProgramStateModel): VwProgram[] {
+  static getFilteredPrograms(state: ProgramStateModel): VwProgram[] {
     var results = state.programs;
 
     //Apply provider filtering
@@ -121,11 +102,11 @@ export class ProgramSelectors {
     }
 
     //Apply distance filtering
-    if (state.programSearchFilter_PostalCode) {
-      //Quick and dirty, if the postal code has the same first 3 characters, it's "close"
-      var providerIds = state.providerLocations.filter(pl=>pl.postalZipCode.startsWith(state.programSearchFilter_PostalCode.slice(0,3))).map(pl=>pl.providerId)
-      results = results.filter((f)=> providerIds.includes(f.providerId));
-    }
+    // if (state.programSearchFilter_PostalCode) {
+    //   //Quick and dirty, if the postal code has the same first 3 characters, it's "close"
+    //   var providerIds = state.getroviderLocations.filter(pl=>pl.postalZipCode.startsWith(state.programSearchFilter_PostalCode.slice(0,3))).map(pl=>pl.providerId)
+    //   results = results.filter((f)=> providerIds.includes(f.providerId));
+    // }
 
     //Apply Credential filtering
     if (state.programSearchFilter_CredentialIds && state.programSearchFilter_CredentialIds.length > 0 ) {

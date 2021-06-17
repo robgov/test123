@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ProgramActions, ProgramSelectors } from '@libs/common/store/program';
+import { ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 import { VwProgram, VwProvider } from '@libs/common/models';
 
 @Component({
@@ -11,7 +11,7 @@ import { VwProgram, VwProvider } from '@libs/common/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolSummaryListComponent {
-  @Select(ProgramSelectors.programProviders) programProviders$: Observable<VwProvider[]>;
+  @Select(ProviderSelectors.getProviders) programProviders$: Observable<VwProvider[]>;
 
   constructor(private store: Store) {
   }

@@ -20,13 +20,10 @@ import {
   VwProgramCredential,
   VwProgramType
 } from '@libs/common/models';
-import {
-  ProgramService,
-} from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
-import { ProgramSelectors } from '@libs/common/store/program';
+import { ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -36,13 +33,14 @@ import { ProgramSelectors } from '@libs/common/store/program';
 export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   FlexConstants = FlexConstants;
 
-  @Select(ProgramSelectors.programSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
+  @Select(ProgramSelectors.getProgramSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
   @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
-  @Select(ProgramSelectors.programProviders) programProviders$: Observable<VwAlbertaPsiprovider[]>
-  @Select(ProgramSelectors.programCredentials) programCredentials$: Observable<VwProgramCredential[]>
-  @Select(ProgramSelectors.filteredPrograms) filteredPrograms$: Observable<VwProgram[]>
-  @Select(ProgramSelectors.programCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
-  @Select(ProgramSelectors.programTypes) programTypes$ : Observable<VwProgramType[]>;
+  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>
+  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<VwProgram[]>
+  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
+  @Select(ProgramSelectors.getProgramTypes) programTypes$ : Observable<VwProgramType[]>;
+
+  @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;
@@ -63,7 +61,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private programService: ProgramService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
    }
@@ -80,8 +77,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       if (params['keywords']) {
         this.keyword = params['keywords'];
       }
-
-      //this.loadPrograms(this.providerId, this.cipSubSeriesCode, this.keyword);
     });
   }
 
@@ -92,11 +87,11 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   }
 
   getProvider(program: VwProgram): Observable<VwProvider> {
-    return this.store.select(ProgramSelectors.getProvider(program.providerId));
+    return this.store.select(ProviderSelectors.getProvider(program.providerId));
   }
 
   getProviderLogo(program: VwProgram): Observable<VwProviderLogo> {
-    return this.store.select(ProgramSelectors.getProviderLogo(program.providerId));
+    return this.store.select(ProviderSelectors.getProviderLogo(program.providerId));
   }
 
   getSpecialization(program: VwProgram): Observable<VwSpecialization> {
@@ -105,5 +100,9 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   getProgramCost(program: VwProgram): Observable<VwProgramCost> {
     return this.store.select(ProgramSelectors.getProgramCost(program.programId));
+  }
+
+  getProgramType(program: VwProgram): Observable<VwProgramType> {
+    return this.store.select(ProgramSelectors.getProgramType(program.programTypeId));
   }
 }
