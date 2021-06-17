@@ -36,7 +36,7 @@ export namespace ProgramActions {
 
     export class SetProgramSearchProviderFilter{
         static readonly type = '[Aed Providers] Filter Program Search By Providers';
-        constructor(public providerId:number){}
+        constructor(public providerIds:number[]){}
     }
 
     export class SetProgramSearchCategoryFilter{
@@ -46,6 +46,6 @@ export namespace ProgramActions {
 
     export class SetProgramSearchCredentialFilter{
         static readonly type = '[Aed Providers] Filter Program Search By Credential';
-        constructor(public credentialId: number){}
+        constructor(public credentialIds: number[]){}
     }
 }

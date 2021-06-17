@@ -14,9 +14,9 @@ export class ProgramSearchResultsFilterComponent implements OnInit {
   @Input() programCountsByCategory: VwPmpPsiprogramCountByCategory[];
   @Input() credentials: VwProgramCredential[];
 
-  selectedProviderId: string="0";
+  selectedProviderId: string[]=[""];
   selectedCipsCode: string="";
-  selectedCredentialId: string="0";
+  selectedCredentialId: string[]=[""];
 
   @Output() CriteriaChanged = new EventEmitter<number>();
   constructor(private store: Store) { }
@@ -24,15 +24,15 @@ export class ProgramSearchResultsFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  providerSelected(providerId: number){
-    this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providerId));
+  providerSelected(providerIds: any[]){
+    this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providerIds));
   }
 
   categorySelected(categoryCode: string){
     this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(categoryCode));
   }
 
-  credentialSelected(credentialId: number){
-    this.store.dispatch(new ProgramActions.SetProgramSearchCredentialFilter(credentialId));
+  credentialSelected(credentialIds: number[]){
+    this.store.dispatch(new ProgramActions.SetProgramSearchCredentialFilter(credentialIds));
   }
 }

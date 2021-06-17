@@ -165,7 +165,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchProviderFilter
   ) {
     ctx.patchState({
-      programSearchFilter_ProviderIds: action.providerId,
+      programSearchFilter_ProviderIds: action.providerIds,
     });
   }
 
@@ -187,7 +187,7 @@ export class ProgramState {
   ) {
 
     ctx.patchState({
-      programSearchFilter_CredentialIds: action.credentialId
+      programSearchFilter_CredentialIds: action.credentialIds
     });
   }
 }

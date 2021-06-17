@@ -11,10 +11,10 @@ export class ProgramStateModel {
 	providerLocations: VwProviderAddress[];
 	providerLogos: VwProviderLogo[];
 
-	programSearchFilter_ProviderIds: number;
+	programSearchFilter_ProviderIds: number[];
 	programSearchFilter_CipSubSeriesCode: string;
 	programSearchFilter_CategoryProgramIds: number[];
 	programSearchFilter_PostalCode:string;
-	programSearchFilter_CredentialIds: number;	
+	programSearchFilter_CredentialIds: number[];	
 }
 

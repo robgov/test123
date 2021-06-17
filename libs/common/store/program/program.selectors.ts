@@ -102,9 +102,9 @@ export class ProgramSelectors {
     var results = state.programs;
 
     //Apply provider filtering
-    if (state.programSearchFilter_ProviderIds > 0) {
+    if (state.programSearchFilter_ProviderIds && state.programSearchFilter_ProviderIds.length > 0) {
       results = results.filter(
-        (f) => f.providerId === state.programSearchFilter_ProviderIds
+        (f) => state.programSearchFilter_ProviderIds.includes(f.providerId)
       );
     }
 
@@ -122,8 +122,8 @@ export class ProgramSelectors {
     }
 
     //Apply Credential filtering
-    if (state.programSearchFilter_CredentialIds > 0 ) {
-      results = results.filter(f=> f.programCredentialId == state.programSearchFilter_CredentialIds);
+    if (state.programSearchFilter_CredentialIds && state.programSearchFilter_CredentialIds.length > 0 ) {
+      results = results.filter(f=> state.programSearchFilter_CredentialIds.includes(f.programCredentialId));
     }
 
     if (results.length > 20) {
