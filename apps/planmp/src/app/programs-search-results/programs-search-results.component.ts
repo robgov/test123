@@ -17,7 +17,8 @@ import {
   VwPmpPsiprogramByCategoryList,
   VwProvider,
   VwPmpPsiprogramCountByCategory,
-  VwProgramCredential
+  VwProgramCredential,
+  VwProgramType
 } from '@libs/common/models';
 import {
   ProgramService,
@@ -41,6 +42,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(ProgramSelectors.programCredentials) programCredentials$: Observable<VwProgramCredential[]>
   @Select(ProgramSelectors.filteredPrograms) filteredPrograms$: Observable<VwProgram[]>
   @Select(ProgramSelectors.programCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
+  @Select(ProgramSelectors.programTypes) programTypes$ : Observable<VwProgramType[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;
@@ -88,11 +90,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       this.dataSource.disconnect();
     }
   }
-
-  onCriteriaChanged(providerId: number) {
-    //this.filterPrograms(providerId, this.cipSubSeriesCode,this.keyword);
-  }
-
 
   getProvider(program: VwProgram): Observable<VwProvider> {
     return this.store.select(ProgramSelectors.getProvider(program.providerId));

@@ -1,9 +1,10 @@
-import { VwPmpPsiprogramCountByCategory, VwProgram, VwProgramCost, VwProviderAddress,VwAlbertaPsiprovider, VwProviderLogo, VwSpecialization, VwProgramCredential } from '@libs/common/models';
+import { VwPmpPsiprogramCountByCategory, VwProgram, VwProgramCost, VwProviderAddress,VwAlbertaPsiprovider, VwProviderLogo, VwSpecialization, VwProgramCredential, VwProgramType } from '@libs/common/models';
 
 export class ProgramStateModel {
     programs: VwProgram[];
 	programSpecializations: VwSpecialization[];
 	programCosts: VwProgramCost[];
+	programTypes: VwProgramType[];
 	programCredentials: VwProgramCredential[];
 	programCategoryCounts: VwPmpPsiprogramCountByCategory[];
 
@@ -16,5 +17,6 @@ export class ProgramStateModel {
 	programSearchFilter_CategoryProgramIds: number[];
 	programSearchFilter_PostalCode:string;
 	programSearchFilter_CredentialIds: number[];	
+	programSearchFilter_ProgramTypeIds: number[];
 }
 

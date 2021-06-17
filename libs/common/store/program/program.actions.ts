@@ -11,6 +11,10 @@ export namespace ProgramActions {
         static readonly type = '[Aed Providers] Get Program Costs';
     }
 
+    export class GetProgramTypes{
+        static readonly type = '[Aed Providers] Get Program Types';
+    }
+
     export class GetProgramCategoryCounts { 
         static readonly type = '[Aed Providers] Get Program Category Counts';
     }
@@ -47,5 +51,10 @@ export namespace ProgramActions {
     export class SetProgramSearchCredentialFilter{
         static readonly type = '[Aed Providers] Filter Program Search By Credential';
         constructor(public credentialIds: number[]){}
+    }
+
+    export class SetProgramSearchProgramTypeFilter{
+        static readonly type = '[Aed Providers] Filter Program Search By Program Type';
+        constructor(public programTypeIds: number[]){}
     }
 }

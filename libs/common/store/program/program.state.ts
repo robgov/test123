@@ -10,6 +10,7 @@ import {
   ProgramCostService,
   AlbertaPSIProviderService,
   ProgramCredentialService,
+  ProgramTypeService,
 } from '@libs/common/services';
 import {
   VwProgram,
@@ -21,6 +22,7 @@ import {
   ProgramCostsRequest,
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
+  VwProgramType,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -41,7 +43,8 @@ export class ProgramState {
     private providerLogoService: ProviderLogoService,
     private specializationService: SpecializationService,
     private programCostService: ProgramCostService,
-    private programCredentialService: ProgramCredentialService
+    private programCredentialService: ProgramCredentialService,
+    private programTypeService: ProgramTypeService
   ) {}
 
   @Action(AppAction.Start)
@@ -55,6 +58,7 @@ export class ProgramState {
       new ProgramActions.GetProgramProviderLogos(),
       new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramSpecializations(),
+      new ProgramActions.GetProgramTypes()
     ]);
   }
 
@@ -130,6 +134,22 @@ export class ProgramState {
       );
   }
 
+  @Action(ProgramActions.GetProgramTypes)
+  onGetProgramTypes(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetProgramTypes
+  ){
+    return this.programTypeService
+    .getProgramTypes()
+    .pipe(
+      tap((data: VwProgramType[]) => {
+        ctx.patchState({
+          programTypes: data,
+        });
+      })
+    );
+  }
+
   @Action(ProgramActions.GetProgramCategoryCounts)
   onGetProgramCategoryCounts(
     ctx: StateContext<ProgramStateModel>,
@@ -188,6 +208,16 @@ export class ProgramState {
 
     ctx.patchState({
       programSearchFilter_CredentialIds: action.credentialIds
+    });
+  }
+
+  @Action(ProgramActions.SetProgramSearchProgramTypeFilter)
+  onSetProgramSearchProgramTypeFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchProgramTypeFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_ProgramTypeIds: action.programTypeIds
     });
   }
 }

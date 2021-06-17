@@ -6,6 +6,7 @@ import {
   VwProgram,
   VwProgramCost,
   VwProgramCredential,
+  VwProgramType,
   VwProvider,
   VwProviderLogo,
   VwSpecialization,
@@ -53,6 +54,11 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static programCosts(state: ProgramStateModel): VwProgramCost[] {
     return state.programCosts;
+  }
+
+  @Selector([ProgramState])
+  static programTypes(state: ProgramStateModel): VwProgramType[] {
+    return state.programTypes;
   }
 
   @Selector([ProgramState])
@@ -124,6 +130,11 @@ export class ProgramSelectors {
     //Apply Credential filtering
     if (state.programSearchFilter_CredentialIds && state.programSearchFilter_CredentialIds.length > 0 ) {
       results = results.filter(f=> state.programSearchFilter_CredentialIds.includes(f.programCredentialId));
+    }
+
+    //Apply Program Type filtering
+    if (state.programSearchFilter_ProgramTypeIds && state.programSearchFilter_ProgramTypeIds.length > 0 ) {
+      results = results.filter(f=> state.programSearchFilter_ProgramTypeIds.includes(f.programTypeId));
     }
 
     if (results.length > 20) {

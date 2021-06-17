@@ -27,9 +27,6 @@ namespace ProviderApi.Controllers
       _context = context;
     }
 
-
-
-
     [HttpGet("")]
     [SwaggerOperation("GetProgramTypes")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
@@ -38,6 +35,5 @@ namespace ProviderApi.Controllers
     {
       return _context.VwProgramTypes.ToList();
     }
-
   }
 }

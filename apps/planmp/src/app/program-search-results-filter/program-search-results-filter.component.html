@@ -24,4 +24,12 @@
                 {{c.programCredential}}</mat-option>
         </mat-select>
     </div>
+    <div fxFlex="25" fxLayout="column">
+        <mat-label style="font-size: small;">Type</mat-label>
+        <mat-select  multiple="true" fxFlex="25" style="font-size: small;" (selectionChange)="programTypeSelected($event.value)"
+            [(value)]="selectedCredentialId" placeholder="All Types">
+            <mat-option [value]="c.programTypeId" *ngFor="let c of programTypes" style="font-size: small;">
+                {{c.programType}}</mat-option>
+        </mat-select>
+    </div>
 </mat-toolbar>

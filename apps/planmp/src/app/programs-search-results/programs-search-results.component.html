@@ -6,7 +6,8 @@
                 [programCountsByCategory]="programCountsByCategory$ | async"
                 [providers]="programProviders$ | async" 
                 [credentials]="programCredentials$ | async"
-                (CriteriaChanged)="onCriteriaChanged($event.value)">
+                [programTypes]="programTypes$ | async"
+            >
             </aedigital-program-search-results-filter>
             <div *ngFor="let p of filteredPrograms$ | async">
                 <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p"
