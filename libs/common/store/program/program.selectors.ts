@@ -114,7 +114,7 @@ export class ProgramSelectors {
       );
     }
 
-    //Apply CipSubCode filering
+    //Apply CipSubCode filtering
     if (state.programSearchFilter_CipSubSeriesCode){
       var programIds = state.programSpecializations.filter(pc=>pc.cipSubSeriesCode===state.programSearchFilter_CipSubSeriesCode).map(pc=>pc.programId);
       results = results.filter((f) => programIds.includes(f.programId));

@@ -33,7 +33,6 @@ export namespace ProgramActions {
     }
 
     // Program Search / Filters
-
     export class GetFilteredPrograms {
         static readonly type = '[Aed Providers] Get Filtered Programs';
     }
