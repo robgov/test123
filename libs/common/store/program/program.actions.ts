@@ -23,4 +23,29 @@ export namespace ProgramActions {
     export class GetProgramProviderLogos { 
         static readonly type = '[Aed Providers] Get Program Provider Logos';
     }
+
+    export class GetProgramCredentials { 
+        static readonly type = '[Aed Providers] Get Program Credentials';
+    }
+
+    // Program Search / Filters
+
+    export class GetFilteredPrograms {
+        static readonly type = '[Aed Providers] Get Filtered Programs';
+    }
+
+    export class SetProgramSearchProviderFilter{
+        static readonly type = '[Aed Providers] Filter Program Search By Providers';
+        constructor(public providerId:number){}
+    }
+
+    export class SetProgramSearchCategoryFilter{
+        static readonly type = '[Aed Providers] Filter Program Search By Categories';
+        constructor(public categoryCode: string){}
+    }
+
+    export class SetProgramSearchCredentialFilter{
+        static readonly type = '[Aed Providers] Filter Program Search By Credential';
+        constructor(public credentialId: number){}
+    }
 }

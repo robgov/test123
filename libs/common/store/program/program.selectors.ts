@@ -1,7 +1,15 @@
 import { createSelector, Selector } from '@ngxs/store';
 import { ProgramState } from './program.state';
 import { ProgramStateModel } from './program-state.model';
-import { VwPmpPsiprogramCountByCategory, VwProgram, VwProgramCost, VwProvider, VwProviderLogo, VwSpecialization } from '@libs/common/models';
+import {
+  VwPmpPsiprogramCountByCategory,
+  VwProgram,
+  VwProgramCost,
+  VwProgramCredential,
+  VwProvider,
+  VwProviderLogo,
+  VwSpecialization,
+} from '@libs/common/models';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
@@ -10,23 +18,31 @@ export class ProgramSelectors {
   }
 
   static getProgramSpecialization(id: number) {
-    return createSelector([ProgramState], (state: ProgramStateModel) =>  state.programSpecializations.find(q => q.programId === id));
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programSpecializations.find((q) => q.programId === id)
+    );
   }
 
   static getProgramCost(id: number) {
-    return createSelector([ProgramState], (state: ProgramStateModel) =>  state.programCosts.find(q => q.programId === id));
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programCosts.find((q) => q.programId === id)
+    );
   }
 
   static getProgramCategoryCount(cipSubSeriesCode: string) {
-    return createSelector([ProgramState], (state:ProgramStateModel) => state.programCategoryCounts.find(q=>q.cipSubSeriesCode === cipSubSeriesCode));
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programCategoryCounts.find(
+        (q) => q.cipSubSeriesCode === cipSubSeriesCode
+      )
+    );
   }
 
   static getCategoryPrograms(cipSubSeriesCode: string) {
-    return createSelector([ProgramState], (state: ProgramStateModel) => state.programSpecializations.filter(q=>q.cipSubSeriesCode === cipSubSeriesCode));
-  }
-
-  static getProgramSearchFilters(){
-    return createSelector([ProgramState], (state:ProgramStateModel) => state.programSearchFilters);
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programSpecializations.filter(
+        (q) => q.cipSubSeriesCode === cipSubSeriesCode
+      )
+    );
   }
 
   @Selector([ProgramState])
@@ -40,21 +56,29 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static programCategoryCounts(state: ProgramStateModel): VwPmpPsiprogramCountByCategory[] {
+  static programCategoryCounts(
+    state: ProgramStateModel
+  ): VwPmpPsiprogramCountByCategory[] {
     return state.programCategoryCounts;
   }
 
   // Provider Selectors
   static getProvider(id: number) {
-    return createSelector([ProgramState], (state: ProgramStateModel) =>  state.programProviders.find(q => q.providerId === id));
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programProviders.find((q) => q.providerId === id)
+    );
   }
 
-  static getProviderLogo(id: number){
-    return createSelector([ProgramState], (state: ProgramStateModel) =>  state.providerLogos.find(q => q.providerId === id));
+  static getProviderLogo(id: number) {
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.providerLogos.find((q) => q.providerId === id)
+    );
   }
 
   static getProviderPrograms(id: number) {
-    return createSelector([ProgramState], (state: ProgramStateModel)=> state.programs.filter(q=>q.providerId===id));
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programs.filter((q) => q.providerId === id)
+    );
   }
 
   @Selector([ProgramState])
@@ -63,9 +87,49 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
+  static programCredentials(state: ProgramStateModel): VwProgramCredential[] {
+    return state.programCredentials;
+  }
+
+  @Selector([ProgramState])
   static programProviderLogos(state: ProgramStateModel): VwProviderLogo[] {
     return state.providerLogos;
   }
 
-  
+  // Program Filtering
+  @Selector([ProgramState])
+  static filteredPrograms(state: ProgramStateModel): VwProgram[] {
+    var results = state.programs;
+
+    //Apply provider filtering
+    if (state.programSearchFilter_ProviderIds > 0) {
+      results = results.filter(
+        (f) => f.providerId === state.programSearchFilter_ProviderIds
+      );
+    }
+
+    //Apply CipSubCode filering
+    if (state.programSearchFilter_CipSubSeriesCode){
+      var programIds = state.programSpecializations.filter(pc=>pc.cipSubSeriesCode===state.programSearchFilter_CipSubSeriesCode).map(pc=>pc.programId);
+      results = results.filter((f) => programIds.includes(f.programId));
+    }
+
+    //Apply distance filtering
+    if (state.programSearchFilter_PostalCode) {
+      //Quick and dirty, if the postal code has the same first 3 characters, it's "close"
+      var providerIds = state.providerLocations.filter(pl=>pl.postalZipCode.startsWith(state.programSearchFilter_PostalCode.slice(0,3))).map(pl=>pl.providerId)
+      results = results.filter((f)=> providerIds.includes(f.providerId));
+    }
+
+    //Apply Credential filtering
+    if (state.programSearchFilter_CredentialIds > 0 ) {
+      results = results.filter(f=> f.programCredentialId == state.programSearchFilter_CredentialIds);
+    }
+
+    if (results.length > 20) {
+      results = results.slice(0,20);
+    }
+
+    return results;
+  }
 }

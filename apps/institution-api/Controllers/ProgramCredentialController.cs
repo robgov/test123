@@ -1,43 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models;
-using ProviderApi.Models.ModelParameters;
-using LinqKit;
-using ProviderApi.Controllers.Enrichers;
 
 namespace ProviderApi.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class ProgramTypeController : ControllerBase
+  public class ProgramCredentialController : ControllerBase
   {
-    private readonly ILogger<ProgramTypeController> _logger;
+    private readonly ILogger<ProgramCredentialController> _logger;
 
     private AEDigital_SYSTContext _context;
 
-    public ProgramTypeController(ILogger<ProgramTypeController> logger, AEDigital_SYSTContext context)
+    public ProgramCredentialController(ILogger<ProgramCredentialController> logger, AEDigital_SYSTContext context)
     {
       _logger = logger;
       _context = context;
     }
 
-
-
-
-    [HttpGet("")]
-    [SwaggerOperation("GetProgramTypes")]
+    [HttpGet("GetProgramCredentials")]
+    [SwaggerOperation("GetProgramCredentials")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProgramType> GetProgramTypes()
+    public IEnumerable<VwProgramCredential> GetProgramCredentials()
     {
-      return _context.VwProgramTypes.ToList();
+      return _context.VwProgramCredentials.ToList();
     }
-
   }
 }

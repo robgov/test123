@@ -5,4 +5,9 @@
     <Configurations>Debug;Release;typewriter</Configurations>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\..\libs\common\services\program-credential.service.ts" Link="program-credential.service.ts" />
+    <None Include="..\..\..\libs\common\services\program-type.service.ts" Link="program-type.service.ts" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
 import {ProgramTypeService} from '@libs/common/services';
-import { PagedDataParameters, VwProgramType } from '@libs/common/models';
+import { PagedDataParameters, VwProgramCredential, VwProgramType } from '@libs/common/models';
 
 @Component({
   selector: 'ae-programstart',
@@ -43,7 +43,7 @@ ngOnInit(): void {
   }
 
   fetchCredentials() {
-    this.ptservice.getCredentials().subscribe((t)=>{
+    this.ptservice.getProgramTypes().subscribe((t)=>{
       this.credentials = t;
     })
   }

@@ -46,6 +46,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -62,7 +63,8 @@ const MATERIAL_MODULES = [
   MatSelectModule,
   MatSidenavModule,
   MatTabsModule,
-  MatTableModule
+  MatTableModule,
+  MatToolbarModule
 ];
 
 // Components
@@ -86,6 +88,7 @@ import { ProgramsSearchResultsComponent } from './programs-search-results/progra
 import { ProgramSummaryComponent } from './program-summary/program-summary.component';
 import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
 import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
+import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +112,7 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     ProgramSummaryComponent,
     ProgramCategorySummaryComponent,
     ProgramCategorySummaryListComponent,
+    ProgramSearchResultsFilterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<mat-toolbar fxFlex>
+    <div fxFlex="25" fxLayout="column">
+        <mat-label fxFlex="100" style="font-size: small;">School</mat-label>
+        <mat-select fxFlex="100" style="font-size: small;" (selectionChange)="providerSelected($event.value)"
+            [(value)]="selectedProviderId">
+            <mat-option value="0">--All--</mat-option>
+            <mat-option [value]="p.providerId" *ngFor="let p of providers" style="font-size: small;">{{p.providerName}}
+            </mat-option>
+        </mat-select>
+    </div>
+    <div fxFlex="25" fxLayout="column">
+        <mat-label style="font-size: small;">Category</mat-label>
+        <mat-select fxFlex="25" style="font-size: small;" (selectionChange)="categorySelected($event.value)"
+            [(value)]="selectedCipsCode">
+            <mat-option value="">--All--</mat-option>
+            <mat-option [value]="pc.cipSubSeriesCode" *ngFor="let pc of programCountsByCategory"
+                style="font-size: small;">{{pc.cipSubSeries}}</mat-option>
+        </mat-select>
+    </div>
+    <div fxFlex="25" fxLayout="column">
+        <mat-label style="font-size: small;">Credential</mat-label>
+        <mat-select fxFlex="25" style="font-size: small;" (selectionChange)="credentialSelected($event.value)"
+            [(value)]="selectedCredentialId">
+            <mat-option value="0">--All--</mat-option>
+            <mat-option [value]="c.programCredentialId" *ngFor="let c of credentials" style="font-size: small;">
+                {{c.programCredential}}</mat-option>
+        </mat-select>
+    </div>
+</mat-toolbar>
