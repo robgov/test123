@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
-using ProviderApi.Models;
+using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
 using LinqKit;
 using ProviderApi.Controllers.Enrichers;

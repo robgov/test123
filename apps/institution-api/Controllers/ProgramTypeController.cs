@@ -1,15 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
-using ProviderApi.Models;
-using ProviderApi.Models.ModelParameters;
-using LinqKit;
-using ProviderApi.Controllers.Enrichers;
+using ProviderApi.Models.EntityFramework;
 
 namespace ProviderApi.Controllers
 {
@@ -27,17 +22,13 @@ namespace ProviderApi.Controllers
       _context = context;
     }
 
-
-
-
     [HttpGet("")]
-    [SwaggerOperation("GetCredentials")]
+    [SwaggerOperation("GetProgramTypes")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProgramType> GetCredentials()
+    public IEnumerable<VwProgramType> GetProgramTypes()
     {
       return _context.VwProgramTypes.ToList();
     }
-
   }
 }

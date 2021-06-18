@@ -1,7 +1,8 @@
-import { Action, NgxsOnInit, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { ProgramStateModel } from './program-state.model';
+
 import { ProgramActions } from './program.actions';
 import {
   ProgramService,
@@ -9,16 +10,18 @@ import {
   SpecializationService,
   ProgramCostService,
   AlbertaPSIProviderService,
+  ProgramCredentialService,
+  ProgramTypeService,
 } from '@libs/common/services';
 import {
   VwProgram,
   ProgramsRequest,
-  VwAlbertaPsiprovider,
-  VwProviderLogo,
   VwSpecialization,
   VwProgramCost,
   ProgramCostsRequest,
   VwPmpPsiprogramCountByCategory,
+  VwProgramCredential,
+  VwProgramType,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -32,24 +35,23 @@ const initialState = new ProgramStateModel();
 @Injectable()
 export class ProgramState {
   constructor(
-    private store: Store,
     private programService: ProgramService,
-    private albertaPSIProviderService: AlbertaPSIProviderService,
-    private providerLogoService: ProviderLogoService,
     private specializationService: SpecializationService,
-    private programCostService: ProgramCostService
+    private programCostService: ProgramCostService,
+    private programCredentialService: ProgramCredentialService,
+    private programTypeService: ProgramTypeService
   ) {}
 
   @Action(AppAction.Start)
   onStart(ctx: StateContext<ProgramStateModel>, action: AppAction.Start) {
     console.log('initializing...');
     ctx.dispatch([
-      new ProgramActions.GetPrograms(),
-      new ProgramActions.GetProgramProviders(),
-      new ProgramActions.GetProgramProviderLogos(),
-      new ProgramActions.GetProgramCosts(),
-      new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramCategoryCounts(),
+      new ProgramActions.GetProgramCosts(),
+      new ProgramActions.GetProgramCredentials(),
+      new ProgramActions.GetPrograms(),
+      new ProgramActions.GetProgramSpecializations(),
+      new ProgramActions.GetProgramTypes()
     ]);
   }
 
@@ -62,34 +64,6 @@ export class ProgramState {
       tap((data: VwProgram[]) => {
         ctx.patchState({
           programs: data,
-        });
-      })
-    );
-  }
-
-  @Action(ProgramActions.GetProgramProviders)
-  onGetProgramProviders(
-    ctx: StateContext<ProgramStateModel>,
-    action: ProgramActions.GetProgramProviders
-  ) {
-    return this.albertaPSIProviderService.getAlbertaPsiProviders().pipe(
-      tap((data: VwAlbertaPsiprovider[]) => {
-        ctx.patchState({
-          programProviders: data,
-        });
-      })
-    );
-  }
-
-  @Action(ProgramActions.GetProgramProviderLogos)
-  onGetProgramProviderLogos(
-    ctx: StateContext<ProgramStateModel>,
-    action: ProgramActions.GetProgramProviderLogos
-  ) {
-    return this.providerLogoService.getProviderLogos().pipe(
-      tap((data: VwProviderLogo[]) => {
-        ctx.patchState({
-          providerLogos: data,
         });
       })
     );
@@ -125,6 +99,22 @@ export class ProgramState {
       );
   }
 
+  @Action(ProgramActions.GetProgramTypes)
+  onGetProgramTypes(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetProgramTypes
+  ){
+    return this.programTypeService
+    .getProgramTypes()
+    .pipe(
+      tap((data: VwProgramType[]) => {
+        ctx.patchState({
+          programTypes: data,
+        });
+      })
+    );
+  }
+
   @Action(ProgramActions.GetProgramCategoryCounts)
   onGetProgramCategoryCounts(
     ctx: StateContext<ProgramStateModel>,
@@ -137,5 +127,62 @@ export class ProgramState {
         });
       })
     );
+  }
+
+  @Action(ProgramActions.GetProgramCredentials)
+  onGetProgramCredentials(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetProgramCredentials
+  ) {
+    return this.programCredentialService.getProgramCredentials().pipe(
+      tap((data: VwProgramCredential[]) => {
+        ctx.patchState({
+          programCredentials: data,
+        });
+      })
+    );
+  }
+
+  //Filtering
+  @Action(ProgramActions.SetProgramSearchProviderFilter)
+  onSetProgramSearchProviderFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchProviderFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_ProviderIds: action.providerIds,
+    });
+  }
+
+  @Action(ProgramActions.SetProgramSearchCategoryFilter)
+  onSetProgramSearchCategoryFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchCategoryFilter
+  ) {
+
+    ctx.patchState({
+      programSearchFilter_CipSubSeriesCode: action.categoryCode
+    });
+  }
+
+  @Action(ProgramActions.SetProgramSearchCredentialFilter)
+  onSetProgramSearchCredentialFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchCredentialFilter
+  ) {
+
+    ctx.patchState({
+      programSearchFilter_CredentialIds: action.credentialIds
+    });
+  }
+
+  @Action(ProgramActions.SetProgramSearchProgramTypeFilter)
+  onSetProgramSearchProgramTypeFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchProgramTypeFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_ProgramTypeIds: action.programTypeIds
+    });
   }
 }

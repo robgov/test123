@@ -18,7 +18,7 @@ export class ProgramTypeService extends EndPointService {
         this.key = 'programType';
     }
     
-    public getCredentials(): Observable<VwProgramType[]> { 
+    public getProgramTypes(): Observable<VwProgramType[]> { 
         return this.get(this.url + '');
     }
 

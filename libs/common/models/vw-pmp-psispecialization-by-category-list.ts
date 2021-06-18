@@ -9,6 +9,12 @@ export class VwPmpPsispecializationByCategoryList {
     public programName: string = '';
     public specializationName: string = '';
     public specializationId: number = 0;
+    public programNumber: number;
+    public specializationNumber: number;
+    public programCode: string = '';
+    public specializationCode: string = '';
+    public sessionStartDate: Date;
+    public sessionEndDate: Date;
 
     constructor(init? : Partial<VwPmpPsispecializationByCategoryList>) {
         

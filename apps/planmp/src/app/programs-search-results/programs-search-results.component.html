@@ -2,16 +2,21 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
         <div fxFlex="100" fxLayout="column">
-            <div *ngFor="let p of programs$ | async">
+            <aedigital-program-search-results-filter 
+                [programCountsByCategory]="programCountsByCategory$ | async"
+                [providers]="providers$ | async" 
+                [credentials]="programCredentials$ | async"
+                [programTypes]="programTypes$ | async"
+                [sortOptions]="sortOption$ | async"
+            >
+            </aedigital-program-search-results-filter>
+            <div *ngFor="let p of filteredPrograms$ | async">
                 <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p"
-                    [programProvider]="getProvider(p) | async" 
-                    [programSpecialization]="getSpecialization(p) | async"
-                    [programCost]="getProgramCost(p) | async" 
-                    [providerLogo]="getProviderLogo(p) | async">
+                    [programProvider]="getProvider(p) | async" [programSpecialization]="getSpecialization(p) | async"
+                    [programCost]="getProgramCost(p) | async" [providerLogo]="getProviderLogo(p) | async"
+                    [programType]="getProgramType(p) | async">
                 </aedigital-program-summary>
             </div>
         </div>
     </div>
-    <mat-paginator [attr.data-cy]="'programs-search-results.paginator'" [pageSizeOptions]="[5, 10, 20]"
-        showFirstLastButtons></mat-paginator>
 </div>

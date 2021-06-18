@@ -47,6 +47,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const MATERIAL_MODULES = [
   MatAutocompleteModule,
@@ -64,7 +65,8 @@ const MATERIAL_MODULES = [
   MatSelectModule,
   MatSidenavModule,
   MatTabsModule,
-  MatTableModule
+  MatTableModule,
+  MatToolbarModule
 ];
 
 // Components
@@ -90,6 +92,7 @@ import { ProgramCategorySummaryComponent } from './program-category-summary/prog
 import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
 import { TypetextComponent } from './typetext/typetext.component';
 import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
+import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +118,7 @@ import { TypetextdetailComponent } from './typetextdetail/typetextdetail.compone
     ProgramCategorySummaryListComponent,
     TypetextComponent,
     TypetextdetailComponent,
+    ProgramSearchResultsFilterComponent,
   ],
   imports: [
     BrowserModule,
