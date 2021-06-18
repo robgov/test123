@@ -162,7 +162,7 @@ ${
         return importBuilder.ToString();
     }
 }
-$Classes(c => c.Namespace.StartsWith("ProviderApi.Models") && (!ignoreModels.Contains(c.Name)))[
+$Classes(c => c.Namespace.StartsWith("ProviderApi.Models")  && (!ignoreModels.Contains(c.Name)))[
 $Imports
 export class $Name$BaseClassExtends {$Properties[
     $PropertyName]

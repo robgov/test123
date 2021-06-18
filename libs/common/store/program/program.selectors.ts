@@ -9,6 +9,7 @@ import {
   VwProgramType,
   VwSpecialization,
 } from '@libs/common/models';
+import { state } from '@angular/animations';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
@@ -81,6 +82,27 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static getProgramCredentials(state: ProgramStateModel): VwProgramCredential[] {
     return state.programCredentials;
+  }
+
+  @Selector([ProgramState])
+  static getProgramFilterOptions(state: ProgramStateModel){
+    const sortOptions :string[] = [];
+    sortOptions.push("Program Name (A-Z)")
+    sortOptions.push("Program Name (Z-A)")
+    if (state.programSearchFilter_PostalCode){
+      sortOptions.push("Distance (Closest)")
+      sortOptions.push("Distance (Furthest)")
+    }
+    sortOptions.push("Estimated Cost (Low-High)")
+    sortOptions.push("Estimated Cost (High-Low)")
+    sortOptions.push("Estimated Median Income (Low-High)")
+    sortOptions.push("Estimated Median Income (High-Low)")
+    sortOptions.push("Program Yearly Cost (Low-High)")
+    sortOptions.push("Program Yearly Cost (High-Low)")
+    sortOptions.push("Employment Rate (Low-High)")
+    sortOptions.push("Employment Rate (High-Low)")
+
+    return sortOptions;
   }
 
   // Program Filtering

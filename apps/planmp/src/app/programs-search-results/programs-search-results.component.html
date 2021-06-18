@@ -7,6 +7,7 @@
                 [providers]="providers$ | async" 
                 [credentials]="programCredentials$ | async"
                 [programTypes]="programTypes$ | async"
+                [sortOptions]="sortOption$ | async"
             >
             </aedigital-program-search-results-filter>
             <div *ngFor="let p of filteredPrograms$ | async">

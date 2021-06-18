@@ -18,12 +18,13 @@ import {
   VwProvider,
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
-  VwProgramType
+  VwProgramType,
+  VwPmpLookup
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
-import { ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
+import { LookupSelectors, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -41,6 +42,9 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(ProgramSelectors.getProgramTypes) programTypes$ : Observable<VwProgramType[]>;
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
+
+  @Select(LookupSelectors.getLookups) sortOption$: Observable<VwPmpLookup[]>;
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { VwAlbertaPsiprovider, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
+import { VwAlbertaPsiprovider, VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
 import { Store } from '@ngxs/store';
 
@@ -14,6 +14,7 @@ export class ProgramSearchResultsFilterComponent implements OnInit {
   @Input() programCountsByCategory: VwPmpPsiprogramCountByCategory[];
   @Input() credentials: VwProgramCredential[];
   @Input() programTypes: VwProgramType[];
+  @Input() sortOptions: VwPmpLookup[];
 
   selectedProviderId: string[]=[""];
   selectedCipsCode: string="";

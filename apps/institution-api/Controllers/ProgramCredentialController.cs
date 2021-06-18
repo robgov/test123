@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
-using ProviderApi.Models;
+using ProviderApi.Models.EntityFramework;
 
 namespace ProviderApi.Controllers
 {
