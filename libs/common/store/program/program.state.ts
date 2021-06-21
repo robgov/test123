@@ -165,6 +165,18 @@ export class ProgramState {
     });
   }
 
+  @Action(ProgramActions.SetProgramSearchKeywordFilter)
+  onSetProgramSearchKeywordFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchKeywordFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_Keywords: action.keywords
+    });
+  }
+
+  //
+
   @Action(ProgramActions.SetProgramSearchCredentialFilter)
   onSetProgramSearchCredentialFilter(
     ctx: StateContext<ProgramStateModel>,

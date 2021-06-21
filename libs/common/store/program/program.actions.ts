@@ -45,6 +45,14 @@ export namespace ProgramActions {
     constructor(public credentialIds: number[]) {}
   }
 
+  export class SetProgramSearchKeywordFilter {
+    static readonly type =
+      '[Aed Providers] Filter Program Search By Keywords';
+    constructor(public keywords: string) {}
+  }
+
+  
+
   export class SetProgramSearchProgramTypeFilter {
     static readonly type =
       '[Aed Providers] Filter Program Search By Program Type';

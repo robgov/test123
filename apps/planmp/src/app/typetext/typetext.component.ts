@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import { Select } from '@ngxs/store';
 import {Observable} from 'rxjs';
-import { ProgramSelectors } from '@libs/common/store/program';
+import { ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 import { VwAlbertaPsiprovider, VwPmpPsispecializationCountByCategory } from '@libs/common/models';
 
 @Component({
@@ -11,6 +11,6 @@ import { VwAlbertaPsiprovider, VwPmpPsispecializationCountByCategory } from '@li
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TypetextComponent {
-    @Select(ProgramSelectors.programProviders) programProviders$: Observable<VwAlbertaPsiprovider[]>
-    @Select(ProgramSelectors.programCategoryCounts) programCategoryCount$: Observable<VwPmpPsispecializationCountByCategory[]>   
+    @Select(ProviderSelectors.getProviders) programProviders$: Observable<VwAlbertaPsiprovider[]>
+    @Select(ProgramSelectors.getProgramCategoryCounts) programCategoryCount$: Observable<VwPmpPsispecializationCountByCategory[]>   
 }

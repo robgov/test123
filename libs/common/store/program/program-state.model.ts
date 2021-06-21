@@ -22,4 +22,7 @@ export class ProgramStateModel {
   programSearchFilter_PostalCode: string;
   programSearchFilter_CredentialIds: number[];
   programSearchFilter_ProgramTypeIds: number[];
+
+  programSearchFilter_Keywords: string;
+
 }

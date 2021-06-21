@@ -123,6 +123,14 @@ export class ProgramSelectors {
       results = results.filter((f) => programIds.includes(f.programId));
     }
 
+
+   //Apply Keyword filtering
+   if (state.programSearchFilter_Keywords){
+      results = results.filter(
+        (f) => f.programName.includes(state.programSearchFilter_Keywords)
+      );
+  }
+
     //Apply distance filtering
     // if (state.programSearchFilter_PostalCode) {
     //   //Quick and dirty, if the postal code has the same first 3 characters, it's "close"
