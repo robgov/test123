@@ -4,26 +4,20 @@ import { ProgramActions } from '@libs/common/store/program';
 import { Store } from '@ngxs/store';
 
 @Component({
-  selector: 'aedigital-program-search-results-filter',
-  templateUrl: './program-search-results-filter.component.html',
-  styleUrls: ['./program-search-results-filter.component.scss']
+  selector: 'aedigital-program-search-filter-options-sidebar',
+  templateUrl: './program-search-filter-options-sidebar.component.html',
+  styleUrls: ['./program-search-filter-options-sidebar.component.scss']
 })
-export class ProgramSearchResultsFilterComponent {
+export class ProgramSearchFilterOptionsSidebarComponent {
   @Input() categoryPrograms: VwSpecializationPrograms[];
   @Input() providers: VwAlbertaPsiprovider[];
-  @Input() programCountsByCategory: VwPmpPsiprogramCountByCategory[];
   @Input() credentials: VwProgramCredential[];
   @Input() programTypes: VwProgramType[];
-  @Input() sortOptions: VwPmpLookup[];
 
   @Input() selectedProviderIds: number[];
+  selectedCipsCode: string="";
   @Input() selectedCredentialIds: number[];
 
-  selectedCipsCode: string="";
-  
-  selectedSortOrder: string="1";
-
-  @Output() CriteriaChanged = new EventEmitter<number>();
   constructor(private store: Store) { }
 
   providerSelected(providerIds: number[]){
@@ -42,15 +36,8 @@ export class ProgramSearchResultsFilterComponent {
     this.store.dispatch(new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds));
   }
 
-  sortOrderSelected(sortOrder: string){
-    this.store.dispatch(new ProgramActions.SetProgramSearchSortOrder(sortOrder));
+  close() {
+    this.store.dispatch(new ProgramActions.CloseProgramFilter());
   }
 
-  showProgramSort(){
-    this.store.dispatch(new ProgramActions.ShowProgramSort());
-  }
-
-  showProgramFilter() {
-    this.store.dispatch(new ProgramActions.ShowProgramFilter());
-  }
 }

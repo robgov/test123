@@ -69,6 +69,21 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
+  static getSelectedProviders(state: ProgramStateModel): number[] {
+    return state.programSearchFilter_ProviderIds;
+  }
+
+  @Selector([ProgramState])
+  static getSelectedCredentials(state:ProgramStateModel): number[]{
+    return state.programSearchFilter_CredentialIds;
+  }
+
+  @Selector([ProgramState])
+  static getSelectedSortOrder(state: ProgramStateModel): string {
+    return state.programSearchFilter_Sort;
+  }
+
+  @Selector([ProgramState])
   static getProgramCategoryCounts(
     state: ProgramStateModel
   ): VwPmpPsiprogramCountByCategory[] {

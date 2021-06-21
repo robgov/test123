@@ -8,11 +8,13 @@
                 [credentials]="programCredentials$ | async"
                 [programTypes]="programTypes$ | async"
                 [sortOptions]="sortOption$ | async"
+                [selectedProviderIds]="selectedProviderIds$ | async"
+                [selectedCredentialIds]="selectedCredentialIds$ | async"
             >
             </aedigital-program-search-results-filter>
             <div *ngFor="let p of filteredPrograms$ | async">
                 <aedigital-program-summary [attr.data-cy]="'programs-search-results.program-summary'" [program]="p"
-                    [programProvider]="getProvider(p) | async" [programSpecialization]="getSpecialization(p) | async"
+                    [programProvider]="getProvider(p) | async"
                     [specializationCosts]="getSpecializationCosts(p) | async"
                     [programCost]="getProgramCost(p) | async" [providerLogo]="getProviderLogo(p) | async"
                     [programType]="getProgramType(p) | async">

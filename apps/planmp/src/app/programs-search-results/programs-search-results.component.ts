@@ -20,11 +20,17 @@ import {
   VwProgramCredential,
   VwProgramType,
   VwPmpLookup,
-  VwSpecializationCost} from '@libs/common/models';
+  VwSpecializationCost,
+} from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
-import { LookupSelectors, ProgramActions, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
+import {
+  LookupSelectors,
+  ProgramActions,
+  ProgramSelectors,
+  ProviderSelectors,
+} from '@libs/common/store/store-index';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -35,16 +41,19 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   FlexConstants = FlexConstants;
 
   @Select(ProgramSelectors.getProgramSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
+
   @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
-  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>
-  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<VwProgram[]>
+  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>;
+  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<VwProgram[]>;
   @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
-  @Select(ProgramSelectors.getProgramTypes) programTypes$ : Observable<VwProgramType[]>;
+  @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<VwProgramType[]>;
+
+  @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
+  @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
-
+  
   @Select(LookupSelectors.getLookups) sortOption$: Observable<VwPmpLookup[]>;
-
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;
@@ -52,7 +61,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   providerId: number = null;
   cipSubSeriesCode: string = null;
-  keyword: string=null;
+  keyword: string = null;
   providers: VwAlbertaPsiprovider[];
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
@@ -65,9 +74,8 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {
-   }
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
 
@@ -76,14 +84,21 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
         this.providerId = params['provider'];
         var providers = new Array<number>();
         providers.push(+this.providerId);
-        this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providers));
+        this.store.dispatch(
+          new ProgramActions.SetProgramSearchProviderFilter(providers)
+        );
       }
       if (params['cipSubSeriesCode']) {
         this.cipSubSeriesCode = params['cipSubSeriesCode'];
-        this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(this.cipSubSeriesCode));
-      }
-      else {
-        this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(""));
+        this.store.dispatch(
+          new ProgramActions.SetProgramSearchCategoryFilter(
+            this.cipSubSeriesCode
+          )
+        );
+      } else {
+        this.store.dispatch(
+          new ProgramActions.SetProgramSearchCategoryFilter('')
+        );
       }
       if (params['keywords']) {
         this.keyword = params['keywords'];
@@ -98,29 +113,49 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   }
 
   getProvider(program: VwProgram): Observable<VwProvider> {
-    if (!this.store.selectSnapshot(ProgramSelectors.getSpecializationCostsForProvider(program.programId))) {
-      this.store.dispatch(new ProgramActions.GetSpecializationCostsForProvider(program.providerId));
-    }
+    // if (
+    //   !this.store.selectSnapshot(
+    //     ProgramSelectors.getSpecializationCostsForProvider(program.programId)
+    //   )
+    // ) {
+    //   this.store.dispatch(
+    //     new ProgramActions.GetSpecializationCostsForProvider(program.providerId)
+    //   );
+    // }
     return this.store.select(ProviderSelectors.getProvider(program.providerId));
   }
 
   getProviderLogo(program: VwProgram): Observable<VwProviderLogo> {
-    return this.store.select(ProviderSelectors.getProviderLogo(program.providerId));
+    return this.store.select(
+      ProviderSelectors.getProviderLogo(program.providerId)
+    );
   }
 
   getSpecialization(program: VwProgram): Observable<VwSpecialization> {
-    return this.store.select(ProgramSelectors.getProgramSpecialization(program.programId));
+    return this.store.select(
+      ProgramSelectors.getProgramSpecialization(program.programId)
+    );
   }
 
   getProgramCost(program: VwProgram): Observable<VwProgramCost> {
-    return this.store.select(ProgramSelectors.getProgramCost(program.programId));
+    return this.store.select(
+      ProgramSelectors.getProgramCost(program.programId)
+    );
   }
 
   getProgramType(program: VwProgram): Observable<VwProgramType> {
-    return this.store.select(ProgramSelectors.getProgramType(program.programTypeId));
+    return this.store.select(
+      ProgramSelectors.getProgramType(program.programTypeId)
+    );
   }
 
-  getSpecializationCosts(program: VwProgram): Observable<VwSpecializationCost[]> {
-    return this.store.select(ProgramSelectors.getSpecializationCostForProgram(program.programId));
+  getSpecializationCosts(
+    program: VwProgram
+  ): Observable<VwSpecializationCost[]> {
+    if (program && program.programId) {
+      return this.store.select(
+        ProgramSelectors.getSpecializationCostForProgram(program.programId)
+      );
+    }
   }
 }

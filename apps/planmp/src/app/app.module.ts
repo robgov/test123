@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppAction } from '@libs/common/store/common/app.actions';
-import {pmpState} from '@libs/common/store/store-index';
+import { pmpState } from '@libs/common/store/store-index';
 
 import {
   LocationAddressService,
@@ -44,9 +44,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -64,7 +64,7 @@ const MATERIAL_MODULES = [
   MatSidenavModule,
   MatTabsModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
 ];
 
 // Components
@@ -89,6 +89,8 @@ import { ProgramSummaryComponent } from './program-summary/program-summary.compo
 import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
 import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
 import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
+import { ProgramSearchSortOptionsSidebarComponent } from './program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
+import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +115,8 @@ import { ProgramSearchResultsFilterComponent } from './program-search-results-fi
     ProgramCategorySummaryComponent,
     ProgramCategorySummaryListComponent,
     ProgramSearchResultsFilterComponent,
+    ProgramSearchSortOptionsSidebarComponent,
+    ProgramSearchFilterOptionsSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -142,11 +146,11 @@ import { ProgramSearchResultsFilterComponent } from './program-search-results-fi
     ProviderTypeService,
     ProviderWebsiteService,
     {
-			provide: APP_INITIALIZER,
-			useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),
-			deps: [Store],
-			multi: true,
-		},
+      provide: APP_INITIALIZER,
+      useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),
+      deps: [Store],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
