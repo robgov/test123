@@ -6,6 +6,7 @@ import {
   VwProgramCredential,
   VwProgramType,
   VwSpecializationCost,
+  VwAbpostalCode,
 } from '@libs/common/models';
 
 export class ProgramStateModel {
@@ -16,6 +17,7 @@ export class ProgramStateModel {
   programTypes: VwProgramType[];
   programCredentials: VwProgramCredential[];
   programCategoryCounts: VwPmpPsiprogramCountByCategory[];
+  postalCodes: VwAbpostalCode[];
 
   // Program Search Filters
   programSearchFilter_ProviderIds: number[];

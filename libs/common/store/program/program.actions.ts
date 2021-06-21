@@ -25,6 +25,10 @@ export namespace ProgramActions {
     static readonly type = '[Aed Program] Get Program Types';
   }
 
+  export class GetPostalCodes {
+    static readonly type = '[Aed Program] Get Postal Codes';
+  }
+
   export class GetProgramCategoryCounts {
     static readonly type = '[Aed Program] Get Program Category Counts';
   }

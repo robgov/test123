@@ -7,6 +7,7 @@ export * from './location-phone.service';
 export * from './location-publication.service';
 export * from './location.service';
 export * from './lookup.service';
+export * from './postal-code.service';
 export * from './program-cost.service';
 export * from './program-credential.service';
 export * from './program-publication.service';

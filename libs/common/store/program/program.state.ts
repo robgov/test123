@@ -11,6 +11,7 @@ import {
   ProgramCredentialService,
   ProgramTypeService,
   SpecializationCostService,
+  PostalCodeService,
 } from '@libs/common/services';
 import {
   VwProgram,
@@ -24,6 +25,8 @@ import {
   VwProgramType,
   SpecializationRequest,
   SpecializationCostRequest,
+  VwAbpostalCode,
+  PostalCodeRequest,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -42,7 +45,8 @@ export class ProgramState {
     private programCostService: ProgramCostService,
     private programCredentialService: ProgramCredentialService,
     private programTypeService: ProgramTypeService,
-    private specializationCostService: SpecializationCostService
+    private specializationCostService: SpecializationCostService,
+    private postalCodeService: PostalCodeService
   ) {}
 
   @Action(AppAction.Start)
@@ -55,6 +59,7 @@ export class ProgramState {
       new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramTypes(),
+      new ProgramActions.GetPostalCodes()
     ]);
   }
 
@@ -81,6 +86,20 @@ export class ProgramState {
       tap((data: VwSpecialization[]) => {
         ctx.patchState({
           programSpecializations: data,
+        });
+      })
+    );
+  }
+
+  @Action(ProgramActions.GetPostalCodes)
+  onGetPostalCodes(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetPostalCodes
+  ) {
+    return this.postalCodeService.getPostalCodes(new PostalCodeRequest()).pipe(
+      tap((data: VwAbpostalCode[]) => {
+        ctx.patchState({
+          postalCodes: data,
         });
       })
     );
