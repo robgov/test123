@@ -8,7 +8,7 @@ import { Store } from '@ngxs/store';
   templateUrl: './program-search-results-filter.component.html',
   styleUrls: ['./program-search-results-filter.component.scss']
 })
-export class ProgramSearchResultsFilterComponent implements OnInit {
+export class ProgramSearchResultsFilterComponent {
   @Input() categoryPrograms: VwSpecializationPrograms[];
   @Input() providers: VwAlbertaPsiprovider[];
   @Input() programCountsByCategory: VwPmpPsiprogramCountByCategory[];
@@ -19,12 +19,10 @@ export class ProgramSearchResultsFilterComponent implements OnInit {
   selectedProviderId: string[]=[""];
   selectedCipsCode: string="";
   selectedCredentialId: string[]=[""];
+  selectedSortOrder: string="1";
 
   @Output() CriteriaChanged = new EventEmitter<number>();
   constructor(private store: Store) { }
-
-  ngOnInit(): void {
-  }
 
   providerSelected(providerIds: any[]){
     this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providerIds));
@@ -40,5 +38,9 @@ export class ProgramSearchResultsFilterComponent implements OnInit {
 
   programTypeSelected(programTypeIds: number[]){
     this.store.dispatch(new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds));
+  }
+
+  sortOrderSelected(sortOrder: string){
+    this.store.dispatch(new ProgramActions.SetProgramSearchSortOrder(sortOrder));
   }
 }

@@ -8,8 +8,8 @@ import {
   VwProgramCredential,
   VwProgramType,
   VwSpecialization,
+  VwSpecializationCost,
 } from '@libs/common/models';
-import { state } from '@angular/animations';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
@@ -52,7 +52,9 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static getProgramSpecializations(state: ProgramStateModel): VwSpecialization[] {
+  static getProgramSpecializations(
+    state: ProgramStateModel
+  ): VwSpecialization[] {
     return state.programSpecializations;
   }
 
@@ -80,27 +82,41 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static getProgramCredentials(state: ProgramStateModel): VwProgramCredential[] {
+  static getProgramCredentials(
+    state: ProgramStateModel
+  ): VwProgramCredential[] {
     return state.programCredentials;
   }
 
+  static getSpecializationCostForProgram(id: number) {
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.specializationCosts.filter((q) => q.programId === id)
+    );
+  }
+
+  static getSpecializationCostsForProvider(id: number) {
+    return createSelector([ProgramState], (state:ProgramStateModel)=>
+      state.specializationCosts.filter(q=>q.providerId === id)
+    );
+  }
+
   @Selector([ProgramState])
-  static getProgramFilterOptions(state: ProgramStateModel){
-    const sortOptions :string[] = [];
-    sortOptions.push("Program Name (A-Z)")
-    sortOptions.push("Program Name (Z-A)")
-    if (state.programSearchFilter_PostalCode){
-      sortOptions.push("Distance (Closest)")
-      sortOptions.push("Distance (Furthest)")
+  static getProgramFilterOptions(state: ProgramStateModel) {
+    const sortOptions: string[] = [];
+    sortOptions.push('Program Name (A-Z)');
+    sortOptions.push('Program Name (Z-A)');
+    if (state.programSearchFilter_PostalCode) {
+      sortOptions.push('Distance (Closest)');
+      sortOptions.push('Distance (Furthest)');
     }
-    sortOptions.push("Estimated Cost (Low-High)")
-    sortOptions.push("Estimated Cost (High-Low)")
-    sortOptions.push("Estimated Median Income (Low-High)")
-    sortOptions.push("Estimated Median Income (High-Low)")
-    sortOptions.push("Program Yearly Cost (Low-High)")
-    sortOptions.push("Program Yearly Cost (High-Low)")
-    sortOptions.push("Employment Rate (Low-High)")
-    sortOptions.push("Employment Rate (High-Low)")
+    sortOptions.push('Estimated Cost (Low-High)');
+    sortOptions.push('Estimated Cost (High-Low)');
+    sortOptions.push('Estimated Median Income (Low-High)');
+    sortOptions.push('Estimated Median Income (High-Low)');
+    sortOptions.push('Program Yearly Cost (Low-High)');
+    sortOptions.push('Program Yearly Cost (High-Low)');
+    sortOptions.push('Employment Rate (Low-High)');
+    sortOptions.push('Employment Rate (High-Low)');
 
     return sortOptions;
   }
@@ -111,15 +127,23 @@ export class ProgramSelectors {
     var results = state.programs;
 
     //Apply provider filtering
-    if (state.programSearchFilter_ProviderIds && state.programSearchFilter_ProviderIds.length > 0) {
-      results = results.filter(
-        (f) => state.programSearchFilter_ProviderIds.includes(f.providerId)
+    if (
+      state.programSearchFilter_ProviderIds &&
+      state.programSearchFilter_ProviderIds.length > 0
+    ) {
+      results = results.filter((f) =>
+        state.programSearchFilter_ProviderIds.includes(f.providerId)
       );
     }
 
     //Apply CipSubCode filtering
-    if (state.programSearchFilter_CipSubSeriesCode){
-      var programIds = state.programSpecializations.filter(pc=>pc.cipSubSeriesCode===state.programSearchFilter_CipSubSeriesCode).map(pc=>pc.programId);
+    if (state.programSearchFilter_CipSubSeriesCode) {
+      var programIds = state.programSpecializations
+        .filter(
+          (pc) =>
+            pc.cipSubSeriesCode === state.programSearchFilter_CipSubSeriesCode
+        )
+        .map((pc) => pc.programId);
       results = results.filter((f) => programIds.includes(f.programId));
     }
 
@@ -131,19 +155,85 @@ export class ProgramSelectors {
     // }
 
     //Apply Credential filtering
-    if (state.programSearchFilter_CredentialIds && state.programSearchFilter_CredentialIds.length > 0 ) {
-      results = results.filter(f=> state.programSearchFilter_CredentialIds.includes(f.programCredentialId));
+    if (
+      state.programSearchFilter_CredentialIds &&
+      state.programSearchFilter_CredentialIds.length > 0
+    ) {
+      results = results.filter((f) =>
+        state.programSearchFilter_CredentialIds.includes(f.programCredentialId)
+      );
     }
 
     //Apply Program Type filtering
-    if (state.programSearchFilter_ProgramTypeIds && state.programSearchFilter_ProgramTypeIds.length > 0 ) {
-      results = results.filter(f=> state.programSearchFilter_ProgramTypeIds.includes(f.programTypeId));
+    if (
+      state.programSearchFilter_ProgramTypeIds &&
+      state.programSearchFilter_ProgramTypeIds.length > 0
+    ) {
+      results = results.filter((f) =>
+        state.programSearchFilter_ProgramTypeIds.includes(f.programTypeId)
+      );
     }
 
+    //This belongs somewhere else
+    enum ProgramSortOptions {
+      SortProgramNameAsc = "1",
+      SortProgramNameDesc = "2",
+      SortProgramDistanceAsc = "3",
+      SortProgramDistanceDesc = "4",
+      SortProgramEstimatedCostAsc = "5",
+      SortProgramEstimatedCostDesc = "6",
+      SortProgramEstimatedMedianIncomeAsc = "7",
+      SortProgramEstimatedMedianIncomeDesc = "8",
+      SortProgramYearlyCostAsc = "9",
+      SortProgramYearlyCostDesc = "10",
+      SortProgramEmploymentRateAsc = "11",
+      SortProgramEmploymentRateDesc = "12"  ,
+    }
+    
+    //Determine Sort 
+    var sortMethod = this.sortByNameAsc;
+    switch (state.programSearchFilter_Sort ) {
+      case ProgramSortOptions.SortProgramNameDesc: {
+        sortMethod = this.sortByNameDesc;
+        break;
+      }
+      default: {
+        sortMethod = this.sortByNameAsc;
+        break;
+      }
+    }
+
+    //Perform Sort
+    results = results.sort((item1: VwProgram, item2: VwProgram) => {
+      return sortMethod(item1, item2);
+    });
+    
+
     if (results.length > 20) {
-      results = results.slice(0,20);
+      results = results.slice(0, 20);
     }
 
     return results;
+  }
+
+  //TODO: Move these somewhere more appropriate.
+  public static sortByNameAsc(item1: VwProgram, item2: VwProgram): number {
+    if (item1.programName > item2.programName) {
+      return 1;
+    }
+    if (item1.programName < item2.programName) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByNameDesc(item1: VwProgram, item2: VwProgram): number {
+    if (item1.programName > item2.programName) {
+      return -1;
+    }
+    if (item1.programName < item2.programName) {
+      return 1;
+    }
+    return 0;
   }
 }

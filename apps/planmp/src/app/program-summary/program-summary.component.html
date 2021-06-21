@@ -1,5 +1,6 @@
 <div fxLayout="column">
     <div fxFlex=100 fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
+        <div>{{program.programId}}</div>
         <div fxFlex="{{FlexConstants.Column.Large}}" fxLayoutAlign="center center">
             <img [id]="program.providerId" [attr.data-cy]="'program-summary.providerLogo'" fxFlex="72px;" fxShrink [src]="getLogoUrl()"></div>
         <div fxLayout="column" fxFlex="{{FlexConstants.Column.Large_6}}">
@@ -14,7 +15,7 @@
                 <div [attr.data-cy]="'program-summary.programCredentialId'" fxFlex="{{FlexConstants.Column.Large_2}}">
                     {{getProgramType()}}</div>
                 <div [attr.data-cy]="'program-summary.programCost'" fxFlex="{{FlexConstants.Column.Large_2}}">$
-                    {{getProgramCost()}}/year
+                    {{getSpecializationCost()}}/year
                 </div>
             </div>
         </div>

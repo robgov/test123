@@ -11,6 +11,16 @@ export namespace ProgramActions {
     static readonly type = '[Aed Providers] Get Program Costs';
   }
 
+  export class GetSpecializationCostsForProvider {
+    static readonly type = "[ Aed Programs] Get Specialization Costs For Provider"
+    constructor (public providerId: number) {}
+  }
+
+  export class GetSpecializationCostForProgram {
+    static readonly type = "[ Aed Programs] Get Specialization Cost For Program"
+    constructor (public programId: number) {}
+  }
+
   export class GetProgramTypes {
     static readonly type = '[Aed Providers] Get Program Types';
   }
@@ -49,5 +59,11 @@ export namespace ProgramActions {
     static readonly type =
       '[Aed Providers] Filter Program Search By Program Type';
     constructor(public programTypeIds: number[]) {}
+  }
+
+  export class SetProgramSearchSortOrder {
+    static readonly type =
+      '[Aed Providers] Filter Program Search By Program Type';
+    constructor(public sortOrder: string) {}
   }
 }

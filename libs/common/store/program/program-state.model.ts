@@ -5,12 +5,14 @@ import {
   VwSpecialization,
   VwProgramCredential,
   VwProgramType,
+  VwSpecializationCost,
 } from '@libs/common/models';
 
 export class ProgramStateModel {
   programs: VwProgram[];
   programSpecializations: VwSpecialization[];
   programCosts: VwProgramCost[];
+  specializationCosts: VwSpecializationCost[];
   programTypes: VwProgramType[];
   programCredentials: VwProgramCredential[];
   programCategoryCounts: VwPmpPsiprogramCountByCategory[];
@@ -22,4 +24,5 @@ export class ProgramStateModel {
   programSearchFilter_PostalCode: string;
   programSearchFilter_CredentialIds: number[];
   programSearchFilter_ProgramTypeIds: number[];
+  programSearchFilter_Sort: string;
 }

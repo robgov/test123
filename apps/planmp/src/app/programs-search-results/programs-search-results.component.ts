@@ -19,12 +19,12 @@ import {
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
   VwProgramType,
-  VwPmpLookup
-} from '@libs/common/models';
+  VwPmpLookup,
+  VwSpecializationCost} from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
-import { LookupSelectors, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
+import { LookupSelectors, ProgramActions, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -74,9 +74,16 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params) => {
       if (params['provider']) {
         this.providerId = params['provider'];
+        var providers = new Array<number>();
+        providers.push(+this.providerId);
+        this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providers));
       }
       if (params['cipSubSeriesCode']) {
         this.cipSubSeriesCode = params['cipSubSeriesCode'];
+        this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(this.cipSubSeriesCode));
+      }
+      else {
+        this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(""));
       }
       if (params['keywords']) {
         this.keyword = params['keywords'];
@@ -91,6 +98,9 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   }
 
   getProvider(program: VwProgram): Observable<VwProvider> {
+    if (!this.store.selectSnapshot(ProgramSelectors.getSpecializationCostsForProvider(program.programId))) {
+      this.store.dispatch(new ProgramActions.GetSpecializationCostsForProvider(program.providerId));
+    }
     return this.store.select(ProviderSelectors.getProvider(program.providerId));
   }
 
@@ -108,5 +118,9 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   getProgramType(program: VwProgram): Observable<VwProgramType> {
     return this.store.select(ProgramSelectors.getProgramType(program.programTypeId));
+  }
+
+  getSpecializationCosts(program: VwProgram): Observable<VwSpecializationCost[]> {
+    return this.store.select(ProgramSelectors.getSpecializationCostForProgram(program.programId));
   }
 }

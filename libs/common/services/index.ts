@@ -20,4 +20,5 @@ export * from './provider-publication.service';
 export * from './provider-type.service';
 export * from './provider-website.service';
 export * from './provider.service';
+export * from './specialization-cost.service';
 export * from './specialization.service';

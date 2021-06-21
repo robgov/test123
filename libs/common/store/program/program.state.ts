@@ -1,4 +1,4 @@
-import { Action, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { ProgramStateModel } from './program-state.model';
@@ -6,22 +6,24 @@ import { ProgramStateModel } from './program-state.model';
 import { ProgramActions } from './program.actions';
 import {
   ProgramService,
-  ProviderLogoService,
   SpecializationService,
   ProgramCostService,
-  AlbertaPSIProviderService,
   ProgramCredentialService,
   ProgramTypeService,
+  SpecializationCostService,
 } from '@libs/common/services';
 import {
   VwProgram,
   ProgramsRequest,
   VwSpecialization,
+  VwSpecializationCost,
   VwProgramCost,
   ProgramCostsRequest,
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
   VwProgramType,
+  SpecializationRequest,
+  SpecializationCostRequest,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -39,7 +41,8 @@ export class ProgramState {
     private specializationService: SpecializationService,
     private programCostService: ProgramCostService,
     private programCredentialService: ProgramCredentialService,
-    private programTypeService: ProgramTypeService
+    private programTypeService: ProgramTypeService,
+    private specializationCostService: SpecializationCostService
   ) {}
 
   @Action(AppAction.Start)
@@ -51,7 +54,7 @@ export class ProgramState {
       new ProgramActions.GetProgramCredentials(),
       new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramSpecializations(),
-      new ProgramActions.GetProgramTypes()
+      new ProgramActions.GetProgramTypes(),
     ]);
   }
 
@@ -83,6 +86,56 @@ export class ProgramState {
     );
   }
 
+  // @Action(ProgramActions.GetSpecializationCosts)
+  // onGetSpecializationCosts(
+  //   ctx: StateContext<ProgramStateModel>,
+  //   action: ProgramActions.GetSpecializationCosts
+  // ) {
+  //   return this.specializationCostService.getSpecializationCosts(new SpecializationCostRequest()).pipe(
+  //     tap((data: VwSpecializationCost[]) => {
+  //       ctx.patchState({
+  //         specializationCosts: data,
+  //       });
+  //     })
+  //   );
+  // }
+
+  @Action(ProgramActions.GetSpecializationCostForProgram)
+  onGetSpecializationCostForProgram(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetSpecializationCostForProgram
+  ) {
+    return this.specializationCostService
+      .getSpecializationCosts(
+        new SpecializationCostRequest({ programId: action.programId })
+      )
+      .pipe(
+        tap((data: VwSpecializationCost[]) => {
+          ctx.patchState({
+            specializationCosts: data,
+          });
+        })
+      );
+  }
+
+  @Action(ProgramActions.GetSpecializationCostsForProvider)
+  onGetSpecializationCostsForProvider(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetSpecializationCostsForProvider
+  ) {
+    return this.specializationCostService
+      .getSpecializationCosts(
+        new SpecializationCostRequest({ providerId: action.providerId })
+      )
+      .pipe(
+        tap((data: VwSpecializationCost[]) => {
+          ctx.patchState({
+            specializationCosts: data,
+          });
+        })
+      );
+  }
+
   @Action(ProgramActions.GetProgramCosts)
   onGetProgramCosts(
     ctx: StateContext<ProgramStateModel>,
@@ -103,10 +156,8 @@ export class ProgramState {
   onGetProgramTypes(
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramTypes
-  ){
-    return this.programTypeService
-    .getProgramTypes()
-    .pipe(
+  ) {
+    return this.programTypeService.getProgramTypes().pipe(
       tap((data: VwProgramType[]) => {
         ctx.patchState({
           programTypes: data,
@@ -159,9 +210,8 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchCategoryFilter
   ) {
-
     ctx.patchState({
-      programSearchFilter_CipSubSeriesCode: action.categoryCode
+      programSearchFilter_CipSubSeriesCode: action.categoryCode,
     });
   }
 
@@ -170,9 +220,8 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchCredentialFilter
   ) {
-
     ctx.patchState({
-      programSearchFilter_CredentialIds: action.credentialIds
+      programSearchFilter_CredentialIds: action.credentialIds,
     });
   }
 
@@ -182,7 +231,17 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchProgramTypeFilter
   ) {
     ctx.patchState({
-      programSearchFilter_ProgramTypeIds: action.programTypeIds
+      programSearchFilter_ProgramTypeIds: action.programTypeIds,
+    });
+  }
+
+  @Action(ProgramActions.SetProgramSearchSortOrder)
+  onSetProgramSearchSortOrder(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchSortOrder
+  ) {
+    ctx.patchState({
+      programSearchFilter_Sort: action.sortOrder,
     });
   }
 }

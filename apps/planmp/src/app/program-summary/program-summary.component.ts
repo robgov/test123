@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwSpecializationPrograms, VwProgramType } from '@libs/common/models';
+import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwSpecializationPrograms, VwProgramType, VwSpecializationCost } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({
@@ -12,7 +12,7 @@ export class ProgramSummaryComponent {
   @Input() program: VwProgram;
   @Input() programProvider: VwProvider;
   @Input() programSpecialization: VwSpecialization;
-  @Input() programCost: VwProgramCost;
+  @Input() specializationCosts: VwSpecializationCost[];
   @Input() providerLogo: VwProviderLogo;
   @Input() programType: VwProgramType;
   
@@ -21,9 +21,19 @@ export class ProgramSummaryComponent {
   currentCost = "XXXXX";
   currentSpecialization: string;
 
-  getProgramCost(): string {
-    if (!this.programCost) return "";
-    return (this.programCost.tuition + this.programCost.books + this.programCost.other).toString();
+  getSpecializationCost(): string {
+    if (!this.specializationCosts) return "";
+    var runningTotal=0;
+    var session:number;
+    this.specializationCosts.forEach(specCost => {
+      if (!session) {
+        session = specCost.sessionOfStudyId;
+      }
+      if (session == specCost.sessionOfStudyId) {
+        runningTotal+=specCost.amount;
+      }
+    });
+    return runningTotal.toString();
   }
 
   getLogoUrl(): string {
