@@ -55,9 +55,9 @@ export class TypetextdetailComponent implements OnInit {
 
 
 
-  private _filter(value: string): VwAlbertaPsiprovider[] {
+  private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
-    return this.providers.filter(option => option.providerName.toLowerCase().indexOf(filterValue) === 0);
+    return this.items.filter(option => option.value.toLowerCase().indexOf(filterValue) === 0);
   }
 
   onSearchChange(searchValue: string): void {

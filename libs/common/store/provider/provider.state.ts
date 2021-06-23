@@ -6,10 +6,17 @@ import { ProviderActions } from './provider.actions';
 import {
   ProviderLogoService,
   AlbertaPSIProviderService,
+  ProviderWebsiteService,
+  ProviderAddressService
+  
 } from '@libs/common/services';
 import {
   VwAlbertaPsiprovider,
   VwProviderLogo,
+  VwProviderWebsite,
+  VwProviderAddress,
+  ProviderWebsiteRequest,
+  ProviderAddressRequest,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -25,6 +32,8 @@ export class ProviderState {
   constructor(
     private albertaPSIProviderService: AlbertaPSIProviderService,
     private providerLogoService: ProviderLogoService,
+    private providerWebsiteService: ProviderWebsiteService,
+    private providerAddressService: ProviderAddressService,
   ) {}
 
   @Action(AppAction.Start)
@@ -33,6 +42,8 @@ export class ProviderState {
     ctx.dispatch([
       new ProviderActions.GetProviders(),
       new ProviderActions.GetProviderLogos(),
+      new ProviderActions.GetProviderWebsites(),
+      new ProviderActions.GetProviderAddresses(),
     ]);
   }
 
@@ -63,4 +74,35 @@ export class ProviderState {
       })
     );
   }
+
+  
+  @Action(ProviderActions.GetProviderWebsites)
+  onGetProgramProviderWebsite(
+    ctx: StateContext<ProviderStateModel>,
+    action: ProviderActions.GetProviderWebsites
+  ) {
+    return this.providerWebsiteService.getProviderWebsites(new ProviderWebsiteRequest()).pipe(
+      tap((data: VwProviderWebsite[]) => {
+        ctx.patchState({
+          providerWebsites: data,
+        });
+      })
+    );
+  }
+
+
+  @Action(ProviderActions.GetProviderAddresses)
+  onGetProgramProviderAddress(
+    ctx: StateContext<ProviderStateModel>,
+    action: ProviderActions.GetProviderAddresses
+  ) {
+    return this.providerAddressService.getProviderAddresses(new ProviderAddressRequest()).pipe(
+      tap((data: VwProviderAddress[]) => {
+        ctx.patchState({
+          providerAddresses: data,
+        });
+      })
+    );
+  }
+
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { VwProviderAddress } from '@libs/common/models';
+import { ProviderAddressRequest, VwProviderAddress } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +20,9 @@ export class ProviderAddressService extends EndPointService {
     
     public getProviderAddress(id: number): Observable<VwProviderAddress[]> { 
         return this.get(this.url + '{id}', id);
+    }
+    public getProviderAddresses(request: ProviderAddressRequest): Observable<VwProviderAddress[]> { 
+        return this.get(this.url + 'GetProviderAddresses', request);
     }
 
     private get url() {

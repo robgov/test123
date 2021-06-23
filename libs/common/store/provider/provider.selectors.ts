@@ -20,6 +20,19 @@ static getProvider(id: number) {
     );
   }
 
+  static getProviderWebsite(id: number) {
+    return createSelector([ProviderState], (state: ProviderStateModel) =>
+      state.providerWebsites.find((q) => q.providerId === id)
+    );
+  }
+
+  static getProviderAddress(id: number) {
+    return createSelector([ProviderState], (state: ProviderStateModel) =>
+      state.providerAddresses.find((q) => q.providerId === id)
+    );
+  }
+
+
   @Selector([ProviderState])
   static getProviders(state: ProviderStateModel): VwProvider[] {
     return state.programProviders;
@@ -29,4 +42,5 @@ static getProvider(id: number) {
   static getProviderLogos(state: ProviderStateModel): VwProviderLogo[] {
     return state.providerLogos;
   }
+
 }

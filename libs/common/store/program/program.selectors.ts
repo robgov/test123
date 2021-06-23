@@ -23,6 +23,12 @@ export class ProgramSelectors {
     );
   }
 
+  static getProgramCredential(id: number) {
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programCredentials.find((q) => q.programCredentialId === id)
+    );
+  }
+  
   static getProgramCost(id: number) {
     return createSelector([ProgramState], (state: ProgramStateModel) =>
       state.programCosts.find((q) => q.programId === id)

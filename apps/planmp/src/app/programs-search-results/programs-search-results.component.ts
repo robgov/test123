@@ -19,7 +19,9 @@ import {
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
   VwProgramType,
-  VwPmpLookup
+  VwPmpLookup,
+  VwProviderWebsite,
+  VwProviderAddress,
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
@@ -42,7 +44,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(ProgramSelectors.getProgramTypes) programTypes$ : Observable<VwProgramType[]>;
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
-
   @Select(LookupSelectors.getLookups) sortOption$: Observable<VwPmpLookup[]>;
 
 
@@ -59,6 +60,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   searchResults: VwProgram[];
   programCosts: VwProgramCost[];
   programByCategoryList: VwPmpPsiprogramByCategoryList[];
+
 
   sortOption: string;
 
@@ -108,5 +110,14 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   getProgramType(program: VwProgram): Observable<VwProgramType> {
     return this.store.select(ProgramSelectors.getProgramType(program.programTypeId));
+  }
+  getProviderWebsite(program: VwProgram): Observable<VwProviderWebsite> {
+    return this.store.select(ProviderSelectors.getProviderWebsite(program.providerId));
+  }
+  getProviderAddress(program: VwProgram): Observable<VwProviderAddress> {
+    return this.store.select(ProviderSelectors.getProviderAddress(program.providerId));
+  }
+  getProgramCredential(program: VwProgram): Observable<VwProgramCredential>{
+    return this.store.select(ProgramSelectors.getProgramCredential(program.programCredentialId));
   }
 }
