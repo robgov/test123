@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwSpecializationPrograms } from '@libs/common/models';
+import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwSpecializationPrograms, VwProgramType } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({
@@ -14,7 +14,7 @@ export class ProgramSummaryComponent {
   @Input() programSpecialization: VwSpecialization;
   @Input() programCost: VwProgramCost;
   @Input() providerLogo: VwProviderLogo;
-  @Input() providerLogos: VwProviderLogo[];
+  @Input() programType: VwProgramType;
   
   currentProvider: VwProvider;
   currentLogo: VwProviderLogo;
@@ -34,5 +34,10 @@ export class ProgramSummaryComponent {
   getProgramProviderName(): string {
     if (!this.currentProvider) return "";
     return this.currentProvider.providerName;
+  }
+
+  getProgramType(): string {
+    if (!this.programType) return ""
+    return this.programType.programType;
   }
 }

@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppAction } from '@libs/common/store/common/app.actions';
-import {pmpState} from '@libs/common/store/store-index';
+import { pmpState } from '@libs/common/store/store-index';
 
 import {
   LocationAddressService,
@@ -44,10 +44,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 const MATERIAL_MODULES = [
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -62,7 +66,8 @@ const MATERIAL_MODULES = [
   MatSelectModule,
   MatSidenavModule,
   MatTabsModule,
-  MatTableModule
+  MatTableModule,
+  MatToolbarModule
 ];
 
 // Components
@@ -86,6 +91,10 @@ import { ProgramsSearchResultsComponent } from './programs-search-results/progra
 import { ProgramSummaryComponent } from './program-summary/program-summary.component';
 import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
 import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
+import { TypetextComponent } from './typetext/typetext.component';
+import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
+import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
+import { ProgramCardComponent } from './program-card/program-card.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +118,10 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     ProgramSummaryComponent,
     ProgramCategorySummaryComponent,
     ProgramCategorySummaryListComponent,
+    TypetextComponent,
+    TypetextdetailComponent,
+    ProgramSearchResultsFilterComponent,
+    ProgramCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,12 +151,12 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
     ProviderTypeService,
     ProviderWebsiteService,
     {
-			provide: APP_INITIALIZER,
-			useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),
-			deps: [Store],
-			multi: true,
-		},
+      provide: APP_INITIALIZER,
+      useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),
+      deps: [Store],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

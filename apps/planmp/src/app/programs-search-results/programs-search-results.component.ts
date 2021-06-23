@@ -11,23 +11,22 @@ import { ActivatedRoute } from '@angular/router';
 import {
   VwAlbertaPsiprovider,
   VwProgram,
-  ProgramsRequest,
   VwSpecialization,
   VwProviderLogo,
   VwProgramCost,
   VwPmpPsiprogramByCategoryList,
-  VwProvider
+  VwProvider,
+  VwPmpPsiprogramCountByCategory,
+  VwProgramCredential,
+  VwProgramType,
+  VwPmpLookup,
+  VwProviderWebsite,
+  VwProviderAddress,
 } from '@libs/common/models';
-import {
-  ProgramService,
-  SpecializationService
-} from '@libs/common/services';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
-import { ProgramSelectors } from '@libs/common/store/program';
-import { map } from 'rxjs/operators';
-import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
+import { LookupSelectors, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -37,17 +36,24 @@ import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dia
 export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   FlexConstants = FlexConstants;
 
-  @Select(ProgramSelectors.programSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
+  @Select(ProgramSelectors.getProgramSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
   @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
-  @Select(ProgramSelectors.getProgramSearchFilters) programSearchFilters$: Observable<any>;
+  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>
+  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<VwProgram[]>
+  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
+  @Select(ProgramSelectors.getProgramTypes) programTypes$ : Observable<VwProgramType[]>;
+
+  @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
+  @Select(LookupSelectors.getLookups) sortOption$: Observable<VwPmpLookup[]>;
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;
   dataSource: MatTableDataSource<VwProgram>;
 
-  private providerId: number = null;
-  private cipSubSeriesCode: string = null;
-  private keyword: string=null;
+  providerId: number = null;
+  cipSubSeriesCode: string = null;
+  keyword: string=null;
   providers: VwAlbertaPsiprovider[];
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
@@ -55,12 +61,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   programCosts: VwProgramCost[];
   programByCategoryList: VwPmpPsiprogramByCategoryList[];
 
+
   sortOption: string;
 
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private programService: ProgramService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
    }
@@ -77,9 +83,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       if (params['keywords']) {
         this.keyword = params['keywords'];
       }
-      this.applyFilter();
-
-      this.loadPrograms(this.providerId, this.cipSubSeriesCode, this.keyword);
     });
   }
 
@@ -89,16 +92,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     }
   }
 
-  applyFilter(){
-    this.store    
-  }
-
   getProvider(program: VwProgram): Observable<VwProvider> {
-    return this.store.select(ProgramSelectors.getProvider(program.providerId));
+    return this.store.select(ProviderSelectors.getProvider(program.providerId));
   }
 
   getProviderLogo(program: VwProgram): Observable<VwProviderLogo> {
-    return this.store.select(ProgramSelectors.getProviderLogo(program.providerId));
+    return this.store.select(ProviderSelectors.getProviderLogo(program.providerId));
   }
 
   getSpecialization(program: VwProgram): Observable<VwSpecialization> {
@@ -109,61 +108,16 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     return this.store.select(ProgramSelectors.getProgramCost(program.programId));
   }
 
-  loadPrograms(providerId: number, cipSubSeriesCode, keyword: string) {
-    this.programService
-      .getPrograms(new ProgramsRequest())
-      .subscribe((result) => {
-        this.searchResults = result;
-        this.dataSource = new MatTableDataSource<VwProgram>(this.searchResults);
-        this.dataSource.paginator = this.paginator;
-        this.programs$ = this.dataSource.connect();
-        this.dataSource.filterPredicate = programFilterPredicate;
-        this.filterPrograms(providerId, cipSubSeriesCode,keyword);
-      });
+  getProgramType(program: VwProgram): Observable<VwProgramType> {
+    return this.store.select(ProgramSelectors.getProgramType(program.programTypeId));
   }
-
-  filterPrograms(providerId: number, cipSubSeriesCode: string, keyword: string) {
-    var selectedFilters = { providerId: [], programId: [], programName:""};
-
-    if (providerId > 0) {
-      selectedFilters.providerId.push(+providerId);
-    }
-    if (cipSubSeriesCode) {
-        const categoryProgramIds = this.store.selectSnapshot(ProgramSelectors.getCategoryPrograms(this.cipSubSeriesCode));
-    
-        selectedFilters.programId = categoryProgramIds.map(specs=>specs.programId);
-    }
-    if (keyword) {
-      selectedFilters.programName=keyword;
-    }
-
-    this.dataSource.filter = JSON.stringify(selectedFilters);
+  getProviderWebsite(program: VwProgram): Observable<VwProviderWebsite> {
+    return this.store.select(ProviderSelectors.getProviderWebsite(program.providerId));
+  }
+  getProviderAddress(program: VwProgram): Observable<VwProviderAddress> {
+    return this.store.select(ProviderSelectors.getProviderAddress(program.providerId));
+  }
+  getProgramCredential(program: VwProgram): Observable<VwProgramCredential>{
+    return this.store.select(ProgramSelectors.getProgramCredential(program.programCredentialId));
   }
 }
-
-export const programFilterPredicate = (
-  data: VwProgram,
-  jsonFilter: string
-): boolean => {
-  const criteria = JSON.parse(jsonFilter);
-  if (!criteria) return true;
-
-  return Object.keys(criteria).every((key) => {
-    const criteriaValue = criteria[key];
-    if (!criteriaValue) return true;
-
-    const dataValue = data[key];
-    return (
-      dataValue === criteriaValue ||
-      (typeof criteriaValue === 'string' &&
-        dataValue &&
-        dataValue
-          .toString()
-          .toLowerCase()
-          .indexOf(criteriaValue.toLowerCase()) !== -1) ||
-      (Array.isArray(criteriaValue) &&
-        (criteriaValue.length === 0 ||
-          criteriaValue.some((cv) => cv === dataValue)))
-    );
-  });
-};

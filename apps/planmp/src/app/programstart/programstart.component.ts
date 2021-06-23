@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
 import {ProgramTypeService} from '@libs/common/services';
-import { PagedDataParameters, VwProgramType } from '@libs/common/models';
+import { PagedDataParameters, VwProgramCredential, VwProgramType } from '@libs/common/models';
 
 @Component({
   selector: 'ae-programstart',
@@ -36,14 +36,14 @@ ngOnInit(): void {
   }
 
   getImageUrl(){
-    if (this.programdata[0]) {
-      return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
-    }
+    // if (this.programdata[0]) {
+    //   return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
+    // }
     return "";
   }
 
   fetchCredentials() {
-    this.ptservice.getCredentials().subscribe((t)=>{
+    this.ptservice.getProgramTypes().subscribe((t)=>{
       this.credentials = t;
     })
   }

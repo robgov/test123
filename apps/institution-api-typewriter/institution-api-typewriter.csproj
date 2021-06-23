@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\libs\common\models\provider-address-request.ts" Link="typewriter\provider-address-request.ts" />
+    <None Include="..\..\libs\common\models\provider-website-request.ts" Link="typewriter\provider-website-request.ts" />
     <None Include="..\..\libs\common\models\vw-pmp-psiprogram-by-category-list.ts" Link="typewriter\vw-pmp-psiprogram-by-category-list.ts" />
     <None Include="..\..\libs\common\models\vw-pmp-psiprogram-count-by-category.ts" Link="typewriter\vw-pmp-psiprogram-count-by-category.ts" />
     <None Include="..\..\libs\common\models\vw-program-credential.ts" Link="typewriter\vw-program-credential.ts" />
@@ -19,6 +21,7 @@
     <None Include="..\..\libs\common\services\location-phone.service.ts" Link="typewriter\location-phone.service.ts" />
     <None Include="..\..\libs\common\services\location-publication.service.ts" Link="typewriter\location-publication.service.ts" />
     <None Include="..\..\libs\common\services\location.service.ts" Link="typewriter\location.service.ts" />
+    <None Include="..\..\libs\common\services\program-credential.service.ts" Link="typewriter\program-credential.service.ts" />
     <None Include="..\..\libs\common\services\program-publication.service.ts" Link="typewriter\program-publication.service.ts" />
     <None Include="..\..\libs\common\services\program.service.ts" Link="typewriter\program.service.ts" />
     <None Include="..\..\libs\common\services\provider-address.service.ts" Link="typewriter\provider-address.service.ts" />

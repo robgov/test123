@@ -14,6 +14,8 @@ export class VwProgram {
     public providerId: number;
     public businessStartDate: Date;
     public businessEndDate: Date;
+    public programEmploymentStat: number;
+    public programMedianIncome: number;
 
     constructor(init? : Partial<VwProgram>) {
         

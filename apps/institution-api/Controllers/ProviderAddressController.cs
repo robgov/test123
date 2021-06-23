@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
-using ProviderApi.Models;
+using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
-using LinqKit;
-using ProviderApi.Controllers.Enrichers;
 
 namespace ProviderApi.Controllers
 {
@@ -34,6 +30,15 @@ namespace ProviderApi.Controllers
     public IEnumerable<VwProviderAddress> GetProviderAddress(int id)
     {
       return _context.VwProviderAddresses.Where(x => x.ProviderAddressId.Equals(id));
+    }
+
+    [HttpGet("GetProviderAddresses")]
+    [SwaggerOperation("GetProviderAddresses")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<VwProviderAddress> GetProviderAddresses([FromQuery] ProviderAddressRequest request)
+    {
+      return _context.VwProviderAddresses.Where(pc => !request.ProviderId.HasValue || pc.ProviderId.Equals(request.ProviderId));
     }
 
   }

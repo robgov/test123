@@ -5,7 +5,7 @@ import { environment } from '../environment/environment';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { VwProgram } from '@libs/common/models';
-import { ProgramActions, ProgramSelectors } from '@libs/common/store/program';
+import {ProgramSelectors } from '@libs/common/store/program';
 
 interface PageContent {
 
@@ -26,8 +26,12 @@ interface SearchOption {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  
   @Select(ProgramSelectors.programs) programs$: Observable<VwProgram[]>;
+
   programs: VwProgram[];
+  cipscode: VwProgram[];
   env = environment;
 
   selectedValue: string;
@@ -41,13 +45,7 @@ export class HomeComponent implements OnInit {
     {value: 'programs', viewValue: 'programs'}
   ];
 
-  providers: any[] = [
-    {
-      PageTitle: "Title",
-      Subtitle: "Subtitle",
-      Header: "Header",
-      Summary: "Strapi call failed",
-    }];
+  providers: any[] = [];
 
   constructor(private http: HttpClient, private store: Store) {
    }

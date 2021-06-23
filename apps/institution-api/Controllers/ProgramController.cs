@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
-using ProviderApi.Models;
+using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
 using LinqKit;
 using ProviderApi.Controllers.Enrichers;
@@ -59,6 +59,15 @@ namespace ProviderApi.Controllers
       //  programs = programs.Where(p => categoryProgramIds.Contains(p.ProgramId));
       //}
 
+      //FOR EACH OF THESE ITEMS ADD A RANDOM EMPLOYMENT % AND MEDIAN INCOME
+
+      foreach(var item in programs)
+      {
+        //ProgramEmploymentStat 
+        //ProgramMedianIncome
+        item.ProgramMedianIncome = -1;
+        item.ProgramEmploymentStat = -1;
+      }
       return programs.ToList().OrderBy(x=>x.ProgramName);
     }
 

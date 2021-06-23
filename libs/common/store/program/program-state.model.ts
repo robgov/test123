@@ -1,35 +1,28 @@
-import { VwPmpPsiprogramCountByCategory, VwProgram, VwProgramCost, VwProvider,VwAlbertaPsiprovider, VwProviderLogo, VwSpecialization } from '@libs/common/models';
+import {
+  VwPmpPsiprogramCountByCategory,
+  VwProgram,
+  VwProgramCost,
+  VwSpecialization,
+  VwProgramCredential,
+  VwProgramType,
+} from '@libs/common/models';
 
 export class ProgramStateModel {
-    programs: VwProgram[];
-	programSpecializations: VwSpecialization[];
-	programCosts: VwProgramCost[];
-	programCategoryCounts: VwPmpPsiprogramCountByCategory[];
+  programs: VwProgram[];
+  programSpecializations: VwSpecialization[];
+  programCosts: VwProgramCost[];
+  programTypes: VwProgramType[];
+  programCredentials: VwProgramCredential[];
+  programCategoryCounts: VwPmpPsiprogramCountByCategory[];
 
-	programProviders: VwAlbertaPsiprovider[];
-	providerLogos: VwProviderLogo[];
+  // Program Search Filters
+  programSearchFilter_ProviderIds: number[];
+  programSearchFilter_CipSubSeriesCode: string;
+  programSearchFilter_CategoryProgramIds: number[];
+  programSearchFilter_PostalCode: string;
+  programSearchFilter_CredentialIds: number[];
+  programSearchFilter_ProgramTypeIds: number[];
 
-	programSearchFilters;
-	// auth: AuthenticatedModel = null;
-	// accessRequests: AllAccessInfoModel = new AllAccessInfoModel();
-	// errors: PropertyErrorModel[] = [];
-	// isAuthInitialized = false;
-	// isAuthorized = false;
-	// redirectUrl = '';
-	// status = new LoginStatusModel();
-	// forms: {
-	// 	accessRequest: {
-	// 		model: RequestAccessModel;
-	// 		dirty: false;
-	// 		status: '';
-	// 		errors: any;
-	// 	};
-	// 	selectJudicialCentre: {
-	// 		model: PreferenceModel;
-	// 		dirty: false;
-	// 		status: '';
-	// 		errors: any;
-	// 	};
-	// };
+  programSearchFilter_Keywords: string;
+
 }
-

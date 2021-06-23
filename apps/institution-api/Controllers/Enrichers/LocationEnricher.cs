@@ -1,5 +1,5 @@
 using LinqKit;
-using ProviderApi.Models;
+using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
 
 namespace ProviderApi.Controllers.Enrichers
