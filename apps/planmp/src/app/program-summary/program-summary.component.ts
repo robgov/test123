@@ -1,5 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwSpecializationPrograms, VwProgramType } from '@libs/common/models';
+import {
+  VwProgram,
+  VwProvider,
+  VwSpecialization,
+  VwProviderLogo,
+  VwProgramType,
+  VwSpecializationCost,
+  ProgramSummaryDto,
+} from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({
@@ -9,35 +17,47 @@ import { FlexConstants } from '@libs/FlexConstants';
 })
 export class ProgramSummaryComponent {
   FlexConstants = FlexConstants;
+  @Input() programSummary: ProgramSummaryDto;
   @Input() program: VwProgram;
   @Input() programProvider: VwProvider;
   @Input() programSpecialization: VwSpecialization;
-  @Input() programCost: VwProgramCost;
+  @Input() specializationCosts: VwSpecializationCost[];
   @Input() providerLogo: VwProviderLogo;
   @Input() programType: VwProgramType;
-  
+  @Input() distance: number;
+
   currentProvider: VwProvider;
   currentLogo: VwProviderLogo;
-  currentCost = "XXXXX";
+  currentCost = 'XXXXX';
   currentSpecialization: string;
 
-  getProgramCost(): string {
-    if (!this.programCost) return "";
-    return (this.programCost.tuition + this.programCost.books + this.programCost.other).toString();
+  getSpecializationCost(): string {
+    if (!this.specializationCosts) return '';
+    var runningTotal = 0;
+    var session: number;
+    this.specializationCosts.forEach((specCost) => {
+      if (!session) {
+        session = specCost.sessionOfStudyId;
+      }
+      if (session == specCost.sessionOfStudyId) {
+        runningTotal += specCost.amount;
+      }
+    });
+    return runningTotal.toString();
   }
 
   getLogoUrl(): string {
-    if (!this.providerLogo) return "";
+    if (!this.providerLogo) return '';
     return this.providerLogo.logoUrl;
   }
 
   getProgramProviderName(): string {
-    if (!this.currentProvider) return "";
+    if (!this.currentProvider) return '';
     return this.currentProvider.providerName;
   }
 
   getProgramType(): string {
-    if (!this.programType) return ""
+    if (!this.programType) return '';
     return this.programType.programType;
   }
 }

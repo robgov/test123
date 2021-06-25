@@ -21,7 +21,7 @@ export class LookupState {
   @Action(AppAction.Start)
   onStart(ctx: StateContext<LookupStateModel>, action: AppAction.Start) {
     console.log('initializing...');
-    ctx.dispatch([new LookupActions.GetLookups(new LookupRequest({type:'ProgramSort'}))]);
+    ctx.dispatch([new LookupActions.GetLookups(new LookupRequest())]);
   }
 
   @Action(LookupActions.GetLookups)

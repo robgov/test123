@@ -1,0 +1,15 @@
+<div fxFlex="100" fxLayout="column">
+    <mat-toolbar fxLayout="row">
+        <button mat-button fxFlex (click)="close()">
+            <mat-icon fxFlex>close</mat-icon>
+        </button>
+        <div fxFlex="*" fxLayout="column" fxLayoutAlign="center center" class="">
+            <div fxFlex>Sort By</div>
+        </div>
+    </mat-toolbar>
+    <mat-select fxFlex="100" class="filter-field" (selectionChange)="sortOrderSelected($event.value)"
+        [(value)]="selectedSortOrder">
+        <mat-option [value]="s.code" *ngFor="let s of sortOptions" class="filter-field">
+            {{s.name}}</mat-option>
+    </mat-select>
+</div>

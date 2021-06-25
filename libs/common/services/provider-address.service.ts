@@ -18,9 +18,6 @@ export class ProviderAddressService extends EndPointService {
         this.key = 'providerAddress';
     }
     
-    public getProviderAddress(id: number): Observable<VwProviderAddress[]> { 
-        return this.get(this.url + '{id}', id);
-    }
     public getProviderAddresses(request: ProviderAddressRequest): Observable<VwProviderAddress[]> { 
         return this.get(this.url + 'GetProviderAddresses', request);
     }

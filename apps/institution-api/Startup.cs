@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProviderApi.Models.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace ProviderApi
 {
@@ -46,6 +47,7 @@ namespace ProviderApi
       services.AddDbContext<AEDigital_SYSTContext>(opt =>
               opt.UseSqlServer(Configuration.GetConnectionString("AEDIGITAL_SYST"))
            );
+      services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

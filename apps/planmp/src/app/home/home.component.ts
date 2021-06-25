@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   getbackgroundurl()
   {
-    if(this.providers[0].HeroImage)
+    if(this.providers && this.providers[0] && this.providers[0].HeroImage)
     {
       return this.providers[0].HeroImage.url;
     }
@@ -74,4 +74,6 @@ export class HomeComponent implements OnInit {
     }
     );
   }
+
+  //Redirect to the router
 }

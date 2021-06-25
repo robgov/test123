@@ -14,9 +14,9 @@ import {
   VwAlbertaPsiprovider,
   VwProviderLogo,
   VwProviderWebsite,
-  VwProviderAddress,
-  ProviderWebsiteRequest,
   ProviderAddressRequest,
+  ProviderWebsiteRequest,
+  VwProviderAddress,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -74,7 +74,6 @@ export class ProviderState {
       })
     );
   }
-
   
   @Action(ProviderActions.GetProviderWebsites)
   onGetProgramProviderWebsite(

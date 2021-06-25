@@ -5,6 +5,8 @@ using System.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models.EntityFramework;
+using ProviderApi.Models.DtoModels;
+using AutoMapper;
 using ProviderApi.Models.ModelParameters;
 
 namespace ProviderApi.Controllers
@@ -16,20 +18,13 @@ namespace ProviderApi.Controllers
     private readonly ILogger<ProviderAddressController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private IMapper _mapper;
 
-    public ProviderAddressController(ILogger<ProviderAddressController> logger, AEDigital_SYSTContext context)
+    public ProviderAddressController(ILogger<ProviderAddressController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
-    }
-
-    [HttpGet("{id}")]
-    [SwaggerOperation("GetProviderAddress")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProviderAddress> GetProviderAddress(int id)
-    {
-      return _context.VwProviderAddresses.Where(x => x.ProviderAddressId.Equals(id));
+      _mapper = mapper;
     }
 
     [HttpGet("GetProviderAddresses")]
@@ -40,6 +35,5 @@ namespace ProviderApi.Controllers
     {
       return _context.VwProviderAddresses.Where(pc => !request.ProviderId.HasValue || pc.ProviderId.Equals(request.ProviderId));
     }
-
   }
 }

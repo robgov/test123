@@ -40,12 +40,13 @@ fxLayout="column"
       fxLayout="row"
       fxflex="100%"
     >
-      <div fxFlex>{{ this.providers[0].HeroTitle }}</div>
+      <div fxFlex *ngIf="this.providers && this.providers[0]">{{ this.providers[0].HeroTitle }}</div>
     </div>
     <div
       subcaption
       style="color: white"
       fxflex="100%"
+      *ngIf="this.providers && this.providers[0]"
     >
       {{ this.providers[0].HeroMessage }}
     </div>
@@ -78,7 +79,7 @@ fxLayout="column"
       fxLayoutAlign=""
       [fxFlex]="FlexConstants.Column.Large_8 "
     >
-      <h1>{{ this.providers[0].schoolbrowsertitle }}</h1>
+      <h1 *ngIf="this.providers && this.providers[0]">{{ this.providers[0].schoolbrowsertitle }}</h1>
       <aedigital-find-programs [attr.data-cy]="'home.find-programs'" ></aedigital-find-programs>
     </div>
     <div

@@ -43,21 +43,13 @@ namespace ProviderApi.Controllers
     public IEnumerable<VwProgram> GetPrograms([FromQuery] ProgramsRequest request)
     {
       IQueryable<VwProgram> programs;
-      ///TODO: Should be able to remove this, server shouldn't be doing the filtering
-      //if (request.ProviderId > 0)
-      //{
-      //   programs = _context.VwPrograms.Where(x => x.ProviderId.Equals(request.ProviderId));
-      //}
-      //else
-      //{
-      programs = _context.VwPrograms;
-      //}
+      var albertaProvidersList = _context.VwAlbertaPsiproviders.Select(apsi => apsi.ProviderId).ToList();
+      programs = _context.VwPrograms.Where(p=> p.ProviderId.HasValue && albertaProvidersList.Contains(p.ProviderId.Value));
 
-      //if (!string.IsNullOrEmpty(request.CipSubSeriesCode))
-      //{
-      //  var categoryProgramIds = _context.VwPmpPsiprogramByCategoryLists.Where(c => c.CipSubSeriesCode == request.CipSubSeriesCode).Select(cp=>cp.ProgramId);
-      //  programs = programs.Where(p => categoryProgramIds.Contains(p.ProgramId));
-      //}
+
+      //TODO: Remove filling in information that's not available yet.
+
+
 
       //FOR EACH OF THESE ITEMS ADD A RANDOM EMPLOYMENT % AND MEDIAN INCOME
 
@@ -79,15 +71,5 @@ namespace ProviderApi.Controllers
     {
       return _context.VwPmpPsispecializationCountByCategories.OrderBy(x=>x.CipSubSeries);
     }
-
-
-    //[HttpGet("GetProgramIdsByCategory")]
-    //[SwaggerOperation("GetProgramIdsByCategory")]
-    //[SwaggerResponse((int)HttpStatusCode.OK)]
-    //[SwaggerResponse((int)HttpStatusCode.NotFound)]
-    //public IEnumerable<VwPmpPsiprogramCountByCategory> GetProgramIdsByCategory()
-    //{
-    //  return _context.VwPmpPsispecializationCountByCategories.ToList();
-    //}
   }
 }

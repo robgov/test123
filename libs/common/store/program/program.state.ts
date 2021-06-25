@@ -1,4 +1,4 @@
-import { Action, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { ProgramStateModel } from './program-state.model';
@@ -6,25 +6,32 @@ import { ProgramStateModel } from './program-state.model';
 import { ProgramActions } from './program.actions';
 import {
   ProgramService,
-  ProviderLogoService,
   SpecializationService,
   ProgramCostService,
-  AlbertaPSIProviderService,
   ProgramCredentialService,
   ProgramTypeService,
+  SpecializationCostService,
+  PostalCodeService,
+  ProgramSummaryService,
 } from '@libs/common/services';
 import {
   VwProgram,
   ProgramsRequest,
   VwSpecialization,
+  VwSpecializationCost,
   VwProgramCost,
   ProgramCostsRequest,
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
   VwProgramType,
+  SpecializationCostRequest,
+  VwAbpostalCode,
+  PostalCodeRequest,
+  ProgramSummaryDto,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
+import { DistanceHelper } from '@libs/common/helpers';
 
 const initialState = new ProgramStateModel();
 
@@ -39,20 +46,41 @@ export class ProgramState {
     private specializationService: SpecializationService,
     private programCostService: ProgramCostService,
     private programCredentialService: ProgramCredentialService,
-    private programTypeService: ProgramTypeService
+    private programTypeService: ProgramTypeService,
+    private specializationCostService: SpecializationCostService,
+    private postalCodeService: PostalCodeService,
+    private programSummaryService: ProgramSummaryService
   ) {}
 
   @Action(AppAction.Start)
   onStart(ctx: StateContext<ProgramStateModel>, action: AppAction.Start) {
     console.log('initializing...');
     ctx.dispatch([
+      new ProgramActions.GetPostalCodes(),
+      // Loading lookups
       new ProgramActions.GetProgramCategoryCounts(),
       new ProgramActions.GetProgramCosts(),
       new ProgramActions.GetProgramCredentials(),
-      new ProgramActions.GetPrograms(),
+      // new ProgramActions.GetPrograms(),
+      new ProgramActions.GetProgramSummaries(),
       new ProgramActions.GetProgramSpecializations(),
-      new ProgramActions.GetProgramTypes()
+      new ProgramActions.GetProgramTypes(),
     ]);
+  }
+
+  @Action(ProgramActions.GetProgramSummaries)
+  onGetProgramSummaries(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetProgramSummaries
+  ) {
+    return this.programSummaryService.getProgramSummaries().pipe(
+      tap((data: ProgramSummaryDto[]) => {
+        ctx.patchState({
+          programSummaries: data,
+        });
+        ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
+      })
+    );
   }
 
   @Action(ProgramActions.GetPrograms)
@@ -83,6 +111,72 @@ export class ProgramState {
     );
   }
 
+  @Action(ProgramActions.GetPostalCodes)
+  onGetPostalCodes(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetPostalCodes
+  ) {
+    
+    return this.postalCodeService.getPostalCodes(new PostalCodeRequest()).pipe(
+      tap((data: VwAbpostalCode[]) => {
+        ctx.patchState({
+          postalCodes: data,
+        });
+        ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
+      })
+    );
+  }
+
+  // @Action(ProgramActions.GetSpecializationCosts)
+  // onGetSpecializationCosts(
+  //   ctx: StateContext<ProgramStateModel>,
+  //   action: ProgramActions.GetSpecializationCosts
+  // ) {
+  //   return this.specializationCostService.getSpecializationCosts(new SpecializationCostRequest()).pipe(
+  //     tap((data: VwSpecializationCost[]) => {
+  //       ctx.patchState({
+  //         specializationCosts: data,
+  //       });
+  //     })
+  //   );
+  // }
+
+  @Action(ProgramActions.GetSpecializationCostForProgram)
+  onGetSpecializationCostForProgram(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetSpecializationCostForProgram
+  ) {
+    return this.specializationCostService
+      .getSpecializationCosts(
+        new SpecializationCostRequest({ programId: action.programId })
+      )
+      .pipe(
+        tap((data: VwSpecializationCost[]) => {
+          ctx.patchState({
+            specializationCosts: data,
+          });
+        })
+      );
+  }
+
+  @Action(ProgramActions.GetSpecializationCostsForProvider)
+  onGetSpecializationCostsForProvider(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetSpecializationCostsForProvider
+  ) {
+    return this.specializationCostService
+      .getSpecializationCosts(
+        new SpecializationCostRequest({ providerId: action.providerId })
+      )
+      .pipe(
+        tap((data: VwSpecializationCost[]) => {
+          ctx.patchState({
+            specializationCosts: data,
+          });
+        })
+      );
+  }
+
   @Action(ProgramActions.GetProgramCosts)
   onGetProgramCosts(
     ctx: StateContext<ProgramStateModel>,
@@ -103,10 +197,8 @@ export class ProgramState {
   onGetProgramTypes(
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramTypes
-  ){
-    return this.programTypeService
-    .getProgramTypes()
-    .pipe(
+  ) {
+    return this.programTypeService.getProgramTypes().pipe(
       tap((data: VwProgramType[]) => {
         ctx.patchState({
           programTypes: data,
@@ -159,9 +251,8 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchCategoryFilter
   ) {
-
     ctx.patchState({
-      programSearchFilter_CipSubSeriesCode: action.categoryCode
+      programSearchFilter_CipSubSeriesCode: action.categoryCode,
     });
   }
 
@@ -175,16 +266,23 @@ export class ProgramState {
     });
   }
 
-  //
+  @Action(ProgramActions.SetProgramSearchDistanceFilter)
+  onSetProgramSearchDistanceFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchDistanceFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_DistanceInKm: action.distance
+    });
+  }
 
   @Action(ProgramActions.SetProgramSearchCredentialFilter)
   onSetProgramSearchCredentialFilter(
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchCredentialFilter
   ) {
-
     ctx.patchState({
-      programSearchFilter_CredentialIds: action.credentialIds
+      programSearchFilter_CredentialIds: action.credentialIds,
     });
   }
 
@@ -194,7 +292,47 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchProgramTypeFilter
   ) {
     ctx.patchState({
-      programSearchFilter_ProgramTypeIds: action.programTypeIds
+      programSearchFilter_ProgramTypeIds: action.programTypeIds,
+    });
+  }
+
+  @Action(ProgramActions.SetProgramSearchPostalCodeFilter)
+  onSetProgramSearchPostalCodeFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchPostalCodeFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_PostalCode: action.postalCode.toUpperCase(),
+    });
+    ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
+  }
+
+  @Action(ProgramActions.SetProgramProviderDistances)
+  onSetProgramProviderDistances(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramProviderDistances
+  ) {
+    const userPostalCode = ctx.getState().programSearchFilter_PostalCode;
+    if (ctx.getState().postalCodes && ctx.getState().programSummaries && userPostalCode){
+      const userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === userPostalCode);
+
+      const updatedProgramSummaries = ctx.getState().programSummaries;
+      updatedProgramSummaries.forEach((summary)=>{
+        summary.providerDistance = DistanceHelper.getDistanceFromLatLonInKm(userLocation,summary.longitude,summary.latitude)
+      });
+      ctx.patchState({
+        programSummaries: updatedProgramSummaries
+      });
+    } 
+  }
+
+  @Action(ProgramActions.SetProgramSearchSortOrder)
+  onSetProgramSearchSortOrder(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchSortOrder
+  ) {
+    ctx.patchState({
+      programSearchFilter_Sort: action.sortOrder,
     });
   }
 }
