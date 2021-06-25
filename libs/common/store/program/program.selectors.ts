@@ -2,8 +2,10 @@ import { createSelector, Selector } from '@ngxs/store';
 import { ProgramState } from './program.state';
 import { Constants} from '@libs/common/constants';
 import { ProgramStateModel } from './program-state.model';
+import { ProviderState, ProviderStateModel } from '@libs/common/store/provider';
 import {
   ProgramSummaryDto,
+  VwPmpLookup,
   VwPmpPsiprogramCountByCategory,
   VwProgram,
   VwProgramCost,
@@ -101,6 +103,32 @@ export class ProgramSelectors {
     return createSelector([ProgramState], (state: ProgramStateModel) =>
       state.programs.filter((q) => q.providerId === id)
     );
+  }
+
+  @Selector([ProgramState, ProviderState])
+  static getProvidersAndCips( state: ProgramStateModel, providerState: ProviderStateModel) {
+      const providers = providerState.programProviders;
+      const cips = state.programCategoryCounts;
+  
+      var items = new Array<VwPmpLookup>();
+  
+      if (providers && cips) {
+        items = providers.map(
+          (p) =>
+            <VwPmpLookup>{
+              name: p.providerName,
+              code: p.providerId.toString(),
+              type: 'provider',
+            }
+        );
+        var tmp = cips.map(
+          (c) =>
+            <VwPmpLookup>{ name: c.cipSubSeries, code: c.cipSubSeriesCode, type: 'cips' }
+        );
+        items = items.concat(tmp);        
+      }
+  
+      return items;
   }
 
   @Selector([ProgramState])

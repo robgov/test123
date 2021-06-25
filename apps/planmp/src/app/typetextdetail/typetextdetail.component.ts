@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   VwAlbertaPsiprovider,
+  VwPmpLookup,
   VwPmpPsiprogramCountByCategory,
 } from '@libs/common/models';
 import { Observable } from 'rxjs';
@@ -22,7 +23,7 @@ interface Item {
 export class TypetextdetailComponent implements OnInit {
   @Input() cips: VwPmpPsiprogramCountByCategory[];
   @Input() providers: VwAlbertaPsiprovider[];
-  items: any[];
+  @Input() items: VwPmpLookup[];
 
   myControl = new FormControl();
   filteredOptions: Observable<any[]>;
@@ -34,7 +35,7 @@ export class TypetextdetailComponent implements OnInit {
   constructor (private router: Router) {}
 
   ngOnInit() {
-    this.loadItemsFromProvider();
+    // this.loadItemsFromProvider();
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -43,36 +44,15 @@ export class TypetextdetailComponent implements OnInit {
     );
   }
 
-  displayFn(u: Item): any {
-    return u && u.value ? u.value : '';
-  }
-
-  loadItemsFromProvider() {
-    if (this.providers && this.cips) {
-      this.items = this.providers.map(
-        (p) =>
-          <Item>{
-            value: p.providerName,
-            id: p.providerId.toString(),
-            type: 'provider',
-          }
-      );
-      var tmp = this.cips.map(
-        (c) =>
-          <Item>{ value: c.cipSubSeries, id: c.cipSubSeriesCode, type: 'cips' }
-      );
-      this.items = this.items.concat(tmp);
-    }
+  displayFn(u: VwPmpLookup): any {
+    return u && u.name ? u.name : '';
   }
 
   private _filter(value: string): any[] {
-    if (!this.items) {
-      this.loadItemsFromProvider();
-    }
 
     const filterValue = value.toLowerCase();
     return this.items.filter(
-      (option) => option.value.toLowerCase().indexOf(filterValue) === 0
+      (option) => option.name.toLowerCase().indexOf(filterValue) === 0
     );
   }
 
@@ -97,11 +77,11 @@ export class TypetextdetailComponent implements OnInit {
       //I'm a material autocomplete entry
       if (this.keywords.type == 'provider') {
         //I'm a provider
-        this.router.navigate(['/home/program-search-results'],{ queryParams: { provider: this.keywords.id } });
+        this.router.navigate(['/home/program-search-results'],{ queryParams: { provider: this.keywords.code } });
       }
       else if (this.keywords.type == 'cips') {
         //I'm a cips code category
-        this.router.navigate(['/home/program-search-results'],{ queryParams: { cipSubSeriesCode: this.keywords.id } });
+        this.router.navigate(['/home/program-search-results'],{ queryParams: { cipSubSeriesCode: this.keywords.code } });
       }
     }
     else {

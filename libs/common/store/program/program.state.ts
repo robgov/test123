@@ -276,8 +276,6 @@ export class ProgramState {
     });
   }
 
-  //
-
   @Action(ProgramActions.SetProgramSearchCredentialFilter)
   onSetProgramSearchCredentialFilter(
     ctx: StateContext<ProgramStateModel>,
