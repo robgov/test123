@@ -32,7 +32,9 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<ProgramSummaryDto> GetProgramSummaries()
     {
-      return _mapper.Map<List<VwPmpPsiprogramSummary>, List<ProgramSummaryDto>> (_context.VwPmpPsiprogramSummaries.ToList());      
+      var result = _mapper.Map<List<VwPmpPsiprogramSummary>, List<ProgramSummaryDto>> (_context.VwPmpPsiprogramSummaries.ToList());
+
+      return result;
     }
   }
 }

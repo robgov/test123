@@ -14,9 +14,16 @@
       >
         <div fxFlex="50%" style="border-right: 2px solid cadetblue">
           <div fxLayout="column">
-            <div class="title" [attr.data-cy]="'program-summary.programName'">
-              {{ program.programName }}
+            <div fxLayout="row">
+              <div fxFlex="*" class="title" [attr.data-cy]="'program-summary.programName'">
+                {{ program.programName }}
+              </div>
+              <div fxFlex="100px;" fxHide [fxShow]="(programSummary.providerDistance > 0)" fxLayoutAlign="end">
+                <div>{{programSummary.providerDistance}} Km</div>
+              </div>
+              <div fxFlex="16px"></div>
             </div>
+            
             <!-- <div [attr.data-cy]="'program-card.providerSpecialization'">
               {{
                 programSpecialization

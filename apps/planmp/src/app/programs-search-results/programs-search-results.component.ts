@@ -21,7 +21,6 @@ import {
   VwProgramType,
   VwPmpLookup,
   VwSpecializationCost,
-  VwAbpostalCode,
   ProgramSummaryDto,
   VwProviderWebsite,
   VwProviderAddress,

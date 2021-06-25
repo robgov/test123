@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwProviderAddress, VwProgramType, VwProviderWebsite, VwProgramCredential } from '@libs/common/models';
+import { VwProgram, VwProvider, VwSpecialization, VwProviderLogo, VwProgramCost, VwProviderAddress, VwProgramType, VwProviderWebsite, VwProgramCredential, ProgramSummaryDto } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { format } from 'path';
 
@@ -21,6 +21,7 @@ export class ProgramCardComponent {
   @Input() providerWebsite: VwProviderWebsite;
   @Input() providerAddress: VwProviderAddress;
   @Input() programCredential: VwProgramCredential;
+  @Input() programSummary: ProgramSummaryDto;
   
  
 

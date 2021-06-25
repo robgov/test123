@@ -31,18 +31,9 @@ namespace ProviderApi.Controllers
     [SwaggerOperation("GetProviderAddresses")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<ProviderAddressDto> GetProviderAddresses()
-    {
-      return _context.VwProviderAddresses.Select(pa=> _mapper.Map<VwProviderAddress,ProviderAddressDto>(pa));
-    }
-    [HttpGet("GetProviderAddresses")]
-    [SwaggerOperation("GetProviderAddresses")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwProviderAddress> GetProviderAddresses([FromQuery] ProviderAddressRequest request)
     {
       return _context.VwProviderAddresses.Where(pc => !request.ProviderId.HasValue || pc.ProviderId.Equals(request.ProviderId));
     }
-
   }
 }
