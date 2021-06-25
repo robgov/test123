@@ -1,5 +1,6 @@
 import { createSelector, Selector } from '@ngxs/store';
 import { ProgramState } from './program.state';
+import { Constants} from '@libs/common/constants';
 import { ProgramStateModel } from './program-state.model';
 import {
   ProgramSummaryDto,
@@ -187,66 +188,50 @@ export class ProgramSelectors {
       );
     }
 
-    //TODO: This belongs somewhere else
-    enum ProgramSortOptions {
-      SortProgramNameAsc = '1',
-      SortProgramNameDesc = '2',
-      SortProgramDistanceAsc = '3',
-      SortProgramDistanceDesc = '4',
-      SortProgramEstimatedCostAsc = '5',
-      SortProgramEstimatedCostDesc = '6',
-      SortProgramEstimatedMedianIncomeAsc = '7',
-      SortProgramEstimatedMedianIncomeDesc = '8',
-      SortProgramYearlyCostAsc = '9',
-      SortProgramYearlyCostDesc = '10',
-      SortProgramEmploymentRateAsc = '11',
-      SortProgramEmploymentRateDesc = '12',
-    }
-
     //Determine Sort
     var sortMethod = this.sortByNameAsc;
     switch (state.programSearchFilter_Sort) {
-      case ProgramSortOptions.SortProgramNameDesc: {
+      case Constants.ProgramSortOptions.SortProgramNameDesc: {
         sortMethod = this.sortByNameDesc;
         break;
       }
-      case ProgramSortOptions.SortProgramDistanceAsc:{
+      case Constants.ProgramSortOptions.SortProgramDistanceAsc:{
         sortMethod = this.sortByDistanceClosest;
         break;
       }
-      case ProgramSortOptions.SortProgramDistanceDesc:{
+      case Constants.ProgramSortOptions.SortProgramDistanceDesc:{
         sortMethod = this.sortByDistanceFurthest;
         break;
       }
-      case ProgramSortOptions.SortProgramEstimatedCostAsc:{
+      case Constants.ProgramSortOptions.SortProgramEstimatedCostAsc:{
         sortMethod = this.sortByEstimatedCostAsc;
         break;
       }
-      case ProgramSortOptions.SortProgramEstimatedCostDesc:{
+      case Constants.ProgramSortOptions.SortProgramEstimatedCostDesc:{
         sortMethod = this.sortByEstimatedCostDesc;
         break;
       }
-      case ProgramSortOptions.SortProgramYearlyCostAsc:{
+      case Constants.ProgramSortOptions.SortProgramYearlyCostAsc:{
         sortMethod = this.sortByFirstYearCostAsc;
         break;
       }
-      case ProgramSortOptions.SortProgramYearlyCostDesc:{
+      case Constants.ProgramSortOptions.SortProgramYearlyCostDesc:{
         sortMethod = this.sortByFirstYearCostDesc;
         break;
       }
-      case ProgramSortOptions.SortProgramEstimatedMedianIncomeAsc:{
+      case Constants.ProgramSortOptions.SortProgramEstimatedMedianIncomeAsc:{
         sortMethod = this.sortByMedianIncomeAsc;
         break;
       }
-      case ProgramSortOptions.SortProgramEstimatedMedianIncomeDesc:{
+      case Constants.ProgramSortOptions.SortProgramEstimatedMedianIncomeDesc:{
         sortMethod = this.sortByMedianIncomeDesc;
         break;
       }
-      case ProgramSortOptions.SortProgramEmploymentRateAsc: {
+      case Constants.ProgramSortOptions.SortProgramEmploymentRateAsc: {
         sortMethod = this.sortByEmploymentRateAsc
         break;
       }
-      case ProgramSortOptions.SortProgramEmploymentRateDesc: {
+      case Constants.ProgramSortOptions.SortProgramEmploymentRateDesc: {
         sortMethod = this.sortByEmploymentRateDesc
         break;
       }

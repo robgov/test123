@@ -11,10 +11,10 @@
       type="text"
       maxlength="256"
       (keyup)="onSearchChange($event.target.value)"
-      [(ngModel)]="keywords"
+      [(ngModel)]="this.keywords"
     />
 
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelected($event.option.value)">
       <mat-option
         *ngFor="let option of filteredOptions | async"
         [value]="option"
@@ -41,6 +41,7 @@
         [disabled]="searchdisabled"
         [routerLink]="['program-search-results']"
         [queryParams]="{ keywords: this.keywords }"
+        (click)="displaySearchResult()"
         queryParamsHandling="merge"
       >
         <mat-icon color="primary" style="font-size: 24px; color: white"

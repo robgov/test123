@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { VwAlbertaPsiprovider, VwPmpPsiprogramCountByCategory } from '@libs/common/models';
+import { Router } from '@angular/router';
+import {
+  VwAlbertaPsiprovider,
+  VwPmpPsiprogramCountByCategory,
+} from '@libs/common/models';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-
 
 interface Item {
   id: string;
@@ -14,58 +17,96 @@ interface Item {
 @Component({
   selector: 'ae-typetextdetail',
   templateUrl: './typetextdetail.component.html',
-  styleUrls: ['./typetextdetail.component.scss']
+  styleUrls: ['./typetextdetail.component.scss'],
 })
 export class TypetextdetailComponent implements OnInit {
-
   @Input() cips: VwPmpPsiprogramCountByCategory[];
   @Input() providers: VwAlbertaPsiprovider[];
-
   items: any[];
 
   myControl = new FormControl();
   filteredOptions: Observable<any[]>;
 
-
-  keywords: string = "";
+  keywords: any;
   searchdisabled: boolean = true;
   ctlvisible: boolean = false;
 
+  constructor (private router: Router) {}
+
   ngOnInit() {
+    this.loadItemsFromProvider();
 
- 
-    this.items = this.providers.map(p=> <Item> ({ value:p.providerName, id: p.providerId.toString(), type: 'provider'}));
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => (typeof value === 'string' ? value : value.name)),
+      map((name) => (name ? this._filter(name) : this.items.slice()))
+    );
+  }
 
-    var tmp = this.cips.map(c=>  <Item> ({ value:c.cipSubSeries, id: c.cipSubSeriesCode, type: 'cips'}));
-    this.items = this.items.concat(tmp);
+  displayFn(u: Item): any {
+    return u && u.value ? u.value : '';
+  }
 
-
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.items.slice())
+  loadItemsFromProvider() {
+    if (this.providers && this.cips) {
+      this.items = this.providers.map(
+        (p) =>
+          <Item>{
+            value: p.providerName,
+            id: p.providerId.toString(),
+            type: 'provider',
+          }
       );
+      var tmp = this.cips.map(
+        (c) =>
+          <Item>{ value: c.cipSubSeries, id: c.cipSubSeriesCode, type: 'cips' }
+      );
+      this.items = this.items.concat(tmp);
+    }
   }
-
-  displayFn(u: Item): any{
-    return u && u.value ? u.value: '';
-  }
-
-
-
 
   private _filter(value: string): any[] {
+    if (!this.items) {
+      this.loadItemsFromProvider();
+    }
+
     const filterValue = value.toLowerCase();
-    return this.items.filter(option => option.value.toLowerCase().indexOf(filterValue) === 0);
+    return this.items.filter(
+      (option) => option.value.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
-  onSearchChange(searchValue: string): void {
+  onSearchChange(searchValue: string) {
     if (this.keywords) {
       if (this.keywords.trim().length > 3) {
         this.searchdisabled = false;
         this.ctlvisible = true;
       }
+    }
+  }
+
+  onOptionSelected(newValue: any) {
+    if (newValue) {
+      this.keywords = newValue;
+      this.searchdisabled = false;
+    }
+  }
+
+  displaySearchResult() {
+    if (this.keywords.type) {
+      //I'm a material autocomplete entry
+      if (this.keywords.type == 'provider') {
+        //I'm a provider
+        this.router.navigate(['/home/program-search-results'],{ queryParams: { provider: this.keywords.id } });
+      }
+      else if (this.keywords.type == 'cips') {
+        //I'm a cips code category
+        this.router.navigate(['/home/program-search-results'],{ queryParams: { cipSubSeriesCode: this.keywords.id } });
+      }
+    }
+    else {
+      //They just typed in a keyword
+      this.router.navigate(['/home/program-search-results'],{ queryParams: { keywords: this.keywords } });
     }
   }
 }

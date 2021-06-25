@@ -20,9 +20,6 @@ import {
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
-// import { ProviderAddressModel } from '@libs/common/models/provider-address.model';
-import { ProgramStateModel } from '../store-index';
-import { DistanceHelper } from '@libs/common/helpers';
 
 const initialState = new ProviderStateModel();
 

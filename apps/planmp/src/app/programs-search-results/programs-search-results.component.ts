@@ -112,10 +112,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       if (params['postalcode']){
         const postalCode = params['postalcode'];
         this.store.dispatch(new ProgramActions.SetProgramSearchPostalCodeFilter(postalCode));
+        this.store.dispatch(new ProgramActions.SetProgramSearchSortOrder("3")); //Closest
       }
 
       if (params['keywords']) {
         this.keyword = params['keywords'];
+        this.store.dispatch(new ProgramActions.SetProgramSearchKeywordFilter(this.keyword));
       }
     });
   }

@@ -8,7 +8,6 @@ import {
 
 export class ProviderStateModel {
   programProviders: VwAlbertaPsiprovider[];
-  // providerAddresses: ProviderAddressModel[];
   providerLogos: VwProviderLogo[];
   providerWebsites: VwProviderWebsite[];
   providerAddresses: VwProviderAddress[];

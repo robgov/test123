@@ -16,7 +16,7 @@
           <div fxLayout="column">
             <div fxLayout="row">
               <div fxFlex="*" class="title" [attr.data-cy]="'program-summary.programName'">
-                {{ program.programName }}
+                {{ programSummary.programName }}
               </div>
               <div fxFlex="100px;" fxHide [fxShow]="(programSummary.providerDistance > 0)" fxLayoutAlign="end">
                 <div>{{programSummary.providerDistance}} Km</div>
@@ -35,14 +35,14 @@
               [attr.data-cy]="'program-card.providerName'"
               class="school-name"
             >
-              {{ getProviderLegalName() }}
+              {{  getProgramProviderName() }}
             </div>
             <div style="height: 10px"></div>
             <div [attr.data-cy]="'program-card.AddressLine'" class="paragraph-content">
               {{ getProviderAddress() }}
             </div>
             <div [attr.data-cy]="'program-card.CityPostalCode'" class="paragraph-content">
-              {{ getProviderCityPostal() }}
+              {{ programSummary.postalCode }}
             </div>
             <div style="height: 10px" class="sub-title"></div>
             <a
@@ -61,14 +61,14 @@
           <div fxLayout="column">
             <div class="secondary-title">Estimated Cost</div>
             <div [attr.data-cy]="'program-card.FirstYearCost'" class="paragraph-content">
-              <span>First Year: </span><b>{{ getProgramCost() }}</b>
+              <span>First Year: </span><b>{{ programSummary.firstYearCost }}</b>
             </div>
             <div class="secondary-title">Estimated graduate outcomes</div>
             <div [attr.data-cy]="'program-card.medianIncome'" class="paragraph-content">
-              <span>Median Income: </span><b>{{ getMedianIncome() }}</b>
+              <span>Median Income: </span><b>{{ programSummary.medianIncome }}</b>
             </div>
             <div [attr.data-cy]="'program-card.employmentRate'" class="paragraph-content">
-              <span>Employment Rate: </span><b>{{ getEmploymentStat() }}</b>
+              <span>Employment Rate: </span><b>{{ programSummary.employmentRate }}</b>
             </div>
             <div style="height: 10px"></div>
             <div>

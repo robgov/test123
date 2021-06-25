@@ -314,9 +314,9 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramProviderDistances
   ) {
-    const postalCode = ctx.getState().programSearchFilter_PostalCode;
-    if (ctx.getState().postalCodes && ctx.getState().programSummaries && postalCode){
-      const userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === postalCode);
+    const userPostalCode = ctx.getState().programSearchFilter_PostalCode;
+    if (ctx.getState().postalCodes && ctx.getState().programSummaries && userPostalCode){
+      const userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === userPostalCode);
 
       const updatedProgramSummaries = ctx.getState().programSummaries;
       updatedProgramSummaries.forEach((summary)=>{
