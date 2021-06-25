@@ -51,6 +51,15 @@ namespace ProviderApi.Controllers
 
 
 
+      //FOR EACH OF THESE ITEMS ADD A RANDOM EMPLOYMENT % AND MEDIAN INCOME
+
+      foreach(var item in programs)
+      {
+        //ProgramEmploymentStat 
+        //ProgramMedianIncome
+        item.ProgramMedianIncome = -1;
+        item.ProgramEmploymentStat = -1;
+      }
       return programs.ToList().OrderBy(x=>x.ProgramName);
     }
 

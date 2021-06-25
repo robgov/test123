@@ -5,16 +5,27 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "institution-api", "institution-api.csproj", "{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "institution-api-typewriter", "..\institution-api-typewriter\institution-api-typewriter.csproj", "{26378B46-AA8D-4837-B108-592E2EFABA9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		typewriter|Any CPU = typewriter|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}.typewriter|Any CPU.ActiveCfg = Release|Any CPU
+		{E09269AC-E0D3-4B7F-AC0B-2E2D12EBF7FD}.typewriter|Any CPU.Build.0 = Release|Any CPU
+		{26378B46-AA8D-4837-B108-592E2EFABA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26378B46-AA8D-4837-B108-592E2EFABA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26378B46-AA8D-4837-B108-592E2EFABA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26378B46-AA8D-4837-B108-592E2EFABA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26378B46-AA8D-4837-B108-592E2EFABA9C}.typewriter|Any CPU.ActiveCfg = typewriter|Any CPU
+		{26378B46-AA8D-4837-B108-592E2EFABA9C}.typewriter|Any CPU.Build.0 = typewriter|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

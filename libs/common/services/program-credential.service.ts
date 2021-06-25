@@ -18,6 +18,9 @@ export class ProgramCredentialService extends EndPointService {
         this.key = 'programCredential';
     }
     
+    public getProgramCredential(id: number): Observable<VwProgramCredential[]> { 
+        return this.get(this.url + '{id}', id);
+    }
     public getProgramCredentials(): Observable<VwProgramCredential[]> { 
         return this.get(this.url + 'GetProgramCredentials');
     }

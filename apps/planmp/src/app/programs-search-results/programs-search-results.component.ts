@@ -23,6 +23,8 @@ import {
   VwSpecializationCost,
   VwAbpostalCode,
   ProgramSummaryDto,
+  VwProviderWebsite,
+  VwProviderAddress,
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
@@ -70,6 +72,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   searchResults: VwProgram[];
   programCosts: VwProgramCost[];
   programByCategoryList: VwPmpPsiprogramByCategoryList[];
+
 
   sortOption: string;
 
@@ -173,5 +176,14 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
         ProgramSelectors.getSpecializationCostForProgram(program.programId)
       );
     }
+  }
+  getProviderWebsite(program: VwProgram): Observable<VwProviderWebsite> {
+    return this.store.select(ProviderSelectors.getProviderWebsite(program.providerId));
+  }
+  getProviderAddress(program: VwProgram): Observable<VwProviderAddress> {
+    return this.store.select(ProviderSelectors.getProviderAddress(program.providerId));
+  }
+  getProgramCredential(program: VwProgram): Observable<VwProgramCredential>{
+    return this.store.select(ProgramSelectors.getProgramCredential(program.programCredentialId));
   }
 }

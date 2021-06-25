@@ -8,10 +8,6 @@ export namespace ProviderActions {
     static readonly type = '[Aed Providers] Get Program Provider Logos';
   }
 
-  export class GetProviderAddresses {
-    static readonly type = '[Aed Providers] Get Provider Addresses';
-  }
-
   export class GetProviderDistances {
     static readonly type = '[Aed Providers] Get Provider Distances';
   }
@@ -19,4 +15,11 @@ export namespace ProviderActions {
   // export class SetProviderDistances {
   //   static readonly type = '[Aed Providers] Set Provider Distances';
   // }
+  export class GetProviderWebsites {
+    static readonly type = '[Aed Providers] Get Program Provider Websites';
+  }
+
+  export class GetProviderAddresses {
+    static readonly type = '[Aed Providers] Get Program Provider addresses';
+  }
 }

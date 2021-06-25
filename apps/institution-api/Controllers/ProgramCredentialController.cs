@@ -22,6 +22,17 @@ namespace ProviderApi.Controllers
       _context = context;
     }
 
+    [HttpGet("{id}")]
+    [SwaggerOperation("GetProgramCredential")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<VwProgramCredential> GetProgramCredential(int id)
+    {
+      return _context.VwProgramCredentials.Where(x => x.ProgramCredentialId.Equals(id));
+    }
+
+
+
     [HttpGet("GetProgramCredentials")]
     [SwaggerOperation("GetProgramCredentials")]
     [SwaggerResponse((int)HttpStatusCode.OK)]

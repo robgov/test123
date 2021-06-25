@@ -45,9 +45,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+
 const MATERIAL_MODULES = [
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -87,9 +90,12 @@ import { ProgramsSearchResultsComponent } from './programs-search-results/progra
 import { ProgramSummaryComponent } from './program-summary/program-summary.component';
 import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
 import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
+import { TypetextComponent } from './typetext/typetext.component';
+import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
 import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
 import { ProgramSearchSortOptionsSidebarComponent } from './program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
 import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
+import { ProgramCardComponent } from './program-card/program-card.component';
 
 @NgModule({
   declarations: [
@@ -113,9 +119,12 @@ import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-fil
     ProgramSummaryComponent,
     ProgramCategorySummaryComponent,
     ProgramCategorySummaryListComponent,
+    TypetextComponent,
+    TypetextdetailComponent,
     ProgramSearchResultsFilterComponent,
     ProgramSearchSortOptionsSidebarComponent,
     ProgramSearchFilterOptionsSidebarComponent,
+    ProgramCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,4 +162,4 @@ import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-fil
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

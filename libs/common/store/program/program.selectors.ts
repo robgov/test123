@@ -23,6 +23,12 @@ export class ProgramSelectors {
     );
   }
 
+  static getProgramCredential(id: number) {
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.programCredentials.find((q) => q.programCredentialId === id)
+    );
+  }
+  
   static getProgramCost(id: number) {
     return createSelector([ProgramState], (state: ProgramStateModel) =>
       state.programCosts.find((q) => q.programId === id)
@@ -142,6 +148,14 @@ export class ProgramSelectors {
         .map((pc) => pc.programId);
       results = results.filter((f) => programIds.includes(f.programId));
     }
+
+
+   //Apply Keyword filtering
+   if (state.programSearchFilter_Keywords){
+      results = results.filter(
+        (f) => f.programName.includes(state.programSearchFilter_Keywords)
+      );
+  }
 
     //Apply Credential filtering
     if (
