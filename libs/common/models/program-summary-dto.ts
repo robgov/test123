@@ -50,6 +50,8 @@ export class ProgramSummaryDto {
     public providerDistance: number = 0;
     public medianIncome: number = 0;
     public employmentRate: number = 0;
+    public estimatedTotalCost: number = 0;
+    public firstYearCost: number = 0;
 
     constructor(init? : Partial<ProgramSummaryDto>) {
         

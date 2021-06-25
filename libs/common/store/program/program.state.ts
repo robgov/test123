@@ -4,7 +4,6 @@ import { tap } from 'rxjs/operators';
 import { ProgramStateModel } from './program-state.model';
 
 import { ProgramActions } from './program.actions';
-import { ProviderActions } from '../provider';
 import {
   ProgramService,
   SpecializationService,

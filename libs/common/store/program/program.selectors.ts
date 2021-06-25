@@ -2,10 +2,6 @@ import { createSelector, Selector } from '@ngxs/store';
 import { ProgramState } from './program.state';
 import { ProgramStateModel } from './program-state.model';
 import {
-  ProviderState,
-  ProviderStateModel,
-} from '@libs/common/store/provider';
-import {
   ProgramSummaryDto,
   VwPmpPsiprogramCountByCategory,
   VwProgram,
@@ -14,7 +10,6 @@ import {
   VwProgramType,
   VwSpecialization,
 } from '@libs/common/models';
-import { DistanceHelper } from '@libs/common/helpers';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
@@ -120,42 +115,10 @@ export class ProgramSelectors {
     );
   }
 
-  // static getProgramsWithDistance() {
-  //   return createSelector([ProgramState,ProviderState],(state:ProgramStateModel, providerState: ProviderStateModel) => {
-  //     return state.programs.map(p=> new ProgramWithDistance({program:p, distance: ProviderSelectors.getDistanceToProvider(p.providerId) }))
-  //   })
-  // }
-
-  // static setProgramSummaryDistances() {
-  //   return createSelector(
-  //     [ProviderState, ProgramState],
-  //     (
-  //       state: ProviderStateModel,
-  //       programState: ProgramStateModel
-  //     ) => {
-  //       var userPostalCode = programState.programSearchFilter_PostalCode
-  //       if (state.providerLocations && programState.postalCodes) {
-  //         const postalCode = programState.postalCodes.find(
-  //           (pc) => pc.postalCode === userPostalCode
-  //         );
-  //         return programState.programSummaries.forEach( (programSummary) =>{
-  //           programSummary.distance = DistanceHelper.getDistanceFromLatLonInKm(postalCode,programSummary.provider.providerId,programSummary.providerAddress, programState)
-  //         }
-
-  //         )
-  //       }
-  //       else{
-  //         return programState.programSummaries;
-  //       }
-  //     }
-  //   );
-  // }
-
   // Program Filtering
-  @Selector([ProgramState, ProviderState])
+  @Selector([ProgramState])
   static getFilteredPrograms(
     state: ProgramStateModel,
-    providerStateModel: ProviderStateModel
   ): ProgramSummaryDto[] {
     var results: ProgramSummaryDto[] = state.programSummaries;
 
@@ -219,10 +182,50 @@ export class ProgramSelectors {
     //Determine Sort
     var sortMethod = this.sortByNameAsc;
     switch (state.programSearchFilter_Sort) {
-      // case ProgramSortOptions.SortProgramNameDesc: {
-      //   sortMethod = this.sortByNameDesc;
-      //   break;
-      // }
+      case ProgramSortOptions.SortProgramNameDesc: {
+        sortMethod = this.sortByNameDesc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramDistanceAsc:{
+        sortMethod = this.sortByDistanceClosest;
+        break;
+      }
+      case ProgramSortOptions.SortProgramDistanceDesc:{
+        sortMethod = this.sortByDistanceFurthest;
+        break;
+      }
+      case ProgramSortOptions.SortProgramEstimatedCostAsc:{
+        sortMethod = this.sortByEstimatedCostAsc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramEstimatedCostDesc:{
+        sortMethod = this.sortByEstimatedCostDesc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramYearlyCostAsc:{
+        sortMethod = this.sortByFirstYearCostAsc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramYearlyCostDesc:{
+        sortMethod = this.sortByFirstYearCostDesc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramEstimatedMedianIncomeAsc:{
+        sortMethod = this.sortByMedianIncomeAsc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramEstimatedMedianIncomeDesc:{
+        sortMethod = this.sortByMedianIncomeDesc;
+        break;
+      }
+      case ProgramSortOptions.SortProgramEmploymentRateAsc: {
+        sortMethod = this.sortByEmploymentRateAsc
+        break;
+      }
+      case ProgramSortOptions.SortProgramEmploymentRateDesc: {
+        sortMethod = this.sortByEmploymentRateDesc
+        break;
+      }
       default: {
         sortMethod = this.sortByNameAsc;
         break;
@@ -241,8 +244,6 @@ export class ProgramSelectors {
     return results;
   }
 
-
-
   //TODO: Move these somewhere more appropriate.
   public static sortByNameAsc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
     if (item1.programName > item2.programName) {
@@ -254,12 +255,112 @@ export class ProgramSelectors {
     return 0;
   }
 
-  public static sortByNameDesc(item1: VwProgram, item2: VwProgram): number {
+  public static sortByNameDesc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
     if (item1.programName > item2.programName) {
       return -1;
     }
     if (item1.programName < item2.programName) {
       return 1;
+    }
+    return 0;
+  }
+
+  public static sortByDistanceClosest(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.providerDistance > item2.providerDistance) {
+      return 1;
+    }
+    if (item1.providerDistance < item2.providerDistance) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByDistanceFurthest(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.providerDistance < item2.providerDistance) {
+      return 1;
+    }
+    if (item1.providerDistance > item2.providerDistance) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByEstimatedCostAsc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.estimatedTotalCost > item2.estimatedTotalCost) {
+      return 1;
+    }
+    if (item1.estimatedTotalCost < item2.estimatedTotalCost) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByEstimatedCostDesc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.estimatedTotalCost < item2.estimatedTotalCost) {
+      return 1;
+    }
+    if (item1.estimatedTotalCost > item2.estimatedTotalCost) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByFirstYearCostAsc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.firstYearCost > item2.firstYearCost) {
+      return 1;
+    }
+    if (item1.firstYearCost < item2.firstYearCost) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByFirstYearCostDesc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.firstYearCost < item2.firstYearCost) {
+      return 1;
+    }
+    if (item1.firstYearCost > item2.firstYearCost) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByMedianIncomeAsc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.medianIncome > item2.medianIncome) {
+      return 1;
+    }
+    if (item1.medianIncome < item2.medianIncome) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByMedianIncomeDesc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.medianIncome < item2.medianIncome) {
+      return 1;
+    }
+    if (item1.medianIncome > item2.medianIncome) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByEmploymentRateAsc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.employmentRate > item2.employmentRate) {
+      return 1;
+    }
+    if (item1.employmentRate < item2.employmentRate) {
+      return -1;
+    }
+    return 0;
+  }
+
+  public static sortByEmploymentRateDesc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
+    if (item1.employmentRate < item2.employmentRate) {
+      return 1;
+    }
+    if (item1.employmentRate > item2.employmentRate) {
+      return -1;
     }
     return 0;
   }

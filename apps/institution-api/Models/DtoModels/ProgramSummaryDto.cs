@@ -56,5 +56,9 @@ namespace ProviderApi.Models.Dto
     public double MedianIncome { get; set; }
 
     public double EmploymentRate { get; set; }
+
+    public double EstimatedTotalCost { get; set; }
+
+    public double FirstYearCost { get; set; }
   }
 }
