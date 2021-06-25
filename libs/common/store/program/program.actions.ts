@@ -3,6 +3,10 @@ export namespace ProgramActions {
     static readonly type = '[Aed Programs] Get Programs';
   }
 
+  export class GetProgramSummaries {
+    static readonly type = '[Aed Programs] Get Program Summaries';
+  }
+
   export class GetProgramSpecializations {
     static readonly type = '[Aed Program] Get Program Specializations';
   }
@@ -65,6 +69,13 @@ export namespace ProgramActions {
     constructor(public programTypeIds: number[]) {}
   }
 
+  export class SetProgramSearchPostalCodeFilter{
+    static readonly type = 
+    '[Aed Program] Filter Program Search By Postal Code';
+    constructor(public postalCode: string) {}
+  }
+
+  //Sorting Stuff
   export class SetProgramSearchSortOrder {
     static readonly type =
       '[Aed Program] Filter Program Search By Program Type';

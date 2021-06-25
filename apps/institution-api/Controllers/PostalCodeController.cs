@@ -32,7 +32,7 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwAbpostalCode> GetPostalCodes([FromQuery] PostalCodeRequest request)
     {
-      return _context.VwAbpostalCodes.Where(pc=> string.IsNullOrEmpty(request.PostalCode) || pc.PostalCode==request.PostalCode).OrderBy(x=>x.PostalCode);
+      return _context.VwAbpostalCodes.Where(pc=> string.IsNullOrEmpty(request.PostalCode) || pc.PostalCode==request.PostalCode).OrderBy(x=>x.PostalCode).ToList();
     }
   }
 }

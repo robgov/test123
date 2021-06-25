@@ -5,34 +5,34 @@ using System.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models.EntityFramework;
-using ProviderApi.Models.DtoModels;
+using ProviderApi.Models.Dto;
 using AutoMapper;
 
 namespace ProviderApi.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class ProviderAddressController : ControllerBase
+  public class ProgramSummaryController : ControllerBase
   {
-    private readonly ILogger<ProviderAddressController> _logger;
+    private readonly ILogger<ProgramSummaryController> _logger;
 
     private AEDigital_SYSTContext _context;
     private IMapper _mapper;
 
-    public ProviderAddressController(ILogger<ProviderAddressController> logger, AEDigital_SYSTContext context, IMapper mapper)
+    public ProgramSummaryController(ILogger<ProgramSummaryController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
       _mapper = mapper;
     }
-
-    [HttpGet("GetProviderAddresses")]
-    [SwaggerOperation("GetProviderAddresses")]
+    
+    [HttpGet("GetProgramSummaries")]
+    [SwaggerOperation("GetProgramSummaries")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<ProviderAddressDto> GetProviderAddresses()
+    public IEnumerable<ProgramSummaryDto> GetProgramSummaries()
     {
-      return _context.VwProviderAddresses.Select(pa=> _mapper.Map<VwProviderAddress,ProviderAddressDto>(pa));
+      return _mapper.Map<List<VwPmpPsiprogramSummary>, List<ProgramSummaryDto>> (_context.VwPmpPsiprogramSummaries.ToList());      
     }
   }
 }

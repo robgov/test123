@@ -21,6 +21,8 @@ import {
   VwProgramType,
   VwPmpLookup,
   VwSpecializationCost,
+  VwAbpostalCode,
+  ProgramSummaryDto,
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
@@ -44,7 +46,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
   @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>;
-  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<VwProgram[]>;
+  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<ProgramSummaryDto[]>;
   @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
   @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<VwProgramType[]>;
 
@@ -52,7 +54,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
-  
   @Select(LookupSelectors.getLookups) sortOption$: Observable<VwPmpLookup[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -62,6 +63,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   providerId: number = null;
   cipSubSeriesCode: string = null;
   keyword: string = null;
+
   providers: VwAlbertaPsiprovider[];
   specializations: VwSpecialization[];
   providerLogos: VwProviderLogo[];
@@ -75,7 +77,10 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     private store: Store,
     private route: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) {
+    store.dispatch(new ProgramActions.GetPrograms());
+
+  }
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
 
@@ -100,6 +105,12 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
           new ProgramActions.SetProgramSearchCategoryFilter('')
         );
       }
+
+      if (params['postalcode']){
+        const postalCode = params['postalcode'];
+        this.store.dispatch(new ProgramActions.SetProgramSearchPostalCodeFilter(postalCode));
+      }
+
       if (params['keywords']) {
         this.keyword = params['keywords'];
       }
@@ -148,6 +159,11 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
       ProgramSelectors.getProgramType(program.programTypeId)
     );
   }
+
+  // getDistanceToProvider(program:VwProgram): Observable<number> {
+  //   return this.store.select(
+  //     ProviderSelectors.getDistanceToProvider(program.providerId));
+  // }
 
   getSpecializationCosts(
     program: VwProgram

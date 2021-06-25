@@ -2,14 +2,19 @@ import { createSelector, Selector } from '@ngxs/store';
 import { ProgramState } from './program.state';
 import { ProgramStateModel } from './program-state.model';
 import {
+  ProviderState,
+  ProviderStateModel,
+} from '@libs/common/store/provider';
+import {
+  ProgramSummaryDto,
   VwPmpPsiprogramCountByCategory,
   VwProgram,
   VwProgramCost,
   VwProgramCredential,
   VwProgramType,
   VwSpecialization,
-  VwSpecializationCost,
 } from '@libs/common/models';
+import { DistanceHelper } from '@libs/common/helpers';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
@@ -74,7 +79,7 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static getSelectedCredentials(state:ProgramStateModel): number[]{
+  static getSelectedCredentials(state: ProgramStateModel): number[] {
     return state.programSearchFilter_CredentialIds;
   }
 
@@ -110,36 +115,49 @@ export class ProgramSelectors {
   }
 
   static getSpecializationCostsForProvider(id: number) {
-    return createSelector([ProgramState], (state:ProgramStateModel)=>
-      state.specializationCosts.filter(q=>q.providerId === id)
+    return createSelector([ProgramState], (state: ProgramStateModel) =>
+      state.specializationCosts.filter((q) => q.providerId === id)
     );
   }
 
-  @Selector([ProgramState])
-  static getProgramFilterOptions(state: ProgramStateModel) {
-    const sortOptions: string[] = [];
-    sortOptions.push('Program Name (A-Z)');
-    sortOptions.push('Program Name (Z-A)');
-    if (state.programSearchFilter_PostalCode) {
-      sortOptions.push('Distance (Closest)');
-      sortOptions.push('Distance (Furthest)');
-    }
-    sortOptions.push('Estimated Cost (Low-High)');
-    sortOptions.push('Estimated Cost (High-Low)');
-    sortOptions.push('Estimated Median Income (Low-High)');
-    sortOptions.push('Estimated Median Income (High-Low)');
-    sortOptions.push('Program Yearly Cost (Low-High)');
-    sortOptions.push('Program Yearly Cost (High-Low)');
-    sortOptions.push('Employment Rate (Low-High)');
-    sortOptions.push('Employment Rate (High-Low)');
+  // static getProgramsWithDistance() {
+  //   return createSelector([ProgramState,ProviderState],(state:ProgramStateModel, providerState: ProviderStateModel) => {
+  //     return state.programs.map(p=> new ProgramWithDistance({program:p, distance: ProviderSelectors.getDistanceToProvider(p.providerId) }))
+  //   })
+  // }
 
-    return sortOptions;
-  }
+  // static setProgramSummaryDistances() {
+  //   return createSelector(
+  //     [ProviderState, ProgramState],
+  //     (
+  //       state: ProviderStateModel,
+  //       programState: ProgramStateModel
+  //     ) => {
+  //       var userPostalCode = programState.programSearchFilter_PostalCode
+  //       if (state.providerLocations && programState.postalCodes) {
+  //         const postalCode = programState.postalCodes.find(
+  //           (pc) => pc.postalCode === userPostalCode
+  //         );
+  //         return programState.programSummaries.forEach( (programSummary) =>{
+  //           programSummary.distance = DistanceHelper.getDistanceFromLatLonInKm(postalCode,programSummary.provider.providerId,programSummary.providerAddress, programState)
+  //         }
+
+  //         )
+  //       }
+  //       else{
+  //         return programState.programSummaries;
+  //       }
+  //     }
+  //   );
+  // }
 
   // Program Filtering
-  @Selector([ProgramState])
-  static getFilteredPrograms(state: ProgramStateModel): VwProgram[] {
-    var results = state.programs;
+  @Selector([ProgramState, ProviderState])
+  static getFilteredPrograms(
+    state: ProgramStateModel,
+    providerStateModel: ProviderStateModel
+  ): ProgramSummaryDto[] {
+    var results: ProgramSummaryDto[] = state.programSummaries;
 
     //Apply provider filtering
     if (
@@ -162,13 +180,6 @@ export class ProgramSelectors {
       results = results.filter((f) => programIds.includes(f.programId));
     }
 
-    //Apply distance filtering
-    // if (state.programSearchFilter_PostalCode) {
-    //   //Quick and dirty, if the postal code has the same first 3 characters, it's "close"
-    //   var providerIds = state.getroviderLocations.filter(pl=>pl.postalZipCode.startsWith(state.programSearchFilter_PostalCode.slice(0,3))).map(pl=>pl.providerId)
-    //   results = results.filter((f)=> providerIds.includes(f.providerId));
-    // }
-
     //Apply Credential filtering
     if (
       state.programSearchFilter_CredentialIds &&
@@ -189,29 +200,29 @@ export class ProgramSelectors {
       );
     }
 
-    //This belongs somewhere else
+    //TODO: This belongs somewhere else
     enum ProgramSortOptions {
-      SortProgramNameAsc = "1",
-      SortProgramNameDesc = "2",
-      SortProgramDistanceAsc = "3",
-      SortProgramDistanceDesc = "4",
-      SortProgramEstimatedCostAsc = "5",
-      SortProgramEstimatedCostDesc = "6",
-      SortProgramEstimatedMedianIncomeAsc = "7",
-      SortProgramEstimatedMedianIncomeDesc = "8",
-      SortProgramYearlyCostAsc = "9",
-      SortProgramYearlyCostDesc = "10",
-      SortProgramEmploymentRateAsc = "11",
-      SortProgramEmploymentRateDesc = "12"  ,
+      SortProgramNameAsc = '1',
+      SortProgramNameDesc = '2',
+      SortProgramDistanceAsc = '3',
+      SortProgramDistanceDesc = '4',
+      SortProgramEstimatedCostAsc = '5',
+      SortProgramEstimatedCostDesc = '6',
+      SortProgramEstimatedMedianIncomeAsc = '7',
+      SortProgramEstimatedMedianIncomeDesc = '8',
+      SortProgramYearlyCostAsc = '9',
+      SortProgramYearlyCostDesc = '10',
+      SortProgramEmploymentRateAsc = '11',
+      SortProgramEmploymentRateDesc = '12',
     }
-    
-    //Determine Sort 
+
+    //Determine Sort
     var sortMethod = this.sortByNameAsc;
-    switch (state.programSearchFilter_Sort ) {
-      case ProgramSortOptions.SortProgramNameDesc: {
-        sortMethod = this.sortByNameDesc;
-        break;
-      }
+    switch (state.programSearchFilter_Sort) {
+      // case ProgramSortOptions.SortProgramNameDesc: {
+      //   sortMethod = this.sortByNameDesc;
+      //   break;
+      // }
       default: {
         sortMethod = this.sortByNameAsc;
         break;
@@ -219,10 +230,9 @@ export class ProgramSelectors {
     }
 
     //Perform Sort
-    results = results.sort((item1: VwProgram, item2: VwProgram) => {
+    results = results.sort((item1: ProgramSummaryDto, item2: ProgramSummaryDto) => {
       return sortMethod(item1, item2);
     });
-    
 
     if (results.length > 20) {
       results = results.slice(0, 20);
@@ -231,8 +241,10 @@ export class ProgramSelectors {
     return results;
   }
 
+
+
   //TODO: Move these somewhere more appropriate.
-  public static sortByNameAsc(item1: VwProgram, item2: VwProgram): number {
+  public static sortByNameAsc(item1: ProgramSummaryDto, item2: ProgramSummaryDto): number {
     if (item1.programName > item2.programName) {
       return 1;
     }

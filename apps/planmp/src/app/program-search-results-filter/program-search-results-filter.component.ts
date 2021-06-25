@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { VwAlbertaPsiprovider, VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
-import { Store } from '@ngxs/store';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
 @Component({
   selector: 'aedigital-program-search-results-filter',
@@ -19,38 +19,42 @@ export class ProgramSearchResultsFilterComponent {
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
 
-  selectedCipsCode: string="";
-  
+  selectedCipsCode: string="";  
   selectedSortOrder: string="1";
 
-  @Output() CriteriaChanged = new EventEmitter<number>();
-  constructor(private store: Store) { }
 
+  @Dispatch()
   providerSelected(providerIds: number[]){
-    this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providerIds));
+    return new ProgramActions.SetProgramSearchProviderFilter(providerIds);
   }
 
+  @Dispatch()
   categorySelected(categoryCode: string){
-    this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(categoryCode));
+    return new ProgramActions.SetProgramSearchCategoryFilter(categoryCode);
   }
 
+  @Dispatch()
   credentialSelected(credentialIds: number[]){
-    this.store.dispatch(new ProgramActions.SetProgramSearchCredentialFilter(credentialIds));
+    return new ProgramActions.SetProgramSearchCredentialFilter(credentialIds);
   }
 
+  @Dispatch()
   programTypeSelected(programTypeIds: number[]){
-    this.store.dispatch(new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds));
+    return new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds);
   }
 
+  @Dispatch()
   sortOrderSelected(sortOrder: string){
-    this.store.dispatch(new ProgramActions.SetProgramSearchSortOrder(sortOrder));
+    return new ProgramActions.SetProgramSearchSortOrder(sortOrder);
   }
 
+  @Dispatch()
   showProgramSort(){
-    this.store.dispatch(new ProgramActions.ShowProgramSort());
+    return new ProgramActions.ShowProgramSort();
   }
 
+  @Dispatch()
   showProgramFilter() {
-    this.store.dispatch(new ProgramActions.ShowProgramFilter());
+    return new ProgramActions.ShowProgramFilter();
   }
 }

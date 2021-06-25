@@ -43,8 +43,9 @@ namespace ProviderApi.Controllers
     public IEnumerable<VwProgram> GetPrograms([FromQuery] ProgramsRequest request)
     {
       IQueryable<VwProgram> programs;
-      
-      programs = _context.VwPrograms;
+      var albertaProvidersList = _context.VwAlbertaPsiproviders.Select(apsi => apsi.ProviderId).ToList();
+      programs = _context.VwPrograms.Where(p=> p.ProviderId.HasValue && albertaProvidersList.Contains(p.ProviderId.Value));
+
 
       //TODO: Remove filling in information that's not available yet.
 

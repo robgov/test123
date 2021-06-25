@@ -7,10 +7,12 @@ import {
   VwProgramType,
   VwSpecializationCost,
   VwAbpostalCode,
+  ProgramSummaryDto,
 } from '@libs/common/models';
 
 export class ProgramStateModel {
   programs: VwProgram[];
+  programSummaries: ProgramSummaryDto[];
   programSpecializations: VwSpecialization[];
   programCosts: VwProgramCost[];
   specializationCosts: VwSpecializationCost[];
@@ -24,6 +26,7 @@ export class ProgramStateModel {
   programSearchFilter_CipSubSeriesCode: string;
   programSearchFilter_CategoryProgramIds: number[];
   programSearchFilter_PostalCode: string;
+  programSearchFilter_DistanceInKm: number=100;
   programSearchFilter_CredentialIds: number[];
   programSearchFilter_ProgramTypeIds: number[];
   programSearchFilter_Sort: string = "1";

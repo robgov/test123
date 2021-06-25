@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { ProgramStateModel } from './program-state.model';
 
 import { ProgramActions } from './program.actions';
+import { ProviderActions } from '../provider';
 import {
   ProgramService,
   SpecializationService,
@@ -12,6 +13,7 @@ import {
   ProgramTypeService,
   SpecializationCostService,
   PostalCodeService,
+  ProgramSummaryService,
 } from '@libs/common/services';
 import {
   VwProgram,
@@ -23,13 +25,14 @@ import {
   VwPmpPsiprogramCountByCategory,
   VwProgramCredential,
   VwProgramType,
-  SpecializationRequest,
   SpecializationCostRequest,
   VwAbpostalCode,
   PostalCodeRequest,
+  ProgramSummaryDto,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
+import { DistanceHelper } from '@libs/common/helpers';
 
 const initialState = new ProgramStateModel();
 
@@ -46,21 +49,39 @@ export class ProgramState {
     private programCredentialService: ProgramCredentialService,
     private programTypeService: ProgramTypeService,
     private specializationCostService: SpecializationCostService,
-    private postalCodeService: PostalCodeService
+    private postalCodeService: PostalCodeService,
+    private programSummaryService: ProgramSummaryService
   ) {}
 
   @Action(AppAction.Start)
   onStart(ctx: StateContext<ProgramStateModel>, action: AppAction.Start) {
     console.log('initializing...');
     ctx.dispatch([
+      new ProgramActions.GetPostalCodes(),
+      // Loading lookups
       new ProgramActions.GetProgramCategoryCounts(),
       new ProgramActions.GetProgramCosts(),
       new ProgramActions.GetProgramCredentials(),
-      new ProgramActions.GetPrograms(),
+      // new ProgramActions.GetPrograms(),
+      new ProgramActions.GetProgramSummaries(),
       new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramTypes(),
-      new ProgramActions.GetPostalCodes()
     ]);
+  }
+
+  @Action(ProgramActions.GetProgramSummaries)
+  onGetProgramSummaries(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetProgramSummaries
+  ) {
+    return this.programSummaryService.getProgramSummaries().pipe(
+      tap((data: ProgramSummaryDto[]) => {
+        ctx.patchState({
+          programSummaries: data,
+        });
+        ctx.dispatch(new ProviderActions.SetProviderDistances());
+      })
+    );
   }
 
   @Action(ProgramActions.GetPrograms)
@@ -96,11 +117,13 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetPostalCodes
   ) {
+    
     return this.postalCodeService.getPostalCodes(new PostalCodeRequest()).pipe(
       tap((data: VwAbpostalCode[]) => {
         ctx.patchState({
           postalCodes: data,
         });
+        ctx.dispatch(new ProviderActions.SetProviderDistances());
       })
     );
   }
@@ -253,6 +276,36 @@ export class ProgramState {
       programSearchFilter_ProgramTypeIds: action.programTypeIds,
     });
   }
+
+  @Action(ProgramActions.SetProgramSearchPostalCodeFilter)
+  onSetProgramSearchPostalCodeFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchPostalCodeFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_PostalCode: action.postalCode.toUpperCase(),
+    });
+    ctx.dispatch(new ProviderActions.SetProviderDistances());
+  }
+
+  // @Action(ProgramActions.SetProgramProviderDistances)
+  // onSetProgramProviderDistances(
+  //   ctx: StateContext<ProgramStateModel>,
+  //   action: ProgramActions.SetProgramProviderDistances
+  // ) {
+  //   const postalCode = ctx.getState().programSearchFilter_PostalCode;
+  //   if (ctx.getState().postalCodes && ctx.getState().programSummaries){
+  //     const userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === postalCode);
+
+  //     const updatedProgramSummaries = ctx.getState().programSummaries;
+  //     updatedProgramSummaries.forEach((summary)=>{
+  //       summary.distance = DistanceHelper.getDistanceFromLatLonInKm(userLocation,summary.provider.providerId,summary.providerAddress,ctx.getState())
+  //     });
+  //     ctx.patchState({
+  //       programSummaries: updatedProgramSummaries
+  //     });
+  //   } 
+  // }
 
   @Action(ProgramActions.SetProgramSearchSortOrder)
   onSetProgramSearchSortOrder(

@@ -11,6 +11,7 @@ export * from './postal-code.service';
 export * from './program-cost.service';
 export * from './program-credential.service';
 export * from './program-publication.service';
+export * from './program-summary.service';
 export * from './program-type.service';
 export * from './program.service';
 export * from './provider-address.service';

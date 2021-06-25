@@ -16,7 +16,7 @@ searchText: string;
 institutions: any[] = [];
 credentials: VwProgramType[];
 
-constructor(private http: HttpClient, private ptservice: ProgramTypeService) { }
+constructor(private http: HttpClient) { }
 ngOnInit(): void { 
   this.fetch();
   this.fetchCredentials();
@@ -43,8 +43,8 @@ ngOnInit(): void {
   }
 
   fetchCredentials() {
-    this.ptservice.getProgramTypes().subscribe((t)=>{
-      this.credentials = t;
-    })
+    // this.ptservice.getProgramTypes().subscribe((t)=>{
+    //   this.credentials = t;
+    // })
   }
 }

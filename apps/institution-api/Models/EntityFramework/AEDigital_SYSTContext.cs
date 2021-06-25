@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -26,6 +26,7 @@ namespace ProviderApi.Models.EntityFramework
         public virtual DbSet<VwLocationPublication> VwLocationPublications { get; set; }
         public virtual DbSet<VwLocationWebsite> VwLocationWebsites { get; set; }
         public virtual DbSet<VwPmpLookup> VwPmpLookups { get; set; }
+        public virtual DbSet<VwPmpPsiprogramSummary> VwPmpPsiprogramSummaries { get; set; }
         public virtual DbSet<VwPmpPsipspecializationYearlyCost> VwPmpPsipspecializationYearlyCosts { get; set; }
         public virtual DbSet<VwPmpPsispecializationByCategoryList> VwPmpPsispecializationByCategoryLists { get; set; }
         public virtual DbSet<VwPmpPsispecializationCountByCategory> VwPmpPsispecializationCountByCategories { get; set; }
@@ -298,6 +299,109 @@ namespace ProviderApi.Models.EntityFramework
                 entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<VwPmpPsiprogramSummary>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_pmp_PSIProgramSummary");
+
+                entity.Property(e => e.AddressLine1).HasMaxLength(35);
+
+                entity.Property(e => e.AddressLine2).HasMaxLength(35);
+
+                entity.Property(e => e.AddressLine3).HasMaxLength(35);
+
+                entity.Property(e => e.AddressLine4).HasMaxLength(35);
+
+                entity.Property(e => e.AddressType).HasMaxLength(200);
+
+                entity.Property(e => e.AddressUsage).HasMaxLength(200);
+
+                entity.Property(e => e.City).HasMaxLength(60);
+
+                entity.Property(e => e.Country).HasMaxLength(50);
+
+                entity.Property(e => e.FederalProviderNumber).HasMaxLength(4);
+
+                entity.Property(e => e.HomeJurisdiction).HasMaxLength(200);
+
+                entity.Property(e => e.Latitude).HasColumnType("numeric(8, 6)");
+
+                entity.Property(e => e.Longitude).HasColumnType("numeric(9, 6)");
+
+                entity.Property(e => e.OperatingName).HasMaxLength(200);
+
+                entity.Property(e => e.OperatingType).HasMaxLength(200);
+
+                entity.Property(e => e.PostalCode)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PostalZipCode).HasMaxLength(12);
+
+                entity.Property(e => e.ProgramCode).HasMaxLength(50);
+
+                entity.Property(e => e.ProgramCredential).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramCredentialId).HasColumnName("ProgramCredentialID");
+
+                entity.Property(e => e.ProgramGovernor).HasMaxLength(50);
+
+                entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
+
+                entity.Property(e => e.ProgramLength).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramName).HasMaxLength(100);
+
+                entity.Property(e => e.ProgramStatus).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramType).HasMaxLength(200);
+
+                entity.Property(e => e.ProgramTypeId).HasColumnName("ProgramTypeID");
+
+                entity.Property(e => e.ProviderAddressId).HasColumnName("ProviderAddressID");
+
+                entity.Property(e => e.ProviderGovernor)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
+
+                entity.Property(e => e.ProviderLegalName).HasMaxLength(200);
+
+                entity.Property(e => e.ProviderName).HasMaxLength(200);
+
+                entity.Property(e => e.ProviderPspcategory)
+                    .HasMaxLength(200)
+                    .HasColumnName("ProviderPSPCategory");
+
+                entity.Property(e => e.ProviderPspcode)
+                    .HasMaxLength(6)
+                    .HasColumnName("ProviderPSPCode");
+
+                entity.Property(e => e.ProviderPspshortName)
+                    .HasMaxLength(50)
+                    .HasColumnName("ProviderPSPShortName");
+
+                entity.Property(e => e.ProviderPspstatus)
+                    .HasMaxLength(200)
+                    .HasColumnName("ProviderPSPStatus");
+
+                entity.Property(e => e.ProviderStatus).HasMaxLength(200);
+
+                entity.Property(e => e.ProviderType).HasMaxLength(200);
+
+                entity.Property(e => e.ProviderTypeId).HasColumnName("ProviderTypeID");
+
+                entity.Property(e => e.ProviderWebsiteId).HasColumnName("ProviderWebsiteID");
+
+                entity.Property(e => e.ProvinceState).HasMaxLength(50);
+
+                entity.Property(e => e.WebsiteUrl)
+                    .HasMaxLength(200)
+                    .HasColumnName("WebsiteURL");
             });
 
             modelBuilder.Entity<VwPmpPsipspecializationYearlyCost>(entity =>
