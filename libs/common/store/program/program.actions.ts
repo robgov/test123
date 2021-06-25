@@ -75,6 +75,11 @@ export namespace ProgramActions {
     constructor(public postalCode: string) {}
   }
 
+  export class SetProgramProviderDistances{
+    static readonly type =
+    '[Aed Program] Set Program Provider Distances';
+  }
+
   //Sorting Stuff
   export class SetProgramSearchSortOrder {
     static readonly type =

@@ -16,7 +16,7 @@ export namespace ProviderActions {
     static readonly type = '[Aed Providers] Get Provider Distances';
   }
 
-  export class SetProviderDistances {
-    static readonly type = '[Aed Providers] Set Provider Distances';
-  }
+  // export class SetProviderDistances {
+  //   static readonly type = '[Aed Providers] Set Provider Distances';
+  // }
 }

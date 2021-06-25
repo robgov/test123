@@ -1,6 +1,6 @@
 <div fxLayout="column">
     <div fxFlex=100 fxLayout="row" fxLayoutGap="{{FlexConstants.Gutter.Large}}">
-        <div>Dist: {{distance}} KM</div>
+        <div>Dist: {{programSummary.providerDistance}} KM</div>
         <div fxFlex="{{FlexConstants.Column.Large}}" fxLayoutAlign="center center">
             <img [id]="programSummary.providerId" [attr.data-cy]="'program-summary.providerLogo'" fxFlex="72px;" fxShrink [src]="getLogoUrl()"></div>
         <div fxLayout="column" fxFlex="{{FlexConstants.Column.Large_6}}">

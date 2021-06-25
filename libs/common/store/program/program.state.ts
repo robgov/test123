@@ -79,7 +79,7 @@ export class ProgramState {
         ctx.patchState({
           programSummaries: data,
         });
-        ctx.dispatch(new ProviderActions.SetProviderDistances());
+        ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
       })
     );
   }
@@ -123,7 +123,7 @@ export class ProgramState {
         ctx.patchState({
           postalCodes: data,
         });
-        ctx.dispatch(new ProviderActions.SetProviderDistances());
+        ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
       })
     );
   }
@@ -285,27 +285,27 @@ export class ProgramState {
     ctx.patchState({
       programSearchFilter_PostalCode: action.postalCode.toUpperCase(),
     });
-    ctx.dispatch(new ProviderActions.SetProviderDistances());
+    ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
   }
 
-  // @Action(ProgramActions.SetProgramProviderDistances)
-  // onSetProgramProviderDistances(
-  //   ctx: StateContext<ProgramStateModel>,
-  //   action: ProgramActions.SetProgramProviderDistances
-  // ) {
-  //   const postalCode = ctx.getState().programSearchFilter_PostalCode;
-  //   if (ctx.getState().postalCodes && ctx.getState().programSummaries){
-  //     const userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === postalCode);
+  @Action(ProgramActions.SetProgramProviderDistances)
+  onSetProgramProviderDistances(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramProviderDistances
+  ) {
+    const postalCode = ctx.getState().programSearchFilter_PostalCode;
+    if (ctx.getState().postalCodes && ctx.getState().programSummaries && postalCode){
+      const userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === postalCode);
 
-  //     const updatedProgramSummaries = ctx.getState().programSummaries;
-  //     updatedProgramSummaries.forEach((summary)=>{
-  //       summary.distance = DistanceHelper.getDistanceFromLatLonInKm(userLocation,summary.provider.providerId,summary.providerAddress,ctx.getState())
-  //     });
-  //     ctx.patchState({
-  //       programSummaries: updatedProgramSummaries
-  //     });
-  //   } 
-  // }
+      const updatedProgramSummaries = ctx.getState().programSummaries;
+      updatedProgramSummaries.forEach((summary)=>{
+        summary.providerDistance = DistanceHelper.getDistanceFromLatLonInKm(userLocation,summary.longitude,summary.latitude)
+      });
+      ctx.patchState({
+        programSummaries: updatedProgramSummaries
+      });
+    } 
+  }
 
   @Action(ProgramActions.SetProgramSearchSortOrder)
   onSetProgramSearchSortOrder(

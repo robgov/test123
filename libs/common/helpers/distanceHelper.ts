@@ -8,27 +8,18 @@ export class DistanceHelper {
   // https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/27943#27943
   public static getDistanceFromLatLonInKm(
     userLocation: VwAbpostalCode,
-    providerId: number,
-    providerLocation: VwProviderAddress,
-    programStateModel: ProgramStateModel
+    providerLongitude: number,
+    providerLatitude: number
   ) {
     try {
       if (
-        providerLocation &&
-        programStateModel.postalCodes && 
+        providerLongitude && providerLatitude &&
         userLocation
       ) {
         const lat1 = userLocation.latitude;
         const lon1 = userLocation.longitude;
-
-        const providerPostalCode = programStateModel.postalCodes.find(
-          (pc) =>
-            pc.postalCode === providerLocation.postalZipCode.replace(/\s/g, '')
-        );
-        if (providerPostalCode) {
-          const lat2 = providerPostalCode.latitude;
-          const lon2 = providerPostalCode.longitude;
-
+        const lat2 = providerLatitude;
+        const lon2 = providerLongitude;
           var R = 6371; // Radius of the earth in km
           var dLat = this.deg2rad(lat2 - lat1); // deg2rad below
           var dLon = this.deg2rad(lon2 - lon1);
@@ -42,9 +33,8 @@ export class DistanceHelper {
           var d = R * c; // Distance in km
           return Math.round(d * 100) / 100
           //return d;
-        }
       }
-      return 99999;
+      return -1;
     } catch (error: any) {
       console.log(error.message);
     }

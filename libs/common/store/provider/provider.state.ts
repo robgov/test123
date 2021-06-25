@@ -84,24 +84,4 @@ export class ProviderState {
   //     })
   //   );
   // }
-
-  @Action(ProviderActions.SetProviderDistances)
-  onSetProviderDistances(
-    ctx: StateContext<ProviderStateModel>,
-    programState: StateContext<ProgramStateModel>,
-    action: ProviderActions.SetProviderDistances
-  ) {
-    // const postalCode = programState.getState().programSearchFilter_PostalCode;
-    // if (programState.getState().postalCodes && programState.getState().programSummaries){
-    //   const userLocation = programState.getState().postalCodes.find(pc=>pc.postalCode === postalCode);
-
-    //   const updatedProviderAddresses = ctx.getState().providerAddresses;
-    //   updatedProviderAddresses.forEach((address)=>{
-    //     address.distance = DistanceHelper.getDistanceFromLatLonInKm(userLocation,address.providerAddress.providerId,address.providerAddress,programState.getState())
-    //   });
-    //   ctx.patchState({
-    //     providerAddresses: updatedProviderAddresses
-    //   });
-    // } 
-  }
 }
