@@ -8,6 +8,7 @@
         [credentials]="programCredentials$ | async"
         [programTypes]="programTypes$ | async"
         [sortOptions]="sortOption$ | async"
+        [distanceFilters]="distanceFilterOptions$ | async"
       >
       </aedigital-program-search-results-filter>
       <div *ngFor="let p of filteredPrograms$ | async">

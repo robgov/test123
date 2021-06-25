@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DistanceHelper } from '@libs/common/helpers';
 import { VwAlbertaPsiprovider, VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
@@ -15,6 +16,7 @@ export class ProgramSearchResultsFilterComponent {
   @Input() credentials: VwProgramCredential[];
   @Input() programTypes: VwProgramType[];
   @Input() sortOptions: VwPmpLookup[];
+  @Input() distanceFilters: VwPmpLookup[];
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
@@ -41,6 +43,27 @@ export class ProgramSearchResultsFilterComponent {
   @Dispatch()
   programTypeSelected(programTypeIds: number[]){
     return new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds);
+  }
+
+  @Dispatch()
+  distanceFilterSelected(distanceFilterId: string){
+    switch (distanceFilterId) {
+      case "1":
+        return new ProgramActions.SetProgramSearchDistanceFilter(5);
+        break;
+      case "2":
+        return new ProgramActions.SetProgramSearchDistanceFilter(25);
+        break;
+      case "3":
+        return new ProgramActions.SetProgramSearchDistanceFilter(100);
+        break;
+      case "4":
+        return new ProgramActions.SetProgramSearchDistanceFilter(200);
+        break;
+      default:
+        return new ProgramActions.SetProgramSearchDistanceFilter(0);
+        break;
+    }
   }
 
   @Dispatch()

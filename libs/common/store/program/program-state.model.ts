@@ -26,11 +26,9 @@ export class ProgramStateModel {
   programSearchFilter_CipSubSeriesCode: string;
   programSearchFilter_CategoryProgramIds: number[];
   programSearchFilter_PostalCode: string;
-  programSearchFilter_DistanceInKm: number=100;
+  programSearchFilter_DistanceInKm: number=0;
   programSearchFilter_CredentialIds: number[];
   programSearchFilter_ProgramTypeIds: number[];
-  programSearchFilter_Sort: string = "1";
-
   programSearchFilter_Keywords: string;
-
+  programSearchFilter_Sort: string = "1";
 }

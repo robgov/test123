@@ -266,6 +266,16 @@ export class ProgramState {
     });
   }
 
+  @Action(ProgramActions.SetProgramSearchDistanceFilter)
+  onSetProgramSearchDistanceFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramSearchDistanceFilter
+  ) {
+    ctx.patchState({
+      programSearchFilter_DistanceInKm: action.distance
+    });
+  }
+
   //
 
   @Action(ProgramActions.SetProgramSearchCredentialFilter)

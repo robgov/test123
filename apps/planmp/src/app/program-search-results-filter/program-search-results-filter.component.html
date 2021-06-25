@@ -1,11 +1,11 @@
 <mat-toolbar fxFlex>
     <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">
         <mat-label fxFlex="100" class="filter-heading">Distance</mat-label>
-        <mat-select multiple="true" fxFlex="100" class="filter-field" 
-            (selectionChange)="providerSelected($event.value)" 
-            placeholder="Alberta Wide" disabled>
-            <!-- <mat-option [value]="p.providerId" *ngFor="let p of providers" class="filter-field">{{p.providerName}}
-            </mat-option> -->
+        <mat-select fxFlex="100" class="filter-field" 
+            (selectionChange)="distanceFilterSelected($event.value)" 
+            placeholder="Alberta">
+            <mat-option [value]="d.code" *ngFor="let d of distanceFilters" class="filter-field">
+                {{d.name}}</mat-option>
         </mat-select>
     </div>
     <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">

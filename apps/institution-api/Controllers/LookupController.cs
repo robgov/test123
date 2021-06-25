@@ -29,10 +29,12 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwPmpLookup> GetLookups([FromQuery] LookupRequest request)
     {
-      return _context.VwPmpLookups.Where(lk => !string.IsNullOrEmpty(request.Code) || lk.Code.Equals(request.Code) &&
-                                               !string.IsNullOrEmpty(request.Name) || lk.Name.Equals(request.Name) &&
-                                               !string.IsNullOrEmpty(request.Type) || lk.Type.Equals(request.Type))
-        .OrderBy(l=>l.DisplayOrder);
+      var results = _context.VwPmpLookups.Where(lk => string.IsNullOrEmpty(request.Code) || lk.Code.Equals(request.Code) &&
+                                               string.IsNullOrEmpty(request.Name) || lk.Name.Equals(request.Name) &&
+                                               string.IsNullOrEmpty(request.Type) || lk.Type.Equals(request.Type))
+        .OrderBy(l=>l.Type).ThenBy(l=>l.DisplayOrder).ToList();
+
+      return results;
     }
   }
 }

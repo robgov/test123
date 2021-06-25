@@ -55,7 +55,8 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
-  @Select(LookupSelectors.getLookups) sortOption$: Observable<VwPmpLookup[]>;
+  @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<VwPmpLookup[]>;
+  @Select(LookupSelectors.getLookupsForType("DistanceFilter")) distanceFilterOptions$: Observable<VwPmpLookup[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;

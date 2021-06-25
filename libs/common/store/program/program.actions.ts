@@ -69,7 +69,11 @@ export namespace ProgramActions {
     constructor(public keywords: string) {}
   }
 
-  
+  export class SetProgramSearchDistanceFilter {
+    static readonly type =
+      '[Aed Providers] Filter Program Search By Distance';
+      constructor(public distance: number){}
+  }
 
   export class SetProgramSearchProgramTypeFilter {
     static readonly type =

@@ -177,6 +177,16 @@ export class ProgramSelectors {
       );
     }
 
+    //Apply distance filtering
+    if (
+      state.programSearchFilter_DistanceInKm &&
+      state.programSearchFilter_DistanceInKm > 0
+    ) {
+      results = results.filter((f) =>
+        f.providerDistance <= state.programSearchFilter_DistanceInKm
+      );
+    }
+
     //TODO: This belongs somewhere else
     enum ProgramSortOptions {
       SortProgramNameAsc = '1',
