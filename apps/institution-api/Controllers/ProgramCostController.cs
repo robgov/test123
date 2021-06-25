@@ -42,7 +42,7 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<VwProgramCost> GetProgramCosts([FromQuery] ProgramCostsRequest request)
     {
-      return _context.VwProgramCosts.Where(pc=> !request.ProgramId.HasValue || pc.ProgramId.Equals(request.ProgramId));
+      return _context.VwProgramCosts.Where(pc => !request.ProgramId.HasValue || pc.ProgramId.Equals(request.ProgramId));
     }
   }
 }

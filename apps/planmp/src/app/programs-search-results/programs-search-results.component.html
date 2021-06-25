@@ -8,19 +8,14 @@
         [credentials]="programCredentials$ | async"
         [programTypes]="programTypes$ | async"
         [sortOptions]="sortOption$ | async"
+        [distanceFilters]="distanceFilterOptions$ | async"
       >
       </aedigital-program-search-results-filter>
       <div *ngFor="let p of filteredPrograms$ | async">
         <ae-program-card
           [attr.data-cy]="'programs-search-results.program-card'"
-          [program]="p"
-          [programProvider]="getProvider(p) | async"
           [programSpecialization]="getSpecialization(p) | async"
-          [programCost]="getProgramCost(p) | async"
-          [providerLogo]="getProviderLogo(p) | async"
-          [programType]="getProgramType(p) | async"
-          [providerAddress]="getProviderAddress(p) | async"
-          [programCredential]="getProgramCredential(p) | async"
+          [programSummary]="p"
         >
         </ae-program-card>
       </div>

@@ -1,12 +1,11 @@
 import { createSelector, Selector } from '@ngxs/store';
 import { LookupState } from './lookup.state';
 import { LookupStateModel } from './lookup-state.model';
-import { VwPmpLookup } from '@libs/common/models';
-import { state } from '@angular/animations';
 
 export class LookupSelectors {
-  @Selector([LookupState])
-  static getLookups(state: LookupStateModel): VwPmpLookup[] {
-    return state.lookups;
+  static getLookupsForType(lookupType: string) {
+    return createSelector([LookupState],(state: LookupStateModel) => {
+      return state.lookups.filter(l=>l.type === lookupType);
+    });
   }
 }

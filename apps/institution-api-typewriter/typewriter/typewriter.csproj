@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\libs\common\models\specialization-cost-request.ts" Link="specialization-cost-request.ts" />
+    <None Include="..\..\..\libs\common\services\program-cost.service.ts" Link="program-cost.service.ts" />
     <None Include="..\..\..\libs\common\services\program-credential.service.ts" Link="program-credential.service.ts" />
     <None Include="..\..\..\libs\common\services\program-type.service.ts" Link="program-type.service.ts" />
+    <None Include="..\..\..\libs\common\services\specialization-cost.service.ts" Link="specialization-cost.service.ts" />
   </ItemGroup>
 
 </Project>

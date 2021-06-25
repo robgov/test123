@@ -1,7 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { NgxsModule, Store } from '@ngxs/store';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularComponentsModule } from '@abgov/angular-components';
@@ -67,7 +66,7 @@ const MATERIAL_MODULES = [
   MatSidenavModule,
   MatTabsModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
 ];
 
 // Components
@@ -94,6 +93,8 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
 import { TypetextComponent } from './typetext/typetext.component';
 import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
 import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
+import { ProgramSearchSortOptionsSidebarComponent } from './program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
+import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
 import { ProgramCardComponent } from './program-card/program-card.component';
 
 @NgModule({
@@ -121,6 +122,8 @@ import { ProgramCardComponent } from './program-card/program-card.component';
     TypetextComponent,
     TypetextdetailComponent,
     ProgramSearchResultsFilterComponent,
+    ProgramSearchSortOptionsSidebarComponent,
+    ProgramSearchFilterOptionsSidebarComponent,
     ProgramCardComponent,
   ],
   imports: [

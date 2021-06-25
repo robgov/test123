@@ -67,6 +67,21 @@
         </button>
       </div>
     </mat-sidenav>
+    <mat-sidenav #programSort mode="over" autoFocus="false" class="right-sheet"
+      [fixedInViewport]="false" fxLayoutGap="8px">
+      <aedigital-program-search-sort-options-sidebar *ngIf="isSort" 
+      [sortOptions]="sortOption$ | async"
+      [selectedSortOrder]="selectedSortOrder$ | async"
+      ></aedigital-program-search-sort-options-sidebar>
+
+      <aedigital-program-search-filter-options-sidebar *ngIf="!isSort" 
+      [providers]="providers$ | async" 
+      [credentials]="programCredentials$ | async"
+      [programTypes]="programTypes$ | async"
+      [selectedProviderIds]="selectedProviderIds$ | async"
+      [selectedCredentialIds]="selectedCredentialIds$ | async"
+      ></aedigital-program-search-filter-options-sidebar>
+    </mat-sidenav>
     <mat-sidenav-content fxLayoutAlign="center">
       <div class="container" fxFlex="100" fxFlex.gt-md="1272px;" fxLayoutGap="{{FlexConstants.Margin.Large}}">
         <div></div>

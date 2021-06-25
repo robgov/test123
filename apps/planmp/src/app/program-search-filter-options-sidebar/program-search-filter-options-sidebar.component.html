@@ -1,0 +1,37 @@
+<div fxFlex="100" fxLayout="column">
+    <mat-toolbar fxFlex fxLayout="row">
+        <button mat-button fxFlex (click)="close()">
+            <mat-icon fxFlex>close</mat-icon>
+        </button>
+        <div fxFlex="*" fxLayout="column" fxLayoutAlign="center center" class="">
+            <div fxFlex>Filter By</div>
+        </div>
+    </mat-toolbar>
+    <div fxLayout="100" fxLayout="column" fxLayoutGap="24px;">
+        <div fxLayout="column">
+            <mat-label fxFlex="100" class="filter-heading">Distance</mat-label>
+            <mat-select multiple="true" fxFlex="100" class="filter-field"
+                (selectionChange)="providerSelected($event.value)" placeholder="Alberta Wide" disabled>
+            </mat-select>
+        </div>
+        <div fxFlex></div>
+        <div fxLayout="column">
+            <mat-label fxFlex="100" class="filter-heading">School</mat-label>
+            <mat-select multiple="true" fxFlex="100" class="filter-field"
+                (selectionChange)="providerSelected($event.value)" [(value)]="selectedProviderIds"
+                placeholder="All Schools">
+                <mat-option [value]="p.providerId" *ngFor="let p of providers" class="filter-field">{{p.providerName}}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div fxLayout="column">
+            <mat-label class="filter-heading">Credential</mat-label>
+            <mat-select multiple="true" fxFlex="25" class="filter-field"
+                (selectionChange)="credentialSelected($event.value)" [(value)]="selectedCredentialIds"
+                placeholder="All Credentials">
+                <mat-option [value]="c.programCredentialId" *ngFor="let c of credentials" class="filter-field">
+                    {{c.programCredential}}</mat-option>
+            </mat-select>
+        </div>
+    </div>
+</div>
