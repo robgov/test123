@@ -11,9 +11,7 @@ import { map, startWith } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { RouterSelectors } from '@libs/common/store';
-import {
-  ProgramActions,
-} from '@libs/common/store';
+import { ProgramActions } from '@libs/common/store';
 
 interface Item {
   id: string;
@@ -40,7 +38,7 @@ export class TypetextdetailComponent implements OnInit {
   searchdisabled: boolean = true;
   ctlvisible: boolean = false;
 
-  constructor (private router: Router, private store: Store) {}
+  constructor(private router: Router, private store: Store) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -55,7 +53,6 @@ export class TypetextdetailComponent implements OnInit {
   }
 
   private _filter(value: string): any[] {
-
     const filterValue = value.toLowerCase();
     return this.items.filter(
       (option) => option.name.toLowerCase().indexOf(filterValue) === 0
@@ -80,7 +77,7 @@ export class TypetextdetailComponent implements OnInit {
 
   displaySearchResult() {
     //TODO: GROSS! Lots of room for improvement here
-    if (this.routeUrl.startsWith("/home/program-search-results")) {
+    if (this.routeUrl.startsWith('/home/program-search-results')) {
       //We're already on the search results, no navigating
       if (this.keywords.type) {
         //I'm a material autocomplete entry
@@ -88,35 +85,53 @@ export class TypetextdetailComponent implements OnInit {
           //I'm a provider
           var providers = new Array<number>();
           providers.push(+this.keywords.code);
-          this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providers));
-        }
-        else if (this.keywords.type == 'cips') {
+          this.store.dispatch(
+            new ProgramActions.SetProgramSearchProviderFilter(providers)
+          );
+        } else if (this.keywords.type == 'cips') {
           //I'm a cips code category
-          this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(this.keywords.code));
+          this.store.dispatch(
+            new ProgramActions.SetProgramSearchCategoryFilter(
+              this.keywords.code
+            )
+          );
         }
-      }
-      else {
+      } else {
         //They just typed in a keyword
-        this.store.dispatch(new ProgramActions.SetProgramSearchKeywordFilter(this.keywords));
+        this.store.dispatch(
+          new ProgramActions.SetProgramSearchKeywordFilter(this.keywords)
+        );
       }
-    }
-    else {
+      this.keywords = '';
+    } else {
       if (this.keywords.type) {
         //I'm a material autocomplete entry
         if (this.keywords.type == 'provider') {
           //I'm a provider
-          this.router.navigate(['/home/program-search-results'],{ queryParams: {id:'program-search-results', provider: this.keywords.code } });
-        }
-        else if (this.keywords.type == 'cips') {
+          this.router.navigate(['/home/program-search-results'], {
+            queryParams: {
+              id: 'program-search-results',
+              provider: this.keywords.code,
+            },
+          });
+        } else if (this.keywords.type == 'cips') {
           //I'm a cips code category
-          this.router.navigate(['/home/program-search-results'],{ queryParams: {id:'program-search-results', cipSubSeriesCode: this.keywords.code } });
+          this.router.navigate(['/home/program-search-results'], {
+            queryParams: {
+              id: 'program-search-results',
+              cipSubSeriesCode: this.keywords.code,
+            },
+          });
         }
-      }
-      else {
+      } else {
         //They just typed in a keyword
-        this.router.navigate(['/home/program-search-results'],{ queryParams: { id:'program-search-results', keywords: this.keywords } });
+        this.router.navigate(['/home/program-search-results'], {
+          queryParams: {
+            id: 'program-search-results',
+            keywords: this.keywords,
+          },
+        });
       }
     }
-  
   }
 }

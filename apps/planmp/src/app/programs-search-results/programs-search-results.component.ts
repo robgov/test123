@@ -56,6 +56,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedPostalCode) selectedPostalCode$: Observable<string>
+  @Select(ProgramSelectors.getSelectedCipSubSeriesCode) selectedCipSubSeriesCode$: Observable<string>
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
   @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<VwPmpLookup[]>;

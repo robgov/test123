@@ -93,6 +93,11 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
+  static getSelectedCipSubSeriesCode(state: ProgramStateModel): string {
+    return state.programSearchFilter_CipSubSeriesCode;
+  }
+
+  @Selector([ProgramState])
   static getSelectedSortOrder(state: ProgramStateModel): string {
     return state.programSearchFilter_Sort;
   }

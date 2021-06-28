@@ -15,6 +15,7 @@
         [selectedProviderIds]="selectedProviderIds$ | async"
         [selectedCredentialIds]="selectedCredentialIds$ | async"
         [selectedPostalCode]="selectedPostalCode$ | async"
+        [selectedCipSubSeriesCode]="selectedCipSubSeriesCode$ | async"
       >
       </aedigital-program-search-results-filter>
       <div *ngFor="let p of filteredPrograms$ | async">
