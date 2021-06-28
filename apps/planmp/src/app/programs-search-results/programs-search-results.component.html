@@ -2,6 +2,9 @@
 <div fxLayout="column">
   <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
     <div fxFlex="100" fxLayout="column">
+      <div >
+        <ae-typetext></ae-typetext>
+      </div>
       <aedigital-program-search-results-filter
         [programCountsByCategory]="programCountsByCategory$ | async"
         [providers]="providers$ | async"
@@ -9,6 +12,9 @@
         [programTypes]="programTypes$ | async"
         [sortOptions]="sortOption$ | async"
         [distanceFilters]="distanceFilterOptions$ | async"
+        [selectedProviderIds]="selectedProviderIds$ | async"
+        [selectedCredentialIds]="selectedCredentialIds$ | async"
+        [selectedPostalCode]="selectedPostalCode$ | async"
       >
       </aedigital-program-search-results-filter>
       <div *ngFor="let p of filteredPrograms$ | async">

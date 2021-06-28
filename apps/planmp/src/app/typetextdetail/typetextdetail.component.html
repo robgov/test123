@@ -39,8 +39,6 @@
         aria-label="search"
         [attr.data-cy]="'searchblock.view-program-search-results'"
         [disabled]="searchdisabled"
-        [routerLink]="['program-search-results']"
-        [queryParams]="{ keywords: this.keywords }"
         (click)="displaySearchResult()"
         queryParamsHandling="merge"
       >

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -8,6 +8,12 @@ import {
 } from '@libs/common/models';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Store } from '@ngxs/store';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { RouterSelectors } from '@libs/common/store';
+import {
+  ProgramActions,
+} from '@libs/common/store';
 
 interface Item {
   id: string;
@@ -25,6 +31,8 @@ export class TypetextdetailComponent implements OnInit {
   @Input() providers: VwAlbertaPsiprovider[];
   @Input() items: VwPmpLookup[];
 
+  @SelectSnapshot(RouterSelectors.getRoute) routeUrl: string;
+
   myControl = new FormControl();
   filteredOptions: Observable<any[]>;
 
@@ -32,11 +40,9 @@ export class TypetextdetailComponent implements OnInit {
   searchdisabled: boolean = true;
   ctlvisible: boolean = false;
 
-  constructor (private router: Router) {}
+  constructor (private router: Router, private store: Store) {}
 
   ngOnInit() {
-    // this.loadItemsFromProvider();
-
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => (typeof value === 'string' ? value : value.name)),
@@ -73,20 +79,44 @@ export class TypetextdetailComponent implements OnInit {
   }
 
   displaySearchResult() {
-    if (this.keywords.type) {
-      //I'm a material autocomplete entry
-      if (this.keywords.type == 'provider') {
-        //I'm a provider
-        this.router.navigate(['/home/program-search-results'],{ queryParams: { provider: this.keywords.code } });
+    //TODO: GROSS! Lots of room for improvement here
+    if (this.routeUrl.startsWith("/home/program-search-results")) {
+      //We're already on the search results, no navigating
+      if (this.keywords.type) {
+        //I'm a material autocomplete entry
+        if (this.keywords.type == 'provider') {
+          //I'm a provider
+          var providers = new Array<number>();
+          providers.push(+this.keywords.code);
+          this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providers));
+        }
+        else if (this.keywords.type == 'cips') {
+          //I'm a cips code category
+          this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(this.keywords.code));
+        }
       }
-      else if (this.keywords.type == 'cips') {
-        //I'm a cips code category
-        this.router.navigate(['/home/program-search-results'],{ queryParams: { cipSubSeriesCode: this.keywords.code } });
+      else {
+        //They just typed in a keyword
+        this.store.dispatch(new ProgramActions.SetProgramSearchKeywordFilter(this.keywords));
       }
     }
     else {
-      //They just typed in a keyword
-      this.router.navigate(['/home/program-search-results'],{ queryParams: { keywords: this.keywords } });
+      if (this.keywords.type) {
+        //I'm a material autocomplete entry
+        if (this.keywords.type == 'provider') {
+          //I'm a provider
+          this.router.navigate(['/home/program-search-results'],{ queryParams: {id:'program-search-results', provider: this.keywords.code } });
+        }
+        else if (this.keywords.type == 'cips') {
+          //I'm a cips code category
+          this.router.navigate(['/home/program-search-results'],{ queryParams: {id:'program-search-results', cipSubSeriesCode: this.keywords.code } });
+        }
+      }
+      else {
+        //They just typed in a keyword
+        this.router.navigate(['/home/program-search-results'],{ queryParams: { id:'program-search-results', keywords: this.keywords } });
+      }
     }
+  
   }
 }

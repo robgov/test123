@@ -20,6 +20,7 @@ export class ProgramSearchResultsFilterComponent {
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
+  @Input() selectedPostalCode: string;
 
   selectedCipsCode: string="";  
   selectedSortOrder: string="1";

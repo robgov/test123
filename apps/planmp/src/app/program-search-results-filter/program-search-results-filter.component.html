@@ -1,13 +1,15 @@
 <mat-toolbar fxFlex>
+    <!-- Distance Selection -->
     <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">
         <mat-label fxFlex="100" class="filter-heading">Distance</mat-label>
-        <mat-select fxFlex="100" class="filter-field" 
+        <mat-select fxFlex="100" class="filter-field" [disabled]="selectedPostalCode==null"
             (selectionChange)="distanceFilterSelected($event.value)" 
             placeholder="Alberta">
             <mat-option [value]="d.code" *ngFor="let d of distanceFilters" class="filter-field">
                 {{d.name}}</mat-option>
         </mat-select>
     </div>
+    <!-- Provider / School Selection -->
     <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">
         <mat-label fxFlex="100" class="filter-heading">School</mat-label>
         <mat-select multiple="true" fxFlex="100" class="filter-field" (selectionChange)="providerSelected($event.value)"
@@ -16,6 +18,7 @@
             </mat-option>
         </mat-select>
     </div>
+    <!-- Category Selection  -->
     <!-- <div fxFlex="25" fxLayout="column" >
         <mat-label class="filter-heading">Category</mat-label>
         <mat-select fxFlex="25" class="filter-field" (selectionChange)="categorySelected($event.value)"
@@ -25,6 +28,7 @@
             class="filter-field">{{pc.cipSubSeries}}</mat-option>
         </mat-select>
     </div> -->
+    <!-- Credential Type Selection -->
     <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">
         <mat-label class="filter-heading">Credential</mat-label>
         <mat-select  multiple="true" fxFlex="25" class="filter-field" (selectionChange)="credentialSelected($event.value)"
@@ -32,6 +36,7 @@
             <mat-option [value]="c.programCredentialId" *ngFor="let c of credentials" class="filter-field">{{c.programCredential}}</mat-option>
         </mat-select>
     </div>
+    <!-- Program Type Selection -->
     <!-- <div fxFlex="25" fxLayout="column">
         <mat-label class="filter-heading">Type</mat-label>
         <mat-select  multiple="true" fxFlex="25" class="filter-field" (selectionChange)="programTypeSelected($event.value)"
