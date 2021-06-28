@@ -92,6 +92,12 @@ export namespace ProgramActions {
     '[Aed Program] Set Program Provider Distances';
   }
 
+  export class SetProgramSearchUserLocationFilter{
+    static readonly type =
+    '[Aed Program] Set Program User Location';
+    constructor(public latitude: number, public longitude:number) {}
+  }
+
   //Sorting Stuff
   export class SetProgramSearchSortOrder {
     static readonly type =

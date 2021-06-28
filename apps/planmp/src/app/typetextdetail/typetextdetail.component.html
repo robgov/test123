@@ -1,51 +1,49 @@
 <!-- <div *ngIf="!this.providers">
   <div> spinner icon ... loading </div>
 </div> -->
-<div fxLayout="row" fxFlex="100">
-  <div fxFlex="100">
-    <input
-      fxFlex
-      [formControl]="myControl"
-      [matAutocomplete]="auto"
-      matInput
-      type="text"
-      maxlength="256"
-      (keyup)="onSearchChange($event.target.value)"
-      [(ngModel)]="this.keywords"
-    />
 
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelected($event.option.value)">
-      <mat-option
-        *ngFor="let option of filteredOptions | async"
-        [value]="option"
-      >
-        <div>
-          <div fxFlex>
-            {{ option.name }}
+<div fxLayout="column" fxLayoutGap="16px">
+  <div fxLayout="row" fxFlex>
+    <form fxFlex="100" fxLayoutGap="16px">
+      <mat-form-field fxFlex="*" fxLayout="column" appearance="fill">
+        <div id="test" fxLayout="column">
+          <mat-label fxFlex>Program Name</mat-label>
+          <div fxLayout="row" fxFlex>
+            <input fxFlex="600px" name="searchBar" [matAutocomplete]="auto" matInput type="text" maxlength="256"
+              (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
           </div>
-          <div fxFlex="100px">
-            <mat-chip>{{ option.type }}</mat-chip>
-          </div>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+            (optionSelected)="onOptionSelected($event.option.value)">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              <div>
+                <div fxFlex>
+                  {{ option.name }}
+                </div>
+                <div fxFlex="100px">
+                  <mat-chip>{{ option.type }}</mat-chip>
+                </div>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
         </div>
-      </mat-option>
-    </mat-autocomplete>
+      </mat-form-field>
 
-    <div fxFlex="40px">
-      <button
-        style="background-color: #0070c4"
-        mat-button
-        matSuffix
-        mat-icon-button
-        aria-label="search"
-        [attr.data-cy]="'searchblock.view-program-search-results'"
-        [disabled]="searchdisabled"
-        (click)="displaySearchResult()"
-        queryParamsHandling="merge"
-      >
-        <mat-icon color="primary" style="font-size: 24px; color: white"
-          >search</mat-icon
-        >
-      </button>
-    </div>
+      <mat-form-field fxLayout="column" fxFlex appearance="fill">
+        <mat-label fxFlex >Location (Optional)</mat-label>
+        <input fxFlex name="location" matInput type="text" [(ngModel)]="this.selectedLocation">
+        <button (click)="locationPrompt()" mat-button fxFlex="24px" fxLayoutAlign="center center">
+          <mat-icon>location_on</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div fxFlex="40px" fxLayoutAlign="center center">
+        <button style="background-color: #0070c4" mat-button matSuffix mat-icon-button aria-label="search"
+          [attr.data-cy]="'searchblock.view-program-search-results'" [disabled]="searchdisabled"
+          (click)="displaySearchResult()" queryParamsHandling="merge">
+          <mat-icon color="primary" style="font-size: 24px; color: white">search</mat-icon>
+        </button>
+      </div>
+    </form>
   </div>
+
 </div>

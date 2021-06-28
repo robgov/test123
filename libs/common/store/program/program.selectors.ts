@@ -103,6 +103,17 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
+  static getSelectedLocation(state:ProgramStateModel): string {
+    if (state.programSearchFilter_PostalCode) {
+      return state.programSearchFilter_PostalCode;
+    }
+    if (state.programSearchFilter_Latitude != 0 && state.programSearchFilter_Longitude) {
+      return state.programSearchFilter_Latitude + ", " + state.programSearchFilter_Longitude;
+    }
+    return "";
+  }
+
+  @Selector([ProgramState])
   static getProgramCategoryCounts(
     state: ProgramStateModel
   ): VwPmpPsiprogramCountByCategory[] {
@@ -114,6 +125,8 @@ export class ProgramSelectors {
       state.programs.filter((q) => q.providerId === id)
     );
   }
+
+  
 
   @Selector([ProgramState, ProviderState])
   static getProvidersAndCips( state: ProgramStateModel, providerState: ProviderStateModel) {
