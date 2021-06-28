@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppAction } from '@libs/common/store/common/app.actions';
 import { pmpState } from '@libs/common/store/store-index';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 import {
   LocationAddressService,
@@ -137,6 +139,8 @@ import { ProgramCardComponent } from './program-card/program-card.component';
     ReactiveFormsModule,
     FormsModule,
     NgxsModule.forRoot(pmpState),
+    NgxsSelectSnapshotModule.forRoot(),
+    NgxsRouterPluginModule.forRoot()
   ],
   providers: [
     LocationAddressService,

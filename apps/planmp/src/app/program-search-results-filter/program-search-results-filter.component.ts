@@ -20,6 +20,8 @@ export class ProgramSearchResultsFilterComponent {
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
+  @Input() selectedPostalCode: string;
+  @Input() selectedCipSubSeriesCode: string;
 
   selectedCipsCode: string="";  
   selectedSortOrder: string="1";
@@ -79,5 +81,27 @@ export class ProgramSearchResultsFilterComponent {
   @Dispatch()
   showProgramFilter() {
     return new ProgramActions.ShowProgramFilter();
+  }
+
+  getSelectedCipSubSeries(){
+    if (this.selectedCipSubSeriesCode) {
+      return this.programCountsByCategory.find(pc=>pc.cipSubSeriesCode == this.selectedCipSubSeriesCode).cipSubSeries;
+    }
+  }
+  
+  @Dispatch()
+  removeCipSubSeries() {
+    return new ProgramActions.SetProgramSearchCategoryFilter("");
+  }
+
+  getSelectedPostalCode() {
+    if (this.selectedPostalCode) {
+      return this.selectedPostalCode;
+    }
+  }
+
+  @Dispatch()
+  removePostalCode() {
+    return new ProgramActions.SetProgramSearchPostalCodeFilter("");
   }
 }

@@ -1,4 +1,4 @@
-import { createSelector, Selector } from '@ngxs/store';
+import { createSelector, Select, Selector } from '@ngxs/store';
 import { ProgramState } from './program.state';
 import { Constants} from '@libs/common/constants';
 import { ProgramStateModel } from './program-state.model';
@@ -85,6 +85,16 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static getSelectedCredentials(state: ProgramStateModel): number[] {
     return state.programSearchFilter_CredentialIds;
+  }
+
+  @Selector([ProgramState])
+  static getSelectedPostalCode(state: ProgramStateModel): string {
+    return state.programSearchFilter_PostalCode;
+  }
+
+  @Selector([ProgramState])
+  static getSelectedCipSubSeriesCode(state: ProgramStateModel): string {
+    return state.programSearchFilter_CipSubSeriesCode;
   }
 
   @Selector([ProgramState])

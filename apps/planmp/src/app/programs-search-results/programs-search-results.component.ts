@@ -34,6 +34,8 @@ import {
   ProgramSelectors,
   ProviderSelectors,
 } from '@libs/common/store/store-index';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { RouterSelectors } from '@libs/common/store';
 
 @Component({
   selector: 'aedigital-programs-search-results',
@@ -53,10 +55,14 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
 
   @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
+  @Select(ProgramSelectors.getSelectedPostalCode) selectedPostalCode$: Observable<string>
+  @Select(ProgramSelectors.getSelectedCipSubSeriesCode) selectedCipSubSeriesCode$: Observable<string>
 
   @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
   @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<VwPmpLookup[]>;
   @Select(LookupSelectors.getLookupsForType("DistanceFilter")) distanceFilterOptions$: Observable<VwPmpLookup[]>;
+
+  @SelectSnapshot(RouterSelectors.getRouteId) routeId: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   programs$: Observable<any>;
