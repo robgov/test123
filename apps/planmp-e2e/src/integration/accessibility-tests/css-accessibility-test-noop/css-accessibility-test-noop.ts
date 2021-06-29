@@ -54,7 +54,7 @@ When(/^we are testing cicd$/, function() {
   expect(1).to.eq(1);
 
   //cy.get('[data-cy="sign-in--submit-button"]').click();
-  //cy.wait(2000);
+  //cy.wait(3000);
 });
 
 Then(/^it should pass$/, function() {
