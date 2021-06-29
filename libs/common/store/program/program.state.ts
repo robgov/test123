@@ -13,6 +13,7 @@ import {
   SpecializationCostService,
   PostalCodeService,
   ProgramSummaryService,
+  GoogleGeocodeApiService,
 } from '@libs/common/services';
 import {
   VwProgram,
@@ -49,7 +50,8 @@ export class ProgramState {
     private programTypeService: ProgramTypeService,
     private specializationCostService: SpecializationCostService,
     private postalCodeService: PostalCodeService,
-    private programSummaryService: ProgramSummaryService
+    private programSummaryService: ProgramSummaryService,
+    private googleGeocodeApiService: GoogleGeocodeApiService
   ) {}
 
   @Action(AppAction.Start)
@@ -301,12 +303,17 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchUserLocationFilter
   ) {
-    ctx.patchState({
-      programSearchFilter_Latitude: action.latitude,
-      programSearchFilter_Longitude: action.longitude,
-      programSearchFilter_PostalCode: ""
-    });
-    ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
+    
+    return this.googleGeocodeApiService.getPostalCodeFromLatLong(action.latitude,action.longitude).pipe(
+      tap((data:object[])=>{
+        ctx.patchState({
+          programSearchFilter_Latitude: action.latitude,
+          programSearchFilter_Longitude: action.longitude,
+          programSearchFilter_PostalCode: ""
+        });  
+        ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
+      }) 
+    )
   }
 
   @Action(ProgramActions.SetProgramSearchPostalCodeFilter)

@@ -1,11 +1,11 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <div fxLayout="row" fxFlex>
     <form fxFlex="100" fxLayoutGap="16px">
-      <div fxFlex="*" fxLayout="column">
+      <div fxFlex="*" fxLayout="">
         <mat-form-field fxLayout="column" appearance="fill">
           <mat-label fxFlex>Program Name</mat-label>
-          <div fxLayout="row" fxFlex>
-            <input fxFlex="600px" name="searchBar" [matAutocomplete]="auto" matInput type="text" maxlength="256"
+          <div fxLayout="" fxFlex>
+            <input fxFlex name="searchBar" [matAutocomplete]="auto" matInput type="text" maxlength="256"
               [formControl]="myControl" (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
           </div>
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"

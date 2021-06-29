@@ -1,5 +1,6 @@
 export * from './alberta-psiprovider.service';
 export * from './end-point.service';
+export * from './google-api';
 export * from './http-object-mapper';
 export * from './location-address.service';
 export * from './location-email.service';
