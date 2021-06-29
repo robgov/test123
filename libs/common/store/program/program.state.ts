@@ -322,6 +322,20 @@ export class ProgramState {
     ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
   }
 
+  @Action(ProgramActions.ResetProgramProviderDistances)
+  onResetProgramProviderDistances(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramProviderDistances
+  ) {
+      const updatedProgramSummaries = ctx.getState().programSummaries;
+      updatedProgramSummaries.forEach((summary)=>{
+        summary.providerDistance = 0
+      });
+      ctx.patchState({
+        programSummaries: updatedProgramSummaries
+      });
+  }
+
   @Action(ProgramActions.SetProgramProviderDistances)
   onSetProgramProviderDistances(
     ctx: StateContext<ProgramStateModel>,
@@ -347,7 +361,10 @@ export class ProgramState {
       ctx.patchState({
         programSummaries: updatedProgramSummaries
       });
-    } 
+    }
+    if (userLatitude===0 && userLongitude===0 && !userPostalCode) {
+      ctx.dispatch(new ProgramActions.ResetProgramProviderDistances());
+    }
   }
 
   @Action(ProgramActions.SetProgramSearchSortOrder)

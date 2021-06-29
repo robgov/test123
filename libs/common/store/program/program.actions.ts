@@ -16,13 +16,15 @@ export namespace ProgramActions {
   }
 
   export class GetSpecializationCostsForProvider {
-    static readonly type = "[ Aed Programs] Get Specialization Costs For Provider"
-    constructor (public providerId: number) {}
+    static readonly type =
+      '[ Aed Programs] Get Specialization Costs For Provider';
+    constructor(public providerId: number) {}
   }
 
   export class GetSpecializationCostForProgram {
-    static readonly type = "[ Aed Programs] Get Specialization Cost For Program"
-    constructor (public programId: number) {}
+    static readonly type =
+      '[ Aed Programs] Get Specialization Cost For Program';
+    constructor(public programId: number) {}
   }
 
   export class GetProgramTypes {
@@ -52,27 +54,23 @@ export namespace ProgramActions {
   }
 
   export class SetProgramSearchCategoryFilter {
-    static readonly type =
-      '[Aed Program] Filter Program Search By Categories';
+    static readonly type = '[Aed Program] Filter Program Search By Categories';
     constructor(public categoryCode: string) {}
   }
 
   export class SetProgramSearchCredentialFilter {
-    static readonly type =
-      '[Aed Program] Filter Program Search By Credential';
+    static readonly type = '[Aed Program] Filter Program Search By Credential';
     constructor(public credentialIds: number[]) {}
   }
 
   export class SetProgramSearchKeywordFilter {
-    static readonly type =
-      '[Aed Providers] Filter Program Search By Keywords';
+    static readonly type = '[Aed Providers] Filter Program Search By Keywords';
     constructor(public keywords: string) {}
   }
 
   export class SetProgramSearchDistanceFilter {
-    static readonly type =
-      '[Aed Providers] Filter Program Search By Distance';
-      constructor(public distance: number){}
+    static readonly type = '[Aed Providers] Filter Program Search By Distance';
+    constructor(public distance: number) {}
   }
 
   export class SetProgramSearchProgramTypeFilter {
@@ -81,21 +79,22 @@ export namespace ProgramActions {
     constructor(public programTypeIds: number[]) {}
   }
 
-  export class SetProgramSearchPostalCodeFilter{
-    static readonly type = 
-    '[Aed Program] Filter Program Search By Postal Code';
+  export class SetProgramSearchPostalCodeFilter {
+    static readonly type = '[Aed Program] Filter Program Search By Postal Code';
     constructor(public postalCode: string) {}
   }
 
-  export class SetProgramProviderDistances{
-    static readonly type =
-    '[Aed Program] Set Program Provider Distances';
+  export class SetProgramProviderDistances {
+    static readonly type = '[Aed Program] Set Program Provider Distances';
   }
 
-  export class SetProgramSearchUserLocationFilter{
-    static readonly type =
-    '[Aed Program] Set Program User Location';
-    constructor(public latitude: number, public longitude:number) {}
+  export class ResetProgramProviderDistances {
+    static readonly type = '[Aed Program] Reset Program Provider Distances';
+  }
+
+  export class SetProgramSearchUserLocationFilter {
+    static readonly type = '[Aed Program] Set Program User Location';
+    constructor(public latitude: number, public longitude: number) {}
   }
 
   //Sorting Stuff
@@ -106,18 +105,18 @@ export namespace ProgramActions {
   }
 
   export class ShowProgramSort {
-		static readonly type = "[Aed Program] Show Program Sort";
-	}
+    static readonly type = '[Aed Program] Show Program Sort';
+  }
 
   export class CloseProgramSort {
-    static readonly type = "[Aed Program] Close Program Sort";
+    static readonly type = '[Aed Program] Close Program Sort';
   }
 
   export class ShowProgramFilter {
-		static readonly type = "[Aed Program] Show Program Filter";
-	}
-  
+    static readonly type = '[Aed Program] Show Program Filter';
+  }
+
   export class CloseProgramFilter {
-    static readonly type = "[Aed Program] Close Program Filter";
+    static readonly type = '[Aed Program] Close Program Filter';
   }
 }

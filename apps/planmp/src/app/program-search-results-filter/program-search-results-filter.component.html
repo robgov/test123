@@ -61,7 +61,7 @@
         </div>
     </mat-toolbar>
     <mat-chip-list #chipList>
-        <mat-chip *ngIf="selectedCipSubSeriesCode">{{getSelectedCipSubSeries()}} <button mat-button (click)="removeCipSubSeries()"><mat-icon>close</mat-icon></button></mat-chip>
-        <mat-chip *ngIf="selectedPostalCode">{{getSelectedPostalCode()}} <button mat-button (click)="removePostalCode()"><mat-icon>close</mat-icon></button></mat-chip>
+        <mat-chip (click)="removeCipSubSeries()" *ngIf="selectedCipSubSeriesCode"><mat-icon>close</mat-icon>{{getSelectedCipSubSeries()}}</mat-chip>
+        <mat-chip (click)="removePostalCode()" *ngIf="selectedPostalCode"><mat-icon>close</mat-icon>{{getSelectedPostalCode()}}</mat-chip>
     </mat-chip-list>
 </div>
