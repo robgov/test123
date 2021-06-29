@@ -3,10 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>ProviderApi</RootNamespace>
+    <UserSecretsId>cdfa2588-955c-4d2c-ac45-50a3fe2a2f5d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+=======
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.2.2" />
+>>>>>>> Stashed changes
     <PackageReference Include="LinqKit" Version="1.1.24" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
