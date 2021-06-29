@@ -9,7 +9,7 @@
         <div id="test" fxLayout="column">
           <mat-label fxFlex>Program Name</mat-label>
           <div fxLayout="row" fxFlex>
-            <input fxFlex="600px" name="searchBar" [matAutocomplete]="auto" matInput type="text" maxlength="256"
+            <input fxFlex="600px" name="searchBar" [matAutocomplete]="auto" matInput type="text" maxlength="256" [formControl]="myControl"
               (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
           </div>
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
@@ -29,6 +29,9 @@
       </mat-form-field>
 
       <mat-form-field fxLayout="column" fxFlex appearance="fill">
+        <button *ngIf="this.selectedLocation" (click)="clearLocation()" mat-button fxFlex="24px" fxLayoutAlign="center center">
+          <mat-icon>clear</mat-icon>
+        </button>
         <mat-label fxFlex >Location (Optional)</mat-label>
         <input fxFlex name="location" matInput type="text" [(ngModel)]="this.selectedLocation">
         <button (click)="locationPrompt()" mat-button fxFlex="24px" fxLayoutAlign="center center">

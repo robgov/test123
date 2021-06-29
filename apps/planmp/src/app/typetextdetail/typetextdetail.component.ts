@@ -25,8 +25,6 @@ interface Item {
   styleUrls: ['./typetextdetail.component.scss'],
 })
 export class TypetextdetailComponent implements OnInit {
-  @Input() cips: VwPmpPsiprogramCountByCategory[];
-  @Input() providers: VwAlbertaPsiprovider[];
   @Input() items: VwPmpLookup[];
 
   @SelectSnapshot(RouterSelectors.getRoute) routeUrl: string;
@@ -74,6 +72,10 @@ export class TypetextdetailComponent implements OnInit {
       this.keywords = newValue;
       this.searchdisabled = false;
     }
+  }
+
+  clearLocation(){
+    this.store.dispatch(new ProgramActions.SetProgramSearchUserLocationFilter(0,0));
   }
 
   locationPrompt(){
