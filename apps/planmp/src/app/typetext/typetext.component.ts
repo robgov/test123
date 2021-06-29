@@ -12,6 +12,7 @@ import { VwPmpLookup } from '@libs/common/models';
 })
 export class TypetextComponent {
     @Select(ProgramSelectors.getProvidersAndCips) getProvidersAndCips$: Observable<VwPmpLookup[]>   
+    @Select(ProgramSelectors.getSelectedLocation) getSelectedLocation$: Observable<string>
 
     constructor(private store: Store){
       store.dispatch(new ProviderActions.GetProviders());

@@ -25,15 +25,14 @@ interface Item {
   styleUrls: ['./typetextdetail.component.scss'],
 })
 export class TypetextdetailComponent implements OnInit {
-  @Input() cips: VwPmpPsiprogramCountByCategory[];
-  @Input() providers: VwAlbertaPsiprovider[];
   @Input() items: VwPmpLookup[];
 
   @SelectSnapshot(RouterSelectors.getRoute) routeUrl: string;
+  @Input() selectedLocation: any;
 
   myControl = new FormControl();
   filteredOptions: Observable<any[]>;
-
+  location: any;
   keywords: any;
   searchdisabled: boolean = true;
   ctlvisible: boolean = false;
@@ -73,6 +72,18 @@ export class TypetextdetailComponent implements OnInit {
       this.keywords = newValue;
       this.searchdisabled = false;
     }
+  }
+
+  clearLocation(){
+    this.store.dispatch(new ProgramActions.SetProgramSearchUserLocationFilter(0,0));
+  }
+
+  locationPrompt(){
+    navigator.geolocation.getCurrentPosition(this.locationSpecified.bind(this));
+  }
+
+  locationSpecified(position: any) {
+    this.store.dispatch(new ProgramActions.SetProgramSearchUserLocationFilter(position.coords.latitude,position.coords.longitude));
   }
 
   displaySearchResult() {

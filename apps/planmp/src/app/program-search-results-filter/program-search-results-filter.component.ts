@@ -84,7 +84,7 @@ export class ProgramSearchResultsFilterComponent {
   }
 
   getSelectedCipSubSeries(){
-    if (this.selectedCipSubSeriesCode) {
+    if (this.selectedCipSubSeriesCode && this.programCountsByCategory) {
       return this.programCountsByCategory.find(pc=>pc.cipSubSeriesCode == this.selectedCipSubSeriesCode).cipSubSeries;
     }
   }
