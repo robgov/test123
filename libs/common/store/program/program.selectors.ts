@@ -5,6 +5,7 @@ import { ProgramStateModel } from './program-state.model';
 import { ProviderState, ProviderStateModel } from '@libs/common/store/provider';
 import {
   ProgramSummaryDto,
+  VwAbpostalCode,
   VwPmpLookup,
   VwPmpPsiprogramCountByCategory,
   VwProgram,
@@ -90,6 +91,11 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static getSelectedPostalCode(state: ProgramStateModel): string {
     return state.programSearchFilter_PostalCode;
+  }
+
+  @Selector([ProgramState])
+  static getPostalCodes(state: ProgramStateModel): VwAbpostalCode[] {
+    return state.postalCodes;
   }
 
   @Selector([ProgramState])

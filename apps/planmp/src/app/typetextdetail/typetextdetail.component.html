@@ -33,7 +33,7 @@
           <mat-icon>location_on</mat-icon>
         </button>
         <mat-label fxFlex>Location (Optional)</mat-label>
-        <input fxFlex="*" name="location" matInput type="text" [(ngModel)]="this.selectedLocation" >
+        <input fxFlex="*" name="location" matInput type="text" [(ngModel)]="this.selectedLocation" (keyup)="checkForPostalCodeMatch()" >
       </mat-form-field>
 
       <div fxFlex="40px" fxLayoutAlign="center center">
