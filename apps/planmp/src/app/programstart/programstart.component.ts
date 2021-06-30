@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
 import {ProgramTypeService} from '@libs/common/services';
+import { environment } from '../environment/environment';
 import { PagedDataParameters, VwProgramCredential, VwProgramType } from '@libs/common/models';
 
 @Component({
@@ -11,6 +12,7 @@ import { PagedDataParameters, VwProgramCredential, VwProgramType } from '@libs/c
 })
 export class ProgramstartComponent implements OnInit {
  
+env = environment;
 FlexConstants = FlexConstants;
 searchText: string;
 institutions: any[] = [];
@@ -28,17 +30,20 @@ ngOnInit(): void {
 
   fetch() {
 
-    const url = "http://aestrapi-dev.eastus.cloudapp.azure.com:1337/ae-programapplies";
+    const url = this.env.StrapiBaseUrl + "/ae-programapplies";
     this.http.get<any[]>(url).subscribe((t) => {
       (this.programdata = t)
     }
     );
+
+
+
   }
 
   getImageUrl(){
-    // if (this.programdata[0]) {
-    //   return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
-    // }
+    if (this.programdata[0]) {
+      return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
+    }
     return "";
   }
 
