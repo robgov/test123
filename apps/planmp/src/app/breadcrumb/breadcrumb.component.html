@@ -1,4 +1,6 @@
 <div class="maticon" fxLayoutAlign="left center" fxLayout="row">
-        <!-- <ng-content></ng-content> -->
-        <a style="color:white" routerLink="{{parentRoute}}" [attr.data-cy]="'breadcrumb.parent-page'" *ngIf="this.parentPage">{{parentPage}}</a><mat-icon *ngIf="this.parentPage">arrow_forward</mat-icon><div [attr.data-cy]="'breadcrumb.current-page'">{{currentPage}}</div>
+        <a style="color:white" routerLink="{{parentRoute}}" [attr.data-cy]="'breadcrumb.parent-page'"
+                *ngIf="this.parentPage">{{parentPage}}</a>
+        <mat-icon *ngIf="this.parentPage">arrow_forward</mat-icon>
+        <div [attr.data-cy]="'breadcrumb.current-page'">{{currentPage}}</div>
 </div>

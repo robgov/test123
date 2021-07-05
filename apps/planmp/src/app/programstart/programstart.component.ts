@@ -36,9 +36,9 @@ ngOnInit(): void {
   }
 
   getImageUrl(){
-    // if (this.programdata[0]) {
-    //   return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
-    // }
+    if (this.programdata[0]) {
+      return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
+    }
     return "";
   }
 
