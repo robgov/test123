@@ -1,13 +1,11 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <div fxLayout="row" fxFlex>
     <form fxFlex="100" fxLayoutGap="16px">
-      <div fxFlex="*" fxLayout="">
-        <mat-form-field fxLayout="column" appearance="fill">
-          <mat-label fxFlex>Program Name</mat-label>
-          <div fxLayout="" fxFlex>
-            <input fxFlex name="searchBar" [matAutocomplete]="auto" matInput type="text" maxlength="256"
-              [formControl]="myControl" (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
-          </div>
+      <!-- <div fxFlex="*"> -->
+        <mat-form-field fxLayout="column" appearance="outline">
+          <mat-label floatLabel='always' >Program Name</mat-label>
+          <input name="searchBar" placeholder="Enter program or category name..." floatLabel="always" [matAutocomplete]="auto" matInput type="text" maxlength="256"
+            [formControl]="myControl" (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
             (optionSelected)="onOptionSelected($event.option.value)">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -22,15 +20,15 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-      </div>
+      <!-- </div> -->
 
-      <mat-form-field fxLayout="column" fxFlex appearance="fill">
-        <button matPrefix *ngIf="this.selectedLocation" (click)="clearLocation()" mat-button fxFlex
+      <mat-form-field fxLayout="column" fxFlex appearance="outline">
+        <button matPrefix *ngIf="this.selectedLocation" (click)="clearLocation()" mat-button fxFlex="8px"
           fxLayoutAlign="center center">
           <mat-icon>clear</mat-icon>
         </button>
-        <button matPrefix *ngIf="!this.selectedLocation" (click)="locationPrompt()" mat-button fxFlex fxShrink="true" fxLayoutAlign="center center">
-          <mat-icon>location_on</mat-icon>
+        <button matPrefix fxFlex="8px" *ngIf="!this.selectedLocation" (click)="locationPrompt()" mat-button fxLayoutAlign="center center">
+          <mat-icon >location_on</mat-icon>
         </button>
         <mat-label fxFlex>Location (Optional)</mat-label>
         <input fxFlex="*" name="location" matInput type="text" [(ngModel)]="this.selectedLocation" (keyup)="checkForPostalCodeMatch()" >
