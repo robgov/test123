@@ -63,11 +63,20 @@ export class ProgramState {
       new ProgramActions.GetProgramCategoryCounts(),
       new ProgramActions.GetProgramCosts(),
       new ProgramActions.GetProgramCredentials(),
-      // new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramSummaries(),
       new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramTypes(),
     ]);
+  }
+
+  @Action(ProgramActions.SetGoogleApiKey)
+  onSetGoogleApiKey(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetGoogleApiKey
+  ) {
+    ctx.patchState({
+      googleApiKey: action.googleApiKey,
+    });
   }
 
   @Action(ProgramActions.GetProgramSummaries)
@@ -303,13 +312,19 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchUserLocationFilter
   ) {
     return this.googleGeocodeApiService
-      .getPostalCodeFromLatLong(action.latitude, action.longitude)
+      .getPostalCodeFromLatLong(
+        ctx.getState().googleApiKey,
+        action.latitude,
+        action.longitude
+      )
       .pipe(
         tap((data: any) => {
           ctx.patchState({
             programSearchFilter_Latitude: action.latitude,
             programSearchFilter_Longitude: action.longitude,
-            programSearchFilter_LocationName: data.plus_code ? data.plus_code.compound_code : '',
+            programSearchFilter_LocationName: data.plus_code
+              ? data.plus_code.compound_code
+              : '',
             programSearchFilter_PostalCode: '',
           });
           ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
@@ -322,12 +337,15 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchPostalCodeFilter
   ) {
-    let location:string = action.postalCode;
-    if (action.postalCode.length ==6) {
-      location = action.postalCode.toUpperCase().substring(0, 3) + ' ' + action.postalCode.toUpperCase().substring(3, 6)
+    let location: string = action.postalCode;
+    if (action.postalCode.length == 6) {
+      location =
+        action.postalCode.toUpperCase().substring(0, 3) +
+        ' ' +
+        action.postalCode.toUpperCase().substring(3, 6);
     }
     ctx.patchState({
-      programSearchFilter_LocationName:location,
+      programSearchFilter_LocationName: location,
       programSearchFilter_PostalCode: action.postalCode.toUpperCase(),
       programSearchFilter_Latitude: 0,
       programSearchFilter_Longitude: 0,
@@ -346,7 +364,7 @@ export class ProgramState {
     });
     ctx.patchState({
       programSummaries: updatedProgramSummaries,
-      programSearchFilter_LocationName : ''
+      programSearchFilter_LocationName: '',
     });
   }
 

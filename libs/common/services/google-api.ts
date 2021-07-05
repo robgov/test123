@@ -7,12 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class GoogleGeocodeApiService {
   protected urlBase = 'https://maps.googleapis.com/maps/api/geocode/json?';
-  protected apiKey = 'AIzaSyBzwNctDuWrCHMy_65PbE3PT5kk06je00E';
-  // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyBzwNctDuWrCHMy_65PbE3PT5kk06je00E
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   public getPostalCodeFromLatLong(
+    apiKey: string,
     latitude: number,
     longitude: number
   ): Observable<Object> {
@@ -23,7 +22,7 @@ export class GoogleGeocodeApiService {
       ',' +
       longitude +
       '&key=' +
-      this.apiKey;
+      apiKey;
     return this.http.get(postalCodeLookupUrl);
   }
 }

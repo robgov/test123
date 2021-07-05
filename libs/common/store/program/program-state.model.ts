@@ -11,6 +11,9 @@ import {
 } from '@libs/common/models';
 
 export class ProgramStateModel {
+  // Api Keys, this probably shouldn't live here
+  googleApiKey: string;
+
   programs: VwProgram[];
   programSummaries: ProgramSummaryDto[];
   programSpecializations: VwSpecialization[];

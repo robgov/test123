@@ -1,4 +1,9 @@
 export namespace ProgramActions {
+  export class SetGoogleApiKey{
+    static readonly type = '[Aed Programs] Set Google Api Key';
+    public constructor (public googleApiKey: string) {}
+  }
+
   export class GetPrograms {
     static readonly type = '[Aed Programs] Get Programs';
   }
