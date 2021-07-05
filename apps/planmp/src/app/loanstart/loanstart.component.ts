@@ -33,9 +33,9 @@ export class LoanstartComponent implements OnInit {
 
     getLoanApplyUrl(){
 
-      // if (this.loandata) {
-      //   return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.loandata[0].Loanapplyimage.url;
-      // }
+      if (this.loandata) {
+        return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.loandata[0].Loanapplyimage.url;
+      }
       return '';
     }
 

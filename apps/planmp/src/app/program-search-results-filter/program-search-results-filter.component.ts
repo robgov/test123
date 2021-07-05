@@ -20,7 +20,7 @@ export class ProgramSearchResultsFilterComponent {
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
-  @Input() selectedPostalCode: string;
+  @Input() selectedLocation: string;
   @Input() selectedCipSubSeriesCode: string;
 
   selectedCipsCode: string="";  
@@ -94,9 +94,9 @@ export class ProgramSearchResultsFilterComponent {
     return new ProgramActions.SetProgramSearchCategoryFilter("");
   }
 
-  getSelectedPostalCode() {
-    if (this.selectedPostalCode) {
-      return this.selectedPostalCode;
+  getSelectedLocation() {
+    if (this.selectedLocation) {
+      return this.selectedLocation;
     }
   }
 

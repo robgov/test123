@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -20,10 +19,5 @@ namespace ProviderApi.Models.EntityFramework
         public int? ProviderId { get; set; }
         public DateTime? BusinessStartDate { get; set; }
         public DateTime? BusinessEndDate { get; set; }
-
-        [NotMapped]
-        public int? ProgramEmploymentStat { get; set; }
-        [NotMapped]
-        public int? ProgramMedianIncome { get; set; }
-  }
+    }
 }

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
-import { RouterSelectors } from '@libs/common/store';
+import { ProgramSelectors, RouterSelectors } from '@libs/common/store';
 import { ProgramActions } from '@libs/common/store';
 
 interface Item {
@@ -84,6 +84,15 @@ export class TypetextdetailComponent implements OnInit {
 
   locationSpecified(position: any) {
     this.store.dispatch(new ProgramActions.SetProgramSearchUserLocationFilter(position.coords.latitude,position.coords.longitude));
+  }
+
+  checkForPostalCodeMatch(){
+    var postalCodes = this.store.selectSnapshot(ProgramSelectors.getPostalCodes);
+    var cleanedPostalCode = this.selectedLocation.replace(/\s/g, "").toUpperCase()
+    var match = postalCodes.find(pc=>pc.postalCode === cleanedPostalCode)
+    if (match) { 
+      this.store.dispatch(new ProgramActions.SetProgramSearchPostalCodeFilter(match.postalCode));
+    }
   }
 
   displaySearchResult() {

@@ -5,6 +5,7 @@ import { ProgramStateModel } from './program-state.model';
 import { ProviderState, ProviderStateModel } from '@libs/common/store/provider';
 import {
   ProgramSummaryDto,
+  VwAbpostalCode,
   VwPmpLookup,
   VwPmpPsiprogramCountByCategory,
   VwProgram,
@@ -93,6 +94,11 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
+  static getPostalCodes(state: ProgramStateModel): VwAbpostalCode[] {
+    return state.postalCodes;
+  }
+
+  @Selector([ProgramState])
   static getSelectedCipSubSeriesCode(state: ProgramStateModel): string {
     return state.programSearchFilter_CipSubSeriesCode;
   }
@@ -104,13 +110,7 @@ export class ProgramSelectors {
 
   @Selector([ProgramState])
   static getSelectedLocation(state:ProgramStateModel): string {
-    if (state.programSearchFilter_PostalCode) {
-      return state.programSearchFilter_PostalCode;
-    }
-    if (state.programSearchFilter_Latitude != 0 && state.programSearchFilter_Longitude) {
-      return state.programSearchFilter_Latitude + ", " + state.programSearchFilter_Longitude;
-    }
-    return "";
+    return state.programSearchFilter_LocationName;
   }
 
   @Selector([ProgramState])

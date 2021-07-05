@@ -11,5 +11,6 @@ namespace ProviderApi.Models.EntityFramework
         public string Type { get; set; }
         public string Name { get; set; }
         public int DisplayOrder { get; set; }
+        public string Value { get; set; }
     }
 }
