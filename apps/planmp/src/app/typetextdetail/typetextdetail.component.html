@@ -23,11 +23,11 @@
       <!-- </div> -->
 
       <mat-form-field fxLayout="column" fxFlex appearance="outline">
-        <button matPrefix *ngIf="this.selectedLocation" (click)="clearLocation()" mat-button fxFlex="8px"
+        <button matPrefix [fxHide]="!selectedLocation" (click)="clearLocation()" mat-flat-button fxFlex="8px"
           fxLayoutAlign="center center">
           <mat-icon>clear</mat-icon>
         </button>
-        <button matPrefix fxFlex="8px" *ngIf="!this.selectedLocation" (click)="locationPrompt()" mat-button fxLayoutAlign="center center">
+        <button matPrefix fxFlex="8px" [fxHide]="!!this.selectedLocation" (click)="locationPrompt()" mat-flat-button fxLayoutAlign="center center">
           <mat-icon >location_on</mat-icon>
         </button>
         <mat-label fxFlex>Location (Optional)</mat-label>
