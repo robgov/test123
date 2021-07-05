@@ -3,7 +3,7 @@
         <!-- Distance Selection -->
         <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">
             <mat-label fxFlex="100" class="filter-heading">Distance</mat-label>
-            <mat-select fxFlex="100" class="filter-field" [disabled]="selectedPostalCode==null"
+            <mat-select fxFlex="100" class="filter-field" [disabled]="selectedLocation==null"
                 (selectionChange)="distanceFilterSelected($event.value)" 
                 placeholder="Alberta">
                 <mat-option [value]="d.code" *ngFor="let d of distanceFilters" class="filter-field">
@@ -61,7 +61,7 @@
     </mat-toolbar>
     <mat-chip-list #chipList>
         <mat-chip (click)="removeCipSubSeries()" *ngIf="selectedCipSubSeriesCode"><mat-icon>close</mat-icon>{{getSelectedCipSubSeries()}}</mat-chip>
-        <mat-chip (click)="removePostalCode()" *ngIf="selectedPostalCode"><mat-icon>close</mat-icon>{{getSelectedPostalCode()}}</mat-chip>
+        <mat-chip (click)="removePostalCode()" *ngIf="selectedLocation"><mat-icon>close</mat-icon>{{getSelectedLocation()}}</mat-chip>
     </mat-chip-list>
     <div></div>
 </div>

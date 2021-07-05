@@ -118,7 +118,6 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetPostalCodes
   ) {
-    
     return this.postalCodeService.getPostalCodes(new PostalCodeRequest()).pipe(
       tap((data: VwAbpostalCode[]) => {
         ctx.patchState({
@@ -264,7 +263,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchKeywordFilter
   ) {
     ctx.patchState({
-      programSearchFilter_Keywords: action.keywords
+      programSearchFilter_Keywords: action.keywords,
     });
   }
 
@@ -274,7 +273,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchDistanceFilter
   ) {
     ctx.patchState({
-      programSearchFilter_DistanceInKm: action.distance
+      programSearchFilter_DistanceInKm: action.distance,
     });
   }
 
@@ -303,17 +302,19 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchUserLocationFilter
   ) {
-    
-    return this.googleGeocodeApiService.getPostalCodeFromLatLong(action.latitude,action.longitude).pipe(
-      tap((data:object[])=>{
-        ctx.patchState({
-          programSearchFilter_Latitude: action.latitude,
-          programSearchFilter_Longitude: action.longitude,
-          programSearchFilter_PostalCode: ""
-        });  
-        ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
-      }) 
-    )
+    return this.googleGeocodeApiService
+      .getPostalCodeFromLatLong(action.latitude, action.longitude)
+      .pipe(
+        tap((data: any) => {
+          ctx.patchState({
+            programSearchFilter_Latitude: action.latitude,
+            programSearchFilter_Longitude: action.longitude,
+            programSearchFilter_LocationName: data.plus_code ? data.plus_code.compound_code : '',
+            programSearchFilter_PostalCode: '',
+          });
+          ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
+        })
+      );
   }
 
   @Action(ProgramActions.SetProgramSearchPostalCodeFilter)
@@ -321,7 +322,12 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchPostalCodeFilter
   ) {
+    let location:string = action.postalCode;
+    if (action.postalCode.length ==6) {
+      location = action.postalCode.toUpperCase().substring(0, 3) + ' ' + action.postalCode.toUpperCase().substring(3, 6)
+    }
     ctx.patchState({
+      programSearchFilter_LocationName:location,
       programSearchFilter_PostalCode: action.postalCode.toUpperCase(),
       programSearchFilter_Latitude: 0,
       programSearchFilter_Longitude: 0,
@@ -334,13 +340,14 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramProviderDistances
   ) {
-      const updatedProgramSummaries = ctx.getState().programSummaries;
-      updatedProgramSummaries.forEach((summary)=>{
-        summary.providerDistance = 0
-      });
-      ctx.patchState({
-        programSummaries: updatedProgramSummaries
-      });
+    const updatedProgramSummaries = ctx.getState().programSummaries;
+    updatedProgramSummaries.forEach((summary) => {
+      summary.providerDistance = null;
+    });
+    ctx.patchState({
+      programSummaries: updatedProgramSummaries,
+      programSearchFilter_LocationName : ''
+    });
   }
 
   @Action(ProgramActions.SetProgramProviderDistances)
@@ -351,25 +358,34 @@ export class ProgramState {
     const userPostalCode = ctx.getState().programSearchFilter_PostalCode;
     const userLatitude = ctx.getState().programSearchFilter_Latitude;
     const userLongitude = ctx.getState().programSearchFilter_Longitude;
-    if (ctx.getState().postalCodes && ctx.getState().programSummaries && (userPostalCode || (userLatitude!=0 && userLongitude!=0 ))){
+    if (
+      ctx.getState().postalCodes &&
+      ctx.getState().programSummaries &&
+      (userPostalCode || (userLatitude != 0 && userLongitude != 0))
+    ) {
       let userLocation: VwAbpostalCode = new VwAbpostalCode();
       if (userPostalCode) {
-        userLocation = ctx.getState().postalCodes.find(pc=>pc.postalCode === userPostalCode);
-      }
-      else {
+        userLocation = ctx
+          .getState()
+          .postalCodes.find((pc) => pc.postalCode === userPostalCode);
+      } else {
         userLocation.longitude = userLongitude;
         userLocation.latitude = userLatitude;
       }
 
       const updatedProgramSummaries = ctx.getState().programSummaries;
-      updatedProgramSummaries.forEach((summary)=>{
-        summary.providerDistance = DistanceHelper.getDistanceFromLatLonInKm(userLocation,summary.longitude,summary.latitude)
+      updatedProgramSummaries.forEach((summary) => {
+        summary.providerDistance = DistanceHelper.getDistanceFromLatLonInKm(
+          userLocation,
+          summary.longitude,
+          summary.latitude
+        );
       });
       ctx.patchState({
-        programSummaries: updatedProgramSummaries
+        programSummaries: updatedProgramSummaries,
       });
     }
-    if (userLatitude===0 && userLongitude===0 && !userPostalCode) {
+    if (userLatitude === 0 && userLongitude === 0 && !userPostalCode) {
       ctx.dispatch(new ProgramActions.ResetProgramProviderDistances());
     }
   }

@@ -25,6 +25,7 @@ export class ProgramStateModel {
   programSearchFilter_ProviderIds: number[];
   programSearchFilter_CipSubSeriesCode: string;
   programSearchFilter_CategoryProgramIds: number[];
+  programSearchFilter_LocationName: string;
   programSearchFilter_PostalCode: string;
   programSearchFilter_Latitude: number;
   programSearchFilter_Longitude: number;

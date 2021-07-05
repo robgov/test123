@@ -110,13 +110,7 @@ export class ProgramSelectors {
 
   @Selector([ProgramState])
   static getSelectedLocation(state:ProgramStateModel): string {
-    if (state.programSearchFilter_PostalCode) {
-      return state.programSearchFilter_PostalCode;
-    }
-    if (state.programSearchFilter_Latitude != 0 && state.programSearchFilter_Longitude) {
-      return state.programSearchFilter_Latitude + ", " + state.programSearchFilter_Longitude;
-    }
-    return "";
+    return state.programSearchFilter_LocationName;
   }
 
   @Selector([ProgramState])
