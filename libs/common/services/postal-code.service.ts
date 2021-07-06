@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { PostalCodeRequest, VwAbpostalCode } from '@libs/common/models';
+import { PostalCodeDto, PostalCodeRequest } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class PostalCodeService extends EndPointService {
         this.key = 'postalCode';
     }
     
-    public getPostalCodes(request: PostalCodeRequest): Observable<VwAbpostalCode[]> { 
+    public getPostalCodes(request: PostalCodeRequest): Observable<PostalCodeDto[]> { 
         return this.get(this.url + 'GetPostalCodes', request);
     }
 

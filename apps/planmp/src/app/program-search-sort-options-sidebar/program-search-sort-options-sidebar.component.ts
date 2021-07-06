@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { ProgramActions } from '@libs/common/store/store-index';
-import { VwPmpLookup } from '@libs/common/models';
+import { LookupDto } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-program-search-sort-options-sidebar',
@@ -9,7 +9,7 @@ import { VwPmpLookup } from '@libs/common/models';
   styleUrls: ['./program-search-sort-options-sidebar.component.scss']
 })
 export class ProgramSearchSortOptionsSidebarComponent implements OnInit {
-  @Input() sortOptions: VwPmpLookup[];
+  @Input() sortOptions: LookupDto[];
   @Input() selectedSortOrder: string;
   
   constructor(private store:Store) { }

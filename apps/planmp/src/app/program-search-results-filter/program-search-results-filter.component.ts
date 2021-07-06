@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DistanceHelper } from '@libs/common/helpers';
-import { VwAlbertaPsiprovider, VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
+import { ProviderDto, LookupDto, PsiSpecializationCountByCategoryDto, ProgramCredentialDto, ProgramTypeDto } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
@@ -10,13 +10,12 @@ import { Dispatch } from '@ngxs-labs/dispatch-decorator';
   styleUrls: ['./program-search-results-filter.component.scss']
 })
 export class ProgramSearchResultsFilterComponent {
-  @Input() categoryPrograms: VwSpecializationPrograms[];
-  @Input() providers: VwAlbertaPsiprovider[];
-  @Input() programCountsByCategory: VwPmpPsiprogramCountByCategory[];
-  @Input() credentials: VwProgramCredential[];
-  @Input() programTypes: VwProgramType[];
-  @Input() sortOptions: VwPmpLookup[];
-  @Input() distanceFilters: VwPmpLookup[];
+  @Input() providers: ProviderDto[];
+  @Input() programCountsByCategory: PsiSpecializationCountByCategoryDto[];
+  @Input() credentials: ProgramCredentialDto[];
+  @Input() programTypes: ProgramTypeDto[];
+  @Input() sortOptions: LookupDto[];
+  @Input() distanceFilters: LookupDto[];
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];

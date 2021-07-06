@@ -5,19 +5,19 @@ import { ProgramStateModel } from './program-state.model';
 import { ProviderState, ProviderStateModel } from '@libs/common/store/provider';
 import {
   ProgramSummaryDto,
-  VwAbpostalCode,
-  VwPmpLookup,
-  VwPmpPsiprogramCountByCategory,
-  VwProgram,
-  VwProgramCost,
-  VwProgramCredential,
-  VwProgramType,
-  VwSpecialization,
+  PostalCodeDto,
+  LookupDto,
+  PsiSpecializationCountByCategoryDto,
+  ProgramDto,
+  ProgramCostDto,
+  ProgramCredentialDto,
+  ProgramTypeDto,
+  SpecializationDto,
 } from '@libs/common/models';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
-  static programs(state: ProgramStateModel): VwProgram[] {
+  static programs(state: ProgramStateModel): ProgramDto[] {
     return state.programs;
   }
 
@@ -64,17 +64,17 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static getProgramSpecializations(
     state: ProgramStateModel
-  ): VwSpecialization[] {
+  ): SpecializationDto[] {
     return state.programSpecializations;
   }
 
   @Selector([ProgramState])
-  static getProgramCosts(state: ProgramStateModel): VwProgramCost[] {
+  static getProgramCosts(state: ProgramStateModel): ProgramCostDto[] {
     return state.programCosts;
   }
 
   @Selector([ProgramState])
-  static getProgramTypes(state: ProgramStateModel): VwProgramType[] {
+  static getProgramTypes(state: ProgramStateModel): ProgramTypeDto[] {
     return state.programTypes;
   }
 
@@ -94,7 +94,7 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
-  static getPostalCodes(state: ProgramStateModel): VwAbpostalCode[] {
+  static getPostalCodes(state: ProgramStateModel): PostalCodeDto[] {
     return state.postalCodes;
   }
 
@@ -116,7 +116,7 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static getProgramCategoryCounts(
     state: ProgramStateModel
-  ): VwPmpPsiprogramCountByCategory[] {
+  ): PsiSpecializationCountByCategoryDto[] {
     return state.programCategoryCounts;
   }
 
@@ -132,12 +132,12 @@ export class ProgramSelectors {
       const providers = providerState.programProviders;
       const cips = state.programCategoryCounts;
   
-      var items = new Array<VwPmpLookup>();
+      var items = new Array<LookupDto>();
   
       if (providers && cips) {
         items = providers.map(
           (p) =>
-            <VwPmpLookup>{
+            <LookupDto>{
               name: p.providerName,
               code: p.providerId.toString(),
               type: 'provider',
@@ -145,7 +145,7 @@ export class ProgramSelectors {
         );
         var tmp = cips.map(
           (c) =>
-            <VwPmpLookup>{ name: c.cipSubSeries, code: c.cipSubSeriesCode, type: 'cips' }
+            <LookupDto>{ name: c.cipSubSeries, code: c.cipSubSeriesCode, type: 'cips' }
         );
         items = items.concat(tmp);        
       }
@@ -166,7 +166,7 @@ export class ProgramSelectors {
   @Selector([ProgramState])
   static getProgramCredentials(
     state: ProgramStateModel
-  ): VwProgramCredential[] {
+  ): ProgramCredentialDto[] {
     return state.programCredentials;
   }
 

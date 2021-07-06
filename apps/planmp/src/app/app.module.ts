@@ -16,18 +16,10 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 import {
   LocationAddressService,
-  LocationEmailService,
-  LocationPhoneService,
-  LocationPublicationService,
   LocationService,
-  ProgramPublicationService,
   ProgramService,
   ProviderAddressService,
-  ProviderEmailService,
-  ProviderPhoneService,
-  ProviderPublicationService,
   ProviderService,
-  ProviderTypeService,
   ProviderWebsiteService,
 } from '@libs/common/services';
 
@@ -144,18 +136,10 @@ import { ProgramCardComponent } from './program-card/program-card.component';
   ],
   providers: [
     LocationAddressService,
-    LocationEmailService,
-    LocationPhoneService,
-    LocationPublicationService,
     LocationService,
-    ProgramPublicationService,
     ProgramService,
     ProviderAddressService,
-    ProviderEmailService,
-    ProviderPhoneService,
-    ProviderPublicationService,
     ProviderService,
-    ProviderTypeService,
     ProviderWebsiteService,
     {
       provide: APP_INITIALIZER,

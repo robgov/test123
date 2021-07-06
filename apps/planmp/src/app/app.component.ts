@@ -3,7 +3,7 @@ import { FlexConstants} from '@libs/FlexConstants';
 import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
 import { LookupSelectors, ProgramActions, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
 import { MatSidenav } from '@angular/material/sidenav';
-import { VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgram, VwProgramCredential, VwProgramType, VwProvider, VwSpecialization } from '@libs/common/models';
+import { LookupDto, PsiSpecializationCountByCategoryDto, ProgramDto, ProgramCredentialDto, ProgramTypeDto, ProviderDto, SpecializationDto } from '@libs/common/models';
 import { Observable, Subscribable, Subscription } from 'rxjs';
 
 @Component({
@@ -12,14 +12,14 @@ import { Observable, Subscribable, Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy{
-  @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<VwPmpLookup[]>;
+  @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<LookupDto[]>;
 
-  @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
-  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>;
-  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<VwProgram[]>;
-  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
-  @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<VwProgramType[]>;
-  @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
+  @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<SpecializationDto[]>;
+  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<ProgramCredentialDto[]>;
+  @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<ProgramDto[]>;
+  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<PsiSpecializationCountByCategoryDto[]>;
+  @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<ProgramTypeDto[]>;
+  @Select(ProviderSelectors.getProviders) providers$: Observable<ProviderDto[]>;
 
   @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>

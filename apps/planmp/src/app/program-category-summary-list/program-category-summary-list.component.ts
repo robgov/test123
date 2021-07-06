@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { VwPmpPsiprogramCountByCategory } from '@libs/common/models';
-import {  ProgramSelectors } from '@libs/common/store/program';
+import { PsiSpecializationCountByCategoryDto } from '@libs/common/models';
+import { ProgramSelectors } from '@libs/common/store/program';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,5 +11,6 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgramCategorySummaryListComponent {
-  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
+  @Select(ProgramSelectors.getProgramCategoryCounts)
+  programCountsByCategory$: Observable<PsiSpecializationCountByCategoryDto[]>;
 }

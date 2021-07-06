@@ -1,13 +1,9 @@
-import { VwAbpostalCode, VwProviderAddress } from '@libs/common/models';
-import {
-  ProgramStateModel,
-  ProviderStateModel,
-} from '@libs/common/store/store-index';
+import { PostalCodeDto } from '@libs/common/models';
 
 export class DistanceHelper {
   // https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/27943#27943
   public static getDistanceFromLatLonInKm(
-    userLocation: VwAbpostalCode,
+    userLocation: PostalCodeDto,
     providerLongitude: number,
     providerLatitude: number
   ) {

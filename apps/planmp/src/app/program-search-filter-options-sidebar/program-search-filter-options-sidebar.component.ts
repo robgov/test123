@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { VwAlbertaPsiprovider, VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
+import { Component, Input } from '@angular/core';
+import { ProviderDto, ProgramCredentialDto, ProgramTypeDto } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
 import { Store } from '@ngxs/store';
 
@@ -9,10 +9,9 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./program-search-filter-options-sidebar.component.scss']
 })
 export class ProgramSearchFilterOptionsSidebarComponent {
-  @Input() categoryPrograms: VwSpecializationPrograms[];
-  @Input() providers: VwAlbertaPsiprovider[];
-  @Input() credentials: VwProgramCredential[];
-  @Input() programTypes: VwProgramType[];
+  @Input() providers: ProviderDto[];
+  @Input() credentials: ProgramCredentialDto[];
+  @Input() programTypes: ProgramTypeDto[];
 
   @Input() selectedProviderIds: number[];
   selectedCipsCode: string="";

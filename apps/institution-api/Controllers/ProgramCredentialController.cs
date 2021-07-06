@@ -5,6 +5,8 @@ using System.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models.EntityFramework;
+using ProviderApi.Models.Dto;
+using AutoMapper;
 
 namespace ProviderApi.Controllers
 {
@@ -15,31 +17,22 @@ namespace ProviderApi.Controllers
     private readonly ILogger<ProgramCredentialController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private IMapper _mapper;
 
-    public ProgramCredentialController(ILogger<ProgramCredentialController> logger, AEDigital_SYSTContext context)
+    public ProgramCredentialController(ILogger<ProgramCredentialController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
+      _mapper = mapper;
     }
-
-    [HttpGet("{id}")]
-    [SwaggerOperation("GetProgramCredential")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProgramCredential> GetProgramCredential(int id)
-    {
-      return _context.VwProgramCredentials.Where(x => x.ProgramCredentialId.Equals(id));
-    }
-
-
 
     [HttpGet("GetProgramCredentials")]
     [SwaggerOperation("GetProgramCredentials")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProgramCredential> GetProgramCredentials()
+    public IEnumerable<ProgramCredentialDto> GetProgramCredentials()
     {
-      return _context.VwProgramCredentials.ToList();
+      return _mapper.Map<List<VwProgramCredential>, List<ProgramCredentialDto>>(_context.VwProgramCredentials.ToList());
     }
   }
 }

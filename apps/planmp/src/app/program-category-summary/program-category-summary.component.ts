@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FlexConstants } from '@libs/FlexConstants';
-import { VwProgram, VwPmpPsiprogramCountByCategory } from '@libs/common/models';
+import { ProgramDto, PsiSpecializationCountByCategoryDto } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-program-category-summary',
@@ -10,6 +10,6 @@ import { VwProgram, VwPmpPsiprogramCountByCategory } from '@libs/common/models';
 export class ProgramCategorySummaryComponent {
   FlexConstants = FlexConstants;
 
-  @Input() programCountByCategory: VwPmpPsiprogramCountByCategory;
-  programs: VwProgram[];
+  @Input() programCountByCategory: PsiSpecializationCountByCategoryDto;
+  programs: ProgramDto[];
 }

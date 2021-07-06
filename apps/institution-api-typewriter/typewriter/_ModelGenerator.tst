@@ -31,7 +31,7 @@ ${
         "AEDigital_SYSTContext",
         "migration-log",
         "migration-log-current",
-        "schema-snapshot"
+        "schema-snapshot",
     }; 
 
     string BaseClassExtends(Class c) => (c.BaseClass != null) ? string.Format(" extends {0}", c.BaseClass.Name) : null;
@@ -162,7 +162,7 @@ ${
         return importBuilder.ToString();
     }
 }
-$Classes(c => c.Namespace.StartsWith("ProviderApi.Models")  && (!ignoreModels.Contains(c.Name)))[
+$Classes(c => c.Namespace.StartsWith("ProviderApi.Models.Dto") && (!ignoreModels.Contains(c.Name)))[
 $Imports
 export class $Name$BaseClassExtends {$Properties[
     $PropertyName]

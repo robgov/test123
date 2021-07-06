@@ -4,7 +4,7 @@ import { FlexConstants } from '@libs/FlexConstants';
 import { environment } from '../environment/environment';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { VwProgram } from '@libs/common/models';
+import { ProgramDto } from '@libs/common/models';
 import {ProgramSelectors } from '@libs/common/store/program';
 
 interface PageContent {
@@ -28,10 +28,10 @@ interface SearchOption {
 export class HomeComponent implements OnInit {
 
   
-  @Select(ProgramSelectors.programs) programs$: Observable<VwProgram[]>;
+  @Select(ProgramSelectors.programs) programs$: Observable<ProgramDto[]>;
 
-  programs: VwProgram[];
-  cipscode: VwProgram[];
+  programs: ProgramDto[];
+  cipscode: ProgramDto[];
   env = environment;
 
   selectedValue: string;

@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  VwAlbertaPsiprovider,
-  VwPmpLookup,
-  VwPmpPsiprogramCountByCategory,
+  ProviderDto,
+  LookupDto,
+  PsiSpecializationCountByCategoryDto,
 } from '@libs/common/models';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -25,7 +25,7 @@ interface Item {
   styleUrls: ['./typetextdetail.component.scss'],
 })
 export class TypetextdetailComponent implements OnInit {
-  @Input() items: VwPmpLookup[];
+  @Input() items: LookupDto[];
 
   @SelectSnapshot(RouterSelectors.getRoute) routeUrl: string;
   @Input() selectedLocation: any;
@@ -47,7 +47,7 @@ export class TypetextdetailComponent implements OnInit {
     );
   }
 
-  displayFn(u: VwPmpLookup): any {
+  displayFn(u: LookupDto): any {
     return u && u.name ? u.name : '';
   }
 

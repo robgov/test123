@@ -2,7 +2,7 @@ import {Component, ChangeDetectionStrategy} from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import {Observable} from 'rxjs';
 import { ProgramActions, ProgramSelectors, ProviderActions } from '@libs/common/store/store-index';
-import { VwPmpLookup } from '@libs/common/models';
+import { LookupDto } from '@libs/common/models';
 
 @Component({
   selector: 'ae-typetext',
@@ -11,7 +11,7 @@ import { VwPmpLookup } from '@libs/common/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TypetextComponent {
-    @Select(ProgramSelectors.getProvidersAndCips) getProvidersAndCips$: Observable<VwPmpLookup[]>   
+    @Select(ProgramSelectors.getProvidersAndCips) getProvidersAndCips$: Observable<LookupDto[]>   
     @Select(ProgramSelectors.getSelectedLocation) getSelectedLocation$: Observable<string>
 
     constructor(private store: Store){

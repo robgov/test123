@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { ProviderService } from '@libs/common/services';
-import { PagedDataParameters, VwProvider } from '@libs/common/models';
+import { PagedDataParameters, ProviderDto } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-tombstone',
@@ -12,7 +12,7 @@ import { PagedDataParameters, VwProvider } from '@libs/common/models';
 export class TombstoneComponent implements OnInit {
   searchText: string;
   institutions: any[] = [];
-  providers: VwProvider[];
+  providers: ProviderDto[];
   pagenumber = 1;
   pagesize = 5;
 

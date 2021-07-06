@@ -16,17 +16,17 @@ import {
   GoogleGeocodeApiService,
 } from '@libs/common/services';
 import {
-  VwProgram,
+  ProgramDto,
   ProgramsRequest,
-  VwSpecialization,
-  VwSpecializationCost,
-  VwProgramCost,
+  SpecializationDto,
+  SpecializationCostDto,
+  ProgramCostDto,
   ProgramCostsRequest,
-  VwPmpPsiprogramCountByCategory,
-  VwProgramCredential,
-  VwProgramType,
+  PsiSpecializationCountByCategoryDto,
+  ProgramCredentialDto,
+  ProgramTypeDto,
   SpecializationCostRequest,
-  VwAbpostalCode,
+  PostalCodeDto,
   PostalCodeRequest,
   ProgramSummaryDto,
 } from '@libs/common/models';
@@ -100,7 +100,7 @@ export class ProgramState {
     action: ProgramActions.GetPrograms
   ) {
     return this.programService.getPrograms(new ProgramsRequest({})).pipe(
-      tap((data: VwProgram[]) => {
+      tap((data: ProgramDto[]) => {
         ctx.patchState({
           programs: data,
         });
@@ -114,7 +114,7 @@ export class ProgramState {
     action: ProgramActions.GetProgramSpecializations
   ) {
     return this.specializationService.getSpecializations().pipe(
-      tap((data: VwSpecialization[]) => {
+      tap((data: SpecializationDto[]) => {
         ctx.patchState({
           programSpecializations: data,
         });
@@ -128,7 +128,7 @@ export class ProgramState {
     action: ProgramActions.GetPostalCodes
   ) {
     return this.postalCodeService.getPostalCodes(new PostalCodeRequest()).pipe(
-      tap((data: VwAbpostalCode[]) => {
+      tap((data: PostalCodeDto[]) => {
         ctx.patchState({
           postalCodes: data,
         });
@@ -161,7 +161,7 @@ export class ProgramState {
         new SpecializationCostRequest({ programId: action.programId })
       )
       .pipe(
-        tap((data: VwSpecializationCost[]) => {
+        tap((data: SpecializationCostDto[]) => {
           ctx.patchState({
             specializationCosts: data,
           });
@@ -179,7 +179,7 @@ export class ProgramState {
         new SpecializationCostRequest({ providerId: action.providerId })
       )
       .pipe(
-        tap((data: VwSpecializationCost[]) => {
+        tap((data: SpecializationCostDto[]) => {
           ctx.patchState({
             specializationCosts: data,
           });
@@ -195,7 +195,7 @@ export class ProgramState {
     return this.programCostService
       .getProgramCosts(new ProgramCostsRequest())
       .pipe(
-        tap((data: VwProgramCost[]) => {
+        tap((data: ProgramCostDto[]) => {
           ctx.patchState({
             programCosts: data,
           });
@@ -209,7 +209,7 @@ export class ProgramState {
     action: ProgramActions.GetProgramTypes
   ) {
     return this.programTypeService.getProgramTypes().pipe(
-      tap((data: VwProgramType[]) => {
+      tap((data: ProgramTypeDto[]) => {
         ctx.patchState({
           programTypes: data,
         });
@@ -223,7 +223,7 @@ export class ProgramState {
     action: ProgramActions.GetProgramCategoryCounts
   ) {
     return this.programService.getProgramCountByCategory().pipe(
-      tap((data: VwPmpPsiprogramCountByCategory[]) => {
+      tap((data: PsiSpecializationCountByCategoryDto[]) => {
         ctx.patchState({
           programCategoryCounts: data,
         });
@@ -237,7 +237,7 @@ export class ProgramState {
     action: ProgramActions.GetProgramCredentials
   ) {
     return this.programCredentialService.getProgramCredentials().pipe(
-      tap((data: VwProgramCredential[]) => {
+      tap((data: ProgramCredentialDto[]) => {
         ctx.patchState({
           programCredentials: data,
         });
@@ -381,7 +381,7 @@ export class ProgramState {
       ctx.getState().programSummaries &&
       (userPostalCode || (userLatitude != 0 && userLongitude != 0))
     ) {
-      let userLocation: VwAbpostalCode = new VwAbpostalCode();
+      let userLocation: PostalCodeDto = new PostalCodeDto();
       if (userPostalCode) {
         userLocation = ctx
           .getState()

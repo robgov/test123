@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { VwProgramType } from '@libs/common/models';
+import { ProgramTypeDto } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class ProgramTypeService extends EndPointService {
         this.key = 'programType';
     }
     
-    public getProgramTypes(): Observable<VwProgramType[]> { 
+    public getProgramTypes(): Observable<ProgramTypeDto[]> { 
         return this.get(this.url + '');
     }
 

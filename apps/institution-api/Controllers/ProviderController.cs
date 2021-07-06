@@ -8,6 +8,8 @@ using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
 using LinqKit;
 using ProviderApi.Controllers.Enrichers;
+using AutoMapper;
+using ProviderApi.Models.Dto;
 
 namespace ProviderApi.Controllers
 {
@@ -18,20 +20,13 @@ namespace ProviderApi.Controllers
     private readonly ILogger<ProviderController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private IMapper _mapper;
 
-    public ProviderController(ILogger<ProviderController> logger, AEDigital_SYSTContext context)
+    public ProviderController(ILogger<ProviderController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
-    }
-
-    [HttpGet("{id}")]
-    [SwaggerOperation("GetProvider")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProvider> GetProvider(int id)
-    {
-      return _context.VwProviders.Where(x => x.ProviderId.Equals(id));
+      _mapper = mapper;
     }
 
     ///<Summary>
@@ -41,7 +36,7 @@ namespace ProviderApi.Controllers
     [SwaggerOperation("GetProviders")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProvider> GetProviders([FromQuery] PagedDataParameters providerParameters)
+    public IEnumerable<ProviderDto> GetProviders([FromQuery] PagedDataParameters providerParameters)
     {
       List<VwProvider> providers = _context.VwProviders.ToList().OrderBy(p=>p.ProviderName).ToList();
 
@@ -59,7 +54,7 @@ namespace ProviderApi.Controllers
           .Take(providerParameters.PageSize)
           .ToList();
 
-      return pagedProviders;
+      return _mapper.Map<List<VwProvider>,List<ProviderDto>>(pagedProviders);
     }
   }
 }

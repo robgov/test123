@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { FlexConstants } from '@libs/FlexConstants';
 import {ProgramTypeService} from '@libs/common/services';
-import { PagedDataParameters, VwProgramCredential, VwProgramType } from '@libs/common/models';
+import { PagedDataParameters, ProgramCredentialDto, ProgramTypeDto } from '@libs/common/models';
 
 @Component({
   selector: 'ae-programstart',
@@ -14,7 +14,7 @@ export class ProgramstartComponent implements OnInit {
 FlexConstants = FlexConstants;
 searchText: string;
 institutions: any[] = [];
-credentials: VwProgramType[];
+credentials: ProgramTypeDto[];
 
 constructor(private http: HttpClient) { }
 ngOnInit(): void { 
