@@ -1,7 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
+import {
+  ProgramSelectors,
+  ProviderSelectors,
+} from '@libs/common/store/store-index';
 import { ProgramDto, ProviderDto } from '@libs/common/models';
 
 @Component({
@@ -13,8 +16,7 @@ import { ProgramDto, ProviderDto } from '@libs/common/models';
 export class SchoolSummaryListComponent {
   @Select(ProviderSelectors.getProviders) programProviders$: Observable<ProviderDto[]>;
 
-  constructor(private store: Store) {
-  }
+  constructor(private store: Store) {}
 
   getProviderPrograms(provider: ProviderDto): Observable<ProgramDto[]> {
     return this.store.select(

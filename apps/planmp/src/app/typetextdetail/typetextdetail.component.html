@@ -1,37 +1,38 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <div fxLayout="row" fxFlex>
     <form fxFlex="100" fxLayoutGap="16px">
-      <!-- <div fxFlex="*"> -->
-        <mat-form-field fxLayout="column" appearance="outline">
-          <mat-label floatLabel='always' >Program Name</mat-label>
-          <input name="searchBar" placeholder="Enter program or category name..." floatLabel="always" [matAutocomplete]="auto" matInput type="text" maxlength="256"
-            [formControl]="myControl" (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
-            (optionSelected)="onOptionSelected($event.option.value)">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              <div>
-                <div fxFlex>
-                  {{ option.name }}
-                </div>
-                <div fxFlex="100px">
-                  <mat-chip>{{ option.type }}</mat-chip>
-                </div>
+      <mat-form-field fxLayout="column" appearance="outline">
+        <mat-label floatLabel='always'>Program Name</mat-label>
+        <input name="searchBar" placeholder="Enter program or category name..." floatLabel="always"
+          [matAutocomplete]="auto" matInput type="text" maxlength="256" [formControl]="myControl"
+          (keyup)="onSearchChange($event.target.value)" [(ngModel)]="this.keywords" />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+          (optionSelected)="onOptionSelected($event.option.value)">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <div>
+              <div fxFlex>
+                {{ option.name }}
               </div>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      <!-- </div> -->
+              <div fxFlex="100px">
+                <mat-chip>{{ option.type }}</mat-chip>
+              </div>
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
       <mat-form-field fxLayout="column" fxFlex appearance="outline">
         <button matPrefix [fxHide]="!selectedLocation" (click)="clearLocation()" mat-flat-button fxFlex="8px"
           fxLayoutAlign="center center">
           <mat-icon>clear</mat-icon>
         </button>
-        <button matPrefix fxFlex="8px" [fxHide]="!!this.selectedLocation" (click)="locationPrompt()" mat-flat-button fxLayoutAlign="center center">
-          <mat-icon >location_on</mat-icon>
+        <button matPrefix fxFlex="8px" [fxHide]="!!this.selectedLocation" (click)="locationPrompt()" mat-flat-button
+          fxLayoutAlign="center center">
+          <mat-icon>location_on</mat-icon>
         </button>
         <mat-label fxFlex>Location (Optional)</mat-label>
-        <input fxFlex="*" name="location" matInput type="text" [(ngModel)]="this.selectedLocation" (keyup)="checkForPostalCodeMatch()" >
+        <input fxFlex="*" name="location" matInput type="text" [(ngModel)]="this.selectedLocation"
+          (keyup)="checkForPostalCodeMatch()">
       </mat-form-field>
 
       <div fxFlex="40px" fxLayoutAlign="center center">

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProviderDto, ProgramCredentialDto, ProgramTypeDto } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
-import { Store } from '@ngxs/store';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
 @Component({
   selector: 'aedigital-program-search-filter-options-sidebar',
@@ -14,29 +14,30 @@ export class ProgramSearchFilterOptionsSidebarComponent {
   @Input() programTypes: ProgramTypeDto[];
 
   @Input() selectedProviderIds: number[];
-  selectedCipsCode: string="";
   @Input() selectedCredentialIds: number[];
 
-  constructor(private store: Store) { }
-
+  @Dispatch()
   providerSelected(providerIds: number[]){
-    this.store.dispatch(new ProgramActions.SetProgramSearchProviderFilter(providerIds));
+    return new ProgramActions.SetProgramSearchProviderFilter(providerIds);
   }
 
+  @Dispatch()
   categorySelected(categoryCode: string){
-    this.store.dispatch(new ProgramActions.SetProgramSearchCategoryFilter(categoryCode));
+    return new ProgramActions.SetProgramSearchCategoryFilter(categoryCode);
   }
 
+  @Dispatch()
   credentialSelected(credentialIds: number[]){
-    this.store.dispatch(new ProgramActions.SetProgramSearchCredentialFilter(credentialIds));
+    return new ProgramActions.SetProgramSearchCredentialFilter(credentialIds);
   }
 
+  @Dispatch()
   programTypeSelected(programTypeIds: number[]){
-    this.store.dispatch(new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds));
+    return new ProgramActions.SetProgramSearchProgramTypeFilter(programTypeIds);
   }
 
+  @Dispatch()
   close() {
-    this.store.dispatch(new ProgramActions.CloseProgramFilter());
+    return new ProgramActions.CloseProgramFilter();
   }
-
 }

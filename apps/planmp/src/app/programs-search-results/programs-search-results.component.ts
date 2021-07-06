@@ -1,12 +1,8 @@
 import {
   Component,
   OnInit,
-  OnDestroy,
-  ViewChild,
   ChangeDetectorRef,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import {
   ProviderDto,
@@ -40,7 +36,7 @@ import { RouterSelectors } from '@libs/common/store';
   templateUrl: './programs-search-results.component.html',
   styleUrls: ['./programs-search-results.component.scss'],
 })
-export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
+export class ProgramsSearchResultsComponent implements OnInit {
   FlexConstants = FlexConstants;
 
   @Select(ProgramSelectors.getProgramSpecializations) programSpecializations$: Observable<SpecializationDto[]>;
@@ -61,10 +57,6 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
   @Select(LookupSelectors.getLookupsForType("DistanceFilter")) distanceFilterOptions$: Observable<LookupDto[]>;
 
   @SelectSnapshot(RouterSelectors.getRouteId) routeId: string;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  programs$: Observable<any>;
-  dataSource: MatTableDataSource<ProgramDto>;
 
   providerId: number = null;
   cipSubSeriesCode: string = null;
@@ -126,22 +118,7 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
-  }
-
   getProvider(program: ProgramDto): Observable<ProviderDto> {
-    // if (
-    //   !this.store.selectSnapshot(
-    //     ProgramSelectors.getSpecializationCostsForProvider(program.programId)
-    //   )
-    // ) {
-    //   this.store.dispatch(
-    //     new ProgramActions.GetSpecializationCostsForProvider(program.providerId)
-    //   );
-    // }
     return this.store.select(ProviderSelectors.getProvider(program.providerId));
   }
 

@@ -2,8 +2,9 @@
     <div fxLayout="row" fxLayoutGap="8px">
         <div fxFlex="100" fxLayout="column">
             <div fxFlex="400px;">
-                <div *ngFor="let p of programProviders$ | async" ngForTrackBy="providerId" >
-                    <aedigital-school-summary [attr.data-cy]="'school-summary-list.school-summary'" [provider]="p" [programs]="getProviderPrograms(p) | async"></aedigital-school-summary>
+                <div *ngFor="let p of programProviders$ | async" ngForTrackBy="providerId">
+                    <aedigital-school-summary [attr.data-cy]="'school-summary-list.school-summary'" [provider]="p"
+                        [programs]="getProviderPrograms(p) | async"></aedigital-school-summary>
                 </div>
             </div>
         </div>

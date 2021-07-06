@@ -12,8 +12,6 @@ import { PagedDataParameters, ProgramCredentialDto, ProgramTypeDto } from '@libs
 export class ProgramstartComponent implements OnInit {
  
 FlexConstants = FlexConstants;
-searchText: string;
-institutions: any[] = [];
 credentials: ProgramTypeDto[];
 
 constructor(private http: HttpClient) { }

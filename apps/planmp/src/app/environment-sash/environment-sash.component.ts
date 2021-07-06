@@ -8,16 +8,5 @@ import { Component, Input } from '@angular/core';
 export class EnvironmentSashComponent {
 
   @Input() version;
-
 	ExternalUrl = {AlbertaCa : 'https://alberta.ca'};
-
-	// constructor(private dialog: MatDialog) {}
-
-	// onDetails() {
-	// 	this.dialog.open(BetaDisclaimerDialogComponent, {
-	// 		width: '800px',
-	// 		autoFocus: false,
-	// 		disableClose: false,
-	// 	});
-	// }
 }

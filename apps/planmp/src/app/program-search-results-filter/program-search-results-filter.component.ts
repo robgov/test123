@@ -22,10 +22,6 @@ export class ProgramSearchResultsFilterComponent {
   @Input() selectedLocation: string;
   @Input() selectedCipSubSeriesCode: string;
 
-  selectedCipsCode: string="";  
-  selectedSortOrder: string="1";
-
-
   @Dispatch()
   providerSelected(providerIds: number[]){
     return new ProgramActions.SetProgramSearchProviderFilter(providerIds);
@@ -47,24 +43,8 @@ export class ProgramSearchResultsFilterComponent {
   }
 
   @Dispatch()
-  distanceFilterSelected(distanceFilterId: string){
-    switch (distanceFilterId) {
-      case "1":
-        return new ProgramActions.SetProgramSearchDistanceFilter(5);
-        break;
-      case "2":
-        return new ProgramActions.SetProgramSearchDistanceFilter(25);
-        break;
-      case "3":
-        return new ProgramActions.SetProgramSearchDistanceFilter(100);
-        break;
-      case "4":
-        return new ProgramActions.SetProgramSearchDistanceFilter(200);
-        break;
-      default:
-        return new ProgramActions.SetProgramSearchDistanceFilter(0);
-        break;
-    }
+  distanceFilterSelected(distance: number){
+    return new ProgramActions.SetProgramSearchDistanceFilter(distance);
   }
 
   @Dispatch()

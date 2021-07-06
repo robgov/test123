@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  SpecializationDto,
-  ProgramSummaryDto,
-} from '@libs/common/models';
+import { SpecializationDto, ProgramSummaryDto } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({

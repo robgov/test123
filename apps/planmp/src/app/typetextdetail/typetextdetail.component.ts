@@ -1,23 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  ProviderDto,
-  LookupDto,
-  PsiSpecializationCountByCategoryDto,
-} from '@libs/common/models';
+import { LookupDto } from '@libs/common/models';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { ProgramSelectors, RouterSelectors } from '@libs/common/store';
 import { ProgramActions } from '@libs/common/store';
-
-interface Item {
-  id: string;
-  value: string;
-  type: string;
-}
 
 @Component({
   selector: 'ae-typetextdetail',
@@ -32,10 +22,8 @@ export class TypetextdetailComponent implements OnInit {
 
   myControl = new FormControl();
   filteredOptions: Observable<any[]>;
-  location: any;
   keywords: any;
   searchdisabled: boolean = true;
-  ctlvisible: boolean = false;
 
   constructor(private router: Router, private store: Store) {}
 
@@ -62,7 +50,6 @@ export class TypetextdetailComponent implements OnInit {
     if (this.keywords) {
       if (this.keywords.trim().length > 3) {
         this.searchdisabled = false;
-        this.ctlvisible = true;
       }
     }
   }
@@ -74,24 +61,37 @@ export class TypetextdetailComponent implements OnInit {
     }
   }
 
-  clearLocation(){
-    this.store.dispatch(new ProgramActions.SetProgramSearchUserLocationFilter(0,0));
+  clearLocation() {
+    this.store.dispatch(
+      new ProgramActions.SetProgramSearchUserLocationFilter(0, 0)
+    );
   }
 
-  locationPrompt(){
+  locationPrompt() {
     navigator.geolocation.getCurrentPosition(this.locationSpecified.bind(this));
   }
 
   locationSpecified(position: any) {
-    this.store.dispatch(new ProgramActions.SetProgramSearchUserLocationFilter(position.coords.latitude,position.coords.longitude));
+    this.store.dispatch(
+      new ProgramActions.SetProgramSearchUserLocationFilter(
+        position.coords.latitude,
+        position.coords.longitude
+      )
+    );
   }
 
-  checkForPostalCodeMatch(){
-    var postalCodes = this.store.selectSnapshot(ProgramSelectors.getPostalCodes);
-    var cleanedPostalCode = this.selectedLocation.replace(/\s/g, "").toUpperCase()
-    var match = postalCodes.find(pc=>pc.postalCode === cleanedPostalCode)
-    if (match) { 
-      this.store.dispatch(new ProgramActions.SetProgramSearchPostalCodeFilter(match.postalCode));
+  checkForPostalCodeMatch() {
+    var postalCodes = this.store.selectSnapshot(
+      ProgramSelectors.getPostalCodes
+    );
+    var cleanedPostalCode = this.selectedLocation
+      .replace(/\s/g, '')
+      .toUpperCase();
+    var match = postalCodes.find((pc) => pc.postalCode === cleanedPostalCode);
+    if (match) {
+      this.store.dispatch(
+        new ProgramActions.SetProgramSearchPostalCodeFilter(match.postalCode)
+      );
     }
   }
 

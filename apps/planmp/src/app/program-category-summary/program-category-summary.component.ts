@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FlexConstants } from '@libs/FlexConstants';
-import { ProgramDto, PsiSpecializationCountByCategoryDto } from '@libs/common/models';
+import {
+  ProgramDto,
+  PsiSpecializationCountByCategoryDto,
+} from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-program-category-summary',
