@@ -252,7 +252,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchProviderFilter
   ) {
     ctx.patchState({
-      programSearchFilter_ProviderIds: action.providerIds,
+      searchFilters: { ... ctx.getState().searchFilters , providerIds: action.providerIds}
     });
   }
 
@@ -262,7 +262,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchCategoryFilter
   ) {
     ctx.patchState({
-      programSearchFilter_CipSubSeriesCode: action.categoryCode,
+      searchFilters: { ... ctx.getState().searchFilters , cipSubSeriesCode: action.categoryCode}
     });
   }
 
@@ -272,7 +272,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchKeywordFilter
   ) {
     ctx.patchState({
-      programSearchFilter_Keywords: action.keywords,
+      searchFilters: { ... ctx.getState().searchFilters , keywords: action.keywords}
     });
   }
 
@@ -282,8 +282,8 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchDistanceFilter
   ) {
     ctx.patchState({
-      programSearchFilter_DistanceInKm: action.distance,
-    });
+      searchFilters: { ... ctx.getState().searchFilters , distanceInKm: action.distance}
+    });   
   }
 
   @Action(ProgramActions.SetProgramSearchCredentialFilter)
@@ -292,7 +292,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchCredentialFilter
   ) {
     ctx.patchState({
-      programSearchFilter_CredentialIds: action.credentialIds,
+      searchFilters: { ... ctx.getState().searchFilters , credentialIds: action.credentialIds}
     });
   }
 
@@ -302,8 +302,8 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchProgramTypeFilter
   ) {
     ctx.patchState({
-      programSearchFilter_ProgramTypeIds: action.programTypeIds,
-    });
+      searchFilters: { ... ctx.getState().searchFilters , programTypeIds: action.programTypeIds}
+    });   
   }
 
   @Action(ProgramActions.SetProgramSearchUserLocationFilter)
@@ -320,13 +320,20 @@ export class ProgramState {
       .pipe(
         tap((data: any) => {
           ctx.patchState({
-            programSearchFilter_Latitude: action.latitude,
-            programSearchFilter_Longitude: action.longitude,
-            programSearchFilter_LocationName: data.plus_code
-              ? data.plus_code.compound_code
-              : '',
-            programSearchFilter_PostalCode: '',
+            searchFilters: { ... ctx.getState().searchFilters , 
+                              latitude: action.latitude, 
+                              longitude: action.longitude, 
+                              locationName: data.plus_code ? data.plus_code : '', 
+                              postalCode: ''}
           });
+          // ctx.patchState({
+          //   programSearchFilter_Latitude: action.latitude,
+          //   programSearchFilter_Longitude: action.longitude,
+          //   programSearchFilter_LocationName: data.plus_code
+          //     ? data.plus_code.compound_code
+          //     : '',
+          //   programSearchFilter_PostalCode: '',
+          // });
           ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
         })
       );
@@ -345,10 +352,11 @@ export class ProgramState {
         action.postalCode.toUpperCase().substring(3, 6);
     }
     ctx.patchState({
-      programSearchFilter_LocationName: location,
-      programSearchFilter_PostalCode: action.postalCode.toUpperCase(),
-      programSearchFilter_Latitude: 0,
-      programSearchFilter_Longitude: 0,
+      searchFilters: { ... ctx.getState().searchFilters , 
+                        locationName: location, 
+                        postalCode: action.postalCode.toUpperCase(), 
+                        longitude:null, 
+                        latitude: null}
     });
     ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
   }
@@ -362,9 +370,10 @@ export class ProgramState {
     updatedProgramSummaries.forEach((summary) => {
       summary.providerDistance = null;
     });
+    ctx.getState()
     ctx.patchState({
       programSummaries: updatedProgramSummaries,
-      programSearchFilter_LocationName: '',
+      searchFilters: {... ctx.getState().searchFilters, locationName: ''}
     });
   }
 
@@ -373,9 +382,9 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramProviderDistances
   ) {
-    const userPostalCode = ctx.getState().programSearchFilter_PostalCode;
-    const userLatitude = ctx.getState().programSearchFilter_Latitude;
-    const userLongitude = ctx.getState().programSearchFilter_Longitude;
+    const userPostalCode = ctx.getState().searchFilters.postalCode;
+    const userLatitude = ctx.getState().searchFilters.latitude;
+    const userLongitude = ctx.getState().searchFilters.longitude;
     if (
       ctx.getState().postalCodes &&
       ctx.getState().programSummaries &&
@@ -414,7 +423,7 @@ export class ProgramState {
     action: ProgramActions.SetProgramSearchSortOrder
   ) {
     ctx.patchState({
-      programSearchFilter_Sort: action.sortOrder,
+      searchFilters: { ... ctx.getState().searchFilters, sort: action.sortOrder }
     });
   }
 }

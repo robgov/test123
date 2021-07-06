@@ -80,17 +80,17 @@ export class ProgramSelectors {
 
   @Selector([ProgramState])
   static getSelectedProviders(state: ProgramStateModel): number[] {
-    return state.programSearchFilter_ProviderIds;
+    return state.searchFilters.providerIds;
   }
 
   @Selector([ProgramState])
   static getSelectedCredentials(state: ProgramStateModel): number[] {
-    return state.programSearchFilter_CredentialIds;
+    return state.searchFilters.credentialIds;
   }
 
   @Selector([ProgramState])
   static getSelectedPostalCode(state: ProgramStateModel): string {
-    return state.programSearchFilter_PostalCode;
+    return state.searchFilters.postalCode;
   }
 
   @Selector([ProgramState])
@@ -100,17 +100,17 @@ export class ProgramSelectors {
 
   @Selector([ProgramState])
   static getSelectedCipSubSeriesCode(state: ProgramStateModel): string {
-    return state.programSearchFilter_CipSubSeriesCode;
+    return state.searchFilters.cipSubSeriesCode;
   }
 
   @Selector([ProgramState])
   static getSelectedSortOrder(state: ProgramStateModel): string {
-    return state.programSearchFilter_Sort;
+    return state.searchFilters.sort;
   }
 
   @Selector([ProgramState])
   static getSelectedLocation(state:ProgramStateModel): string {
-    return state.programSearchFilter_LocationName;
+    return state.searchFilters.locationName;
   }
 
   @Selector([ProgramState])
@@ -191,20 +191,20 @@ export class ProgramSelectors {
 
     //Apply provider filtering
     if (
-      state.programSearchFilter_ProviderIds &&
-      state.programSearchFilter_ProviderIds.length > 0
+      state.searchFilters.providerIds &&
+      state.searchFilters.providerIds.length > 0
     ) {
       results = results.filter((f) =>
-        state.programSearchFilter_ProviderIds.includes(f.providerId)
+        state.searchFilters.providerIds.includes(f.providerId)
       );
     }
 
     //Apply CipSubCode filtering
-    if (state.programSearchFilter_CipSubSeriesCode) {
+    if (state.searchFilters.cipSubSeriesCode) {
       var programIds = state.programSpecializations
         .filter(
           (pc) =>
-            pc.cipSubSeriesCode === state.programSearchFilter_CipSubSeriesCode
+            pc.cipSubSeriesCode === state.searchFilters.cipSubSeriesCode
         )
         .map((pc) => pc.programId);
       results = results.filter((f) => programIds.includes(f.programId));
@@ -212,45 +212,45 @@ export class ProgramSelectors {
 
 
    //Apply Keyword filtering
-   if (state.programSearchFilter_Keywords){
+   if (state.searchFilters.keywords){
       results = results.filter(
-        (f) => f.programName.includes(state.programSearchFilter_Keywords)
+        (f) => f.programName.includes(state.searchFilters.keywords)
       );
   }
 
     //Apply Credential filtering
     if (
-      state.programSearchFilter_CredentialIds &&
-      state.programSearchFilter_CredentialIds.length > 0
+      state.searchFilters.credentialIds &&
+      state.searchFilters.credentialIds.length > 0
     ) {
       results = results.filter((f) =>
-        state.programSearchFilter_CredentialIds.includes(f.programCredentialId)
+        state.searchFilters.credentialIds.includes(f.programCredentialId)
       );
     }
 
     //Apply Program Type filtering
     if (
-      state.programSearchFilter_ProgramTypeIds &&
-      state.programSearchFilter_ProgramTypeIds.length > 0
+      state.searchFilters.programTypeIds &&
+      state.searchFilters.programTypeIds.length > 0
     ) {
       results = results.filter((f) =>
-        state.programSearchFilter_ProgramTypeIds.includes(f.programTypeId)
+        state.searchFilters.programTypeIds.includes(f.programTypeId)
       );
     }
 
     //Apply distance filtering
     if (
-      state.programSearchFilter_DistanceInKm &&
-      state.programSearchFilter_DistanceInKm > 0
+      state.searchFilters.distanceInKm &&
+      state.searchFilters.distanceInKm > 0
     ) {
       results = results.filter((f) =>
-        f.providerDistance <= state.programSearchFilter_DistanceInKm
+        f.providerDistance <= state.searchFilters.distanceInKm
       );
     }
 
     //Determine Sort
     var sortMethod = this.sortByNameAsc;
-    switch (state.programSearchFilter_Sort) {
+    switch (state.searchFilters.sort) {
       case Constants.ProgramSortOptions.SortProgramNameDesc: {
         sortMethod = this.sortByNameDesc;
         break;
