@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import { Select } from '@ngxs/store';
 import {Observable} from 'rxjs';
-import { ProgramActions, ProgramSelectors, ProviderActions } from '@libs/common/store/store-index';
+import { ProgramActions, ProgramSelectors, ProviderActions } from '@libs/common/store';
 import { LookupDto } from '@libs/common/models';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 

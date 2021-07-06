@@ -27,7 +27,7 @@ import {
   ProgramActions,
   ProgramSelectors,
   ProviderSelectors,
-} from '@libs/common/store/store-index';
+} from '@libs/common/store';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { RouterSelectors } from '@libs/common/store';
 

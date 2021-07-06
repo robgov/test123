@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {
   ProgramSelectors,
   ProviderSelectors,
-} from '@libs/common/store/store-index';
+} from '@libs/common/store';
 import { ProgramDto, ProviderDto } from '@libs/common/models';
 
 @Component({

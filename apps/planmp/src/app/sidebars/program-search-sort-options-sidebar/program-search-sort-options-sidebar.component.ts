@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProgramActions } from '@libs/common/store/store-index';
+import { ProgramActions } from '@libs/common/store';
 import { LookupDto } from '@libs/common/models';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
@@ -18,7 +18,7 @@ export class ProgramSearchSortOptionsSidebarComponent {
   }
 
   @Dispatch()
-  close() {
-    return new ProgramActions.CloseProgramSort();
+  close(){
+    return new ProgramActions.CloseSidebar();
   }
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FlexConstants} from '@libs/FlexConstants';
 import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
-import { LookupSelectors, ProgramActions, ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
+import { LookupSelectors, ProgramActions, ProgramSelectors, ProviderSelectors } from '@libs/common/store';
 import { MatSidenav } from '@angular/material/sidenav';
 import { LookupDto, PsiSpecializationCountByCategoryDto, ProgramDto, ProgramCredentialDto, ProgramTypeDto, ProviderDto, SpecializationDto } from '@libs/common/models';
 import { Observable, Subscribable, Subscription } from 'rxjs';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
 @Component({
   selector: 'aedigital-root',
@@ -21,46 +22,56 @@ export class AppComponent implements OnInit, OnDestroy{
   @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<ProgramTypeDto[]>;
   @Select(ProviderSelectors.getProviders) providers$: Observable<ProviderDto[]>;
 
+  @Select()
+
   @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedSortOrder) selectedSortOrder$: Observable<number[]>
 
   private subscriptionSort: Subscription;
-  private subscriptionSortClose: Subscription;
   private subscriptionFilter: Subscription;
-  private subscriptionFilterClose: Subscription;
+  private subscriptionSidebarClose: Subscription;
+  private subscriptionMenu: Subscription;
   
   FlexConstants = FlexConstants;
-  @ViewChild('programSort') public filterSidenav: MatSidenav;
-  isSort = true;
+  @ViewChild('rightSidenav') public rightSidenav: MatSidenav;
+  @ViewChild('leftSidenav') public leftSidenav: MatSidenav;
+  menu: string=null;
 
-  constructor(private actions$: Actions, private store: Store) {}
+  constructor(private actions$: Actions) {}
 
   ngOnInit() {
     this.subscriptionSort = this.actions$.pipe(ofActionSuccessful(ProgramActions.ShowProgramSort)).subscribe(() => {
-      this.isSort=true;
-      this.filterSidenav.toggle();
+      this.menu="sort";
+      this.rightSidenav.toggle();
     });
 
-    this.subscriptionSortClose = this.actions$.pipe(ofActionSuccessful(ProgramActions.CloseProgramSort)).subscribe(() => {
-      this.filterSidenav.close();
+    this.subscriptionSidebarClose = this.actions$.pipe(ofActionSuccessful(ProgramActions.CloseSidebar)).subscribe(() => {
+      this.menu=null;
+      this.rightSidenav.close();
     })
 
     this.subscriptionFilter = this.actions$.pipe(ofActionSuccessful(ProgramActions.ShowProgramFilter)).subscribe(() => {
-      this.isSort=false;
-      this.filterSidenav.toggle();
+      this.menu="filter";
+      this.rightSidenav.toggle();
     });
 
-    this.subscriptionFilterClose = this.actions$.pipe(ofActionSuccessful(ProgramActions.CloseProgramFilter)).subscribe(()=>{
-      this.filterSidenav.toggle();
-    })
+    this.subscriptionMenu = this.actions$.pipe(ofActionSuccessful(ProgramActions.ShowMenu)).subscribe(() => {
+      this.menu="menu";
+      this.rightSidenav.toggle();
+    });
+  }
+
+  @Dispatch()
+  showMenu() {
+    return new ProgramActions.ShowMenu();
   }
 
   ngOnDestroy() {
     this.subscriptionSort.unsubscribe();
-    this.subscriptionSortClose.unsubscribe();
     this.subscriptionFilter.unsubscribe();
-    this.subscriptionFilterClose.unsubscribe();
+    this.subscriptionSidebarClose.unsubscribe();
+    this.subscriptionMenu.unsubscribe();
   }
 }
 

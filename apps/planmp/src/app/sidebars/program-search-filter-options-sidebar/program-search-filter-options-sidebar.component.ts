@@ -37,7 +37,7 @@ export class ProgramSearchFilterOptionsSidebarComponent {
   }
 
   @Dispatch()
-  close() {
-    return new ProgramActions.CloseProgramFilter();
+  close(){
+    return new ProgramActions.CloseSidebar();
   }
 }

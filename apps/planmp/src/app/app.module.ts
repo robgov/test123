@@ -2,7 +2,6 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { NgxsModule, Store } from '@ngxs/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
@@ -87,6 +86,7 @@ import { ProgramSearchResultsFilterComponent } from './program-search-results-fi
 import { ProgramSearchSortOptionsSidebarComponent } from './sidebars/program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
 import { ProgramSearchFilterOptionsSidebarComponent } from './sidebars/program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
 import { ProgramCardComponent } from './program-card/program-card.component';
+import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +113,7 @@ import { ProgramCardComponent } from './program-card/program-card.component';
     ProgramSearchSortOptionsSidebarComponent,
     ProgramSearchFilterOptionsSidebarComponent,
     ProgramCardComponent,
+    MenuSidebarComponent,
   ],
   imports: [
     BrowserModule,

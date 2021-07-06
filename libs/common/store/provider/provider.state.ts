@@ -89,7 +89,6 @@ export class ProviderState {
     );
   }
 
-
   @Action(ProviderActions.GetProviderAddresses)
   onGetProgramProviderAddress(
     ctx: StateContext<ProviderStateModel>,
