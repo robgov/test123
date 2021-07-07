@@ -8,6 +8,12 @@ export namespace ProgramActions {
     static readonly type = '[Aed Programs] Get Programs';
   }
 
+  export class ViewProgram {
+    static readonly type = '[Aed Programs] View Program';
+    
+    constructor(public programId: number) {}
+  }
+
   export class GetProgramSummaries {
     static readonly type = '[Aed Programs] Get Program Summaries';
   }
@@ -51,6 +57,12 @@ export namespace ProgramActions {
   // Program Search / Filters
   export class GetFilteredPrograms {
     static readonly type = '[Aed Program] Get Filtered Programs';
+  }
+
+  //A singular search/filter for a specific programs
+  export class SetProgramIDSearchFilter {
+    static readonly type = '[Aed Program] Filter Program Search By ID';
+    constructor(public programIDs: number[]) {}
   }
 
   export class SetProgramSearchProviderFilter {

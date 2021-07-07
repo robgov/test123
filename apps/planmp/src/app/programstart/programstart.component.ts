@@ -25,19 +25,20 @@ export class ProgramstartComponent implements OnInit {
   programdata: any[] = [{}];
 
   fetch() {
-    const url =
-      'http://aestrapi-dev.eastus.cloudapp.azure.com:1337/ae-programapplies';
+
+    const url = this.env.StrapiBaseUrl + "/ae-programapplies";
     this.http.get<any[]>(url).subscribe((t) => {
-      this.programdata = t;
-    });
+      (this.programdata = t)
+    }
+    );
+
+
+
   }
 
   getImageUrl() {
     if (this.programdata[0]) {
-      return (
-        'http://aestrapi-dev.eastus.cloudapp.azure.com:1337' +
-        this.programdata[0].Applyimage.url
-      );
+      return "http://aestrapi-dev.eastus.cloudapp.azure.com:1337" + this.programdata[0].Applyimage.url;
     }
     return '';
   }

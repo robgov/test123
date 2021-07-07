@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,ChangeDetectorRef } from '@angular/core';
+
+import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import {
+  ProgramSelectors, ProgramActions,
+} from '@libs/common/store/store-index';
 import {
   ProgramDto,
   ProviderDto,
@@ -31,33 +37,5 @@ export class ProgramSummaryComponent {
   currentCost = 'XXXXX';
   currentSpecialization: string;
 
-  getSpecializationCost(): string {
-    if (!this.specializationCosts) return '';
-    var runningTotal = 0;
-    var session: number;
-    this.specializationCosts.forEach((specCost) => {
-      if (!session) {
-        session = specCost.sessionOfStudyId;
-      }
-      if (session == specCost.sessionOfStudyId) {
-        runningTotal += specCost.amount;
-      }
-    });
-    return runningTotal.toString();
-  }
 
-  getLogoUrl(): string {
-    if (!this.providerLogo) return '';
-    return this.providerLogo.logoUrl;
-  }
-
-  getProgramProviderName(): string {
-    if (!this.currentProvider) return '';
-    return this.currentProvider.providerName;
-  }
-
-  getProgramType(): string {
-    if (!this.programType) return '';
-    return this.programType.programType;
-  }
 }

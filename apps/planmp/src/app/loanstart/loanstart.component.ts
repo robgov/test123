@@ -41,7 +41,9 @@ export class LoanstartComponent implements OnInit {
 
   fetch() {
 
-    const url = "http://aestrapi-dev.eastus.cloudapp.azure.com:1337/ae-loanapplies";
+
+
+    const url = this.env.StrapiBaseUrl + "/ae-loanapplies";
     this.http.get<any[]>(url).subscribe((t) => {
       (this.loandata = t)
     }

@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { SpecializationDto, ProgramSummaryDto } from '@libs/common/models';
+import {
+  SpecializationDto,
+  ProgramSummaryDto,
+} from '@libs/common/models';
+import { ProgramActions } from '@libs/common/store';
 import { FlexConstants } from '@libs/FlexConstants';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
 @Component({
   selector: 'ae-program-card',
@@ -11,6 +16,7 @@ export class ProgramCardComponent {
   FlexConstants = FlexConstants;
   @Input() programSummary: ProgramSummaryDto;
   @Input() programSpecialization: SpecializationDto;
+router: any;
 
   currencyformatter(f1): string {
     var formatter = new Intl.NumberFormat('en-US', {
@@ -54,4 +60,16 @@ export class ProgramCardComponent {
       this.programSummary.addressLine1 + '\n' + this.programSummary.addressLine2
     );
   }
+
+
+
+  @Dispatch()
+  viewProgram() { 
+
+    //@dispatch from the store
+    return new ProgramActions.ViewProgram(this.programSummary.programId);
+
+
+  }
+
 }

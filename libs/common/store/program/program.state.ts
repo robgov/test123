@@ -1,6 +1,6 @@
 import { Action, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 import { ProgramStateModel } from './program-state.model';
 
 import { ProgramActions } from './program.actions';
@@ -25,7 +25,7 @@ import {
   PostalCodeRequest,
   ProgramSummaryDto,
 } from '@libs/common/models';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
 import { DistanceHelper } from '@libs/common/helpers';
 
@@ -41,7 +41,9 @@ export class ProgramState {
     private programService: ProgramService,
     private specializationService: SpecializationService,
     private postalCodeService: PostalCodeService,
-    private googleGeocodeApiService: GoogleGeocodeApiService
+    private googleGeocodeApiService: GoogleGeocodeApiService,
+	private router: Router,
+    private ngZone: NgZone,
   ) {}
 
   @Action(AppAction.Start)
@@ -245,6 +247,23 @@ export class ProgramState {
       searchFilters: { ... ctx.getState().searchFilters , providerIds: action.providerIds}
     });
   }
+
+
+  @Action(ProgramActions.ViewProgram)
+  onViewProgram(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.ViewProgram
+  )
+  {
+    ctx.patchState({
+      programSearchFilter_ProgramId: action.programId,
+    });
+    
+		return this.ngZone.run(() => {
+			this.router.navigate(['/home/Summary']);
+		});
+  }
+
 
   @Action(ProgramActions.SetProgramSearchCategoryFilter)
   onSetProgramSearchCategoryFilter(
