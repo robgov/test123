@@ -16,7 +16,7 @@ import {
 export class ProgramstartComponent implements OnInit {
   FlexConstants = FlexConstants;
   credentials: ProgramTypeDto[];
-
+  
   constructor(private http: HttpClient) {}
   ngOnInit(): void {
     this.fetch();
@@ -25,8 +25,8 @@ export class ProgramstartComponent implements OnInit {
   programdata: any[] = [{}];
 
   fetch() {
-
-    const url = this.env.StrapiBaseUrl + "/ae-programapplies";
+    const url ='http://aestrapi-dev.eastus.cloudapp.azure.com:1337/ae-programapplies';
+    // const url = this.env.StrapiBaseUrl + "/ae-programapplies";
     this.http.get<any[]>(url).subscribe((t) => {
       (this.programdata = t)
     }

@@ -256,7 +256,7 @@ export class ProgramState {
   )
   {
     ctx.patchState({
-      programSearchFilter_ProgramId: action.programId,
+      searchFilters: { ... ctx.getState().searchFilters , programId: action.programId}
     });
     
 		return this.ngZone.run(() => {

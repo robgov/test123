@@ -31,6 +31,7 @@ export class ProgramSummaryComponent {
   @Input() providerLogo: ProviderLogoDto;
   @Input() programType: ProgramTypeDto;
   @Input() distance: number;
+  @Select(ProgramSelectors.getSelectedProgram) SelectedProgram$: Observable<ProgramSummaryDto>;
 
   currentProvider: ProviderDto;
   currentLogo: ProviderLogoDto;

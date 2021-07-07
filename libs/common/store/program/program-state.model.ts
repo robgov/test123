@@ -25,6 +25,7 @@ export class ProgramStateModel {
   postalCodes: PostalCodeDto[];
 
   searchFilters: {
+    programId: number;
     providerIds: number[];
     cipSubSeriesCode: string;
     categoryProgramIds: number[];

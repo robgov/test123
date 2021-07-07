@@ -29,7 +29,7 @@ export class ProgramSelectors {
   static getSelectedProgram(
     state: ProgramStateModel
   ): ProgramSummaryDto{
-    return state.programSummaries.find((q) => q.programId === state.programSearchFilter_ProgramId);
+    return state.programSummaries.find((q) => q.programId === state.searchFilters.programId);
   }
 
 

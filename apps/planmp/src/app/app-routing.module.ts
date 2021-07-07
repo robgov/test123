@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
-import { ProgramSummaryComponent } from './program-summary/program-summary.component';
+import { ProgramSummaryComponent } from './programs/program-summary/program-summary.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ProgramsSearchResultsComponent } from './programs/programs-search-results/programs-search-results.component';
 

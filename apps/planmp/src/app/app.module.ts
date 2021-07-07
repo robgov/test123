@@ -79,12 +79,13 @@ import { ProgramCategorySummaryComponent } from './programs/program-category-sum
 import { ProgramCategorySummaryListComponent } from './programs/program-category-summary-list/program-category-summary-list.component';
 import { TypetextComponent } from './typetext/typetext.component';
 import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
-import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
-import { ProgramSearchSortOptionsSidebarComponent } from './program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
-import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
-import { ProgramCardComponent } from './program-card/program-card.component';
+import { ProgramSearchResultsFilterComponent } from './programs/program-search-results-filter/program-search-results-filter.component';
+import { ProgramSearchSortOptionsSidebarComponent } from './sidebars/program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
+import { ProgramSearchFilterOptionsSidebarComponent } from './sidebars/program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
+import { ProgramCardComponent } from './programs/program-card/program-card.component';
 import { ProgramSummaryDetailComponent } from './program-summary-detail/program-summary-detail.component';
 import { ProviderLocationComponent } from './provider-location/provider-location.component';
+import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
 
 @NgModule({
   declarations: [
