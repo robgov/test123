@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { VwProgramCredential } from '@libs/common/models';
+import { ProgramCredentialDto } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -18,10 +18,7 @@ export class ProgramCredentialService extends EndPointService {
         this.key = 'programCredential';
     }
     
-    public getProgramCredential(id: number): Observable<VwProgramCredential[]> { 
-        return this.get(this.url + '{id}', id);
-    }
-    public getProgramCredentials(): Observable<VwProgramCredential[]> { 
+    public getProgramCredentials(): Observable<ProgramCredentialDto[]> { 
         return this.get(this.url + 'GetProgramCredentials');
     }
 

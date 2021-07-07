@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import {
-  VwProgram,
-  VwProvider,
-  VwSpecialization,
-  VwProviderLogo,
-  VwProgramType,
-  VwSpecializationCost,
+  ProgramDto,
+  ProviderDto,
+  SpecializationDto,
+  ProviderLogoDto,
+  ProgramTypeDto,
+  SpecializationCostDto,
   ProgramSummaryDto,
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
@@ -18,16 +18,16 @@ import { FlexConstants } from '@libs/FlexConstants';
 export class ProgramSummaryComponent {
   FlexConstants = FlexConstants;
   @Input() programSummary: ProgramSummaryDto;
-  @Input() program: VwProgram;
-  @Input() programProvider: VwProvider;
-  @Input() programSpecialization: VwSpecialization;
-  @Input() specializationCosts: VwSpecializationCost[];
-  @Input() providerLogo: VwProviderLogo;
-  @Input() programType: VwProgramType;
+  @Input() program: ProgramDto;
+  @Input() programProvider: ProviderDto;
+  @Input() programSpecialization: SpecializationDto;
+  @Input() specializationCosts: SpecializationCostDto[];
+  @Input() providerLogo: ProviderLogoDto;
+  @Input() programType: ProgramTypeDto;
   @Input() distance: number;
 
-  currentProvider: VwProvider;
-  currentLogo: VwProviderLogo;
+  currentProvider: ProviderDto;
+  currentLogo: ProviderLogoDto;
   currentCost = 'XXXXX';
   currentSpecialization: string;
 

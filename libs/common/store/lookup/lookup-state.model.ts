@@ -1,6 +1,6 @@
-import { LookupRequest, VwPmpLookup } from '../../models';
+import { LookupDto } from '../../models';
   
   export class LookupStateModel {
-    lookups: VwPmpLookup[];
+    lookups: LookupDto[];
   }
   

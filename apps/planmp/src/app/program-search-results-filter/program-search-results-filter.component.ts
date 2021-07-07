@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DistanceHelper } from '@libs/common/helpers';
-import { VwAlbertaPsiprovider, VwPmpLookup, VwPmpPsiprogramCountByCategory, VwProgramCredential, VwProgramType, VwSpecializationPrograms } from '@libs/common/models';
+import { ProviderDto, LookupDto, PsiSpecializationCountByCategoryDto, ProgramCredentialDto, ProgramTypeDto } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
@@ -10,22 +10,17 @@ import { Dispatch } from '@ngxs-labs/dispatch-decorator';
   styleUrls: ['./program-search-results-filter.component.scss']
 })
 export class ProgramSearchResultsFilterComponent {
-  @Input() categoryPrograms: VwSpecializationPrograms[];
-  @Input() providers: VwAlbertaPsiprovider[];
-  @Input() programCountsByCategory: VwPmpPsiprogramCountByCategory[];
-  @Input() credentials: VwProgramCredential[];
-  @Input() programTypes: VwProgramType[];
-  @Input() sortOptions: VwPmpLookup[];
-  @Input() distanceFilters: VwPmpLookup[];
+  @Input() providers: ProviderDto[];
+  @Input() programCountsByCategory: PsiSpecializationCountByCategoryDto[];
+  @Input() credentials: ProgramCredentialDto[];
+  @Input() programTypes: ProgramTypeDto[];
+  @Input() sortOptions: LookupDto[];
+  @Input() distanceFilters: LookupDto[];
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
   @Input() selectedLocation: string;
   @Input() selectedCipSubSeriesCode: string;
-
-  selectedCipsCode: string="";  
-  selectedSortOrder: string="1";
-
 
   @Dispatch()
   providerSelected(providerIds: number[]){
@@ -48,24 +43,8 @@ export class ProgramSearchResultsFilterComponent {
   }
 
   @Dispatch()
-  distanceFilterSelected(distanceFilterId: string){
-    switch (distanceFilterId) {
-      case "1":
-        return new ProgramActions.SetProgramSearchDistanceFilter(5);
-        break;
-      case "2":
-        return new ProgramActions.SetProgramSearchDistanceFilter(25);
-        break;
-      case "3":
-        return new ProgramActions.SetProgramSearchDistanceFilter(100);
-        break;
-      case "4":
-        return new ProgramActions.SetProgramSearchDistanceFilter(200);
-        break;
-      default:
-        return new ProgramActions.SetProgramSearchDistanceFilter(0);
-        break;
-    }
+  distanceFilterSelected(distance: number){
+    return new ProgramActions.SetProgramSearchDistanceFilter(distance);
   }
 
   @Dispatch()

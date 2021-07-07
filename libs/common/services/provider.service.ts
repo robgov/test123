@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { PagedDataParameters, VwProvider } from '@libs/common/models';
+import { PagedDataParameters, ProviderDto } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -18,10 +18,7 @@ export class ProviderService extends EndPointService {
         this.key = 'provider';
     }
     
-    public getProvider(id: number): Observable<VwProvider[]> { 
-        return this.get(this.url + '{id}', id);
-    }
-    public getProviders(providerParameters: PagedDataParameters): Observable<VwProvider[]> { 
+    public getProviders(providerParameters: PagedDataParameters): Observable<ProviderDto[]> { 
         return this.get(this.url + 'GetProviders', providerParameters);
     }
 

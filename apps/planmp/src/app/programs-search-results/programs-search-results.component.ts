@@ -1,29 +1,23 @@
 import {
   Component,
   OnInit,
-  OnDestroy,
-  ViewChild,
   ChangeDetectorRef,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import {
-  VwAlbertaPsiprovider,
-  VwProgram,
-  VwSpecialization,
-  VwProviderLogo,
-  VwProgramCost,
-  VwPmpPsiprogramByCategoryList,
-  VwProvider,
-  VwPmpPsiprogramCountByCategory,
-  VwProgramCredential,
-  VwProgramType,
-  VwPmpLookup,
-  VwSpecializationCost,
+  ProviderDto,
+  ProgramDto,
+  SpecializationDto,
+  ProviderLogoDto,
+  ProgramCostDto,
+  PsiSpecializationCountByCategoryDto,
+  ProgramCredentialDto,
+  ProgramTypeDto,
+  LookupDto,
+  SpecializationCostDto,
   ProgramSummaryDto,
-  VwProviderWebsite,
-  VwProviderAddress,
+  ProviderWebsiteDto,
+  ProviderAddressDto,
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Observable } from 'rxjs';
@@ -33,7 +27,7 @@ import {
   ProgramActions,
   ProgramSelectors,
   ProviderSelectors,
-} from '@libs/common/store/store-index';
+} from '@libs/common/store';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { RouterSelectors } from '@libs/common/store';
 
@@ -42,42 +36,38 @@ import { RouterSelectors } from '@libs/common/store';
   templateUrl: './programs-search-results.component.html',
   styleUrls: ['./programs-search-results.component.scss'],
 })
-export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
+export class ProgramsSearchResultsComponent implements OnInit {
   FlexConstants = FlexConstants;
 
-  @Select(ProgramSelectors.getProgramSpecializations) programSpecializations$: Observable<VwSpecialization[]>;
+  @Select(ProgramSelectors.getProgramSpecializations) programSpecializations$: Observable<SpecializationDto[]>;
 
-  @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<VwSpecialization[]>;
-  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<VwProgramCredential[]>;
+  @Select(ProgramSelectors.getCategoryPrograms) categoryPrograms$: Observable<SpecializationDto[]>;
+  @Select(ProgramSelectors.getProgramCredentials) programCredentials$: Observable<ProgramCredentialDto[]>;
   @Select(ProgramSelectors.getFilteredPrograms) filteredPrograms$: Observable<ProgramSummaryDto[]>;
-  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<VwPmpPsiprogramCountByCategory[]>;
-  @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<VwProgramType[]>;
+  @Select(ProgramSelectors.getProgramCategoryCounts) programCountsByCategory$: Observable<PsiSpecializationCountByCategoryDto[]>;
+  @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<ProgramTypeDto[]>;
 
   @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedLocation) selectedPostalCode$: Observable<string>
   @Select(ProgramSelectors.getSelectedCipSubSeriesCode) selectedCipSubSeriesCode$: Observable<string>
 
-  @Select(ProviderSelectors.getProviders) providers$: Observable<VwProvider[]>;
-  @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<VwPmpLookup[]>;
-  @Select(LookupSelectors.getLookupsForType("DistanceFilter")) distanceFilterOptions$: Observable<VwPmpLookup[]>;
+  @Select(ProviderSelectors.getProviders) providers$: Observable<ProviderDto[]>;
+  @Select(LookupSelectors.getLookupsForType("ProgramSort")) sortOption$: Observable<LookupDto[]>;
+  @Select(LookupSelectors.getLookupsForType("DistanceFilter")) distanceFilterOptions$: Observable<LookupDto[]>;
 
   @SelectSnapshot(RouterSelectors.getRouteId) routeId: string;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  programs$: Observable<any>;
-  dataSource: MatTableDataSource<VwProgram>;
 
   providerId: number = null;
   cipSubSeriesCode: string = null;
   keyword: string = null;
 
-  providers: VwAlbertaPsiprovider[];
-  specializations: VwSpecialization[];
-  providerLogos: VwProviderLogo[];
-  searchResults: VwProgram[];
-  programCosts: VwProgramCost[];
-  programByCategoryList: VwPmpPsiprogramByCategoryList[];
+  providers: ProviderDto[];
+  specializations: SpecializationDto[];
+  providerLogos: ProviderLogoDto[];
+  searchResults: ProgramDto[];
+  programCosts: ProgramCostDto[];
+  programByCategoryList: PsiSpecializationCountByCategoryDto[];
 
 
   sortOption: string;
@@ -128,70 +118,50 @@ export class ProgramsSearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
-  }
-
-  getProvider(program: VwProgram): Observable<VwProvider> {
-    // if (
-    //   !this.store.selectSnapshot(
-    //     ProgramSelectors.getSpecializationCostsForProvider(program.programId)
-    //   )
-    // ) {
-    //   this.store.dispatch(
-    //     new ProgramActions.GetSpecializationCostsForProvider(program.providerId)
-    //   );
-    // }
+  getProvider(program: ProgramDto): Observable<ProviderDto> {
     return this.store.select(ProviderSelectors.getProvider(program.providerId));
   }
 
-  getProviderLogo(program: VwProgram): Observable<VwProviderLogo> {
+  getProviderLogo(program: ProgramDto): Observable<ProviderLogoDto> {
     return this.store.select(
       ProviderSelectors.getProviderLogo(program.providerId)
     );
   }
 
-  getSpecialization(program: VwProgram): Observable<VwSpecialization> {
+  getSpecialization(program: ProgramDto): Observable<SpecializationDto> {
     return this.store.select(
       ProgramSelectors.getProgramSpecialization(program.programId)
     );
   }
 
-  getProgramCost(program: VwProgram): Observable<VwProgramCost> {
+  getProgramCost(program: ProgramDto): Observable<ProgramCostDto> {
     return this.store.select(
       ProgramSelectors.getProgramCost(program.programId)
     );
   }
 
-  getProgramType(program: VwProgram): Observable<VwProgramType> {
+  getProgramType(program: ProgramDto): Observable<ProgramTypeDto> {
     return this.store.select(
       ProgramSelectors.getProgramType(program.programTypeId)
     );
   }
 
-  // getDistanceToProvider(program:VwProgram): Observable<number> {
-  //   return this.store.select(
-  //     ProviderSelectors.getDistanceToProvider(program.providerId));
-  // }
-
   getSpecializationCosts(
-    program: VwProgram
-  ): Observable<VwSpecializationCost[]> {
+    program: ProgramDto
+  ): Observable<SpecializationCostDto[]> {
     if (program && program.programId) {
       return this.store.select(
         ProgramSelectors.getSpecializationCostForProgram(program.programId)
       );
     }
   }
-  getProviderWebsite(program: VwProgram): Observable<VwProviderWebsite> {
+  getProviderWebsite(program: ProgramDto): Observable<ProviderWebsiteDto> {
     return this.store.select(ProviderSelectors.getProviderWebsite(program.providerId));
   }
-  getProviderAddress(program: VwProgram): Observable<VwProviderAddress> {
+  getProviderAddress(program: ProgramDto): Observable<ProviderAddressDto> {
     return this.store.select(ProviderSelectors.getProviderAddress(program.providerId));
   }
-  getProgramCredential(program: VwProgram): Observable<VwProgramCredential>{
+  getProgramCredential(program: ProgramDto): Observable<ProgramCredentialDto>{
     return this.store.select(ProgramSelectors.getProgramCredential(program.programCredentialId));
   }
 }

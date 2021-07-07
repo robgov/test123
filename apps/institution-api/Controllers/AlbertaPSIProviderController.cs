@@ -5,6 +5,8 @@ using System.Linq;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models.EntityFramework;
+using ProviderApi.Models.Dto;
+using AutoMapper;
 
 namespace ProviderApi.Controllers
 {
@@ -15,35 +17,22 @@ namespace ProviderApi.Controllers
     private readonly ILogger<AlbertaPSIProviderController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private IMapper _mapper;
 
-    public AlbertaPSIProviderController(ILogger<AlbertaPSIProviderController> logger, AEDigital_SYSTContext context)
+    public AlbertaPSIProviderController(ILogger<AlbertaPSIProviderController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
+      _mapper = mapper;
     }
 
-    ///<Summary>
-    /// Gets an Alberta PsiProvider by ProviderId
-    ///</Summary>
-    [HttpGet("{id}")]
-    [SwaggerOperation("GetAlbertaPsiProvider")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwAlbertaPsiprovider> GetAlbertaPsiProvider(int id)
-    {
-      return _context.VwAlbertaPsiproviders.Where(x => x.ProviderId.Equals(id));
-    }
-
-    ///<Summary>
-    /// Gets an Alberta PsiProvider by ProviderId
-    ///</Summary>
-    [HttpGet("")]
+    [HttpGet("GetAlbertaPsiProviders")]
     [SwaggerOperation("GetAlbertaPsiProviders")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwAlbertaPsiprovider> GetAlbertaPsiProviders()
+    public IEnumerable<ProviderDto> GetAlbertaPsiProviders()
     {
-      return _context.VwAlbertaPsiproviders.OrderBy(x=>x.ProviderName);
+      return _mapper.Map<List<VwAlbertaPsiprovider>,List<ProviderDto>>(_context.VwAlbertaPsiproviders.ToList()).OrderBy(x=>x.ProviderName);
     }
   }
 }

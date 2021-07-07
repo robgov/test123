@@ -2,7 +2,6 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { NgxsModule, Store } from '@ngxs/store';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,18 +15,10 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 import {
   LocationAddressService,
-  LocationEmailService,
-  LocationPhoneService,
-  LocationPublicationService,
   LocationService,
-  ProgramPublicationService,
   ProgramService,
   ProviderAddressService,
-  ProviderEmailService,
-  ProviderPhoneService,
-  ProviderPublicationService,
   ProviderService,
-  ProviderTypeService,
   ProviderWebsiteService,
 } from '@libs/common/services';
 
@@ -73,18 +64,15 @@ const MATERIAL_MODULES = [
 
 // Components
 import { AppComponent } from './app.component';
-import { TombstoneComponent } from './tombstone/tombstone.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { InputFormComponent } from './input-form/input-form.component';
 import { BannerComponent } from './banner/banner.component';
 import { EnvironmentSashComponent } from './environment-sash/environment-sash.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FilterPipe } from './filter.pipe';
 import { LoanstartComponent } from './loanstart/loanstart.component';
 import { ProgramstartComponent } from './programstart/programstart.component';
-import { SearchblockComponent } from './searchblock/searchblock.component';
 import { SchoolSummaryComponent } from './school-summary/school-summary.component';
 import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
 import { FindProgramsComponent } from './find-programs/find-programs.component';
@@ -95,25 +83,23 @@ import { ProgramCategorySummaryListComponent } from './program-category-summary-
 import { TypetextComponent } from './typetext/typetext.component';
 import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
 import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
-import { ProgramSearchSortOptionsSidebarComponent } from './program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
-import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
+import { ProgramSearchSortOptionsSidebarComponent } from './sidebars/program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
+import { ProgramSearchFilterOptionsSidebarComponent } from './sidebars/program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
 import { ProgramCardComponent } from './program-card/program-card.component';
+import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TombstoneComponent,
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    InputFormComponent,
     BannerComponent,
     EnvironmentSashComponent,
     BreadcrumbComponent,
     FilterPipe,
     LoanstartComponent,
     ProgramstartComponent,
-    SearchblockComponent,
     SchoolSummaryComponent,
     SchoolSummaryListComponent,
     FindProgramsComponent,
@@ -127,6 +113,7 @@ import { ProgramCardComponent } from './program-card/program-card.component';
     ProgramSearchSortOptionsSidebarComponent,
     ProgramSearchFilterOptionsSidebarComponent,
     ProgramCardComponent,
+    MenuSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -144,18 +131,10 @@ import { ProgramCardComponent } from './program-card/program-card.component';
   ],
   providers: [
     LocationAddressService,
-    LocationEmailService,
-    LocationPhoneService,
-    LocationPublicationService,
     LocationService,
-    ProgramPublicationService,
     ProgramService,
     ProviderAddressService,
-    ProviderEmailService,
-    ProviderPhoneService,
-    ProviderPublicationService,
     ProviderService,
-    ProviderTypeService,
     ProviderWebsiteService,
     {
       provide: APP_INITIALIZER,

@@ -11,12 +11,12 @@ import {
   
 } from '@libs/common/services';
 import {
-  VwAlbertaPsiprovider,
-  VwProviderLogo,
-  VwProviderWebsite,
+  ProviderDto,
+  ProviderLogoDto,
+  ProviderWebsiteDto,
   ProviderAddressRequest,
   ProviderWebsiteRequest,
-  VwProviderAddress,
+  ProviderAddressDto,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -53,7 +53,7 @@ export class ProviderState {
     action: ProviderActions.GetProviders
   ) {
     return this.albertaPSIProviderService.getAlbertaPsiProviders().pipe(
-      tap((data: VwAlbertaPsiprovider[]) => {
+      tap((data: ProviderDto[]) => {
         ctx.patchState({
           programProviders: data,
         });
@@ -67,7 +67,7 @@ export class ProviderState {
     action: ProviderActions.GetProviderLogos
   ) {
     return this.providerLogoService.getProviderLogos().pipe(
-      tap((data: VwProviderLogo[]) => {
+      tap((data: ProviderLogoDto[]) => {
         ctx.patchState({
           providerLogos: data,
         });
@@ -81,7 +81,7 @@ export class ProviderState {
     action: ProviderActions.GetProviderWebsites
   ) {
     return this.providerWebsiteService.getProviderWebsites(new ProviderWebsiteRequest()).pipe(
-      tap((data: VwProviderWebsite[]) => {
+      tap((data: ProviderWebsiteDto[]) => {
         ctx.patchState({
           providerWebsites: data,
         });
@@ -89,14 +89,13 @@ export class ProviderState {
     );
   }
 
-
   @Action(ProviderActions.GetProviderAddresses)
   onGetProgramProviderAddress(
     ctx: StateContext<ProviderStateModel>,
     action: ProviderActions.GetProviderAddresses
   ) {
     return this.providerAddressService.getProviderAddresses(new ProviderAddressRequest()).pipe(
-      tap((data: VwProviderAddress[]) => {
+      tap((data: ProviderAddressDto[]) => {
         ctx.patchState({
           providerAddresses: data,
         });

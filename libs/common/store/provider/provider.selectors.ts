@@ -1,15 +1,10 @@
 import { createSelector, Selector } from '@ngxs/store';
 import { ProviderState } from './provider.state';
-import { ProgramState } from '@libs/common/store/program';
 import { ProviderStateModel } from './provider-state.model';
 import {
-  VwProvider,
-  VwProviderAddress,
-  VwProviderLogo,
+  ProviderDto,
+  ProviderLogoDto,
 } from '@libs/common/models';
-import { ProgramStateModel } from '../program';
-import { DistanceHelper } from '@libs/common/helpers';
-// import { ProviderAddressModel } from '@libs/common/models/provider-address.model';
 
 export class ProviderSelectors {
   // Provider Selectors
@@ -37,14 +32,13 @@ export class ProviderSelectors {
     );
   }
 
-
   @Selector([ProviderState])
-  static getProviders(state: ProviderStateModel): VwProvider[] {
+  static getProviders(state: ProviderStateModel): ProviderDto[] {
     return state.programProviders;
   }
 
   @Selector([ProviderState])
-  static getProviderLogos(state: ProviderStateModel): VwProviderLogo[] {
+  static getProviderLogos(state: ProviderStateModel): ProviderLogoDto[] {
     return state.providerLogos;
   }
 }

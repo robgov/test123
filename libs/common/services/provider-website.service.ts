@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { ProviderWebsiteRequest, VwProviderWebsite } from '@libs/common/models';
+import { ProviderWebsiteDto, ProviderWebsiteRequest } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class ProviderWebsiteService extends EndPointService {
         this.key = 'providerWebsite';
     }
     
-    public getProviderWebsites(request: ProviderWebsiteRequest): Observable<VwProviderWebsite[]> { 
+    public getProviderWebsites(request: ProviderWebsiteRequest): Observable<ProviderWebsiteDto[]> { 
         return this.get(this.url + 'GetProviderWebsites', request);
     }
 

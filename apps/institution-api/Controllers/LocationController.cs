@@ -8,6 +8,8 @@ using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
 using LinqKit;
 using ProviderApi.Controllers.Enrichers;
+using AutoMapper;
+using ProviderApi.Models.Dto;
 
 namespace ProviderApi.Controllers
 {
@@ -18,34 +20,20 @@ namespace ProviderApi.Controllers
     private readonly ILogger<LocationController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private IMapper _mapper;
 
-    public LocationController(ILogger<LocationController> logger, AEDigital_SYSTContext context)
+    public LocationController(ILogger<LocationController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
+      _mapper = mapper;
     }
 
-    ///<Summary>
-    /// Gets Institution Summary by InstitutionID 
-    ///</Summary>
-    [HttpGet("{id}")]
-    [SwaggerOperation("GetLocation")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwLocation> GetLocation(int id)
-    {
-      return _context.VwLocations.Where(x => x.LocationId.Equals(id));
-    }
-
-
-    ///<Summary>
-    /// Gets Institution Summary by InstitutionID 
-    ///</Summary>
     [HttpGet("GetLocations")]
     [SwaggerOperation("GetLocations")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwLocation> GetLocations([FromQuery] PagedDataParameters locationParameters)
+    public IEnumerable<LocationDto> GetLocations([FromQuery] PagedDataParameters locationParameters)
     {
       List<VwLocation> locations = _context.VwLocations.ToList();
 
@@ -63,7 +51,7 @@ namespace ProviderApi.Controllers
           .Take(locationParameters.PageSize)
           .ToList();
 
-      return pagedLocations;
+      return _mapper.Map<List<VwLocation>,List<LocationDto>>(pagedLocations);
     }
   }
 }

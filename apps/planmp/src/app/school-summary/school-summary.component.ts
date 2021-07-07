@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { VwAlbertaPsiprovider, VwProgram } from '@libs/common/models';
+import { ProviderDto, ProgramDto } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-school-summary',
@@ -9,6 +9,6 @@ import { VwAlbertaPsiprovider, VwProgram } from '@libs/common/models';
 export class SchoolSummaryComponent {
   constructor() {}
 
-  @Input() provider: VwAlbertaPsiprovider;
-  @Input() programs: VwProgram[];
+  @Input() provider: ProviderDto;
+  @Input() programs: ProgramDto[];
 }
