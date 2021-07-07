@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  VwSpecialization,
-  ProgramSummaryDto,
-} from '@libs/common/models';
+import { SpecializationDto, ProgramSummaryDto } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 
 @Component({
@@ -13,7 +10,7 @@ import { FlexConstants } from '@libs/FlexConstants';
 export class ProgramCardComponent {
   FlexConstants = FlexConstants;
   @Input() programSummary: ProgramSummaryDto;
-  @Input() programSpecialization: VwSpecialization;
+  @Input() programSpecialization: SpecializationDto;
 
   currencyformatter(f1): string {
     var formatter = new Intl.NumberFormat('en-US', {

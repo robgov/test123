@@ -1,8 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ProgramSelectors, ProviderSelectors } from '@libs/common/store/store-index';
-import { VwProgram, VwProvider } from '@libs/common/models';
+import {
+  ProgramSelectors,
+  ProviderSelectors,
+} from '@libs/common/store';
+import { ProgramDto, ProviderDto } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-school-summary-list',
@@ -11,12 +14,11 @@ import { VwProgram, VwProvider } from '@libs/common/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolSummaryListComponent {
-  @Select(ProviderSelectors.getProviders) programProviders$: Observable<VwProvider[]>;
+  @Select(ProviderSelectors.getProviders) programProviders$: Observable<ProviderDto[]>;
 
-  constructor(private store: Store) {
-  }
+  constructor(private store: Store) {}
 
-  getProviderPrograms(provider: VwProvider): Observable<VwProgram[]> {
+  getProviderPrograms(provider: ProviderDto): Observable<ProgramDto[]> {
     return this.store.select(
       ProgramSelectors.getProviderPrograms(provider.providerId)
     );

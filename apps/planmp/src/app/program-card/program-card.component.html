@@ -1,17 +1,7 @@
 <mat-card class="tp-card">
-  <!-- <mat-card-header>
-       <mat-card-title>TITLE OF THE CARD</mat-card-title>
-       <mat-card-subtitle>description</mat-card-subtitle>
-    </mat-card-header> -->
-  <!-- <img mat-card-image src = "https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg" alt = "Learn HTML5"> -->
   <mat-card-content>
     <div fxLayout="column">
-      <div
-        fxFlex="100"
-        fxLayout="row"
-        fxShrink
-        fxLayoutGap="{{ FlexConstants.Gutter.Large }}"
-      >
+      <div fxFlex="100" fxLayout="row" fxShrink fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
         <div fxFlex="50%" style="border-right: 2px solid cadetblue">
           <div fxLayout="column">
             <div fxLayout="row">
@@ -23,19 +13,8 @@
               </div>
               <div fxFlex="16px"></div>
             </div>
-            
-            <!-- <div [attr.data-cy]="'program-card.providerSpecialization'">
-              {{
-                programSpecialization
-                  ? programSpecialization.specializationName
-                  : ''
-              }}
-            </div> -->
-            <div
-              [attr.data-cy]="'program-card.providerName'"
-              class="school-name"
-            >
-              {{  getProgramProviderName() }}
+            <div [attr.data-cy]="'program-card.providerName'" class="school-name">
+              {{ getProgramProviderName() }}
             </div>
             <div style="height: 10px"></div>
             <div [attr.data-cy]="'program-card.AddressLine'" class="paragraph-content">
@@ -45,10 +24,7 @@
               {{ programSummary.postalCode }}
             </div>
             <div style="height: 10px" class="sub-title"></div>
-            <a
-              [href]="getProviderWebsite()"
-              style="text-align: center; display: flex; text-decoration: none"
-            >
+            <a [href]="getProviderWebsite()" style="text-align: center; display: flex; text-decoration: none">
               <span>Program website </span>
               <mat-icon style="height: 18px">open_in_new</mat-icon>
             </a>
@@ -72,27 +48,14 @@
             </div>
             <div style="height: 10px"></div>
             <div>
-              <div
-                fxLayout="row"
-                fxLayoutGap="{{ FlexConstants.Gutter.Small }}"
-                fxLayoutAlign="left center"
-              >
-                <div >
-                  <button
-                    [attr.data-cy]="'program-card.compare-button'"
-                    mat-flat-button
-                    class="primary-button"
-                  >
+              <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Small }}" fxLayoutAlign="left center">
+                <div>
+                  <button [attr.data-cy]="'program-card.compare-button'" mat-flat-button class="primary-button">
                     Compare
                   </button>
                 </div>
                 <div>
-                  <button
-                    fxFlex
-                    [attr.data-cy]="'program-card.save-button'"
-                    mat-flat-button
-                    class="secondary-button"
-                  >
+                  <button fxFlex [attr.data-cy]="'program-card.save-button'" mat-flat-button class="secondary-button">
                     Save program
                   </button>
                 </div>

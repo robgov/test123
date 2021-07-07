@@ -3,7 +3,7 @@ import { tap } from 'rxjs/operators';
 
 import { LookupActions } from './lookup.actions';
 import { LookupService } from '@libs/common/services';
-import { LookupRequest, VwPmpLookup } from '@libs/common/models';
+import { LookupRequest, LookupDto } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
 import { LookupStateModel } from './lookup-state.model';
@@ -31,7 +31,7 @@ export class LookupState {
     action: LookupActions.GetLookups
   ) {
     return this.lookupService.getLookups(action.request).pipe(
-      tap((data: VwPmpLookup[]) => {
+      tap((data: LookupDto[]) => {
         ctx.patchState({
           lookups: data,
         });

@@ -1,14 +1,13 @@
 import {
-    VwProviderAddress,
-    VwAlbertaPsiprovider,
-    VwProviderLogo,
-    VwProviderWebsite,
+    ProviderAddressDto,
+    ProviderDto,
+    ProviderLogoDto,
+    ProviderWebsiteDto,
   } from '@libs/common/models';
-// import { ProviderAddressModel } from '@libs/common/models/provider-address.model';
 
 export class ProviderStateModel {
-  programProviders: VwAlbertaPsiprovider[];
-  providerLogos: VwProviderLogo[];
-  providerWebsites: VwProviderWebsite[];
-  providerAddresses: VwProviderAddress[];
+  programProviders: ProviderDto[];
+  providerLogos: ProviderLogoDto[];
+  providerWebsites: ProviderWebsiteDto[];
+  providerAddresses: ProviderAddressDto[];
 }

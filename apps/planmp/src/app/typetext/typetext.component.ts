@@ -1,8 +1,9 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
+import { Select } from '@ngxs/store';
 import {Observable} from 'rxjs';
-import { ProgramActions, ProgramSelectors, ProviderActions } from '@libs/common/store/store-index';
-import { VwPmpLookup } from '@libs/common/models';
+import { ProgramActions, ProgramSelectors, ProviderActions } from '@libs/common/store';
+import { LookupDto } from '@libs/common/models';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 
 @Component({
   selector: 'ae-typetext',
@@ -10,12 +11,16 @@ import { VwPmpLookup } from '@libs/common/models';
   styleUrls: ['./typetext.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TypetextComponent {
-    @Select(ProgramSelectors.getProvidersAndCips) getProvidersAndCips$: Observable<VwPmpLookup[]>   
+export class TypetextComponent implements OnInit {
+    @Select(ProgramSelectors.getProvidersAndCips) getProvidersAndCips$: Observable<LookupDto[]>   
     @Select(ProgramSelectors.getSelectedLocation) getSelectedLocation$: Observable<string>
 
-    constructor(private store: Store){
-      store.dispatch(new ProviderActions.GetProviders());
-      store.dispatch(new ProgramActions.GetProgramCategoryCounts());
+    ngOnInit() {
+      this.getInfo();
+    }
+
+    @Dispatch()
+    getInfo(){
+      return [new ProviderActions.GetProviders(),new ProgramActions.GetProgramCategoryCounts()];
     }
 }

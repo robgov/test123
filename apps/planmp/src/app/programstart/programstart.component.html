@@ -1,18 +1,17 @@
-<div fxLayout="column" fxFlex="100" >
-        <div alt="programapplyimage" fxHide.lt-md>
-          <img fxFlex="100%" [src]="getImageUrl()" />
-        </div>
+<div fxLayout="column" fxFlex="100">
+  <div alt="programapplyimage" fxHide.lt-md>
+    <img fxFlex="100%" [src]="getImageUrl()" />
+  </div>
 
-        <h1>{{ this.programdata[0].Applytitle }}</h1>
-        <h2>{{ this.programdata[0].Applymessage }}</h2>
+  <h1>{{ this.programdata[0].Applytitle }}</h1>
+  <h2>{{ this.programdata[0].Applymessage }}</h2>
 
-        <ul>
-          <li *ngFor="let c of credentials | slice :0:5">{{ c.programType}}</li>
-        </ul>
+  <ul>
+    <li *ngFor="let c of credentials | slice :0:5">{{ c.programType}}</li>
+  </ul>
 
-
-        <button mat-raised-button color="primary"
-        [attr.data-cy]="'programstart.start_application_process'"
-        >{{ this.programdata[0].Buttonstart }}</button>
+  <button mat-raised-button color="primary" [attr.data-cy]="'programstart.start_application_process'">{{
+    this.programdata[0].Buttonstart }}
+  </button>
 
 </div>

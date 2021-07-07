@@ -13,74 +13,31 @@
       </button>
     </div>
     <div fxHide fxShow.lt-md>
-      <button mat-button (click)="right.toggle()">
+      <button mat-button (click)="showMenu()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
   </aedigital-header>
 
   <mat-sidenav-container>
-    <mat-sidenav #right mode="over" autoFocus="false" position="end" class="right-sheet"
+    <mat-sidenav #rightSidenav mode="over" autoFocus="false" position="end" class="right-sheet"
       [fixedInViewport]="false" fxLayoutGap="8px">
-      <div fxLayout="column" fxLayoutGap="8px">
-        <button mat-button (click)="right.toggle()" >
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>close</mat-icon>
-            <p>Close</p>
-          </div>
-        </button>
-        <button mat-button [routerLink]="'/home'">
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>home</mat-icon>
-            <p>Home</p>
-          </div>
-        </button>
-        <button mat-button [routerLink]="'/home/Page1'">
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>account_balance</mat-icon>
-            <p>Providers</p>
-          </div>
-        </button>
-        <button mat-button [routerLink]="'/home/Page2'">
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>description</mat-icon>
-            <p>Test Form</p>
-          </div>
-        </button>
-        <button mat-button href="#">
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>filter_4</mat-icon>
-            <p>For four</p>
-          </div>
-        </button>
-        <button mat-button href="#">
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>search</mat-icon>
-            <p>Search</p>
-          </div>
-        </button>
-        <button mat-button href="#">
-          <div fxLayoutAlign="left center" fxLayoutGap="8px">
-            <mat-icon>account_circle</mat-icon>
-            <p>Account</p>
-          </div>
-        </button>
-      </div>
-    </mat-sidenav>
-    <mat-sidenav #programSort mode="over" autoFocus="false" class="right-sheet"
-      [fixedInViewport]="false" fxLayoutGap="8px">
-      <aedigital-program-search-sort-options-sidebar *ngIf="isSort" 
+      <aedigital-menu-sidebar *ngIf="menu==='menu'" ></aedigital-menu-sidebar>
+      <aedigital-program-search-sort-options-sidebar *ngIf="menu=='sort'" 
       [sortOptions]="sortOption$ | async"
       [selectedSortOrder]="selectedSortOrder$ | async"
       ></aedigital-program-search-sort-options-sidebar>
 
-      <aedigital-program-search-filter-options-sidebar *ngIf="!isSort" 
+      <aedigital-program-search-filter-options-sidebar *ngIf="menu=='filter'" 
       [providers]="providers$ | async" 
       [credentials]="programCredentials$ | async"
       [programTypes]="programTypes$ | async"
       [selectedProviderIds]="selectedProviderIds$ | async"
       [selectedCredentialIds]="selectedCredentialIds$ | async"
       ></aedigital-program-search-filter-options-sidebar>
+    </mat-sidenav>
+    <mat-sidenav #left mode="over" autoFocus="false" class="left-sheet"
+      [fixedInViewport]="false" fxLayoutGap="8px">
     </mat-sidenav>
     <mat-sidenav-content fxLayoutAlign="center">
       <div class="container" fxFlex="100" fxFlex.gt-md="1272px;" fxLayoutGap="{{FlexConstants.Margin.Large}}">

@@ -6,6 +6,8 @@ using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
+using AutoMapper;
+using ProviderApi.Models.Dto;
 
 namespace ProviderApi.Controllers
 {
@@ -16,29 +18,22 @@ namespace ProviderApi.Controllers
     private readonly ILogger<ProviderLogoController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private IMapper _mapper;
 
-    public ProviderLogoController(ILogger<ProviderLogoController> logger, AEDigital_SYSTContext context)
+    public ProviderLogoController(ILogger<ProviderLogoController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
+      _mapper = mapper;
     }
 
-    [HttpGet("GetProviderLogoByProviderId")]
-    [SwaggerOperation("GetProviderLogoByProviderId")]
-    [SwaggerResponse((int)HttpStatusCode.OK)]
-    [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public VwProviderLogo GetProviderLogoByProviderId([FromQuery] ProviderLogoRequest request)
-    {
-      return _context.VwProviderLogos.FirstOrDefault(x => x.ProviderId.Equals(request.ProviderId));
-    }
-
-    [HttpGet("")]
+    [HttpGet("GetProviderLogos")]
     [SwaggerOperation("GetProviderLogos")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwProviderLogo> GetProviderLogos()
+    public IEnumerable<ProviderLogoDto> GetProviderLogos()
     {
-      return _context.VwProviderLogos;
+      return _mapper.Map<List<VwProviderLogo>,List<ProviderLogoDto>>(_context.VwProviderLogos.ToList());
     }
   }
 }

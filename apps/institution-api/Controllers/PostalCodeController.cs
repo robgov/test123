@@ -6,6 +6,8 @@ using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using ProviderApi.Models.EntityFramework;
 using ProviderApi.Models.ModelParameters;
+using AutoMapper;
+using ProviderApi.Models.Dto;
 
 namespace ProviderApi.Controllers
 {
@@ -16,23 +18,24 @@ namespace ProviderApi.Controllers
     private readonly ILogger<PostalCodeController> _logger;
 
     private AEDigital_SYSTContext _context;
+    private readonly IMapper _mapper;
 
-    public PostalCodeController(ILogger<PostalCodeController> logger, AEDigital_SYSTContext context)
+    public PostalCodeController(ILogger<PostalCodeController> logger, AEDigital_SYSTContext context, IMapper mapper)
     {
       _logger = logger;
       _context = context;
+      _mapper = mapper;
     }
 
-    ///<Summary>
-    /// Gets Postal Codes
-    ///</Summary>
     [HttpGet("GetPostalCodes")]
     [SwaggerOperation("GetPostalCodes")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
-    public IEnumerable<VwAbpostalCode> GetPostalCodes([FromQuery] PostalCodeRequest request)
+    public IEnumerable<PostalCodeDto> GetPostalCodes([FromQuery] PostalCodeRequest request)
     {
-      return _context.VwAbpostalCodes.Where(pc=> string.IsNullOrEmpty(request.PostalCode) || pc.PostalCode==request.PostalCode).OrderBy(x=>x.PostalCode).ToList();
+      return _mapper.Map<List<VwAbpostalCode>, List<PostalCodeDto>>(_context.VwAbpostalCodes
+        .Where(pc => string.IsNullOrEmpty(request.PostalCode) || pc.PostalCode == request.PostalCode)
+        .OrderBy(x => x.PostalCode).ToList());
     }
   }
 }

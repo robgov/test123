@@ -109,19 +109,20 @@ export namespace ProgramActions {
     constructor(public sortOrder: string) {}
   }
 
+  //Menu action stuff, belongs somewhere else
   export class ShowProgramSort {
     static readonly type = '[Aed Program] Show Program Sort';
   }
 
-  export class CloseProgramSort {
-    static readonly type = '[Aed Program] Close Program Sort';
+  export class CloseSidebar {
+    static readonly type = '[Aed Program] Close Sidebar';
   }
 
   export class ShowProgramFilter {
     static readonly type = '[Aed Program] Show Program Filter';
   }
 
-  export class CloseProgramFilter {
-    static readonly type = '[Aed Program] Close Program Filter';
+  export class ShowMenu {
+    static readonly type = '[Aed Program] Show Menu';
   }
 }

@@ -6,4 +6,8 @@ export * from './program';
 export * from './provider';
 export * from './lookup';
 
-export const pmpState = [ProgramState, ProviderState, LookupState];
+export const pmpState = [
+  ProgramState,
+  ProviderState,
+  LookupState,
+];

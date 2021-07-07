@@ -6,7 +6,7 @@
             <mat-select fxFlex="100" class="filter-field" [disabled]="selectedLocation==null"
                 (selectionChange)="distanceFilterSelected($event.value)" 
                 placeholder="Alberta">
-                <mat-option [value]="d.code" *ngFor="let d of distanceFilters" class="filter-field">
+                <mat-option [value]="d.value" *ngFor="let d of distanceFilters" class="filter-field">
                     {{d.name}}</mat-option>
             </mat-select>
         </div>
@@ -19,16 +19,6 @@
                 </mat-option>
             </mat-select>
         </div>
-        <!-- Category Selection  -->
-        <!-- <div fxFlex="25" fxLayout="column" >
-            <mat-label class="filter-heading">Category</mat-label>
-            <mat-select fxFlex="25" class="filter-field" (selectionChange)="categorySelected($event.value)"
-                [(value)]="selectedCipsCode">
-                <mat-option value="">--All--</mat-option>
-                <mat-option [value]="pc.cipSubSeriesCode" *ngFor="let pc of programCountsByCategory"
-                class="filter-field">{{pc.cipSubSeries}}</mat-option>
-            </mat-select>
-        </div> -->
         <!-- Credential Type Selection -->
         <div fxFlex="25" fxLayout="column" fxHide.lt-md="true">
             <mat-label class="filter-heading">Credential</mat-label>
@@ -37,23 +27,8 @@
                 <mat-option [value]="c.programCredentialId" *ngFor="let c of credentials" class="filter-field">{{c.programCredential}}</mat-option>
             </mat-select>
         </div>
-        <!-- Program Type Selection -->
-        <!-- <div fxFlex="25" fxLayout="column">
-            <mat-label class="filter-heading">Type</mat-label>
-            <mat-select  multiple="true" fxFlex="25" class="filter-field" (selectionChange)="programTypeSelected($event.value)"
-                [(value)]="selectedCredentialId" placeholder="All Types">
-                <mat-option [value]="c.programTypeId" *ngFor="let c of programTypes" class="filter-field">
-                    {{c.programType}}</mat-option>
-            </mat-select>
-        </div> -->
         <div fxFlex="50" fxLayout="column" fxHide="true" fxShow.lt-md="true">
             <button mat-raised-button (click)="showProgramFilter()"><mat-icon>filter</mat-icon> Filter</button>
-            <!-- <mat-label class="filter-heading">Sort By</mat-label>
-            <mat-select  fxFlex="25" class="filter-field" (selectionChange)="sortOrderSelected($event.value)"
-                [(value)]="selectedSortOrder">
-                <mat-option [value]="s.code" *ngFor="let s of sortOptions" class="filter-field">
-                    {{s.name}}</mat-option>
-            </mat-select> -->
         </div>
         <div fxFlex="25" fxLayout="row" fxFlex.lt-md="50">
             <button fxFlex fxFlex mat-raised-button (click)="showProgramSort()"><mat-icon>sort</mat-icon> Sort</button>
