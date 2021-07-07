@@ -51,7 +51,7 @@ export class ProgramState {
     console.log('initializing...');
     ctx.dispatch([
       new ProgramActions.GetPostalCodes(),
-      // Loading lookups
+      new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramCategoryCounts(),
       new ProgramActions.GetProgramCosts(),
       new ProgramActions.GetProgramCredentials(),
@@ -388,6 +388,9 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramProviderDistances
   ) {
+    if (!ctx.getState().searchFilters) { 
+      return;
+    }
     const userPostalCode = ctx.getState().searchFilters.postalCode;
     const userLatitude = ctx.getState().searchFilters.latitude;
     const userLongitude = ctx.getState().searchFilters.longitude;

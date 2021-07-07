@@ -14,16 +14,18 @@ import {
   ProgramTypeDto,
   SpecializationDto,
 } from '@libs/common/models';
-import { ProgramstartComponent } from '@planmp/programstart/programstart.component';
 
 export class ProgramSelectors {
+  @Selector([ProgramState])
+	static isInitialized(state: ProgramStateModel): any {
+		const keys = Object.keys(state.programs);
+		return keys.length > 0;
+	}
+
   @Selector([ProgramState])
   static programs(state: ProgramStateModel): ProgramDto[] {
     return state.programs;
   }
-
-
-
 
   @Selector([ProgramState])
   static getSelectedProgram(
@@ -31,10 +33,6 @@ export class ProgramSelectors {
   ): ProgramSummaryDto{
     return state.programSummaries.find((q) => q.programId === state.searchFilters.programId);
   }
-
-
-
-
 
   static getProgramSpecialization(id: number) {
     return createSelector([ProgramState], (state: ProgramStateModel) =>
