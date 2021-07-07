@@ -301,6 +301,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchUserLocationFilter
   ) {
+
     return this.googleGeocodeApiService
       .getPostalCodeFromLatLong(
         ctx.getState().googleApiKey,
@@ -309,11 +310,15 @@ export class ProgramState {
       )
       .pipe(
         tap((data: any) => {
+          var locationName = '';
+          if (data.plus_code && data.plus_code.compound_code) {
+            locationName = data.plus_code.compound_code.substring(data.plus_code.compound_code.indexOf(' '),data.plus_code.compound_code.indexOf(','))
+          }
           ctx.patchState({
             searchFilters: { ... ctx.getState().searchFilters , 
                               latitude: action.latitude, 
                               longitude: action.longitude, 
-                              locationName: data.plus_code ? data.plus_code : '', 
+                              locationName: locationName, 
                               postalCode: ''}
           });
           ctx.dispatch(new ProgramActions.SetProgramProviderDistances());

@@ -34,6 +34,8 @@
       [programTypes]="programTypes$ | async"
       [selectedProviderIds]="selectedProviderIds$ | async"
       [selectedCredentialIds]="selectedCredentialIds$ | async"
+      [selectedLocation]="selectedPostalCode$ | async"
+      [selectedCipSubSeriesCode]="selectedCipSubSeriesCode$ | async"
       ></aedigital-program-search-filter-options-sidebar>
     </mat-sidenav>
     <mat-sidenav #left mode="over" autoFocus="false" class="left-sheet"

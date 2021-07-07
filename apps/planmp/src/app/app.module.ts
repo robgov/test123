@@ -72,17 +72,17 @@ import { LoanstartComponent } from './loanstart/loanstart.component';
 import { ProgramstartComponent } from './programstart/programstart.component';
 import { SchoolSummaryComponent } from './school-summary/school-summary.component';
 import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
-import { FindProgramsComponent } from './find-programs/find-programs.component';
-import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
-import { ProgramSummaryComponent } from './program-summary/program-summary.component';
-import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
-import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
+import { FindProgramsComponent } from './programs/find-programs/find-programs.component';
+import { ProgramsSearchResultsComponent } from './programs/programs-search-results/programs-search-results.component';
+import { ProgramSummaryComponent } from './programs/program-summary/program-summary.component';
+import { ProgramCategorySummaryComponent } from './programs/program-category-summary/program-category-summary.component';
+import { ProgramCategorySummaryListComponent } from './programs/program-category-summary-list/program-category-summary-list.component';
 import { TypetextComponent } from './typetext/typetext.component';
 import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
-import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
+import { ProgramSearchResultsFilterComponent } from './programs/program-search-results-filter/program-search-results-filter.component';
 import { ProgramSearchSortOptionsSidebarComponent } from './sidebars/program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
 import { ProgramSearchFilterOptionsSidebarComponent } from './sidebars/program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
-import { ProgramCardComponent } from './program-card/program-card.component';
+import { ProgramCardComponent } from './programs/program-card/program-card.component';
 import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
 
 @NgModule({

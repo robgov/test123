@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { DistanceHelper } from '@libs/common/helpers';
 import { ProviderDto, LookupDto, PsiSpecializationCountByCategoryDto, ProgramCredentialDto, ProgramTypeDto } from '@libs/common/models';
 import { ProgramActions } from '@libs/common/store/program';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
