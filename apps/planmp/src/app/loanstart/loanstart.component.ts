@@ -1,49 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
 import { FlexConstants } from '@libs/FlexConstants';
-import { environment } from '../environment/environment';
-import { StrapiService } from '@libs/common/services';
+import { Store } from '@ngxs/store';
+import { StrapiSelectors } from '@libs/common/store';
 
 @Component({
   selector: 'aedigital-loanstart',
   templateUrl: './loanstart.component.html',
   styleUrls: ['./loanstart.component.scss'],
 })
-export class LoanstartComponent implements OnInit {
-  env = environment;
+export class LoanstartComponent {
+  @Input() loanData: Object[];
+
   FlexConstants = FlexConstants;
-  loandata: any[] = [
-    {
-      loantitle: 'Title',
-      loanmessage: 'Subtitle',
-      loanimage: 'Header',
-      Summary: 'Strapi call failed',
-    },
-  ];
-
-  constructor(private strapiService: StrapiService) {}
-
-  ngOnInit(): void {
-    this.strapiService.getLoanApplies().subscribe((data: any) => {
-      this.loandata = data;
-    });
-  }
-
-  AddBackgroundImage() {
-    return (
-      "'url('" +
-      this.env.StrapiBaseUrl +
-      this.loandata[0].loanapplyimage.url +
-      "')'"
-    );
-  }
+  
+  constructor(public store:Store) { }
 
   getLoanApplyUrl() {
-    if (this.loandata) {
-      return (
-        'http://aestrapi-dev.eastus.cloudapp.azure.com:1337' +
-        this.loandata[0].Loanapplyimage.url
-      );
+    if (this.loanData) {
+      return this.store.selectSnapshot(StrapiSelectors.getLoanDataImageUrl(this.loanData[0]));
     }
     return '';
   }

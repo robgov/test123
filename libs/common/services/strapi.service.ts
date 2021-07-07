@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StrapiService {
-  protected urlBase = 'http://aestrapi-dev.eastus.cloudapp.azure.com:1337';
+  public urlBase = 'http://aestrapi-dev.eastus.cloudapp.azure.com:1337';
 
   constructor(public http: HttpClient) { }
 
@@ -14,7 +14,7 @@ export class StrapiService {
       return this.http.get(this.urlBase + "/ae-programapplies");
   }
 
-  public getLoanApplies(): Observable<any> {
+  public getLoanData(): Observable<any> {
       return this.http.get(this.urlBase + "/ae-loanapplies")
   }
 }

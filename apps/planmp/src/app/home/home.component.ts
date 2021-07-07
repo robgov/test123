@@ -5,7 +5,7 @@ import { environment } from '../environment/environment';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ProgramDto } from '@libs/common/models';
-import { ProgramSelectors } from '@libs/common/store/program';
+import { ProgramSelectors, StrapiSelectors } from '@libs/common/store';
 
 @Component({
   selector: 'aedigital-mono-repo-home',
@@ -14,6 +14,8 @@ import { ProgramSelectors } from '@libs/common/store/program';
 })
 export class HomeComponent implements OnInit {
   @Select(ProgramSelectors.programs) programs$: Observable<ProgramDto[]>;
+  @Select(StrapiSelectors.loanData) loanData$: Observable<Object[]>
+  @Select(StrapiSelectors.programData) programData$: Observable<Object[]>;
 
   FlexConstants = FlexConstants;
 

@@ -1,35 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
 import { FlexConstants } from '@libs/FlexConstants';
-import { environment } from '../environment/environment';
 import { ProgramTypeDto } from '@libs/common/models';
-import { StrapiService } from '@libs/common/services';
+import { Store } from '@ngxs/store';
+import { StrapiSelectors } from '@libs/common/store';
 
 @Component({
   selector: 'ae-programstart',
   templateUrl: './programstart.component.html',
   styleUrls: ['./programstart.component.scss'],
 })
-export class ProgramstartComponent implements OnInit {
+export class ProgramstartComponent {
+  @Input() programData: any[];
   FlexConstants = FlexConstants;
   credentials: ProgramTypeDto[];
-  env = environment;
-  programdata: any[] = [{}];
 
-  constructor(private http: HttpClient, private strapiService: StrapiService) {}
-  ngOnInit(): void {
-    this.strapiService.getProgramData().subscribe((data)=>{
-      this.programdata = data;
-    })
-    this.fetchCredentials();
-  }
+  constructor(public store:Store) { }
   
   getImageUrl() {
-    if (this.programdata[0]) {
-      return (
-        'http://aestrapi-dev.eastus.cloudapp.azure.com:1337' +
-        this.programdata[0].Applyimage.url
-      );
+    if (this.programData) {
+      return this.store.selectSnapshot(StrapiSelectors.getApplyImageUrl(this.programData[0]));
     }
     return '';
   }
