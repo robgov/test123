@@ -2,9 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  VwAlbertaPsiprovider,
   VwPmpLookup,
-  VwPmpPsiprogramCountByCategory,
 } from '@libs/common/models';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';

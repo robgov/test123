@@ -13,12 +13,27 @@ import {
   VwProgramType,
   VwSpecialization,
 } from '@libs/common/models';
+import { ProgramstartComponent } from '@planmp/programstart/programstart.component';
 
 export class ProgramSelectors {
   @Selector([ProgramState])
   static programs(state: ProgramStateModel): VwProgram[] {
     return state.programs;
   }
+
+
+
+
+  @Selector([ProgramState])
+  static getSelectedProgram(
+    state: ProgramStateModel
+  ): ProgramSummaryDto{
+    return state.programSummaries.find((q) => q.programId === state.programSearchFilter_ProgramId);
+  }
+
+
+
+
 
   static getProgramSpecialization(id: number) {
     return createSelector([ProgramState], (state: ProgramStateModel) =>
@@ -188,6 +203,7 @@ export class ProgramSelectors {
     state: ProgramStateModel,
   ): ProgramSummaryDto[] {
     var results: ProgramSummaryDto[] = state.programSummaries;
+
 
     //Apply provider filtering
     if (

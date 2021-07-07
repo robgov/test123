@@ -22,6 +22,7 @@ export class ProgramStateModel {
   postalCodes: VwAbpostalCode[];
 
   // Program Search Filters
+  programSearchFilter_ProgramId: number;
   programSearchFilter_ProviderIds: number[];
   programSearchFilter_CipSubSeriesCode: string;
   programSearchFilter_CategoryProgramIds: number[];

@@ -98,6 +98,8 @@ import { ProgramSearchResultsFilterComponent } from './program-search-results-fi
 import { ProgramSearchSortOptionsSidebarComponent } from './program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
 import { ProgramSearchFilterOptionsSidebarComponent } from './program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
 import { ProgramCardComponent } from './program-card/program-card.component';
+import { ProgramSummaryDetailComponent } from './program-summary-detail/program-summary-detail.component';
+import { ProviderLocationComponent } from './provider-location/provider-location.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +129,8 @@ import { ProgramCardComponent } from './program-card/program-card.component';
     ProgramSearchSortOptionsSidebarComponent,
     ProgramSearchFilterOptionsSidebarComponent,
     ProgramCardComponent,
+    ProgramSummaryDetailComponent,
+    ProviderLocationComponent,
   ],
   imports: [
     BrowserModule,

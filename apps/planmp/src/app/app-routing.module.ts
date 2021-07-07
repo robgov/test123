@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
-import { TombstoneComponent } from './tombstone/tombstone.component';
+import { ProgramSummaryComponent } from './program-summary/program-summary.component';
 import { Routes, RouterModule } from '@angular/router';
 import { InputFormComponent } from './input-form/input-form.component';
 import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
@@ -13,19 +13,20 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       {
-        path: 'Page1',
-        component: TombstoneComponent,
-        data: { breadcrumb: 'Tombstone' },
-      },
-      {
         path: 'Page2',
         component: InputFormComponent,
         data: { breadcrumb: 'Test Form Thing' },
       },
       {
+        path: 'Summary',
+        component: ProgramSummaryComponent,
+        data: { breadcrumb: 'Summary' },
+      },
+      {
         path: 'program-search-results',
         component: ProgramsSearchResultsComponent,
         data: { breadcrumb: 'Programs' },
+
       },
     ],
   },
