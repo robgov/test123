@@ -7,12 +7,7 @@ import { ProgramActions } from './program.actions';
 import {
   ProgramService,
   SpecializationService,
-  ProgramCostService,
-  ProgramCredentialService,
-  ProgramTypeService,
-  SpecializationCostService,
   PostalCodeService,
-  ProgramSummaryService,
   GoogleGeocodeApiService,
 } from '@libs/common/services';
 import {
@@ -45,12 +40,7 @@ export class ProgramState {
   constructor(
     private programService: ProgramService,
     private specializationService: SpecializationService,
-    private programCostService: ProgramCostService,
-    private programCredentialService: ProgramCredentialService,
-    private programTypeService: ProgramTypeService,
-    private specializationCostService: SpecializationCostService,
     private postalCodeService: PostalCodeService,
-    private programSummaryService: ProgramSummaryService,
     private googleGeocodeApiService: GoogleGeocodeApiService
   ) {}
 
@@ -84,7 +74,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramSummaries
   ) {
-    return this.programSummaryService.getProgramSummaries().pipe(
+    return this.programService.getProgramSummaries().pipe(
       tap((data: ProgramSummaryDto[]) => {
         ctx.patchState({
           programSummaries: data,
@@ -156,7 +146,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetSpecializationCostForProgram
   ) {
-    return this.specializationCostService
+    return this.specializationService
       .getSpecializationCosts(
         new SpecializationCostRequest({ programId: action.programId })
       )
@@ -174,7 +164,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetSpecializationCostsForProvider
   ) {
-    return this.specializationCostService
+    return this.specializationService
       .getSpecializationCosts(
         new SpecializationCostRequest({ providerId: action.providerId })
       )
@@ -192,7 +182,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramCosts
   ) {
-    return this.programCostService
+    return this.programService
       .getProgramCosts(new ProgramCostsRequest())
       .pipe(
         tap((data: ProgramCostDto[]) => {
@@ -208,7 +198,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramTypes
   ) {
-    return this.programTypeService.getProgramTypes().pipe(
+    return this.programService.getProgramTypes().pipe(
       tap((data: ProgramTypeDto[]) => {
         ctx.patchState({
           programTypes: data,
@@ -236,7 +226,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramCredentials
   ) {
-    return this.programCredentialService.getProgramCredentials().pipe(
+    return this.programService.getProgramCredentials().pipe(
       tap((data: ProgramCredentialDto[]) => {
         ctx.patchState({
           programCredentials: data,
@@ -326,14 +316,6 @@ export class ProgramState {
                               locationName: data.plus_code ? data.plus_code : '', 
                               postalCode: ''}
           });
-          // ctx.patchState({
-          //   programSearchFilter_Latitude: action.latitude,
-          //   programSearchFilter_Longitude: action.longitude,
-          //   programSearchFilter_LocationName: data.plus_code
-          //     ? data.plus_code.compound_code
-          //     : '',
-          //   programSearchFilter_PostalCode: '',
-          // });
           ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
         })
       );

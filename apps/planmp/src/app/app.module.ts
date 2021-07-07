@@ -14,12 +14,9 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 import {
-  LocationAddressService,
   LocationService,
   ProgramService,
-  ProviderAddressService,
   ProviderService,
-  ProviderWebsiteService,
 } from '@libs/common/services';
 
 // Material Imports
@@ -130,12 +127,10 @@ import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.compo
     NgxsRouterPluginModule.forRoot()
   ],
   providers: [
-    LocationAddressService,
+    LocationService,
     LocationService,
     ProgramService,
-    ProviderAddressService,
     ProviderService,
-    ProviderWebsiteService,
     {
       provide: APP_INITIALIZER,
       useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),

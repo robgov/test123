@@ -53,5 +53,30 @@ namespace ProviderApi.Controllers
 
       return _mapper.Map<List<VwLocation>,List<LocationDto>>(pagedLocations);
     }
+
+    [HttpGet("GetLocationAddresses")]
+    [SwaggerOperation("GetLocationAddresses")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<LocationAddressDto> GetLocationAddresses([FromQuery] PagedDataParameters locationAdressParameters)
+    {
+      List<VwLocationAddress> locationAddresses = _context.VwLocationAddresses.ToList();
+
+      // Filtering
+      var predicate = PredicateBuilder.New<VwLocationAddress>();
+      var originalPredicate = predicate;
+      predicate = LocationAddressEnricher.LocationAddressFilter(locationAdressParameters, predicate);
+      if (predicate != originalPredicate)
+      {
+        locationAddresses = locationAddresses.Where(predicate).ToList();
+      }
+
+      // Pagination
+      var pagedLocationAddresses = locationAddresses.Skip((locationAdressParameters.PageNumber - 1) * locationAdressParameters.PageSize)
+          .Take(locationAdressParameters.PageSize)
+          .ToList();
+
+      return _mapper.Map<List<VwLocationAddress>, List<LocationAddressDto>>(pagedLocationAddresses);
+    }
   }
 }

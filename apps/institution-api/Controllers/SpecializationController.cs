@@ -52,5 +52,16 @@ namespace ProviderApi.Controllers
     {
       return _mapper.Map<List<VwPmpPsipspecializationYearlyCost>,List<SpecializationYearlyCostDto>>(_context.VwPmpPsipspecializationYearlyCosts.ToList());
     }
+
+    [HttpGet("GetSpecializationCosts")]
+    [SwaggerOperation("GetSpecializationCosts")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<SpecializationCostDto> GetSpecializationCosts([FromQuery] SpecializationCostRequest request)
+    {
+      return _mapper.Map<List<VwSpecializationCost>, List<SpecializationCostDto>>(_context.VwSpecializationCosts.Where(pc => (!request.ProgramId.HasValue || pc.ProgramId.Equals(request.ProgramId))
+                                                     && (!request.SpecializationId.HasValue || pc.SpecializationId.Equals(request.SpecializationId))
+                                                     && (!request.ProviderId.HasValue || pc.ProviderId.Equals(request.ProviderId))).ToList());
+    }
   }
 }
