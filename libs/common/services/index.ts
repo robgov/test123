@@ -1,5 +1,5 @@
 export * from './end-point.service';
-export * from './google-api';
+export * from './google-api.service';
 export * from './http-object-mapper';
 export * from './location.service';
 export * from './lookup.service';
@@ -7,3 +7,4 @@ export * from './postal-code.service';
 export * from './program.service';
 export * from './provider.service';
 export * from './specialization.service';
+export * from './strapi.service';
