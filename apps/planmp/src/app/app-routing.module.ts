@@ -16,12 +16,13 @@ const routes: Routes = [
         path: 'Summary',
         component: ProgramSummaryComponent,
         data: { breadcrumb: 'Summary' },
+        resolve: { init: ProgramResolverService}
       },
       {
         path: 'program-search-results',
         component: ProgramsSearchResultsComponent,
         data: { breadcrumb: 'Programs' },
-
+        resolve: { init: ProgramResolverService}
       },
     ],
   },
