@@ -42,10 +42,6 @@ export class ProgramSummaryComponent {
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
-  // getSelectedProgramDetailData(program: ProgramDto) {
-  //   this.store.select(StrapiSelectors.getProgramDetailData(program.programId))
-  // }
-
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       if (params['programId']) {

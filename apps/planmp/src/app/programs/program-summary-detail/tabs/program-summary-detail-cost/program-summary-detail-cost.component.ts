@@ -13,10 +13,10 @@ export class ProgramSummaryDetailCostComponent implements OnInit {
   }
 
   sortContent(a, b) {
-    if (a.displayOrder < b.displayOrder) {
+    if (a.sortOrder < b.sortOrder) {
       return -1;
     }
-    if (a.displayOrder > b.displayOrder) {
+    if (a.sortOrder > b.sortOrder) {
       return 1;
     }
     return 0;

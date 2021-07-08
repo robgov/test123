@@ -1,4 +1,5 @@
 <div>
-    <H4>{{title}}</H4>
+    <H4 *ngIf="!titleTarget">{{title}}</H4>
+    <a [href]="titleTarget"><H4 *ngIf="titleTarget">{{title}}</H4></a>
     <div>{{content}}</div>
 </div>

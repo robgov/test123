@@ -1,4 +1,4 @@
-<H1>{{content.cost.title}}</H1>
-<div *ngFor="let s of content.cost.sections.sort(sortContent)">
+<H1>{{content.title}}</H1>
+<div *ngFor="let s of content.sections.sort(sortContent)">
     <aedigital-strapi-content [title]="s.title" [content]="s.content"></aedigital-strapi-content>
 </div>

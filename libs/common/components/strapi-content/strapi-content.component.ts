@@ -7,5 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StrapiContentComponent {
   @Input() title: any;
+  @Input() titleTarget: string;
   @Input() content: any;
 }
