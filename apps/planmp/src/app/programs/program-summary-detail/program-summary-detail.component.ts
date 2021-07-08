@@ -13,6 +13,7 @@ import { Store } from '@ngxs/store';
 export class ProgramSummaryDetailComponent implements OnInit {
 
   @Input() program: any;
+  @Input() programDetailData: any;
   FlexConstants = FlexConstants;
   constructor(private router: Router, private store: Store) {}
   programName: number = 0;

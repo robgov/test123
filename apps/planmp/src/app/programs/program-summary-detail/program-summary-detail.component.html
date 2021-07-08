@@ -1,4 +1,4 @@
-<div fxFlex="100" fxLayout="column">
+<div *ngIf="program" fxFlex="100" fxLayout="column">
   <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
     <div
       fxLayout="column"
@@ -95,7 +95,7 @@
         <div></div>
       </mat-tab>
       <mat-tab label="Admission" [attr.data-cy]="'program-summary-detail.admission-tab'">
-        <div></div>
+          <aedigital-program-summary-detail-admission [content]="programDetailData"></aedigital-program-summary-detail-admission>
       </mat-tab>
   </mat-tab-group>
   </div>

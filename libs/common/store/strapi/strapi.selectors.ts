@@ -25,4 +25,11 @@ export class StrapiSelectors {
             state.baseUrl + programData.Applyimage.url
         )
     }
+
+    static getProgramDetailData(programId: number) {
+        return createSelector([StrapiState],(state:StrapiStateModel)=>
+            // state.programDetailData.find(pd=>pd.programId === programId)]
+            state.programDetailData[0]
+        )
+    }
 }

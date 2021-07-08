@@ -248,6 +248,15 @@ export class ProgramState {
     });
   }
 
+  @Action(ProgramActions.SetProgramIDSearchFilter)
+  onSetProgramIDSearchFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramIDSearchFilter
+    ) {
+      ctx.patchState({
+        searchFilters: { ... ctx.getState().searchFilters , programId: action.programId}
+      });
+    }
 
   @Action(ProgramActions.ViewProgram)
   onViewProgram(

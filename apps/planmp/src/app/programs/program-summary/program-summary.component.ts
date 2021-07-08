@@ -3,7 +3,7 @@ import { Component, Input,ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import {
-  ProgramSelectors, ProgramActions,
+  ProgramSelectors, ProgramActions, StrapiSelectors,
 } from '@libs/common/store/store-index';
 import {
   ProgramDto,
@@ -15,6 +15,7 @@ import {
   ProgramSummaryDto,
 } from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'aedigital-program-summary',
@@ -32,11 +33,27 @@ export class ProgramSummaryComponent {
   @Input() programType: ProgramTypeDto;
   @Input() distance: number;
   @Select(ProgramSelectors.getSelectedProgram) SelectedProgram$: Observable<ProgramSummaryDto>;
+  @Select(StrapiSelectors.getProgramDetailData(1)) SelectedProgramDetailData$: Observable<any>;
 
   currentProvider: ProviderDto;
   currentLogo: ProviderLogoDto;
   currentCost = 'XXXXX';
   currentSpecialization: string;
 
+  constructor(private store: Store, private route: ActivatedRoute) {}
+
+  // getSelectedProgramDetailData(program: ProgramDto) {
+  //   this.store.select(StrapiSelectors.getProgramDetailData(program.programId))
+  // }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['programId']) {
+        this.store.dispatch(
+          new ProgramActions.SetProgramIDSearchFilter(+params['programId'])
+        );
+      }
+    });
+  }
 
 }

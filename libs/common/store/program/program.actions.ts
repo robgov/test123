@@ -62,7 +62,7 @@ export namespace ProgramActions {
   //A singular search/filter for a specific programs
   export class SetProgramIDSearchFilter {
     static readonly type = '[Aed Program] Filter Program Search By ID';
-    constructor(public programIDs: number[]) {}
+    constructor(public programId: number) {}
   }
 
   export class SetProgramSearchProviderFilter {

@@ -83,9 +83,10 @@ import { ProgramSearchResultsFilterComponent } from './programs/program-search-r
 import { ProgramSearchSortOptionsSidebarComponent } from './sidebars/program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
 import { ProgramSearchFilterOptionsSidebarComponent } from './sidebars/program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
 import { ProgramCardComponent } from './programs/program-card/program-card.component';
-import { ProgramSummaryDetailComponent } from './program-summary-detail/program-summary-detail.component';
+import { ProgramSummaryDetailComponent } from './programs/program-summary-detail/program-summary-detail.component';
 import { ProviderLocationComponent } from './provider-location/provider-location.component';
 import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
+import { ProgramSummaryDetailAdmissionComponent } from './programs/program-summary-detail/tabs/program-summary-detail-admission/program-summary-detail-admission.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.compo
     MenuSidebarComponent,
     ProgramSummaryDetailComponent,
     ProviderLocationComponent,
+    ProgramSummaryDetailAdmissionComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,8 @@ export class StrapiState {
         console.log('initializing...');
         ctx.dispatch([
             new StrapiActions.GetProgramData(),
-            new StrapiActions.GetLoanData()
+            new StrapiActions.GetLoanData(),
+            new StrapiActions.GetProgramDetailData()
         ]);
         ctx.patchState({
             baseUrl: this.strapiService.urlBase
@@ -50,4 +51,16 @@ export class StrapiState {
             })
         );
     }
+
+    @Action(StrapiActions.GetProgramDetailData)
+    onGetProgramDetailData(ctx: StateContext<StrapiStateModel>, action: StrapiActions.GetProgramDetailData) {
+      return this.strapiService.getProgramDetailData().pipe(
+        tap((data: object[]) => {
+          ctx.patchState({
+            programDetailData: data,
+          });
+        })
+      )
+    }
+
 }
