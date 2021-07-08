@@ -59,6 +59,9 @@ const MATERIAL_MODULES = [
   MatToolbarModule,
 ];
 
+// Common Components
+import { StrapiContentComponent } from '@libs/common/components';
+
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -117,6 +120,7 @@ import { ProgramSummaryDetailAdmissionComponent } from './programs/program-summa
     ProgramSummaryDetailComponent,
     ProviderLocationComponent,
     ProgramSummaryDetailAdmissionComponent,
+    StrapiContentComponent,
   ],
   imports: [
     BrowserModule,
