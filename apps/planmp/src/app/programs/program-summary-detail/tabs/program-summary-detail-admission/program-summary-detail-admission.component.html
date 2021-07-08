@@ -1,5 +1,4 @@
 <H1>{{content.admission.title}}</H1>
 <div *ngFor="let s of content.admission.sections.sort(sortContent)">
     <aedigital-strapi-content [title]="s.title" [content]="s.content"></aedigital-strapi-content>
-    
 </div>

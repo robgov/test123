@@ -141,7 +141,7 @@ export class StrapiService {
           ]
         },
         outcomes:{
-          title: 'Waht outcomes can I expect?',
+          title: 'What outcomes can I expect?',
           content: 'Student Outcomes is a collection and dissemination of information from former students about their post-secondary education and their labour market',
           sections: [
             {

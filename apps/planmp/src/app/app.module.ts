@@ -90,6 +90,9 @@ import { ProgramSummaryDetailComponent } from './programs/program-summary-detail
 import { ProviderLocationComponent } from './provider-location/provider-location.component';
 import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
 import { ProgramSummaryDetailAdmissionComponent } from './programs/program-summary-detail/tabs/program-summary-detail-admission/program-summary-detail-admission.component';
+import { ProgramSummaryDetailCostComponent } from './programs/program-summary-detail/tabs/program-summary-detail-cost/program-summary-detail-cost.component';
+import { ProgramSummaryDetailOccupationsComponent } from './programs/program-summary-detail/tabs/program-summary-detail-occupations/program-summary-detail-occupations.component';
+import { ProgramSummaryDetailOutcomesComponent } from './programs/program-summary-detail/tabs/program-summary-detail-outcomes/program-summary-detail-outcomes.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +124,9 @@ import { ProgramSummaryDetailAdmissionComponent } from './programs/program-summa
     ProviderLocationComponent,
     ProgramSummaryDetailAdmissionComponent,
     StrapiContentComponent,
+    ProgramSummaryDetailCostComponent,
+    ProgramSummaryDetailOccupationsComponent,
+    ProgramSummaryDetailOutcomesComponent,
   ],
   imports: [
     BrowserModule,

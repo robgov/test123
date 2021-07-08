@@ -1,36 +1,26 @@
 <div *ngIf="program" fxFlex="100" fxLayout="column">
   <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
-    <div
-      fxLayout="column"
-      [attr.data-cy]="'program-summary-detail.programName'"
-      class="title"
-      fxFlex="{{ FlexConstants.Column.Large_7 }}"
-    >
+    <div fxLayout="column" [attr.data-cy]="'program-summary-detail.programName'" class="title"
+      fxFlex="{{ FlexConstants.Column.Large_7 }}">
       {{ program.programName }}
     </div>
   </div>
   <div style="height: 10px"></div>
   <div fxLayout="row" fxFlex="100" [attr.data-cy]="'program-summary-detail.providerprogramsummary'">
 
-    {{ program.providerName }} | {{ program.getProgramTermandCredential }} |     <a
-    href="{{ program.websiteUrl }}"
-    style="text-align: center; display: flex; text-decoration: none"
-  >
-    <span>Program page </span>
-    <mat-icon style="height: 18px">open_in_new</mat-icon>
-  </a>
+    {{ program.providerName }} | {{ program.getProgramTermandCredential }} | <a href="{{ program.websiteUrl }}"
+      style="text-align: center; display: flex; text-decoration: none">
+      <span>Program page </span>
+      <mat-icon style="height: 18px">open_in_new</mat-icon>
+    </a>
 
 
   </div>
 
   <div style="height: 10px"></div>
   <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
-    <div
-      fxLayout="column"
-      [attr.data-cy]="'program-summary-detail.providerOverview'"
-      class="paragraph-content"
-      fxFlex="{{ FlexConstants.Column.Large_8 }}"
-    >
+    <div fxLayout="column" [attr.data-cy]="'program-summary-detail.providerOverview'" class="paragraph-content"
+      fxFlex="{{ FlexConstants.Column.Large_8 }}">
       MacEwan University inspires students with a powerful combination of
       academic excellence and personal learning experiences - ours is a
       connected culture that focuses on learner-centred teaching, and on
@@ -53,50 +43,38 @@
 
   <div style="height: 20px"></div>
   <div>
-    <div
-      fxLayout="row"
-      fxLayoutGap="{{ FlexConstants.Gutter.Small }}"
-      fxLayoutAlign="left center"
-
-    >
+    <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Small }}" fxLayoutAlign="left center">
 
       <div fxLayout="column" fxFlex="{{ FlexConstants.Column.Large_3 }}">
-        <button
-          [attr.data-cy]="'program-summary-detail.apply-button'"
-          mat-flat-button
-          class="primary-button"
-        >
+        <button [attr.data-cy]="'program-summary-detail.apply-button'" mat-flat-button class="primary-button">
           Apply to this program
         </button>
       </div>
       <div fxLayout="column" fxFlex="{{ FlexConstants.Column.Large_3 }}">
-        <button
-          [attr.data-cy]="'program-summary-detail.compare-button'"
-          mat-flat-button
-          class="secondary-button"
-        >
+        <button [attr.data-cy]="'program-summary-detail.compare-button'" mat-flat-button class="secondary-button">
           Compare this program
         </button>
       </div>
       <div fxFlex>
 
       </div>
+    </div>
+    <div style="height: 20px"></div>
+    <div>
+      <mat-tab-group>
+        <mat-tab label="Outcomes" [attr.data-cy]="'program-summary-detail.outcomes-tab'">
+          <aedigital-program-summary-detail-outcomes [content]="programDetailData"></aedigital-program-summary-detail-outcomes>
+        </mat-tab>
+        <mat-tab label="Cost" [attr.data-cy]="'program-summary-detail.cost-tab'">
+          <aedigital-program-summary-detail-cost [content]="programDetailData"></aedigital-program-summary-detail-cost>
+        </mat-tab>
+        <mat-tab label="Occupations" [attr.data-cy]="'program-summary-detail.occupations-tab'">
+          <aedigital-program-summary-detail-occupations [content]="programDetailData"></aedigital-program-summary-detail-occupations>
+        </mat-tab>
+        <mat-tab label="Admission" [attr.data-cy]="'program-summary-detail.admission-tab'">
+          <aedigital-program-summary-detail-admission [content]="programDetailData">
+          </aedigital-program-summary-detail-admission>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
-  <div style="height: 20px"></div>
-  <div>
-    <mat-tab-group>
-      <mat-tab label="Outcomes" [attr.data-cy]="'program-summary-detail.outcomes-tab'">
-          <div></div>
-      </mat-tab>
-      <mat-tab label="Cost" [attr.data-cy]="'program-summary-detail.cost-tab'">
-        <div></div>
-      </mat-tab>
-      <mat-tab label="Occupations" [attr.data-cy]="'program-summary-detail.occupations-tab'">
-        <div></div>
-      </mat-tab>
-      <mat-tab label="Admission" [attr.data-cy]="'program-summary-detail.admission-tab'">
-          <aedigital-program-summary-detail-admission [content]="programDetailData"></aedigital-program-summary-detail-admission>
-      </mat-tab>
-  </mat-tab-group>
-  </div>
-</div>
