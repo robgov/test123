@@ -7,4 +7,5 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StrapiContentListComponent {
   @Input() listItems: string[];
+  @Input() content: string;
 }

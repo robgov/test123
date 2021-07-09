@@ -7,4 +7,5 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StrapiContentBulletListComponent {
   @Input() listItems: string[];
+  @Input() content: string;
 }

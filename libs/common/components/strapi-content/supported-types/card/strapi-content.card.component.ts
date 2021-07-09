@@ -8,5 +8,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class StrapiContentCardComponent {
   @Input() title: any;
   @Input() titleTarget: string;
+  @Input() subTitle: string;
   @Input() content: any;
 }

@@ -48,28 +48,112 @@ export class StrapiService {
               },
               {
                 sortOrder: 3,
-                title: 'Regular Admission',
-                content:
-                  'To be evaluated through the office of the University Registrar, applicants must have a minimum overalge average of 65%, with',
+                type: 'bulletlist',
+                content: 'In addition, all applicants must also meet the following admission criteria:',
+                listItems: [
+                  'English Language Proficiency',
+                ],
               },
               {
                 sortOrder: 4,
+                title: 'Regular Admission',
+                content:
+                  'To be evaluated through the office of the University Registrar, applicants must have a minimum overall average of 65%, with no course grade lower than 50%, in the following high school courses:',
+              },
+              {
+                sortOrder: 5,
+                type: 'list',
+                listItems: [
+                  'ELA 30-1',
+                  'Four subjects from Group A, B, C, or D',
+                ],
+              },
+              {
+                sortOrder: 6,
+                type: 'bulletlist',
+                content: 'Notes:',
+                listItems: [
+                  'Applicants are strongly encouraged to present a broad range of subjects in order to benefit from the breadth of learning and to increase flexibility of future program and course choices.',
+                  'A maximum of two Group B subjects may be presented; they must be from different disciplines.',
+                  'A maximum of one Group D subject may be presented. Group D subjects used for admission must be 5-credit or any credit combination of at least 5 credits (e.g., two 3-credit subjects).',
+                ],
+              },
+              {
+                sortOrder: 7,
+                content:
+                  'Applicants with nine or more post-secondary credits must also present a minimum Admission Grade Point Average (AGPA) of 2.0 on a 4.0 scale.',
+              },
+              {
+                sortOrder: 70,
                 title: 'Mature Admission',
                 content:
                   'To be evaluated through the office of the University Registrar, applicants must:',
               },
               {
-                sortOrder: 5,
-                title: 'Previous Post-Secondary Admission',
-                content:
-                  'To be evaluated through the office of the University Registrar, applicants must present a minimum of 24 post-secondary',
+                sortOrder: 71,
+                type: 'bulletlist',
+                listItems: [
+                  'Be 20 years of age or older',
+                  'Have been out of full-time high school at least one year by the beginning of the intake term',
+                ]
               },
               {
-                sortOrder: 6,
-                title: 'Additional Admission Criteria',
-                subtitle: '1. English Language Proficiency',
+                sortOrder: 72,
+                content:'Applicants must also have the following:',
+                type: 'bulletlist',
+                listItems: [
+                  'ELA 30-1 with a minimum grade of 65% (or equivalent)',
+                ]
+              },
+              {
+                sortOrder: 73,
+                content:'OR',
+                type: 'bulletlist',
+                listItems: [
+                  'Six credits of university-level English with no grade less than C-',
+                ]
+              },
+              {
+                sortOrder: 74,
                 content:
-                  'To be evaluated through the office of the University Registrar, applicants must meet an acceptable level of English',
+                  'Applicants with nine or more post-secondary credits must also present a minimum Admission Grade Point Average (AGPA) of 2.0 on a 4.0 scale.',
+              },
+              {
+                sortOrder: 80,
+                title: 'Previous Post-Secondary Admission',
+                content:
+                  'To be evaluated through the Office of the University Registrar, applicants must present a minimum of 24 post-secondary credits with a minimum Admission Grade Point Average (AGPA) of 2.0 on the 4.0 scale and must have completed the required core courses listed under the Regular or Mature Category.',
+              },
+              {
+                sortOrder: 81,
+                content:
+                  'Admission in this category does not imply or guarantee the transfer of any coursework and/or credential unless a block transfer agreement (internal or external) is in effect and published in the Calendar by the Office of the University Registrar. In addition, transfer of coursework does not imply or guarantee that an applicant will be admitted.',
+              },
+              {
+                sortOrder: 90,
+                title: 'Additional Admission Criteria',
+                subTitle: '1. English Language Proficiency',
+                content:
+                  'To be evaluated through the Office of the University Registrar, all applicants must meet an acceptable level of English language proficiency. We will require official documents such as:',
+              },
+              {
+                sortOrder: 91,
+                type: 'bulletlist',
+                listItems: [
+                  'High school transcripts',
+                  'Post-secondary transcripts',
+                  'Proof of successful completion of standardized language evaluation',
+                ]
+              },
+              {
+                sortOrder: 92,
+                content:
+                  'Full details are available in MacEwan University’s academic calendar or online at',
+              },
+              {
+                sortOrder: 93,
+                title: 'MacEwan.ca/ELP',
+                titleTarget: 'http://www.macewan.ca/elp'
               },
             ],
           },
