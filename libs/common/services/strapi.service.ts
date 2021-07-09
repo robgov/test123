@@ -32,13 +32,13 @@ export class StrapiService {
             content: '',
             sections: [
               {
-                sortOrder: 1,
+                sortOrder: 11,
                 title: 'Categories of Admission',
                 content:
                   'Applicants may be admitted through one of the following:',
               },
               {
-                sortOrder: 2,
+                sortOrder: 12,
                 type: 'list',
                 listItems: [
                   'Regular Admission',
@@ -47,7 +47,7 @@ export class StrapiService {
                 ],
               },
               {
-                sortOrder: 3,
+                sortOrder: 13,
                 type: 'bulletlist',
                 content: 'In addition, all applicants must also meet the following admission criteria:',
                 listItems: [
@@ -55,13 +55,13 @@ export class StrapiService {
                 ],
               },
               {
-                sortOrder: 4,
+                sortOrder: 20,
                 title: 'Regular Admission',
                 content:
                   'To be evaluated through the office of the University Registrar, applicants must have a minimum overall average of 65%, with no course grade lower than 50%, in the following high school courses:',
               },
               {
-                sortOrder: 5,
+                sortOrder: 21,
                 type: 'list',
                 listItems: [
                   'ELA 30-1',
@@ -69,7 +69,7 @@ export class StrapiService {
                 ],
               },
               {
-                sortOrder: 6,
+                sortOrder: 22,
                 type: 'bulletlist',
                 content: 'Notes:',
                 listItems: [
@@ -79,18 +79,18 @@ export class StrapiService {
                 ],
               },
               {
-                sortOrder: 7,
+                sortOrder: 23,
                 content:
                   'Applicants with nine or more post-secondary credits must also present a minimum Admission Grade Point Average (AGPA) of 2.0 on a 4.0 scale.',
               },
               {
-                sortOrder: 70,
+                sortOrder: 30,
                 title: 'Mature Admission',
                 content:
                   'To be evaluated through the office of the University Registrar, applicants must:',
               },
               {
-                sortOrder: 71,
+                sortOrder: 31,
                 type: 'bulletlist',
                 listItems: [
                   'Be 20 years of age or older',
@@ -98,7 +98,7 @@ export class StrapiService {
                 ]
               },
               {
-                sortOrder: 72,
+                sortOrder: 32,
                 content:'Applicants must also have the following:',
                 type: 'bulletlist',
                 listItems: [
@@ -106,7 +106,7 @@ export class StrapiService {
                 ]
               },
               {
-                sortOrder: 73,
+                sortOrder: 33,
                 content:'OR',
                 type: 'bulletlist',
                 listItems: [
@@ -114,30 +114,30 @@ export class StrapiService {
                 ]
               },
               {
-                sortOrder: 74,
+                sortOrder: 34,
                 content:
                   'Applicants with nine or more post-secondary credits must also present a minimum Admission Grade Point Average (AGPA) of 2.0 on a 4.0 scale.',
               },
               {
-                sortOrder: 80,
+                sortOrder: 40,
                 title: 'Previous Post-Secondary Admission',
                 content:
                   'To be evaluated through the Office of the University Registrar, applicants must present a minimum of 24 post-secondary credits with a minimum Admission Grade Point Average (AGPA) of 2.0 on the 4.0 scale and must have completed the required core courses listed under the Regular or Mature Category.',
               },
               {
-                sortOrder: 81,
+                sortOrder: 41,
                 content:
                   'Admission in this category does not imply or guarantee the transfer of any coursework and/or credential unless a block transfer agreement (internal or external) is in effect and published in the Calendar by the Office of the University Registrar. In addition, transfer of coursework does not imply or guarantee that an applicant will be admitted.',
               },
               {
-                sortOrder: 90,
+                sortOrder: 50,
                 title: 'Additional Admission Criteria',
                 subTitle: '1. English Language Proficiency',
                 content:
                   'To be evaluated through the Office of the University Registrar, all applicants must meet an acceptable level of English language proficiency. We will require official documents such as:',
               },
               {
-                sortOrder: 91,
+                sortOrder: 51,
                 type: 'bulletlist',
                 listItems: [
                   'High school transcripts',
@@ -146,12 +146,12 @@ export class StrapiService {
                 ]
               },
               {
-                sortOrder: 92,
+                sortOrder: 52,
                 content:
                   'Full details are available in MacEwan University’s academic calendar or online at',
               },
               {
-                sortOrder: 93,
+                sortOrder: 53,
                 title: 'MacEwan.ca/ELP',
                 titleTarget: 'http://www.macewan.ca/elp'
               },
@@ -214,34 +214,63 @@ export class StrapiService {
             content: '',
             sections: [
               {
-                sortOrder: 1,
+                sortOrder: 11,
                 title: 'How much does it cost?',
                 content:
-                  'Program costs include tuition, books/supplies, and mandatory fees, and student aid/FLS eligibility Program costs',
+                  'Program costs include tuition, books/supplies, and mandatory fees, and student aid/FLS eligibility Program costs are shown on a per year basis as well as the expected total cost based on the number of years defined in the degree.',
               },
               {
-                sortOrder: 2,
+                sortOrder: 12,
                 title: 'Tuition Increases',
                 content:
-                  'Tuition fees are reviewed annually by a Board of Governors. Current regulation caps tuition increases at 7% so',
+                  'Tuition fees are reviewed annually by a Board of Governors. Current regulation caps tuition increases at 7% so year after year tuition may not remain the same. Below shows the potential range the tuition may increase, from no increase up to the maximum 7%; fees are subject to change every year.',
               },
               {
-                sortOrder: 3,
+                sortOrder: 13,
                 title: 'Mandatory Fees',
                 content:
                   'Campus athletic and recreation Fee: $183.20',
               },
               {
-                sortOrder: 4,
+                sortOrder: 14,
+                content:
+                  'Universal transit pass (UPass): $310 - Check eligibility here.',
+              },
+              {
+                sortOrder: 15,
+                content:
+                  'Student support fee: $150 Student technology fee: $150',
+              },
+              {
+                sortOrder: 15,
+                content:
+                  'Student technology fee: $150',
+              },
+              {
+                sortOrder: 21,
                 title: 'Books, Supplies & Instrument Fees',
                 content:
                   'Every course has required reeding and textbooks; they cost can vary greatly for each course or program.',
+                listItems:[
+                  'Books and supplies are approximately $1,000 - $2,000 per full-time year.',
+                  'These are anticipated costs to participate in the program for purchasing things like text books or lab equipment etc.',
+                  'This cost amount is used by student aid to determine amounts students may need.'
+                   
+                ]
               },
               {
-                sortOrder: 5,
-                title: 'Student Aid',
+                sortOrder: 22,
                 content:
-                  'This program is eligible for full-time post-secondary assistance by Alberta Student Aid for the funding year',
+                  '* Tuition, fees, books and supply costs are subject to change.',
+              },
+              {
+                sortOrder: 30,
+                title: 'Student Aid',
+              },
+              {
+                sortOrder: 31,
+                content:
+                  'This program is eligible for full-time post-secondary assistance by Alberta Student Aid for the funding year 2021/08/01 to 2022/07/31*.',
               },
             ]
           },
@@ -254,8 +283,11 @@ export class StrapiService {
               {
                 sortOrder: 1,
                 title: 'Annual Median Income',
+                type: 'MedianIncome',
                 content:
                   'The median (midpoint) annual income of graduates',
+                value: '$52,000'
+                
               },
               {
                 sortOrder: 2,

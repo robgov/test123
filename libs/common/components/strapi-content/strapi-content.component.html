@@ -1,5 +1,6 @@
 <div *ngIf="section">
-    <aedigital-strapi-content-card *ngIf="section.type==='normal' || !section.type" [title]="section.title"  [titleTarget]="section.titleTarget" [subTitle]="section.subTitle" [content]="section.content"></aedigital-strapi-content-card>
+    <aedigital-strapi-content-text *ngIf="section.type==='normal' || !section.type" [title]="section.title"  [titleTarget]="section.titleTarget" [subTitle]="section.subTitle" [content]="section.content"></aedigital-strapi-content-text>
+    <aedigital-strapi-content-card *ngIf="section.type==='card' || !section.type" [title]="section.title"  [titleTarget]="section.titleTarget" [subTitle]="section.subTitle" [content]="section.content"></aedigital-strapi-content-card>
     <aedigital-strapi-content-list *ngIf="section.type==='list'" [listItems]="section.listItems"></aedigital-strapi-content-list>
     <aedigital-strapi-content-bulletlist *ngIf="section.type==='bulletlist'" [content]="section.content" [listItems]="section.listItems"></aedigital-strapi-content-bulletlist>
 </div>

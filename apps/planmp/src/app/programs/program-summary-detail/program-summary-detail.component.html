@@ -62,6 +62,10 @@
     <div style="height: 20px"></div>
     <div>
       <mat-tab-group>
+        <mat-tab label="Admission" [attr.data-cy]="'program-summary-detail.admission-tab'">
+          <aedigital-program-summary-detail-admission [content]="programDetailData.tabs[0]">
+          </aedigital-program-summary-detail-admission>
+        </mat-tab>
         <mat-tab label="Outcomes" [attr.data-cy]="'program-summary-detail.outcomes-tab'">
           <aedigital-program-summary-detail-outcomes [content]="programDetailData.tabs[3]"></aedigital-program-summary-detail-outcomes>
         </mat-tab>
@@ -70,10 +74,6 @@
         </mat-tab>
         <mat-tab label="Occupations" [attr.data-cy]="'program-summary-detail.occupations-tab'">
           <aedigital-program-summary-detail-occupations [content]="programDetailData.tabs[1]"></aedigital-program-summary-detail-occupations>
-        </mat-tab>
-        <mat-tab label="Admission" [attr.data-cy]="'program-summary-detail.admission-tab'">
-          <aedigital-program-summary-detail-admission [content]="programDetailData.tabs[0]">
-          </aedigital-program-summary-detail-admission>
         </mat-tab>
       </mat-tab-group>
     </div>
