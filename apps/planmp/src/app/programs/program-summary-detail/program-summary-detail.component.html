@@ -8,19 +8,17 @@
   <div style="height: 10px"></div>
   <div fxLayout="row" fxFlex="100" [attr.data-cy]="'program-summary-detail.providerprogramsummary'">
 
-    {{ program.providerName }} | {{ program.getProgramTermandCredential }} | <a href="{{ program.websiteUrl }}"
-      style="text-align: center; display: flex; text-decoration: none">
+    {{ program.providerName }} | {{ program.getProgramTermandCredential }} | <a href="http://{{ program.websiteUrl }}"
+      style="text-align: center; display: flex; text-decoration: none" target="_blank">
       <span>Program page </span>
       <mat-icon style="height: 18px">open_in_new</mat-icon>
     </a>
-
-
   </div>
 
   <div style="height: 10px"></div>
   <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
     <div fxLayout="column" [attr.data-cy]="'program-summary-detail.providerOverview'" class="paragraph-content"
-      fxFlex="{{ FlexConstants.Column.Large_8 }}">
+      [fxFlex]="FlexConstants.Column.Large_8">
       MacEwan University inspires students with a powerful combination of
       academic excellence and personal learning experiences - ours is a
       connected culture that focuses on learner-centred teaching, and on
@@ -36,7 +34,7 @@
       arts and communications; health and community studies; liberal arts and
       sciences; and business.
     </div>
-    <div class="red-border">
+    <div>
       <ae-provider-location></ae-provider-location>
     </div>
   </div>

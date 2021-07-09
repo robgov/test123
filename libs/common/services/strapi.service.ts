@@ -24,10 +24,10 @@ export class StrapiService {
     results.push(
       new Object({
         programId: 1,
-        tabs:[
+        tabs: [
           {
-            tab:'Admission',
-            sortOrder:1,
+            tab: 'Admission',
+            sortOrder: 1,
             title: 'How do I get in?',
             content: '',
             sections: [
@@ -43,16 +43,15 @@ export class StrapiService {
                 listItems: [
                   'Regular Admission',
                   'Mature Admission',
-                  'Previous Post-Secondary Admission'
+                  'Previous Post-Secondary Admission',
                 ],
               },
               {
                 sortOrder: 13,
                 type: 'bulletlist',
-                content: 'In addition, all applicants must also meet the following admission criteria:',
-                listItems: [
-                  'English Language Proficiency',
-                ],
+                content:
+                  'In addition, all applicants must also meet the following admission criteria:',
+                listItems: ['English Language Proficiency'],
               },
               {
                 sortOrder: 20,
@@ -95,23 +94,23 @@ export class StrapiService {
                 listItems: [
                   'Be 20 years of age or older',
                   'Have been out of full-time high school at least one year by the beginning of the intake term',
-                ]
+                ],
               },
               {
                 sortOrder: 32,
-                content:'Applicants must also have the following:',
+                content: 'Applicants must also have the following:',
                 type: 'bulletlist',
                 listItems: [
                   'ELA 30-1 with a minimum grade of 65% (or equivalent)',
-                ]
+                ],
               },
               {
                 sortOrder: 33,
-                content:'OR',
+                content: 'OR',
                 type: 'bulletlist',
                 listItems: [
                   'Six credits of university-level English with no grade less than C-',
-                ]
+                ],
               },
               {
                 sortOrder: 34,
@@ -143,7 +142,7 @@ export class StrapiService {
                   'High school transcripts',
                   'Post-secondary transcripts',
                   'Proof of successful completion of standardized language evaluation',
-                ]
+                ],
               },
               {
                 sortOrder: 52,
@@ -153,41 +152,43 @@ export class StrapiService {
               {
                 sortOrder: 53,
                 title: 'MacEwan.ca/ELP',
-                titleTarget: 'http://www.macewan.ca/elp'
+                titleTarget: 'http://www.macewan.ca/elp',
               },
             ],
           },
           {
-            tab:'Occupations',
-            sortOrder:2,
+            tab: 'Occupations',
+            sortOrder: 2,
             title: 'What are the most popular occupations?',
             content:
-            'Based on data linkage between CIP codes and top occupations held by graduates of that field, as identified in teh 2011 National Household Survey. Data is based on findings at the national level.',
+              'Based on data linkage between CIP codes and top occupations held by graduates of that field, as identified in teh 2011 National Household Survey. Data is based on findings at the national level.',
             sections: [
               {
                 sortOrder: 1,
                 title:
                   'Professional occupations in advertising, marketing and public relations',
                 titleTarget: 'http://www.google.com',
+                type: 'card',
                 content:
                   'People in this group have professional occupations in advertising, marketing and public',
               },
               {
                 sortOrder: 2,
-                title:
-                  'Advertising, marketing and public relations managers',
+                title: 'Advertising, marketing and public relations managers',
+                type: 'card',
                 content:
                   'Advertising, marketing and public relations managers plan, organize, direct, control and',
               },
               {
                 sortOrder: 3,
-                title:
-                  'Journalist',
+                type: 'card',
+                title: 'Journalist',
                 content:
                   'Journalists research, investigate, interpret and communicate news and public affairs through',
               },
               {
                 sortOrder: 4,
+                type: 'card',
                 title:
                   'Business development officers and marketing researchers and consultants',
                 content:
@@ -195,27 +196,27 @@ export class StrapiService {
               },
               {
                 sortOrder: 5,
-                title:
-                  'Graphic designers and illustrators',
+                type: 'card',
+                title: 'Graphic designers and illustrators',
                 content:
                   'Graphic designers and illustrators conceptualize and create graphic art and visual',
               },
               {
                 sortOrder: 6,
-                content:
-                  'Source: ESDC NHS Concordance Table',
+                content: 'Source: ESDC NHS Concordance Table',
               },
             ],
           },
           {
-            tab:'Cost',
-            sortOrder:3,
-            title:'',
+            tab: 'Cost',
+            sortOrder: 3,
+            title: '',
             content: '',
             sections: [
               {
                 sortOrder: 11,
                 title: 'How much does it cost?',
+                type: 'text',
                 content:
                   'Program costs include tuition, books/supplies, and mandatory fees, and student aid/FLS eligibility Program costs are shown on a per year basis as well as the expected total cost based on the number of years defined in the degree.',
               },
@@ -228,8 +229,7 @@ export class StrapiService {
               {
                 sortOrder: 13,
                 title: 'Mandatory Fees',
-                content:
-                  'Campus athletic and recreation Fee: $183.20',
+                content: 'Campus athletic and recreation Fee: $183.20',
               },
               {
                 sortOrder: 14,
@@ -243,20 +243,18 @@ export class StrapiService {
               },
               {
                 sortOrder: 15,
-                content:
-                  'Student technology fee: $150',
+                content: 'Student technology fee: $150',
               },
               {
                 sortOrder: 21,
                 title: 'Books, Supplies & Instrument Fees',
                 content:
                   'Every course has required reeding and textbooks; they cost can vary greatly for each course or program.',
-                listItems:[
+                listItems: [
                   'Books and supplies are approximately $1,000 - $2,000 per full-time year.',
                   'These are anticipated costs to participate in the program for purchasing things like text books or lab equipment etc.',
-                  'This cost amount is used by student aid to determine amounts students may need.'
-                   
-                ]
+                  'This cost amount is used by student aid to determine amounts students may need.',
+                ],
               },
               {
                 sortOrder: 22,
@@ -272,43 +270,60 @@ export class StrapiService {
                 content:
                   'This program is eligible for full-time post-secondary assistance by Alberta Student Aid for the funding year 2021/08/01 to 2022/07/31*.',
               },
-            ]
+            ],
           },
           {
-            tab:'Outcomes',
-            sortOrder:4,
+            tab: 'Outcomes',
+            sortOrder: 4,
             title: 'What outcomes can I expect?',
-            content: 'Student Outcomes is a collection and dissemination of information from former students about their post-secondary education and their labour market',
+            content:
+              'Student Outcomes is a collection and dissemination of information from former students about their post-secondary education and their labour market',
             sections: [
               {
-                sortOrder: 1,
-                title: 'Annual Median Income',
-                type: 'MedianIncome',
-                content:
-                  'The median (midpoint) annual income of graduates',
-                value: '$52,000'
-                
+                type: 'small-card-list',
+                listItems: [
+                  {
+                    sortOrder: 1,
+                    title: 'Annual Median Income',
+                    type: 'small-card',
+                    content: 'The median (midpoint) annual income of graduates',
+                    value: '$52,000',
+                    footer: 'Source: Graduate Outcomes Survey 2018',
+                    icon: 'attach_money',
+                  },
+                  {
+                    sortOrder: 2,
+                    title: 'Avg Employment Rate',
+                    type: 'small-card',
+                    content: 'The percentage of graduates who were employed',
+                    value: '93.0%',
+                    footer: 'Source: Graduate Outcomes Survey 2018',
+                    icon: 'groups',
+                  },
+                  {
+                    sortOrder: 3,
+                    title: 'Job Relatedness Rate (Skills and Abilities)',
+                    type: 'small-card',
+                    content:
+                      'The percentage of graduates who thought their current',
+                    value: '97.4%',
+                    footer: 'Source: Graduate Outcomes Survey 2018',
+                    icon: 'playlist_add_check',
+                  },
+                  {
+                    sortOrder: 4,
+                    title: 'Time to Full Employment (Months)',
+                    type: 'small-card',
+                    content:
+                      'The Median number of months after graduation that it took',
+                    value: '3.0',
+                    footer: 'Source: Graduate Outcomes Survey 2018',
+                    icon: 'badge',
+                  },
+                ],
               },
-              {
-                sortOrder: 2,
-                title: 'Avg Employment Rate',
-                content:
-                  'The percentage of graduates who were employed',
-              },
-              {
-                sortOrder: 3,
-                title: 'Job Relatedness Rate (Skills and Abilities)',
-                content:
-                  'The percentage of graduates who thought their current',
-              },
-              {
-                sortOrder: 4,
-                title: 'Time to Full Employment (Months)',
-                content:
-                  'The Median number of months after graduation that it took',
-              },
-            ]
-          }
+            ],
+          },
         ],
       })
     );
