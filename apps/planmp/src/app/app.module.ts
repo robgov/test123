@@ -61,6 +61,7 @@ const MATERIAL_MODULES = [
 
 // Common Components
 import { StrapiContentComponent } from '@libs/common/components';
+import { StrapiContentCardComponent, StrapiContentListComponent, StrapiContentBulletListComponent } from '@libs/common/components/strapi-content/supported-types';
 
 // Components
 import { AppComponent } from './app.component';
@@ -124,6 +125,9 @@ import { ProgramSummaryDetailOutcomesComponent } from './programs/program-summar
     ProviderLocationComponent,
     ProgramSummaryDetailAdmissionComponent,
     StrapiContentComponent,
+    StrapiContentCardComponent, 
+    StrapiContentListComponent, 
+    StrapiContentBulletListComponent,
     ProgramSummaryDetailCostComponent,
     ProgramSummaryDetailOccupationsComponent,
     ProgramSummaryDetailOutcomesComponent,

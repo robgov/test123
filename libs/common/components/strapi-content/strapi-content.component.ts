@@ -6,8 +6,5 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./strapi-content.component.scss'],
 })
 export class StrapiContentComponent {
-  @Input() title: any;
-  @Input() titleTarget: string;
-  @Input() content: any;
-  @Input() type = 'normal';
+  @Input() section: any;
 }

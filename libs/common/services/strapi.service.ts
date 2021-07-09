@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
+import { ProgramSummaryDetailAdmissionComponent } from '@planmp/programs/program-summary-detail/tabs/program-summary-detail-admission/program-summary-detail-admission.component';
 
 @Injectable({
   providedIn: 'root',
@@ -38,24 +39,33 @@ export class StrapiService {
               },
               {
                 sortOrder: 2,
+                type: 'list',
+                listItems: [
+                  'Regular Admission',
+                  'Mature Admission',
+                  'Previous Post-Secondary Admission'
+                ],
+              },
+              {
+                sortOrder: 3,
                 title: 'Regular Admission',
                 content:
                   'To be evaluated through the office of the University Registrar, applicants must have a minimum overalge average of 65%, with',
               },
               {
-                sortOrder: 3,
+                sortOrder: 4,
                 title: 'Mature Admission',
                 content:
                   'To be evaluated through the office of the University Registrar, applicants must:',
               },
               {
-                sortOrder: 4,
+                sortOrder: 5,
                 title: 'Previous Post-Secondary Admission',
                 content:
                   'To be evaluated through the office of the University Registrar, applicants must present a minimum of 24 post-secondary',
               },
               {
-                sortOrder: 5,
+                sortOrder: 6,
                 title: 'Additional Admission Criteria',
                 subtitle: '1. English Language Proficiency',
                 content:

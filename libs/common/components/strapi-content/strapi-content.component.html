@@ -1,5 +1,5 @@
-<div>
-    <H4 *ngIf="!titleTarget">{{title}}</H4>
-    <a [href]="titleTarget"><H4 *ngIf="titleTarget">{{title}}</H4></a>
-    <div>{{content}}</div>
+<div *ngIf="section">
+    <aedigital-strapi-content-card *ngIf="section.type==='normal' || !section.type" [title]="section.title"  [titleTarget]="section.titleTarget" [content]="section.content"></aedigital-strapi-content-card>
+    <aedigital-strapi-content-list *ngIf="section.type==='list'" [listItems]="section.listItems"></aedigital-strapi-content-list>
+    <aedigital-strapi-content-bulletlist *ngIf="section.type==='bulletlist'" [listItems]="section.listItems"></aedigital-strapi-content-bulletlist>
 </div>
