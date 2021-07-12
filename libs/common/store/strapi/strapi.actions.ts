@@ -9,5 +9,11 @@ export namespace StrapiActions {
 
   export class GetProgramDetailData {
     static readonly type = '[Aed Strapi] Get Program Detail Data';
+    constructor() {}
+  }
+
+  export class GetProgramDetailTabData {
+    static readonly type = '[Aed Strapi] Get Program Detail Tab Data';
+    constructor(public tabId: number) {}
   }
 }

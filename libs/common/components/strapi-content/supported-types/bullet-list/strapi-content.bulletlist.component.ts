@@ -6,6 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./strapi-content.bulletlist.component.scss'],
 })
 export class StrapiContentBulletListComponent {
-  @Input() listItems: string[];
-  @Input() content: string;
+  @Input() section: any;
+
+  getListItems(){
+    if (!this.section.content) return '';
+    return this.section.content.split('\n');
+  }
 }

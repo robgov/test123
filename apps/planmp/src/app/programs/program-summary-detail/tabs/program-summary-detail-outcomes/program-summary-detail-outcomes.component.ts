@@ -13,12 +13,17 @@ export class ProgramSummaryDetailOutcomesComponent implements OnInit {
   }
 
   sortContent(a, b) {
-    if (a.sortOrder < b.sortOrder) {
+    if (a.sort < b.sort) {
       return -1;
     }
-    if (a.sortOrder > b.sortOrder) {
+    if (a.sort > b.sort) {
       return 1;
     }
     return 0;
+  }
+
+  getSmallCardSections() {
+    var results =  this.content.sections.filter(s=>s.type==='smallcard');
+    return results;
   }
 }

@@ -12,10 +12,10 @@ export class ProgramSummaryDetailAdmissionComponent implements OnInit {
   ngOnInit(): void {}
 
   sortContent(a, b) {
-    if (a.sortOrder < b.sortOrder) {
+    if (a.sort < b.sort) {
       return -1;
     }
-    if (a.sortOrder > b.sortOrder) {
+    if (a.sort > b.sort) {
       return 1;
     }
     return 0;

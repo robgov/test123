@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { ProgramSummaryDetailAdmissionComponent } from '@planmp/programs/program-summary-detail/tabs/program-summary-detail-admission/program-summary-detail-admission.component';
+import { StrapiProgramDto, StrapiProgramTabDto } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StrapiService {
-  public urlBase = 'http://aestrapi-dev.eastus.cloudapp.azure.com:1337';
+  public urlBase = 'http://l-638947.goa.ds.gov.ab.ca:1337';
 
   constructor(public http: HttpClient) {}
 
@@ -19,7 +20,17 @@ export class StrapiService {
     return this.http.get(this.urlBase + '/ae-loanapplies');
   }
 
-  public getProgramDetailData(): Observable<any[]> {
+  public getProgramDetailData(programId: number): Observable<StrapiProgramDto> {
+    programId = 1852;
+    
+    return this.http.get(this.urlBase + "/programs/" + programId) as Observable<StrapiProgramDto>;
+  }
+
+  public getProgramDetailTabData(): Observable<StrapiProgramTabDto> {
+    return this.http.get(this.urlBase + "/program-tabs") as Observable<StrapiProgramTabDto>;
+  }
+
+  public getProgramDetailData2(): Observable<any[]> {
     const results = new Array<object>();
     results.push(
       new Object({

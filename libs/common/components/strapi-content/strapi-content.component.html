@@ -1,12 +1,8 @@
-<!-- <div *ngIf="section && section.sections">
-    <div *ngFor="let s of section.sections">
-        <aedigital-strapi-content [section]="s" ></aedigital-strapi-content>
-    </div>
-</div> -->
-<div *ngIf="section && !section.sections">
-    <aedigital-strapi-content-text *ngIf="section.type==='normal' || !section.type" [title]="section.title"  [titleTarget]="section.titleTarget" [subTitle]="section.subTitle" [content]="section.content"></aedigital-strapi-content-text>
-    <aedigital-strapi-content-card *ngIf="section.type==='card'" [title]="section.title"  [titleTarget]="section.titleTarget" [subTitle]="section.subTitle" [content]="section.content"></aedigital-strapi-content-card>
-    <aedigital-strapi-content-list *ngIf="section.type==='list'" [listItems]="section.listItems"></aedigital-strapi-content-list>
-    <aedigital-strapi-content-bulletlist *ngIf="section.type==='bulletlist'" [content]="section.content" [listItems]="section.listItems"></aedigital-strapi-content-bulletlist>
-    <aedigital-strapi-content-small-card-list *ngIf="section.type==='small-card-list'" [content]="section.content" [listItems]="section.listItems"></aedigital-strapi-content-small-card-list>
+<div *ngIf="section && !section.sections" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="" fxLayoutGap="16px">
+    <aedigital-strapi-content-text *ngIf="section.type==='content' || !section.type" [section]="section"></aedigital-strapi-content-text>
+    <aedigital-strapi-content-card fxFlex="100" *ngIf="section.type==='card'" [section]="section"></aedigital-strapi-content-card>
+    <aedigital-strapi-content-list *ngIf="section.type==='list'" [section]="section" ></aedigital-strapi-content-list>
+    <aedigital-strapi-content-bulletlist *ngIf="section.type==='bulletlist'" [section]="section"></aedigital-strapi-content-bulletlist>
+    <!-- <aedigital-strapi-content-small-card-list *ngIf="section.type==='small-card-list'" [content]="section.content" [listItems]="section.listItems"></aedigital-strapi-content-small-card-list> -->
+    <!-- <aedigital-strapi-content-small-card fxFlex="30%" *ngIf="section.type==='smallcard'" [section]="section"></aedigital-strapi-content-small-card> -->
 </div>

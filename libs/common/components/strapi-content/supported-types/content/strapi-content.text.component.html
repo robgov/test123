@@ -1,0 +1,6 @@
+<div>
+    <H1 *ngIf="!section.Titletarget">{{section.title}}</H1>
+    <a [href]="section.Titletarget" target="_blank"><H4 *ngIf="section.Titletarget">{{section.title}}</H4></a>
+    <H5 *ngIf="section.subtitle">{{section.subtitle}}</H5>
+    <div>{{section.content}}</div>
+</div>

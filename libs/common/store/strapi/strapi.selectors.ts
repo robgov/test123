@@ -28,8 +28,9 @@ export class StrapiSelectors {
 
     static getProgramDetailData(programId: number) {
         return createSelector([StrapiState],(state:StrapiStateModel)=>
-            // state.programDetailData.find(pd=>pd.programId === programId)]
+            //state.programDetailData.find(pd=>pd.programId === programId)]
             state.programDetailData[0]
         )
     }
+
 }

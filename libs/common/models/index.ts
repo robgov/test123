@@ -32,3 +32,4 @@ export * from './specialization-cost-request';
 export * from './specialization-dto';
 export * from './specialization-request';
 export * from './specialization-yearly-cost-dto';
+export * from './strapi';

@@ -1,4 +1,5 @@
-<div>{{content}}</div>
+
 <ol>
-    <li *ngFor="let item of listItems">{{item}}</li>
+    <li *ngFor="let item of getListItems()">{{item}}</li>
 </ol>
+<div *ngIf="section.footer">{{section.footer}}</div>

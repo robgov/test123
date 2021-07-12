@@ -1,6 +1,6 @@
 <mat-card>
-    <mat-card-subtitle *ngIf="!titleTarget">{{title}}</mat-card-subtitle>
-    <a [href]="titleTarget"><mat-card-subtitle *ngIf="titleTarget">{{title}}</mat-card-subtitle></a>
-    <H6 *ngIf="subTitle">{{subTitle}}</H6>
-    <mat-card-content>{{content}}</mat-card-content>
+    <mat-card-subtitle *ngIf="!section.titletarget">{{section.title}}</mat-card-subtitle>
+    <a [href]="section.titletarget"><mat-card-subtitle *ngIf="section.titletarget">{{section.title}}</mat-card-subtitle></a>
+    <H6 *ngIf="section.subTitle">{{section.subTitle}}</H6>
+    <mat-card-content>{{section.content}}</mat-card-content>
 </mat-card>
