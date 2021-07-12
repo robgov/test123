@@ -13,6 +13,7 @@ import {
   ProviderAddressRequest,
   ProviderWebsiteRequest,
   ProviderAddressDto,
+  ProviderPublicationDto,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -37,6 +38,7 @@ export class ProviderState {
       new ProviderActions.GetProviderLogos(),
       new ProviderActions.GetProviderWebsites(),
       new ProviderActions.GetProviderAddresses(),
+      new ProviderActions.GetProviderPublications(),
     ]);
   }
 
@@ -63,6 +65,20 @@ export class ProviderState {
       tap((data: ProviderLogoDto[]) => {
         ctx.patchState({
           providerLogos: data,
+        });
+      })
+    );
+  }
+
+  @Action(ProviderActions.GetProviderPublications)
+  onGetProviderPublications(
+    ctx: StateContext<ProviderStateModel>,
+    action: ProviderActions.GetProviderPublications
+  ) {
+    return this.providerService.getProviderPublications().pipe(
+      tap((data: ProviderPublicationDto[]) => {
+        ctx.patchState({
+          providerPublications: data,
         });
       })
     );

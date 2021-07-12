@@ -94,5 +94,14 @@ namespace ProviderApi.Controllers
     {
       return _mapper.Map<List<VwAlbertaPsiprovider>, List<ProviderDto>>(_context.VwAlbertaPsiproviders.ToList()).OrderBy(x => x.ProviderName);
     }
+
+    [HttpGet("GetProviderPublications")]
+    [SwaggerOperation("GetProviderPublications")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<ProviderPublicationDto> GetProviderPublications()
+    {
+      return _mapper.Map<List<VwProviderPublication>, List<ProviderPublicationDto>>(_context.VwProviderPublications.ToList());
+    }
   }
 }

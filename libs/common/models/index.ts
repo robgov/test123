@@ -23,6 +23,7 @@ export * from './provider-dto';
 export * from './provider-logo-dto';
 export * from './provider-logo-request';
 export * from './provider-program-request';
+export * from './provider-publication-dto';
 export * from './provider-website-dto';
 export * from './provider-website-request';
 export * from './psi-specialization-count-by-category-dto';

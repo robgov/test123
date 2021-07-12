@@ -5,4 +5,9 @@
     <Configurations>Debug;Release;typewriter</Configurations>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\..\libs\common\models\provider-publication-dto.ts" Link="provider-publication-dto.ts" />
+    <None Include="..\..\..\libs\common\services\provider.service.ts" Link="provider.service.ts" />
+  </ItemGroup>
+
 </Project>

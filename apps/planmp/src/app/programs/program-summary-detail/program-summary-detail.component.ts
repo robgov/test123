@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProgramSummaryDto} from '@libs/common/models';
+import { ProviderPublicationDto} from '@libs/common/models';
 import { FlexConstants } from '@libs/FlexConstants';
 import { Store } from '@ngxs/store';
 
@@ -14,6 +14,7 @@ export class ProgramSummaryDetailComponent implements OnInit {
 
   @Input() program: any;
   @Input() programDetailData: any;
+  @Input() providerPublications: ProviderPublicationDto[];
   FlexConstants = FlexConstants;
   constructor(private router: Router, private store: Store) {}
   programName: number = 0;

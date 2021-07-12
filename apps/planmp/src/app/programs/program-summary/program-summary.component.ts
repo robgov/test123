@@ -3,7 +3,7 @@ import { Component, Input,ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import {
-  ProgramSelectors, ProgramActions, StrapiSelectors,
+  ProgramSelectors, ProgramActions, StrapiSelectors, ProviderSelectors,
 } from '@libs/common/store/store-index';
 import {
   ProgramDto,
@@ -24,27 +24,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProgramSummaryComponent {
   FlexConstants = FlexConstants;
-  @Input() programSummary: ProgramSummaryDto;
-  @Input() program: ProgramDto;
-  @Input() programProvider: ProviderDto;
-  @Input() programSpecialization: SpecializationDto;
-  @Input() specializationCosts: SpecializationCostDto[];
-  @Input() providerLogo: ProviderLogoDto;
-  @Input() programType: ProgramTypeDto;
-  @Input() distance: number;
-  @Select(ProgramSelectors.getSelectedProgram) SelectedProgram$: Observable<ProgramSummaryDto>;
-  @Select(StrapiSelectors.getProgramDetailData(1)) SelectedProgramDetailData$: Observable<any>;
+  @Select(ProgramSelectors.getSelectedProgram) selectedProgram$: Observable<ProgramSummaryDto>;
+  @Select(ProviderSelectors.getProviderPublications) providerPublications$: Observable<ProgramSummaryDto>;
 
-  currentProvider: ProviderDto;
-  currentLogo: ProviderLogoDto;
-  currentCost = 'XXXXX';
-  currentSpecialization: string;
+  selectedProgramId: number;
+  selectedProviderId: number;
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       if (params['programId']) {
+        this.selectedProgramId = +params['programId'];
         this.store.dispatch(
           new ProgramActions.SetProgramIDSearchFilter(+params['programId'])
         );
@@ -52,4 +43,7 @@ export class ProgramSummaryComponent {
     });
   }
 
+  getProgramDetailData(){
+    return this.store.select(StrapiSelectors.getProgramDetailData(this.selectedProgramId));
+  }
 }
