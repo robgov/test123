@@ -5,7 +5,7 @@
         <div [attr.data-cy]="'school-summary.programCount'">{{programs ? programs.length : 0}} Programs</div>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
-        <a mat-stroked-button [routerLink]="['program-search-results']" [attr.data-cy]="'school-summary.view-program'" [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" >View</a>
+        <a mat-stroked-button [routerLink]="['program-search-results']" [queryParams]="{provider: provider.providerId}" [attr.data-cy]="'school-summary.view-program'"  queryParamsHandling="merge" >View</a>
     </div>
 </div>
 <hr>

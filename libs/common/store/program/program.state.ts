@@ -269,7 +269,11 @@ export class ProgramState {
     });
     
 		return this.ngZone.run(() => {
-			this.router.navigate(['/home/Summary']);
+			this.router.navigate(['home/program-search-results/Summary'],{
+        queryParams: {
+          programId: action.programId
+        },
+      });
 		});
   }
 

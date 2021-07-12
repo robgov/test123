@@ -5,10 +5,11 @@
         <div fxFlex="50%" style="border-right: 2px solid cadetblue">
           <div fxLayout="column">
             <div fxLayout="row">
-              <a fxFlex="*" class="title" [attr.data-cy]="'program-summary.programName'" (click)="viewProgram()">
+              <a mat fxFlex="*" class="title" [attr.data-cy]="'program-summary.programName'" [routerLink]="['/home/program-search-results/summary']"
+              [queryParams]="{programId: programSummary.programId}">
                 <!-- [attr.data-cy]="'school-summary.view-program'" [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" -->
                 {{ programSummary.programName }} - {{ programSummary.programId }}
-              </a>
+            </a>
               <div fxFlex="100px;" fxHide [fxShow]="(programSummary.providerDistance > 0)" fxLayoutAlign="end">
                 <div>{{programSummary.providerDistance}} Km</div>
               </div>

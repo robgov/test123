@@ -6,32 +6,40 @@ import { ProgramsSearchResultsComponent } from './programs/programs-search-resul
 import { ProgramResolverService } from '@libs/common/resolvers';
 
 const routes: Routes = [
-  { path: '*', redirectTo: '/home', pathMatch: 'full' },
+  
   {
     path: 'home',
     data: { breadcrumb: 'Home' },
     children: [
       { path: '', component: HomeComponent, resolve: { init: ProgramResolverService} },
       {
-        path: 'Summary',
-        component: ProgramSummaryComponent,
-        data: { breadcrumb: 'Summary' },
-        resolve: { init: ProgramResolverService}
-      },
-      {
         path: 'program-search-results',
-        component: ProgramsSearchResultsComponent,
-        data: { breadcrumb: 'Programs' },
-        resolve: { init: ProgramResolverService}
+        data: { breadcrumb: 'Programs Search Results' },
+        children:[
+          {
+            path: '',
+            component: ProgramsSearchResultsComponent,
+            data: { breadcrumb: '' },
+            resolve: { init: ProgramResolverService},
+          },
+          {
+            path: 'summary',
+            component: ProgramSummaryComponent,
+            data: { breadcrumb: 'Summary' },
+            resolve: { init: ProgramResolverService}
+          },
+        ]
       },
+      
     ],
   },
+  { path: '*', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ enableTracing: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
