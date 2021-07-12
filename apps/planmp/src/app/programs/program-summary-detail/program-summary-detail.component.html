@@ -66,7 +66,7 @@
           </aedigital-program-summary-detail-admission>
         </mat-tab>
         <mat-tab label="Outcomes" [attr.data-cy]="'program-summary-detail.outcomes-tab'">
-          <aedigital-program-summary-detail-outcomes [content]="programDetailData.tabs[3]"></aedigital-program-summary-detail-outcomes>
+          <aedigital-program-summary-detail-outcomes [content]="programDetailData.tabs[3]" [programSummary]="program"></aedigital-program-summary-detail-outcomes>
         </mat-tab>
         <mat-tab label="Cost" [attr.data-cy]="'program-summary-detail.cost-tab'">
           <aedigital-program-summary-detail-cost [content]="programDetailData.tabs[1]"></aedigital-program-summary-detail-cost>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProgramSummaryDto } from '@libs/common/models';
 
 @Component({
   selector: 'aedigital-program-summary-detail-outcomes',
@@ -7,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProgramSummaryDetailOutcomesComponent implements OnInit {
   @Input() content: any;
+  @Input() programSummary: ProgramSummaryDto;
   constructor() { }
 
   ngOnInit(): void {
