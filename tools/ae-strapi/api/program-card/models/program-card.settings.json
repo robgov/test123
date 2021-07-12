@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "program_cards",
+  "info": {
+    "name": "program_card"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "value": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "string"
+    },
+    "program": {
+      "model": "program",
+      "via": "program_cards"
+    }
+  }
+}

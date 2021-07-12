@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/program-cards",
+      "handler": "program-card.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/program-cards/count",
+      "handler": "program-card.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/program-cards/:id",
+      "handler": "program-card.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/program-cards",
+      "handler": "program-card.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/program-cards/:id",
+      "handler": "program-card.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/program-cards/:id",
+      "handler": "program-card.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

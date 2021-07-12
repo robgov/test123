@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ae_landingpages",
+  "info": {
+    "name": "ae_landingpage",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HeroTitle": {
+      "type": "string"
+    },
+    "HeroMessage": {
+      "type": "richtext"
+    },
+    "schoolbrowsertitle": {
+      "type": "string"
+    },
+    "HeroImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "ButtonStart": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ae_loanapplies",
+  "info": {
+    "name": "ae_loanapply"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Loanapplytitle": {
+      "type": "string"
+    },
+    "Loanapplymessage": {
+      "type": "richtext"
+    },
+    "Loanapplyimage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "Buttonstart": {
+      "type": "string"
+    }
+  }
+}

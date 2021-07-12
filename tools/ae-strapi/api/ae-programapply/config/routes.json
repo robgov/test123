@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/ae-programapplies",
+      "handler": "ae-programapply.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ae-programapplies/count",
+      "handler": "ae-programapply.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ae-programapplies/:id",
+      "handler": "ae-programapply.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ae-programapplies",
+      "handler": "ae-programapply.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/ae-programapplies/:id",
+      "handler": "ae-programapply.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/ae-programapplies/:id",
+      "handler": "ae-programapply.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

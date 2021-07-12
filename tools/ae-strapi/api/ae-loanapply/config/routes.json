@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/ae-loanapplies",
+      "handler": "ae-loanapply.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ae-loanapplies/count",
+      "handler": "ae-loanapply.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ae-loanapplies/:id",
+      "handler": "ae-loanapply.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ae-loanapplies",
+      "handler": "ae-loanapply.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/ae-loanapplies/:id",
+      "handler": "ae-loanapply.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/ae-loanapplies/:id",
+      "handler": "ae-loanapply.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

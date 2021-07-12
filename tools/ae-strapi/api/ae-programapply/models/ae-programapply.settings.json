@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ae_programapplies",
+  "info": {
+    "name": "ae_programapply"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Applytitle": {
+      "type": "string"
+    },
+    "Applymessage": {
+      "type": "richtext"
+    },
+    "Buttonstart": {
+      "type": "string"
+    },
+    "Applyimage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}
