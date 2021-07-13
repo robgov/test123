@@ -1,19 +1,15 @@
 import { Action, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 import { ProgramStateModel } from './program-state.model';
 
 import { ProgramActions } from './program.actions';
 import {
   ProgramService,
   SpecializationService,
-  ProgramCostService,
-  ProgramCredentialService,
-  ProgramTypeService,
-  SpecializationCostService,
   PostalCodeService,
-  ProgramSummaryService,
   GoogleGeocodeApiService,
+  VersionService,
 } from '@libs/common/services';
 import {
   ProgramDto,
@@ -29,8 +25,9 @@ import {
   PostalCodeDto,
   PostalCodeRequest,
   ProgramSummaryDto,
+  VersionInfoDto,
 } from '@libs/common/models';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
 import { DistanceHelper } from '@libs/common/helpers';
 
@@ -45,13 +42,11 @@ export class ProgramState {
   constructor(
     private programService: ProgramService,
     private specializationService: SpecializationService,
-    private programCostService: ProgramCostService,
-    private programCredentialService: ProgramCredentialService,
-    private programTypeService: ProgramTypeService,
-    private specializationCostService: SpecializationCostService,
     private postalCodeService: PostalCodeService,
-    private programSummaryService: ProgramSummaryService,
-    private googleGeocodeApiService: GoogleGeocodeApiService
+    private googleGeocodeApiService: GoogleGeocodeApiService,
+    private versionService: VersionService,
+	private router: Router,
+    private ngZone: NgZone,
   ) {}
 
   @Action(AppAction.Start)
@@ -59,13 +54,14 @@ export class ProgramState {
     console.log('initializing...');
     ctx.dispatch([
       new ProgramActions.GetPostalCodes(),
-      // Loading lookups
+      new ProgramActions.GetPrograms(),
       new ProgramActions.GetProgramCategoryCounts(),
       new ProgramActions.GetProgramCosts(),
       new ProgramActions.GetProgramCredentials(),
       new ProgramActions.GetProgramSummaries(),
       new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramTypes(),
+      new ProgramActions.GetVersion()
     ]);
   }
 
@@ -79,12 +75,26 @@ export class ProgramState {
     });
   }
 
+  @Action(ProgramActions.GetVersion)
+  onGetVersion(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetVersion
+  ) {
+    return this.versionService.getVersion().pipe(
+      tap((data: VersionInfoDto) => {
+        ctx.patchState({
+          version: data.version,
+        });
+      })
+    );
+  }
+
   @Action(ProgramActions.GetProgramSummaries)
   onGetProgramSummaries(
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramSummaries
   ) {
-    return this.programSummaryService.getProgramSummaries().pipe(
+    return this.programService.getProgramSummaries().pipe(
       tap((data: ProgramSummaryDto[]) => {
         ctx.patchState({
           programSummaries: data,
@@ -156,7 +166,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetSpecializationCostForProgram
   ) {
-    return this.specializationCostService
+    return this.specializationService
       .getSpecializationCosts(
         new SpecializationCostRequest({ programId: action.programId })
       )
@@ -174,7 +184,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetSpecializationCostsForProvider
   ) {
-    return this.specializationCostService
+    return this.specializationService
       .getSpecializationCosts(
         new SpecializationCostRequest({ providerId: action.providerId })
       )
@@ -192,7 +202,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramCosts
   ) {
-    return this.programCostService
+    return this.programService
       .getProgramCosts(new ProgramCostsRequest())
       .pipe(
         tap((data: ProgramCostDto[]) => {
@@ -208,7 +218,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramTypes
   ) {
-    return this.programTypeService.getProgramTypes().pipe(
+    return this.programService.getProgramTypes().pipe(
       tap((data: ProgramTypeDto[]) => {
         ctx.patchState({
           programTypes: data,
@@ -236,7 +246,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.GetProgramCredentials
   ) {
-    return this.programCredentialService.getProgramCredentials().pipe(
+    return this.programService.getProgramCredentials().pipe(
       tap((data: ProgramCredentialDto[]) => {
         ctx.patchState({
           programCredentials: data,
@@ -255,6 +265,36 @@ export class ProgramState {
       searchFilters: { ... ctx.getState().searchFilters , providerIds: action.providerIds}
     });
   }
+
+  @Action(ProgramActions.SetProgramIDSearchFilter)
+  onSetProgramIDSearchFilter(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.SetProgramIDSearchFilter
+    ) {
+      ctx.patchState({
+        searchFilters: { ... ctx.getState().searchFilters , programId: action.programId}
+      });
+    }
+
+  @Action(ProgramActions.ViewProgram)
+  onViewProgram(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.ViewProgram
+  )
+  {
+    ctx.patchState({
+      searchFilters: { ... ctx.getState().searchFilters , programId: action.programId}
+    });
+    
+		return this.ngZone.run(() => {
+			this.router.navigate(['home/program-search-results/Summary'],{
+        queryParams: {
+          programId: action.programId
+        },
+      });
+		});
+  }
+
 
   @Action(ProgramActions.SetProgramSearchCategoryFilter)
   onSetProgramSearchCategoryFilter(
@@ -311,6 +351,7 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramSearchUserLocationFilter
   ) {
+
     return this.googleGeocodeApiService
       .getPostalCodeFromLatLong(
         ctx.getState().googleApiKey,
@@ -319,21 +360,17 @@ export class ProgramState {
       )
       .pipe(
         tap((data: any) => {
+          var locationName = '';
+          if (data.plus_code && data.plus_code.compound_code) {
+            locationName = data.plus_code.compound_code.substring(data.plus_code.compound_code.indexOf(' '),data.plus_code.compound_code.indexOf(','))
+          }
           ctx.patchState({
             searchFilters: { ... ctx.getState().searchFilters , 
                               latitude: action.latitude, 
                               longitude: action.longitude, 
-                              locationName: data.plus_code ? data.plus_code : '', 
+                              locationName: locationName, 
                               postalCode: ''}
           });
-          // ctx.patchState({
-          //   programSearchFilter_Latitude: action.latitude,
-          //   programSearchFilter_Longitude: action.longitude,
-          //   programSearchFilter_LocationName: data.plus_code
-          //     ? data.plus_code.compound_code
-          //     : '',
-          //   programSearchFilter_PostalCode: '',
-          // });
           ctx.dispatch(new ProgramActions.SetProgramProviderDistances());
         })
       );
@@ -382,6 +419,9 @@ export class ProgramState {
     ctx: StateContext<ProgramStateModel>,
     action: ProgramActions.SetProgramProviderDistances
   ) {
+    if (!ctx.getState().searchFilters) { 
+      return;
+    }
     const userPostalCode = ctx.getState().searchFilters.postalCode;
     const userLatitude = ctx.getState().searchFilters.latitude;
     const userLongitude = ctx.getState().searchFilters.longitude;

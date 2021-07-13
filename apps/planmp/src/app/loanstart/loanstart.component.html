@@ -8,10 +8,10 @@
       </div>
     </div>
     <div fxFlex style="color: white;">
-      <h1>{{ this.loandata[0].Loanapplytitle }}</h1>
-      <p>{{ this.loandata[0].Loanapplymessage }}</p>
-      <button [attr.data-cy]="'loanstart.start_application_process'" mat-raised-button color="primary">{{
-        this.loandata[0].Buttonstart }}</button>
+      <h1 *ngIf="this.loanData[0]">{{ this.loanData[0].Loanapplytitle }}</h1>
+      <p *ngIf="this.loanData[0]">{{ this.loanData[0].Loanapplymessage }}</p>
+      <button *ngIf="this.loanData[0]" [attr.data-cy]="'loanstart.start_application_process'" mat-raised-button color="primary">{{
+        this.loanData[0].Buttonstart }}</button>
     </div>
   </div>
 </div>

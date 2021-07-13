@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EndPointService } from './end-point.service';
 import { Observable } from 'rxjs';
 
-import { LocationDto, PagedDataParameters } from '@libs/common/models';
+import { LocationAddressDto, LocationDto, PagedDataParameters } from '@libs/common/models';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +20,9 @@ export class LocationService extends EndPointService {
     
     public getLocations(locationParameters: PagedDataParameters): Observable<LocationDto[]> { 
         return this.get(this.url + 'GetLocations', locationParameters);
+    }
+    public getLocationAddresses(locationAdressParameters: PagedDataParameters): Observable<LocationAddressDto[]> { 
+        return this.get(this.url + 'GetLocationAddresses', locationAdressParameters);
     }
 
     private get url() {

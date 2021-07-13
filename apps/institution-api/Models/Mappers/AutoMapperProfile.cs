@@ -24,6 +24,7 @@ namespace ProviderApi.Models.Mappers
       CreateMap<VwProvider, ProviderDto>();
       CreateMap<VwProviderAddress, ProviderAddressDto>();
       CreateMap<VwProviderLogo, ProviderLogoDto>();
+      CreateMap<VwProviderPublication, ProviderPublicationDto>();
       CreateMap<VwProviderWebsite, ProviderWebsiteDto>();
       CreateMap<VwSpecialization, SpecializationDto>();
       CreateMap<VwSpecializationCost, SpecializationCostDto>();

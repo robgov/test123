@@ -1,0 +1,71 @@
+<mat-card class="tp-card">
+  <mat-card-content>
+    <div fxLayout="column">
+      <div fxFlex="100" fxLayout="row" fxShrink fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
+        <div fxFlex="50%" style="border-right: 2px solid cadetblue">
+          <div fxLayout="column">
+            <div fxLayout="row">
+              <a mat fxFlex="*" [id]="programSummary.programId" class="title" [attr.data-cy]="'program-summary.programName'" [routerLink]="['/home/program-search-results/summary']"
+              [queryParams]="{programId: programSummary.programId}">
+                <!-- [attr.data-cy]="'school-summary.view-program'" [queryParams]="{provider: provider.providerId}" queryParamsHandling="merge" -->
+                {{ programSummary.programName }}
+            </a>
+              <div fxFlex="100px;" fxHide [fxShow]="(programSummary.providerDistance > 0)" fxLayoutAlign="end">
+                <div>{{programSummary.providerDistance}} Km</div>
+              </div>
+              <div fxFlex="16px"></div>
+            </div>
+            <div [attr.data-cy]="'program-card.providerName'" class="school-name">
+              {{ getProgramProviderName() }}
+            </div>
+            <div style="height: 10px"></div>
+            <div [attr.data-cy]="'program-card.AddressLine'" class="paragraph-content">
+              {{ getProviderAddress() }}
+            </div>
+            <div [attr.data-cy]="'program-card.CityPostalCode'" class="paragraph-content">
+              {{ programSummary.postalCode }}
+            </div>
+            <div style="height: 10px" class="sub-title"></div>
+            <a [href]="getProviderWebsite()" style="text-align: center; display: flex; text-decoration: none">
+              <span>Program website </span>
+              <mat-icon style="height: 18px">open_in_new</mat-icon>
+            </a>
+          </div>
+          <div style="height: 10px"></div>
+          <div>{{ getProgramTermandCredential() }}</div>
+        </div>
+
+        <div fxFlex>
+          <div fxLayout="column">
+            <div class="secondary-title">Estimated Cost</div>
+            <div [attr.data-cy]="'program-card.FirstYearCost'" class="paragraph-content">
+              <span>First Year: </span><b>{{ programSummary.firstYearCost }}</b>
+            </div>
+            <div class="secondary-title">Estimated graduate outcomes</div>
+            <div [attr.data-cy]="'program-card.medianIncome'" class="paragraph-content">
+              <span>Median Income: </span><b>{{ programSummary.medianIncome | currency}}</b>
+            </div>
+            <div [attr.data-cy]="'program-card.employmentRate'" class="paragraph-content">
+              <span>Employment Rate: </span><b>{{ (programSummary.employmentRate/1000) | percent:'1.1-1' }}</b>
+            </div>
+            <div style="height: 10px"></div>
+            <div>
+              <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Small }}" fxLayoutAlign="left center">
+                <div>
+                  <button [attr.data-cy]="'program-card.compare-button'" mat-flat-button class="primary-button">
+                    Compare
+                  </button>
+                </div>
+                <div>
+                  <button fxFlex [attr.data-cy]="'program-card.save-button'" mat-flat-button class="secondary-button">
+                    Save program
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

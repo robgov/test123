@@ -6,6 +6,7 @@ import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CurrencyPipe, PercentPipe } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -14,12 +15,9 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 import {
-  LocationAddressService,
   LocationService,
   ProgramService,
-  ProviderAddressService,
   ProviderService,
-  ProviderWebsiteService,
 } from '@libs/common/services';
 
 // Material Imports
@@ -62,6 +60,16 @@ const MATERIAL_MODULES = [
   MatToolbarModule,
 ];
 
+// Common Components
+import { StrapiContentComponent } from '@libs/common/components';
+import { StrapiContentCardComponent, 
+         StrapiContentTextComponent, 
+         StrapiContentListComponent, 
+         StrapiContentBulletListComponent ,
+         StrapiContentSmallCardComponent,
+         StrapiContentSmallCardListComponent,
+        } from '@libs/common/components/strapi-content/supported-types';
+
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -75,18 +83,24 @@ import { LoanstartComponent } from './loanstart/loanstart.component';
 import { ProgramstartComponent } from './programstart/programstart.component';
 import { SchoolSummaryComponent } from './school-summary/school-summary.component';
 import { SchoolSummaryListComponent } from './school-summary-list/school-summary-list.component';
-import { FindProgramsComponent } from './find-programs/find-programs.component';
-import { ProgramsSearchResultsComponent } from './programs-search-results/programs-search-results.component';
-import { ProgramSummaryComponent } from './program-summary/program-summary.component';
-import { ProgramCategorySummaryComponent } from './program-category-summary/program-category-summary.component';
-import { ProgramCategorySummaryListComponent } from './program-category-summary-list/program-category-summary-list.component';
+import { FindProgramsComponent } from './programs/find-programs/find-programs.component';
+import { ProgramsSearchResultsComponent } from './programs/programs-search-results/programs-search-results.component';
+import { ProgramSummaryComponent } from './programs/program-summary/program-summary.component';
+import { ProgramCategorySummaryComponent } from './programs/program-category-summary/program-category-summary.component';
+import { ProgramCategorySummaryListComponent } from './programs/program-category-summary-list/program-category-summary-list.component';
 import { TypetextComponent } from './typetext/typetext.component';
 import { TypetextdetailComponent } from './typetextdetail/typetextdetail.component';
-import { ProgramSearchResultsFilterComponent } from './program-search-results-filter/program-search-results-filter.component';
+import { ProgramSearchResultsFilterComponent } from './programs/program-search-results-filter/program-search-results-filter.component';
 import { ProgramSearchSortOptionsSidebarComponent } from './sidebars/program-search-sort-options-sidebar/program-search-sort-options-sidebar.component';
 import { ProgramSearchFilterOptionsSidebarComponent } from './sidebars/program-search-filter-options-sidebar/program-search-filter-options-sidebar.component';
-import { ProgramCardComponent } from './program-card/program-card.component';
+import { ProgramCardComponent } from './programs/program-card/program-card.component';
+import { ProgramSummaryDetailComponent } from './programs/program-summary-detail/program-summary-detail.component';
+import { ProviderLocationComponent } from './provider-location/provider-location.component';
 import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.component';
+import { ProgramSummaryDetailAdmissionComponent } from './programs/program-summary-detail/tabs/program-summary-detail-admission/program-summary-detail-admission.component';
+import { ProgramSummaryDetailCostComponent } from './programs/program-summary-detail/tabs/program-summary-detail-cost/program-summary-detail-cost.component';
+import { ProgramSummaryDetailOccupationsComponent } from './programs/program-summary-detail/tabs/program-summary-detail-occupations/program-summary-detail-occupations.component';
+import { ProgramSummaryDetailOutcomesComponent } from './programs/program-summary-detail/tabs/program-summary-detail-outcomes/program-summary-detail-outcomes.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +128,19 @@ import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.compo
     ProgramSearchFilterOptionsSidebarComponent,
     ProgramCardComponent,
     MenuSidebarComponent,
+    ProgramSummaryDetailComponent,
+    ProviderLocationComponent,
+    ProgramSummaryDetailAdmissionComponent,
+    StrapiContentComponent,
+    StrapiContentCardComponent, 
+    StrapiContentTextComponent,
+    StrapiContentListComponent, 
+    StrapiContentBulletListComponent,
+    StrapiContentSmallCardComponent,
+    StrapiContentSmallCardListComponent,
+    ProgramSummaryDetailCostComponent,
+    ProgramSummaryDetailOccupationsComponent,
+    ProgramSummaryDetailOutcomesComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,12 +157,12 @@ import { MenuSidebarComponent } from './sidebars/menu-sidebar/menu-sidebar.compo
     NgxsRouterPluginModule.forRoot()
   ],
   providers: [
-    LocationAddressService,
+    LocationService,
     LocationService,
     ProgramService,
-    ProviderAddressService,
+    CurrencyPipe,
+    PercentPipe,
     ProviderService,
-    ProviderWebsiteService,
     {
       provide: APP_INITIALIZER,
       useFactory: (store: Store) => () => store.dispatch(new AppAction.Start()),
