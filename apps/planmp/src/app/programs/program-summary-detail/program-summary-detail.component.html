@@ -18,22 +18,7 @@
   <div style="height: 10px"></div>
   <div fxLayout="row" fxLayoutGap="{{ FlexConstants.Gutter.Large }}">
     <div fxLayout="column" [attr.data-cy]="'program-summary-detail.providerOverview'" class="paragraph-content"
-      [fxFlex]="FlexConstants.Column.Large_8">
-      {{program.pr}}
-      MacEwan University inspires students with a powerful combination of
-      academic excellence and personal learning experiences - ours is a
-      connected culture that focuses on learner-centred teaching, and on
-      providing opportunities for students to grow and achieve. The university
-      provides a transformative education in a collaborative and supportive
-      environment where creativity and innovation thrive. Faculties focus on
-      teaching, and many are also engaged in ground-breaking,
-      internationally-recognized research and scholarly and artistic activity
-      that enhances their teaching and the curriculum - and creates
-      opportunities for student involvement in research. The university offers a
-      broad complement of programs comprised of bachelor and applied degrees,
-      diplomas and certificates. Faculties and schools offer programming in fine
-      arts and communications; health and community studies; liberal arts and
-      sciences; and business.
+      [fxFlex]="FlexConstants.Column.Large_8" [innerHtml]="getProgramProviderOverview()">
     </div>
     <div>
       <ae-provider-location></ae-provider-location>

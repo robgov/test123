@@ -5,8 +5,7 @@
 		<a [routerLink]="">Details</a>
 	</span>
 
-	<div class="version" *ngIf="version?.environment">
-		<strong [attr.data-cy]="'environment-sash.environment'">{{ version.environment }}</strong>
-		<span [attr.data-cy]="'environment-sash.build-number'" class="build-number">({{ version.version }})</span>
+	<div class="version">
+		<span [attr.data-cy]="'environment-sash.build-number'" class="build-number">({{ version }})</span>
 	</div>
 </div>

@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./environment-sash.component.scss']
 })
 export class EnvironmentSashComponent {
-
   @Input() version;
 	ExternalUrl = {AlbertaCa : 'https://alberta.ca'};
+  
 }

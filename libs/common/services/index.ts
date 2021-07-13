@@ -8,3 +8,4 @@ export * from './program.service';
 export * from './provider.service';
 export * from './specialization.service';
 export * from './strapi.service';
+export * from './version.service';

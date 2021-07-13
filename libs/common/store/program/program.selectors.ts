@@ -28,6 +28,11 @@ export class ProgramSelectors {
   }
 
   @Selector([ProgramState])
+  static version(state: ProgramStateModel): string {
+    return state.version;
+  }
+
+  @Selector([ProgramState])
   static getSelectedProgram(
     state: ProgramStateModel
   ): ProgramSummaryDto{

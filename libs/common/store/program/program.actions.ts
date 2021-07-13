@@ -137,4 +137,8 @@ export namespace ProgramActions {
   export class ShowMenu {
     static readonly type = '[Aed Program] Show Menu';
   }
+
+  export class GetVersion {
+    static readonly type = '[Aed Program] Get Version';
+  }
 }

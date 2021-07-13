@@ -33,3 +33,4 @@ export * from './specialization-dto';
 export * from './specialization-request';
 export * from './specialization-yearly-cost-dto';
 export * from './strapi';
+export * from './version-info-dto';

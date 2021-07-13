@@ -11,8 +11,10 @@ import {
 } from '@libs/common/models';
 
 export class ProgramStateModel {
-  // Api Keys, this probably shouldn't live here
+  // Things that don't belong in program state Start
   googleApiKey: string;
+  version: string;
+  // Things that don't belong in program state End
 
   programs: ProgramDto[];
   programSummaries: ProgramSummaryDto[];

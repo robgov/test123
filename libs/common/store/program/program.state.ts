@@ -9,6 +9,7 @@ import {
   SpecializationService,
   PostalCodeService,
   GoogleGeocodeApiService,
+  VersionService,
 } from '@libs/common/services';
 import {
   ProgramDto,
@@ -24,6 +25,7 @@ import {
   PostalCodeDto,
   PostalCodeRequest,
   ProgramSummaryDto,
+  VersionInfoDto,
 } from '@libs/common/models';
 import { Injectable, NgZone } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -42,6 +44,7 @@ export class ProgramState {
     private specializationService: SpecializationService,
     private postalCodeService: PostalCodeService,
     private googleGeocodeApiService: GoogleGeocodeApiService,
+    private versionService: VersionService,
 	private router: Router,
     private ngZone: NgZone,
   ) {}
@@ -58,6 +61,7 @@ export class ProgramState {
       new ProgramActions.GetProgramSummaries(),
       new ProgramActions.GetProgramSpecializations(),
       new ProgramActions.GetProgramTypes(),
+      new ProgramActions.GetVersion()
     ]);
   }
 
@@ -69,6 +73,20 @@ export class ProgramState {
     ctx.patchState({
       googleApiKey: action.googleApiKey,
     });
+  }
+
+  @Action(ProgramActions.GetVersion)
+  onGetVersion(
+    ctx: StateContext<ProgramStateModel>,
+    action: ProgramActions.GetVersion
+  ) {
+    return this.versionService.getVersion().pipe(
+      tap((data: VersionInfoDto) => {
+        ctx.patchState({
+          version: data.version,
+        });
+      })
+    );
   }
 
   @Action(ProgramActions.GetProgramSummaries)
