@@ -42,6 +42,24 @@ namespace ProviderApi.Controllers
       return _mapper.Map<List<VwProgram>,List<ProgramDto>>(programs.OrderBy(x=>x.ProgramName).ToList());
     }
 
+    [HttpGet("GetProgramCosts")]
+    [SwaggerOperation("GetProgramCosts")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<ProgramCostDto> GetProgramCosts([FromQuery] ProgramCostsRequest request)
+    {
+      return _mapper.Map<List<VwProgramCost>, List<ProgramCostDto>>(_context.VwProgramCosts.Where(pc => !request.ProgramId.HasValue || pc.ProgramId.Equals(request.ProgramId)).ToList());
+    }
+
+    [HttpGet("GetProgramCredentials")]
+    [SwaggerOperation("GetProgramCredentials")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<ProgramCredentialDto> GetProgramCredentials()
+    {
+      return _mapper.Map<List<VwProgramCredential>, List<ProgramCredentialDto>>(_context.VwProgramCredentials.ToList());
+    }
+
     [HttpGet("GetProgramCountByCategory")]
     [SwaggerOperation("GetProgramCountByCategory")]
     [SwaggerResponse((int)HttpStatusCode.OK)]
@@ -49,6 +67,31 @@ namespace ProviderApi.Controllers
     public IEnumerable<PsiSpecializationCountByCategoryDto> GetProgramCountByCategory()
     {
       return _mapper.Map<List<VwPmpPsispecializationCountByCategory>,List<PsiSpecializationCountByCategoryDto>>(_context.VwPmpPsispecializationCountByCategories.OrderBy(x=>x.CipSubSeries).ToList());
+    }
+
+    [HttpGet("GetProgramSummaries")]
+    [SwaggerOperation("GetProgramSummaries")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<ProgramSummaryDto> GetProgramSummaries()
+    {
+      var result = _mapper.Map<List<VwPmpPsiprogramSummary>, List<ProgramSummaryDto>>(_context.VwPmpPsiprogramSummaries.ToList());
+      var rnd = new System.Random();
+      foreach (var item in result)
+      {
+        item.MedianIncome = rnd.Next(30000, 200000);
+        item.EmploymentRate = rnd.Next(1, 1000);
+      }
+      return result;
+    }
+
+    [HttpGet("GetProgramTypes")]
+    [SwaggerOperation("GetProgramTypes")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public IEnumerable<ProgramTypeDto> GetProgramTypes()
+    {
+      return _mapper.Map<List<VwProgramType>, List<ProgramTypeDto>>(_context.VwProgramTypes.ToList());
     }
   }
 }

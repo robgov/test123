@@ -15,6 +15,8 @@ export class ProgramSearchFilterOptionsSidebarComponent {
 
   @Input() selectedProviderIds: number[];
   @Input() selectedCredentialIds: number[];
+  @Input() selectedLocation: string;
+  @Input() selectedCipSubSeriesCode: string;
 
   @Dispatch()
   providerSelected(providerIds: number[]){

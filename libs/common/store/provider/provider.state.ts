@@ -4,11 +4,7 @@ import { tap } from 'rxjs/operators';
 import { ProviderStateModel } from './provider-state.model';
 import { ProviderActions } from './provider.actions';
 import {
-  ProviderLogoService,
-  AlbertaPSIProviderService,
-  ProviderWebsiteService,
-  ProviderAddressService
-  
+  ProviderService,
 } from '@libs/common/services';
 import {
   ProviderDto,
@@ -17,6 +13,7 @@ import {
   ProviderAddressRequest,
   ProviderWebsiteRequest,
   ProviderAddressDto,
+  ProviderPublicationDto,
 } from '@libs/common/models';
 import { Injectable } from '@angular/core';
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -30,10 +27,7 @@ const initialState = new ProviderStateModel();
 @Injectable()
 export class ProviderState {
   constructor(
-    private albertaPSIProviderService: AlbertaPSIProviderService,
-    private providerLogoService: ProviderLogoService,
-    private providerWebsiteService: ProviderWebsiteService,
-    private providerAddressService: ProviderAddressService,
+    private providerService: ProviderService,
   ) {}
 
   @Action(AppAction.Start)
@@ -44,6 +38,7 @@ export class ProviderState {
       new ProviderActions.GetProviderLogos(),
       new ProviderActions.GetProviderWebsites(),
       new ProviderActions.GetProviderAddresses(),
+      new ProviderActions.GetProviderPublications(),
     ]);
   }
 
@@ -52,7 +47,7 @@ export class ProviderState {
     ctx: StateContext<ProviderStateModel>,
     action: ProviderActions.GetProviders
   ) {
-    return this.albertaPSIProviderService.getAlbertaPsiProviders().pipe(
+    return this.providerService.getAlbertaPsiProviders().pipe(
       tap((data: ProviderDto[]) => {
         ctx.patchState({
           programProviders: data,
@@ -66,10 +61,24 @@ export class ProviderState {
     ctx: StateContext<ProviderStateModel>,
     action: ProviderActions.GetProviderLogos
   ) {
-    return this.providerLogoService.getProviderLogos().pipe(
+    return this.providerService.getProviderLogos().pipe(
       tap((data: ProviderLogoDto[]) => {
         ctx.patchState({
           providerLogos: data,
+        });
+      })
+    );
+  }
+
+  @Action(ProviderActions.GetProviderPublications)
+  onGetProviderPublications(
+    ctx: StateContext<ProviderStateModel>,
+    action: ProviderActions.GetProviderPublications
+  ) {
+    return this.providerService.getProviderPublications().pipe(
+      tap((data: ProviderPublicationDto[]) => {
+        ctx.patchState({
+          providerPublications: data,
         });
       })
     );
@@ -80,7 +89,7 @@ export class ProviderState {
     ctx: StateContext<ProviderStateModel>,
     action: ProviderActions.GetProviderWebsites
   ) {
-    return this.providerWebsiteService.getProviderWebsites(new ProviderWebsiteRequest()).pipe(
+    return this.providerService.getProviderWebsites(new ProviderWebsiteRequest()).pipe(
       tap((data: ProviderWebsiteDto[]) => {
         ctx.patchState({
           providerWebsites: data,
@@ -94,7 +103,7 @@ export class ProviderState {
     ctx: StateContext<ProviderStateModel>,
     action: ProviderActions.GetProviderAddresses
   ) {
-    return this.providerAddressService.getProviderAddresses(new ProviderAddressRequest()).pipe(
+    return this.providerService.getProviderAddresses(new ProviderAddressRequest()).pipe(
       tap((data: ProviderAddressDto[]) => {
         ctx.patchState({
           providerAddresses: data,

@@ -17,8 +17,26 @@ import {
 
 export class ProgramSelectors {
   @Selector([ProgramState])
+	static isInitialized(state: ProgramStateModel): any {
+		const keys = Object.keys(state.programs);
+		return keys.length > 0;
+	}
+
+  @Selector([ProgramState])
   static programs(state: ProgramStateModel): ProgramDto[] {
     return state.programs;
+  }
+
+  @Selector([ProgramState])
+  static version(state: ProgramStateModel): string {
+    return state.version;
+  }
+
+  @Selector([ProgramState])
+  static getSelectedProgram(
+    state: ProgramStateModel
+  ): ProgramSummaryDto{
+    return state.programSummaries.find((q) => q.programId === state.searchFilters.programId);
   }
 
   static getProgramSpecialization(id: number) {
@@ -188,6 +206,7 @@ export class ProgramSelectors {
     state: ProgramStateModel,
   ): ProgramSummaryDto[] {
     var results: ProgramSummaryDto[] = state.programSummaries;
+
 
     //Apply provider filtering
     if (

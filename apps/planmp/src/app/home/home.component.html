@@ -31,12 +31,12 @@
     <div [fxFlex]=" FlexConstants.Column.Large ">
     </div>
     <div fxLayout="column" fxLayoutAlign="" fxLayoutGap="16px" [fxFlex]="FlexConstants.Column.Large_3 " fxHide.lt-md>
-      <ae-programstart></ae-programstart>
+      <ae-programstart [programData]="programData$ | async"></ae-programstart>
       <div></div>
     </div>
 
     <div fxLayout="column" fxLayoutAlign="" fxFlex>
-      <aedigital-loanstart></aedigital-loanstart>
+      <aedigital-loanstart [loanData]="loanData$ | async"></aedigital-loanstart>
     </div>
   </div>
 </div>

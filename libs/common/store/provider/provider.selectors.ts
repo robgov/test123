@@ -4,6 +4,7 @@ import { ProviderStateModel } from './provider-state.model';
 import {
   ProviderDto,
   ProviderLogoDto,
+  ProviderPublicationDto,
 } from '@libs/common/models';
 
 export class ProviderSelectors {
@@ -32,6 +33,12 @@ export class ProviderSelectors {
     );
   }
 
+  static getProviderPublication(id: number) {
+    return createSelector([ProviderState], (state: ProviderStateModel) =>
+      state.providerPublications.find((q) => q.providerId === id)
+    );
+  }
+
   @Selector([ProviderState])
   static getProviders(state: ProviderStateModel): ProviderDto[] {
     return state.programProviders;
@@ -40,5 +47,10 @@ export class ProviderSelectors {
   @Selector([ProviderState])
   static getProviderLogos(state: ProviderStateModel): ProviderLogoDto[] {
     return state.providerLogos;
+  }
+
+  @Selector([ProviderState])
+  static getProviderPublications(state: ProviderStateModel): ProviderPublicationDto[] {
+    return state.providerPublications;
   }
 }

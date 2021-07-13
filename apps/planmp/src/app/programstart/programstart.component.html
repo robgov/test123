@@ -3,15 +3,14 @@
     <img fxFlex="100%" [src]="getImageUrl()" />
   </div>
 
-  <h1>{{ this.programdata[0].Applytitle }}</h1>
-  <h2>{{ this.programdata[0].Applymessage }}</h2>
+  <h1 *ngIf="this.programData && this.programData[0]">{{ this.programData[0].Applytitle }}</h1>
+  <h2 *ngIf="this.programData && this.programData[0]">{{ this.programData[0].Applymessage }}</h2>
 
   <ul>
     <li *ngFor="let c of credentials | slice :0:5">{{ c.programType}}</li>
   </ul>
 
-  <button mat-raised-button color="primary" [attr.data-cy]="'programstart.start_application_process'">{{
-    this.programdata[0].Buttonstart }}
+  <button *ngIf="this.programData && this.programData[0]" mat-raised-button color="primary" [attr.data-cy]="'programstart.start_application_process'">{{
+    this.programData[0].Buttonstart }}
   </button>
-
 </div>

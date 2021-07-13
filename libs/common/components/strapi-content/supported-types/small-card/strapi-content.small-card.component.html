@@ -1,0 +1,10 @@
+<mat-card>
+    <mat-card-subtitle *ngIf="!section.titleTarget">{{section.title}}</mat-card-subtitle>
+    <a [href]="section.titleTarget"><mat-card-subtitle *ngIf="section.titleTarget">{{section.title}}</mat-card-subtitle></a>
+    <H6 *ngIf="section.subTitle">{{section.subTitle}}</H6>
+    <div fxLayout="row" fxLayoutAlign="left">
+        <H2 fxFlex >{{getValue()}}</H2>
+    </div>
+    <mat-card-content>{{section.content}}</mat-card-content>
+    <div>{{section.footer}}</div>
+</mat-card>

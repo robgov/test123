@@ -1,0 +1,13 @@
+<div fxLayout="column">
+    <div *ngFor="let s of content.sections.sort(sortContent)">
+        <aedigital-strapi-content [section]="s"></aedigital-strapi-content>
+    </div>
+
+    <!-- Iterate small card items afterwards -->
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="16px">
+        <aedigital-strapi-content-small-card *ngFor="let s of getSmallCardSections()"
+            [programSummary]="programSummary" fxFlex="30%" [section]="s">
+        </aedigital-strapi-content-small-card>
+    </div>
+
+</div>

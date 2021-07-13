@@ -22,10 +22,10 @@ export class AppComponent implements OnInit, OnDestroy{
   @Select(ProgramSelectors.getProgramTypes) programTypes$: Observable<ProgramTypeDto[]>;
   @Select(ProviderSelectors.getProviders) providers$: Observable<ProviderDto[]>;
 
-  @Select()
-
   @Select(ProgramSelectors.getSelectedProviders) selectedProviderIds$: Observable<number[]>
   @Select(ProgramSelectors.getSelectedCredentials) selectedCredentialIds$: Observable<number[]>
+  @Select(ProgramSelectors.getSelectedLocation) selectedPostalCode$: Observable<string>
+  @Select(ProgramSelectors.getSelectedCipSubSeriesCode) selectedCipSubSeriesCode$: Observable<string>
   @Select(ProgramSelectors.getSelectedSortOrder) selectedSortOrder$: Observable<number[]>
 
   private subscriptionSort: Subscription;
