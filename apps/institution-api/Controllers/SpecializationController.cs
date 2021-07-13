@@ -32,7 +32,11 @@ namespace ProviderApi.Controllers
     [SwaggerResponse((int)HttpStatusCode.NotFound)]
     public IEnumerable<SpecializationDto> GetSpecializations()
     {
-      return _mapper.Map<List<VwSpecialization>,List<SpecializationDto>>(_context.VwSpecializations.ToList());
+      var filteredSpecializations = from specialization in _context.VwSpecializations
+                 join studies in _context.VwSessionOfStudies on specialization.SpecializationId equals studies.SpecializationId
+                 select specialization;
+
+      return _mapper.Map<List<VwSpecialization>,List<SpecializationDto>>(filteredSpecializations.ToList());
     }
 
     [HttpGet("GetSpecializationByProgramId")]

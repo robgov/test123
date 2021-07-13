@@ -325,8 +325,8 @@ export class ProgramSelectors {
       return sortMethod(item1, item2);
     });
 
-    if (results.length > 20) {
-      results = results.slice(0, 20);
+    if (results.length > 200) {
+      results = results.slice(0, 200);
     }
 
     return results;
