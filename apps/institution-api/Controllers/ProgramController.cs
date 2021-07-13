@@ -76,7 +76,12 @@ namespace ProviderApi.Controllers
     public IEnumerable<ProgramSummaryDto> GetProgramSummaries()
     {
       var result = _mapper.Map<List<VwPmpPsiprogramSummary>, List<ProgramSummaryDto>>(_context.VwPmpPsiprogramSummaries.ToList());
-
+      var rnd = new System.Random();
+      foreach (var item in result)
+      {
+        item.MedianIncome = rnd.Next(30000, 200000);
+        item.EmploymentRate = rnd.Next(1, 1000);
+      }
       return result;
     }
 

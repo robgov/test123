@@ -6,6 +6,7 @@ import { AngularComponentsModule } from '@abgov/angular-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CurrencyPipe, PercentPipe } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppAction } from '@libs/common/store/common/app.actions';
@@ -159,6 +160,8 @@ import { ProgramSummaryDetailOutcomesComponent } from './programs/program-summar
     LocationService,
     LocationService,
     ProgramService,
+    CurrencyPipe,
+    PercentPipe,
     ProviderService,
     {
       provide: APP_INITIALIZER,

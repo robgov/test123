@@ -43,10 +43,10 @@
             </div>
             <div class="secondary-title">Estimated graduate outcomes</div>
             <div [attr.data-cy]="'program-card.medianIncome'" class="paragraph-content">
-              <span>Median Income: </span><b>{{ programSummary.medianIncome }}</b>
+              <span>Median Income: </span><b>{{ programSummary.medianIncome | currency}}</b>
             </div>
             <div [attr.data-cy]="'program-card.employmentRate'" class="paragraph-content">
-              <span>Employment Rate: </span><b>{{ programSummary.employmentRate }}</b>
+              <span>Employment Rate: </span><b>{{ (programSummary.employmentRate/1000) | percent:'1.1-1' }}</b>
             </div>
             <div style="height: 10px"></div>
             <div>

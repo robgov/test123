@@ -6,13 +6,22 @@
     </div>
   </div>
   <div style="height: 10px"></div>
-  <div fxLayout="row" fxFlex="100" [attr.data-cy]="'program-summary-detail.providerprogramsummary'">
-
-    {{ program.providerName }} | {{ getProgramTermandCredential() }} | <a href="http://{{ program.websiteUrl }}"
-      style="text-align: center; display: flex; text-decoration: none" target="_blank">
-      <span>Program page </span>
-      <mat-icon style="height: 18px">open_in_new</mat-icon>
-    </a>
+  <div fxLayout="column">
+  <div fxLayout="row" fxFlex [attr.data-cy]="'program-summary-detail.providerprogramsummary'"
+    fxLayoutAlign="space-around">
+      <span fxFlex="25%" >{{ program.providerName }}</span>
+      <span fxFlex="16px">|</span>
+      <span fxFlex="16%">{{ getProgramTermandCredential() }}</span>
+      <span fxFlex="16px">|</span>
+      <span fxFlex="15%">
+        <a href="http://{{ program.websiteUrl }}" style="text-align: center; display: flex; text-decoration: none"
+          target="_blank">
+          <span>Program page </span>
+          <mat-icon style="height: 18px">open_in_new</mat-icon>
+        </a>
+      </span>
+      <span fxFlex></span>
+    </div>
   </div>
 
   <div style="height: 10px"></div>
@@ -51,13 +60,16 @@
           </aedigital-program-summary-detail-admission>
         </mat-tab>
         <mat-tab label="Outcomes" [attr.data-cy]="'program-summary-detail.outcomes-tab'">
-          <aedigital-program-summary-detail-outcomes [content]="programDetailData.tabs[3]" [programSummary]="program"></aedigital-program-summary-detail-outcomes>
+          <aedigital-program-summary-detail-outcomes [content]="programDetailData.tabs[3]" [programSummary]="program">
+          </aedigital-program-summary-detail-outcomes>
         </mat-tab>
         <mat-tab label="Cost" [attr.data-cy]="'program-summary-detail.cost-tab'">
-          <aedigital-program-summary-detail-cost [content]="programDetailData.tabs[1]"></aedigital-program-summary-detail-cost>
+          <aedigital-program-summary-detail-cost [content]="programDetailData.tabs[1]">
+          </aedigital-program-summary-detail-cost>
         </mat-tab>
         <mat-tab label="Occupations" [attr.data-cy]="'program-summary-detail.occupations-tab'">
-          <aedigital-program-summary-detail-occupations [content]="programDetailData.tabs[2]"></aedigital-program-summary-detail-occupations>
+          <aedigital-program-summary-detail-occupations [content]="programDetailData.tabs[2]">
+          </aedigital-program-summary-detail-occupations>
         </mat-tab>
       </mat-tab-group>
     </div>
