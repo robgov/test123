@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/program-tabs",
+      "handler": "program-tab.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/program-tabs/count",
+      "handler": "program-tab.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/program-tabs/:id",
+      "handler": "program-tab.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/program-tabs",
+      "handler": "program-tab.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/program-tabs/:id",
+      "handler": "program-tab.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/program-tabs/:id",
+      "handler": "program-tab.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

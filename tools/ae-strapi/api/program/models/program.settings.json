@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "programs",
   "info": {
-    "name": "program"
+    "name": "program",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,21 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "content": {
-      "type": "richtext"
-    },
-    "sort": {
+    "program_id": {
       "type": "integer"
     },
-    "tabtitle": {
-      "type": "string"
-    },
-    "program_cards": {
+    "program_tabs": {
       "via": "program",
-      "collection": "program-card"
+      "collection": "program-tab"
+    },
+    "program_name": {
+      "type": "string"
     }
   }
 }

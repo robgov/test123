@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "program_tab_sections",
+  "info": {
+    "name": "Program_tab_section",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "card",
+        "bulletlist",
+        "list",
+        "content",
+        "smallcardlist",
+        "smallcard"
+      ]
+    },
+    "subtype": {
+      "type": "enumeration",
+      "enum": [
+        "annualmedianincome",
+        "averageemploymentrate",
+        "jobrelatednessrate",
+        "timetofullemployment"
+      ]
+    },
+    "footer": {
+      "type": "string"
+    },
+    "program_list_items": {
+      "collection": "program-list-item",
+      "via": "program_tab_section"
+    },
+    "program_tab": {
+      "via": "program_tab_sections",
+      "model": "program-tab"
+    },
+    "titletarget": {
+      "type": "string"
+    }
+  }
+}

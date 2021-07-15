@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "program_list_items",
+  "info": {
+    "name": "program_list_item"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "text"
+    },
+    "program_tab_section": {
+      "via": "program_list_items",
+      "model": "program-tab-section"
+    }
+  }
+}

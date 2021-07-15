@@ -1,8 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "program_cards",
+  "collectionName": "program_tabs",
   "info": {
-    "name": "program_card"
+    "name": "program_tab",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -14,21 +15,16 @@
     "title": {
       "type": "string"
     },
-    "content": {
-      "type": "richtext"
-    },
-    "value": {
-      "type": "string"
-    },
     "sort": {
       "type": "integer"
     },
-    "type": {
-      "type": "string"
-    },
     "program": {
-      "model": "program",
-      "via": "program_cards"
+      "via": "program_tabs",
+      "model": "program"
+    },
+    "program_tab_sections": {
+      "via": "program_tab",
+      "collection": "program-tab-section"
     }
   }
 }

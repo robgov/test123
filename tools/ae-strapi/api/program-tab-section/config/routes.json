@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/program-cards",
-      "handler": "program-card.find",
+      "path": "/program-tab-sections",
+      "handler": "program-tab-section.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/program-cards/count",
-      "handler": "program-card.count",
+      "path": "/program-tab-sections/count",
+      "handler": "program-tab-section.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/program-cards/:id",
-      "handler": "program-card.findOne",
+      "path": "/program-tab-sections/:id",
+      "handler": "program-tab-section.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/program-cards",
-      "handler": "program-card.create",
+      "path": "/program-tab-sections",
+      "handler": "program-tab-section.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/program-cards/:id",
-      "handler": "program-card.update",
+      "path": "/program-tab-sections/:id",
+      "handler": "program-tab-section.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/program-cards/:id",
-      "handler": "program-card.delete",
+      "path": "/program-tab-sections/:id",
+      "handler": "program-tab-section.delete",
       "config": {
         "policies": []
       }
