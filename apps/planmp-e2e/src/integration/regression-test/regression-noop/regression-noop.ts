@@ -17,4 +17,6 @@ When(/^we are testing cicd$/, function () {
 
 Then(/^it should pass$/, function () {
   expect(1).to.eq(1);
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(5000)
 });
